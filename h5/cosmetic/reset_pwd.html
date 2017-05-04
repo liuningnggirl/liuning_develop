@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/reser_pwd.css" />
+<title>修改密码</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/reser_pwd.js"></script>
+</head>
+<body>
+	<div class="box">
+		<input type="password" class="pwd_one" id="pwd_one" placeholder="请输入旧密码" maxlength="20"/>
+        <img src="images/new_login_pwd_eyes.png" alt="" class="eyes eyes_one" id="eyes_one" pwd_one="no" />
+        <img src="images/new_login_del.png" alt="" class="del del_one" />
+		<input type="password" class="pwd_two" id="pwd_two" placeholder="请输入新密码（6-20位）" maxlength="20"/>
+        <img src="images/new_login_pwd_eyes.png" alt="" class="eyes eyes_two" id="eyes_two" pwd_two="no" />
+        <img src="images/new_login_del.png" alt="" class="del del_two" />
+    </div>
+    <div class="ok_btn">完成</div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

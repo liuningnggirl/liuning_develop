@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
+html{font-size:10px; color:#000; font-family:'微软雅黑';}
+body{ line-height:1; }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.part1{ background:#fc9684; }
+.part2{ background:#fdc060; }
+.part3{ background:#91e1d8; }
+.part4{ background:#9ea7fa; }
+.part5{ background:#fc9684; }
+.part6{ background:#fdc060; }
+.part7{ background:#91e1d8; }
+.part8{ background:#9ea7fa; }
+.part9{ background:#fc9684; }
+.part .bot img{ width:100%; display:block;}
+.part .question1{width:100%; font-size:2.15rem; color:#fff;padding:65px 4% 35px 4%;}
+.part .question1 span{ font-size:3.4rem;}
+.part .question1 p{ margin:-1.35em 0 0 1.9em; line-height:1.3em; letter-spacing:3px;}
+.part .answer{ position:relative; z-index:11;background:#fff; border-radius:10px; width:82.67%; margin:0 auto; padding:19px 23px 0 23px;}
+.part .checked{ background:#fff url(../images/checked.png) 92.1% center no-repeat; background-size:12.9%;}
+.part .answer .tit{ font-size:1.9rem; color:#fd6a60;}
+.part .answer .ansdel{ font-size:1.62rem; width:70%; line-height:1.48em; padding:5px 0 17px 0;}
+.part .answer img{ position:absolute; left:-25px; bottom:-12px; width:48px;}
+.part .answer2{ margin:53px auto 69px auto;}
+.section3{ display:none; width:100%; height:100%; position:fixed; top:0; left:0; z-index:99; background:#fd6a60;background-color:rgba(253,106,96,0.5);}
+.section3 img{ position:fixed; top:52px; right:30px; width:120px;}
+.section3 .sharebox{ border:#fff solid 5px; width:75.73%; margin:0 auto; background:#fd6a60; margin-top:191px;}
+.section3 .sharebox p{ padding:37px 10px 31px; font-size:1.5rem; color:#fff; line-height:23px; letter-spacing:2px; text-align:center; word-break:break-all; }
+.section4{ background:#fd6a60; }
+.section4 .top img{width:100%; display:block;}
+.section4 .result{ position:relative; margin-top:51px; z-index:5;}
+.section4 .result .photo{ border:4px solid #8eb9df; border-radius:10px;width:190px; height:212px; margin:0 auto; overflow:hidden;box-shadow:2px 5px 1.46rem rgba(0,0,0,.5); }
+.section4 .result .photo img{ width:100%; }
+.section4 .result .retop{ position:absolute; top:-23px;left:50%; width:130px; height:34px; line-height:34px; letter-spacing:6px; font-size:2.05rem; color:#fff; margin-left:-65px; text-align:center; background:url(../images/section4t.png) no-repeat; background-size:128px 34px;  }
+.section4 .result .name{ text-align:center; font-size:2.76rem; color:#fff; margin:10px 0 35px 0; letter-spacing:7px;}
+.section4 .ewm{ width:71.33%; margin:0 14.3%; position:relative; z-index:4;}
+.section4bot { width:100%; position:relative; margin-top:-119px; z-index:2;}
+.section4bot img{width:100%; background:#fd6a60; display:block;}
+.section1 img{ width:100%; display:block; }
+.part,.section4{  position:relative;}
+.part .bot{ width:100%; position:absolute; bottom:0; left:0;}
+.section4bots {  position: absolute; bottom: 0; left: 0; }
+.section2,.part1,.part2,.part3,.part4,.part5,.part6,.part7,.part8,.part9,.section4{ display:none;}
+a[title*="站长统计"]{ display:none;}
+@media (max-height:667px){
+	.part,.section4{ height:667px;}
+}

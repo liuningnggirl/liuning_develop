@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<title></title>
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico">
+<link rel="stylesheet" href="../cosmetic/css/drawLottery.css" type="text/css">
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.rotate.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/drawLottery.js"></script>
+<script> 
+	var _czc = _czc || []; 
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body >
+    <div class="header">
+    	<img id="userRecordImg" src="images/drawLottery/userRecord.png">
+        <img id="headerImg" src="images/drawLottery/banner.jpg">
+        <p id="headerCounter" ></p>
+    </div>
+    <div class="drawZone">
+        <p class="timesLeft">今日免费次数<span></span>次</p>
+        <div class="drawPan">
+        	<img class="pan" src="images/drawLottery/pan-white.png"/>
+        		<img class="pointer" src="images/drawLottery/pointer-white.png"/>
+        	
+        </div>
+        <p class="userPoints">我的积分：<span></span></p>
+    </div>
+    <div class="listZone">
+        <div class="left">中奖名单</div>
+        <div class="right">
+        	<ul>
+        	</ul>
+        </div> 
+    </div>
+    <li class="listZone-template hidden">
+    	<img src="https://photosd.nggirl.com.cn/work/81b7a539375149249039fbf755d51912.jpg"></img>
+       	<div class="drawHistory">
+       		<div class="userName">小米米1米米米</div>
+       		<p>抽中了</p>
+       		<div class="userPrize">小南玩偶偶偶偶</div>
+       	</div>
+    </li>
+    <li class="listZone-nolist-template hidden">
+    	<span>活动尚未开始，等你来抽奖~</span>
+    </li>
+    <div class="prizeZone">
+        <p class="prizeZoneName">活动奖品</p>
+        <ul class="prizeflow clearfix">
+        </ul>
+    </div>
+ 	<li class="prizeFlow-template hidden">
+ 		<img src="images/drawLottery/points1.png" id="0"><p>南瓜玩偶南瓜玩偶南瓜玩偶南瓜玩偶<span>7份</span></p>
+ 	</li>
+ 	    <div class="rulerBtn">活动规则>></div>
+    <div class="innercontent">
+        <p class="innertit">活动规则</p>
+        <div class="rulerdetail">
+        <div class="rulerdetail2">
+            <p> 1.抽奖活动时间为：<span class="start">2016年9月14日</span>至<span class="end">2016年9月28日</span>，此活动为概率中奖，奖品数量有限，先到先得；<br/>
+                2.每位用户每天有<span class="times"></span>次免费抽奖机会，超出免费机会后若继续参与，需使用<span class="costScore"></span>积分兑换抽奖机会；<br/>
+                3.抽到实物类的奖品时需填写收货人的配送地址，奖品将在7个工作日内发货，请准确填写收货地址，如因无法联系收件人致使投递失败，奖品与积分将不做返还；<br/>
+                4.实物奖品由南瓜姑娘提供与发货；<br/>
+                5.本次抽奖活动，所有商品一经兑换，一律不退还积分，请用户兑换前仔细参照抽奖规则、兑换活动时间等重要信息，如有问题，可在南瓜姑娘APP“我的”-“联系客服”进行咨询（工作日08:00-21:00）；<br/>
+                6.凡采用不正当手段，如：作弊、扰乱系统、实施网络攻击等进行抽奖，一经发现，南瓜姑娘有权取消该账户参与资格，并对账户做冻结处理；<br/>
+                7.本活动最终解释权归北京旭洋群美科技有限公司所有。
+            </p> 
+            </div>
+        </div>
+    </div>
+    <!-- 奖品查看 -->
+    <div class="boxshadow"> </div>
+    <div class="imgbox">
+        <ul class="imgSingle">
+        </ul>
+    </div>
+    <li class="imgbox-template hidden">
+    	<img src="images/drawLottery/points1.png" class="bigimg">
+  		<img src="images/points/pointsCloseBtn.png" class="close">
+  		<div class="desc">
+  			<p class="descName">南瓜周边礼包南瓜周边礼包南瓜周边礼南瓜周边礼包</p>
+  			<p class="descNum">7份</p>
+  		</div>
+    </li>
+    
+	<!-- 摇奖结果显示 -->
+	<div class="drawResult hidden">
+		<div class="result-inner sorry  hidden">
+			<img src="images/drawLottery/draw-result-01.png" class="bigimg">
+	  		<img src="images/points/pointsCloseBtn.png" class="close">
+	  		<div class="tips">
+	  			<p>很遗憾!</br>
+	  			您没有中奖，再来一次~</p>
+	  			<div class="confirm-btn">知道了</div>
+	  		</div>
+		</div>
+		<div class="result-inner lack-of-score hidden">
+			<img src="images/drawLottery/draw-result-01.png" class="bigimg">
+	  		<img src="images/points/pointsCloseBtn.png" class="close">
+	  		<div class="tips">
+	  			<p>您当前只有 <span>3</span> 积分</br>
+	  			不能抽奖，赶快赚取积分吧~</p>
+	  			<div class="confirm-btn">知道了</div>
+	  		</div>
+		</div>
+		<div class="result-inner goods  hidden">
+			<img src="images/drawLottery/draw-result-02.png" class="bigimg">
+	  		<img src="images/points/pointsCloseBtn.png" class="close">
+	  		<div class="tips">
+	  			<p>恭喜您已经获得了</br>
+	  			<span>南瓜玩偶</span></p>
+	  			<div class="confirm-btn">去填地址</div>
+	  		</div>
+		</div>
+		<div class="result-inner third-coupon  hidden">
+			<img src="images/drawLottery/draw-result-02.png" class="bigimg">
+	  		<img src="images/points/pointsCloseBtn.png" class="close">
+	  		<div class="tips">
+	  			<p>恭喜您</p>
+	  			<p class="awardName">已经获得了<span>回家吃饭</span>优惠券</p>
+	  			<div class="confirm-btn">查看使用详情</div>
+	  		</div>
+		</div>
+		<div class="result-inner nggirl-coupon  hidden">
+			<img src="images/drawLottery/draw-result-03.png" class="bigimg">
+	  		<img src="images/points/pointsCloseBtn.png" class="close">
+	  		<div class="mount">30</div>
+	  		<div class="detail">
+	  			<ul>
+	  				<li>南瓜券</li>
+	  				<li>仅限上门美妆使用</li>
+	  				<li>满<span>199</span>可用</li>
+	  			</ul>
+	  		</div>
+	  		<div class="tips">
+	  			<p>恭喜您</p>
+	  			<p class="awardName">已经获得了<span></span>元面值南瓜券</p>
+	  			<div class="confirm-btn">查看使用详情</div>
+	  		</div>
+		</div>
+	</div>
+
+    <!--地址录入页面-->
+    <div class="address hidden">
+     	<div class="message">
+            <div class="box box1">
+                <label>收货人：</label><input type="text" placeholder="请输入收货人姓名">
+            </div>
+            <div class="box box2">
+                <label>手机号码：</label><input type="tel" autocomplete="on" maxlength="11" placeholder="请输入收货人的联系电话">
+            </div>
+            <div class="box box3">
+                <label>详细地址：</label><input type="text" placeholder="为了方便给您邮寄奖品请填写详细地址">
+            </div>
+        </div>
+        <div class="mesbtn greyBtn">确认地址</div>
+    </div>
+    
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

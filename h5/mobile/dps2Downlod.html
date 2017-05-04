@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<title>南瓜姑娘</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+    	function loadAppDownloadPage(){
+    		var wap_url = '';
+    		var ua = navigator.userAgent;
+        	var platform = /MicroMessenger/i.test(ua) ? "weixin" : /Android/i.test(ua) ? "android" : /iPhone|iPad|iPod/i.test(ua) ? "ios" : "other";
+
+        	if (platform == "android") {
+    	        wap_url = "//nggirl-product-res.oss-cn-beijing.aliyuncs.com/apks/2.1.0/nguser_v2.1.0_dsp2_release.apk";
+    	    } else if (platform == "ios") {
+    	        wap_url = '//itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8';
+    	    } else if (platform == "weixin") {
+    	        wap_url = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+    	    } else {
+    	        wap_url = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+    	    }
+    		
+    		window.location.href = wap_url;
+    	}
+    	loadAppDownloadPage();
+	</script>
+</body>
+</html>

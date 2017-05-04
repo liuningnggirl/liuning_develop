@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>客服中心</title>
+<style type="text/css">
+* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-appearance:none;-webkit-text-size-adjust:none; -webkit-tap-highlight-color: transparent; color:#4c4c4c; font-family:"微软雅黑";}
+body{ background:#eff4f5;}
+.content_header{ width:100%; height:78px; background:#fff; padding:20px; box-sizing:border-box; position:relative; border-bottom:1px solid #d7dcdc;}
+.content_header .ch_icon{ width:40px; float:left; margin:0 20px 0 0;}
+.content_header .ch_kuang{ width:72%; height:32px; margin:5px 0 0 0; position:absolute;right: 20px;}
+.content_header .ch_kuang_txt{ position:absolute; color:#4c4c4c; font-size:12px; right:20px; top:30px; text-align:center; line-height:20px;}
+.content_kinds{ width:100%; height:50px; background:#fff; position:relative;}
+.content_kinds .ck_left,.content_kinds .ck_right{ float:left; text-align:center; width:50%; font-size:14px; color:#ffb27d;}
+.content_kinds .ck_left:before{ content:""; width:16px; display:inline-block; height:16px; background:url(images/kefu_icon_logo.png) no-repeat; background-size:contain; margin: 0 2px -2px 0;}
+.content_kinds .ck_left{ padding:15px 0;}
+.content_kinds .ck_right p,.content_kinds .ck_right a{ font-size:14px; color:#ffb27d; margin-top: 1px;}
+.content_kinds .ck_right{ padding: 15px 0;}
+.content_kinds .ck_right .tel:before{ content:""; width:16px; display:inline-block; height:16px; background:url(images/kefu_icon_tel.png) no-repeat; background-size:contain; margin: 0 2px -4px 0;}
+.content_kinds:after{ content:""; width:1px; height:40px; background:#d7dcdc; position:absolute; top:5px; left:50%; display:inline-block;}
+.content_p{ width:100%; height:35px; font-size:12px; line-height:35px; padding:0 0 0 20px; box-sizing:border-box; display:none;}
+.content_question,.content_gonggao{ width:100%; padding:0 8px 7px; box-sizing:border-box;}
+.content_question .cq_content,.content_gonggao .cq_content{ width:100%; background:#fff; border-radius:5px; overflow:hidden;}
+.cq_content .cc_title{ width:100%; height:30px; background:#ffb27d; font-size:14px; color:#fff; line-height:32px; padding:0 0 0 12px; box-sizing:border-box;}
+.cq_content .cc_list li{font-size:14px; min-height:50px; line-height:20px; width:100%; box-sizing:border-box; position:relative; word-wrap: break-word; overflow:hidden; }
+.cq_content .cc_list li:after{ content:''; width:7px; height:14px; background:url(images/black_right.png) no-repeat; background-size:contain; display:block; position:absolute; top:22px; right:14px;}
+.cc_list_arr{ height:30px; background:#fff; text-align:center;}
+.cc_list_arr .arr{ width:16px; margin-top: 9px;}
+.li_div{font-size:14px; min-height:50px; line-height:20px; width:100%; padding:18px 37px 18px 0; box-sizing:border-box; border-bottom:1px solid #d7dcdc; position:relative; word-wrap: break-word; margin-left:12px;}
+.tel_hidden{position: absolute;right: 0px;top: 0px;padding: 16px 0; opacity:0;}
+</style>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/customerService.js"></script>
+</head>
+<body>
+	<div class="content">
+    	<div class="content_header">
+        	<img src="images/kefu_xiaonan_icon.png" class="ch_icon" alt="" />
+            <img src="images/kefu_kuang.png" class="ch_kuang" alt="" />
+            <p class="ch_kuang_txt">Hi,我是客服小南,请问您遇到了什么问题？</p>
+        </div>
+        <div class="content_kinds">
+        	<div class="ck_left online">在线客服</div>
+        	<div class="ck_right tel">
+            	<p class="tel">客服电话</p>
+                <a href="tel:400-062-6336" class="tel_hidden">400-062-6336</a>
+            </div>
+        </div>
+        <div class="contnet_second">
+            <div class="content_p">猜您遇到了以下问题</div>
+            <!-- 常见问题  -->
+            <div class="content_question">
+                <div class="cq_content">
+                    <p class="cc_title">常见问题</p>
+                    <ul class="cc_list"></ul>
+                    <div class="cc_list_arr">
+                        <img src="images/index_search_arr_down.png" class="arr" alt="" />
+                    </div>
+                </div>
+            </div>
+            <!-- 活动公告  -->
+            <div class="content_gonggao">
+                <div class="cq_content">
+                    <p class="cc_title">活动公告</p>
+                    <ul class="cc_list"></ul>
+                    <div class="cc_list_arr">
+                        <img src="images/index_search_arr_down.png" class="arr" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>积分商城订单确认</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/integralMallOrder.css" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/integralMallOrder.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+	<div class="content">
+    	<div class="content_box">
+            <div class="content_tel">
+                <div class="left">收货人电话：</div>
+                <div class="right">请填写收货人电话</div>
+                <img src="images/black_right.png" class="ct_arr" alt="" />
+            </div>
+            <div class="content_address">
+                <div class="left">收货人地址：</div>
+                <div class="right">请填写收货人地址</div>
+                <img src="images/black_right.png" class="ct_arr" alt="" />
+            </div>
+        </div>
+        <div class="content_integral">
+        	<div class="ci_gift">
+            	<img src="" class="cg_img" alt="" />
+                <div class="cg_right">
+                	<p class="cr_name"></p>
+                    <div class="cr_num">
+                    	<img src="images/integral_small_icon.png" alt="" /><span class="cn_points"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_box clear">
+        	<div class="cb xiaoji">
+                <div class="left">小计：</div>
+                <div class="right"></div>
+            </div>
+        	<div class="cb yunfei">
+                <div class="left">运费：</div>
+                <div class="right"></div>
+            </div>
+        </div>
+        <div class="beizhu">
+        	<div class="left">备注：</div>
+            <div class="remark right" contenteditable="true">如果有衣服，妆品型号的需求可以备注下（但库存短缺时，我们也只好随机发放了~)</div>
+        </div>
+        <div class="btn">
+        	<span class="btn_num"></span>
+            <span class="btn_ok">确认</span>
+        </div>
+    </div>
+	<div class="content_part01">
+    	<div class="content_txt">
+        	<div class="ct_left">收货人：</div>
+            <input value="" type="text" placeholder="请填写姓名" class="ct_right cp_name" />
+        </div>
+    	<div class="content_txt">
+        	<div class="ct_left">手机号码：</div>
+            <input value="" type="tel" placeholder="请填写联系电话" class="ct_right cp_tel" />
+        </div>
+    	<div class="content_txt">
+        	<div class="ct_left address">详细地址：</div>
+            <input value="" style="width:100%; margin:0 0 0 77px;" type="text" placeholder="请填写详细地址" class="ct_right cp_address" />
+        </div>
+        <div class="btn_ok_address">确认地址</div>
+    </div>
+    <div class="gray">
+    	<img src="images/congratulate.png" class="success" alt="" />
+        <img src="images/freetryclose.png" alt="" class="close" />
+        <div class="success_message">
+        	恭喜您已经获得<br/><span class="gray_gift_name"></span>礼品，坐等收礼吧！
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

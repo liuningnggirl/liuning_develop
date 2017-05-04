@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/workDetails.css" />
+<link href="../cosmetic/css/mobiscroll.css" rel="stylesheet" />
+<link href="../cosmetic/css/mobiscroll_date.css" rel="stylesheet" />
+<title>【南瓜姑娘】上门美妆-作品详情</title>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/Slide_pone.js"></script>
+<script type="text/javascript" src="../cosmetic/js/workDetails-share.js"></script>
+<script type="text/javascript" src="../cosmetic/js/mobiscroll_date.js" charset="gb2312"></script> 
+<script type="text/javascript" src="../cosmetic/js/mobiscroll.js"></script>
+<script type="text/javascript" src="../cosmetic/js/Slide_pone.js"></script>
+</head>
+<body>
+	<div class="gray_box">
+    	<img src="images/loadding2.gif" alt="" />
+    </div>
+	<a href="home_page.html?v=<%= VERSION %>" class="return-index"></a>
+	<div class="box">
+<!--  轮播 -->
+        <div class="banner" id="slideBox">
+            <div class="top bd">
+                <ul class="imgw"></ul>
+            </div>
+            <div class="bot hd">
+                <ul class="clear"></ul>
+            </div>
+            <div class="z-kinds">收　藏</div>
+            <div class="zz-kinds">已收藏</div>
+       	</div>
+        <div class="content">
+            <div class="price-info">
+                <div class="pi-left"><span style="font-size:1.07rem;">¥</span> <span class="left-num"></span> </div>
+                <div class="pi-right">
+                	<p class="pr-minite"><span class="blue"></span>分钟</p>
+                    <p class="pr-yue"><span class="blue"></span>人预约</p>
+                </div>
+            </div>
+            <div class="c-style"></div>
+            <a href="javascript:;" class="f-btn"><img class="zan" src="images/lover-img_03.png" alt="" /></a>
+            <a href="javascript:;" class="f-btn-cancle" style="display:none;"><img class="cancle-zan" src="images/works-like-btn-hl@2x.png" alt="" /></a>
+            <p class="p-content"></p>
+            <!--  收单五折 -->
+            <div class="half">
+            	<div class="half-title"></div>
+            	<div class="half-content"></div>
+            </div>
+            <div class="order-date">
+                <div class="ot-time">预约日期</div>
+                <input type="text" name="USER_AGE" class="ot-date" id="USER_AGE" readonly placeholder="选择预约日期" />
+            </div>
+            <div class="order-time">
+                <div class="ot-time">预约时间</div>
+                <select name="" id="" class="ot-data">
+                    <option value="">选择预约时间</option>
+                </select>
+            </div>
+<!--  展开 -->
+            <div class="zk">
+                <div class="zk-left">使用化妆品种类</div>
+                <div class="zk-right">
+                    <div class="zk-txt">展开</div>
+                    <div class="zk-arrdown"><img src="images/arr-down_03.png" alt="" /></div>
+                </div>
+            </div>
+            <div class="pro-kinds"></div>
+            <div class="like-num">喜欢&nbsp;<span class="num"></span></div>
+            <div class="like-photo">
+            	<ul>
+                	<li class="add-circle"></li>
+                </ul>
+            </div>
+<!--  化妆师信息 -->
+            <div class="dresser">
+                <div class="dresser-img clearfix">
+                	<div class="dresser-imgs ">
+                	<img src="" class="di-img" alt="" />
+                    </div>
+                    <img src="images/v.png" class="di-v" alt="" />
+                </div>
+                <p class="dresser-name">化妆师:<span class="dn-name"></span> <img src="images/girl.png" class="dn-sex" alt="" /></p>
+                <div class="dresser-start"></div>
+                <div class="dresser-tag"></div>
+                <p class="dresser-message">从业<span class="dm-year">10</span>年 | 接单量：<span class="dm-num">12334</span></p>
+                <div class="dresser-three-img">
+                	<div class="dti-about">
+                    	<img src="images/about.png" alt="" />
+                    </div>
+                	<div class="dti-about">
+                    	<img src="images/small-ping.png" alt="" />
+                    </div>
+                	<div class="dti-about">
+                    	<img src="images/address.png" alt="" />
+                    </div>
+                </div>
+                <div class="dresser-three-txt">
+					<span>关于我</span>
+					<span>用户评价</span>
+					<span>服务商圈</span>
+                </div>
+            </div>
+    <!--  猜你喜欢 -->
+            <div class="guss-like">
+                <p class="gl-txt">猜你喜欢</p>
+                <div class="gl-pic">
+                    <ul></ul>
+                </div>
+            </div>        
+    <!--  footer -->
+            <div class="footer">
+                <div class="f-center">我要预约</div>
+            </div>
+       </div> 
+    </div>
+<script type="text/javascript">
+	$(function () {
+		var currYear = (new Date()).getFullYear();
+		var opt={};
+		opt.date = {preset : 'date'};
+		opt.datetime = {preset : 'datetime'};
+		opt.time = {preset : 'time'};
+		opt.default = {
+			theme: 'android-ics light', //皮肤样式
+			display: 'modal', //显示方式 
+			mode: 'scroller', //日期选择模式
+			dateFormat: 'yyyy-mm-dd',
+			lang: 'zh',
+			startYear:currYear, //开始年份
+            endYear:currYear,//结束年份
+			minDate: new Date(),
+			maxDate: new Date(2016, 11, 31)
+		};
+		
+		$("#USER_AGE").mobiscroll($.extend(opt['date'], opt['default']))
+	});
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

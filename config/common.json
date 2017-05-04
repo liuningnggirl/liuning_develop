@@ -1,0 +1,41 @@
+{
+  "PARAM_VERSION": "3.1",
+  "PARAM_BUILD":"2",
+  "sourceDir": "h5/",
+  "destDir": "target/h5/",
+  "websiteTitle": "南瓜瓜娘",
+  "PAGE_KEYWORDS":"南瓜姑娘，旭洋群美，美妆社区，美妆电商，o2o美妆",
+  "PAGE_DESCRIPTION":"北京旭洋群美科技有限公司，成立于2015年3月，旗下主要产品为以美妆电商为主，社区分享为辅，同时提供美妆上门服务的移动端产品",
+  "CNZZ_STAT_CODE_ID": "1259610547",
+  "CNZZ_STAT_CODE_WEB_ID": "1259610547",
+  "WEIXIN_BOUND_DOMAIN_URL":"https://testcli.nggirl.com.cn",
+  "source": {
+    "rootDir": "h5/",
+    "jsFiles": [
+      "h5/**/*.js"
+    ],
+    "cssFiles": [
+      "h5/**/*.css"
+    ],
+    "imageFiles": [
+      "h5/**/*.png",
+      "h5/**/*.gif",
+      "h5/**/*.jpg",
+      "h5/**/*.jpeg",
+      "h5/**/*.ico",
+      "h5/**/*.bmp"
+    ],
+    "htmlFiles": [
+      "h5/**/*.html",
+      "h5/**/*.htm",
+      "h5/**/*.shtml"
+    ]
+  },
+  "dest": {
+    "rootDir": "target/",
+    "packageDir": "target/h5/",
+    "jsRevJsonDir": "target/jsrev",
+    "cssRevJsonDir": "target/cssrev",
+    "imageRevJsonDir": "target/imagerev"
+  }
+}

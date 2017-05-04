@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/beautyWantOrder.css" />
+<title>美妆沙龙-我要预约</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/beautySalonWantOrder.js"></script>
+</head>
+<body>
+    <!--  gif动画 -->
+    <div class="loading">
+    	<img src="images/loadding2.gif" alt="" />
+    </div>
+    <div class="box">
+    	<div class="hzs-cover">
+        	<div class="hc-left"><img src="" class="hzs-img" alt="" /></div>
+        	<div class="hc-right">
+            	<div class="hr-top"></div>
+            	<div class="hr-bottom">
+                	<span class="hb-num"></span><span class="hb-yuan">元/位</span>
+                </div>
+            </div>
+        </div>
+        <div class="box-hzs">
+            <div class="bh-left">
+                <img src=""  class="bl-photo" alt="" />
+            </div>
+            <div class="bh-right">
+                <div class="bh-name"><span class="br-name"></span><img src="images/girl.png" class="br-sex" alt="" /></div>
+                <div class="bh-start"></div>
+            </div>
+        </div>
+        <ul class="content">
+            <li>
+                <div class="left">预约数量</div>
+                <div class="right order-num">
+                	<div class="on-r">
+                    	<img src="images/beauty-jian_03.png" alt="" class="on-jian" />
+                        <span class="on-num">1</span>
+                        <img src="images/beauty-plus_03.png" alt="" class="on-plus" />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="left">活动费用</div>
+                <div class="right order-cost"></div>
+            </li>
+            <li>
+                <div class="left">活动时间</div>
+                <div class="right order-time"></div>
+            </li>
+            <li>
+                <div class="left">活动地址</div>
+                <div class="right order-address"></div>
+            </li>
+            <li>
+                <div class="left">联系电话</div>
+                <div class="right">
+                	<input type="text" placeholder="请输入联系电话" class="order-tel" />
+                </div>
+            </li>
+        </ul>
+        <!--  支付方式 -->
+        <div class="box-zhifu zhifu-zfb">
+            <a class="pay" href="javascript:;">
+                <img src="images/order-zhifubao_03.png" alt="" />
+            </a>
+            <img src="images/order_detail_pay_option_hl.png" class="choose" alt="" />
+        </div>
+        <div class="box-zhifu zhifu-weixin">
+            <a class="pay" href="javascript:;">
+                <img src="images/booking-details-weixin_03.png" alt="" />
+            </a>
+            <img src="images/order_detail_pay_option_hl.png" class="choose" alt="" />
+        </div>
+        <div class="use-voucherss">
+            <p class="uv-left">使用优惠券</p>
+            <p class="uv-right"></p>
+        </div>
+        <!--  产品预约须知 -->
+        <div class="order-message">
+            <div class="om-left"><span class="ol-left">接受产品预约的</span><span class="ol-right">预约须知</span></div>
+            <div class="om-right" seled="seled"><img src="images/beauty-get_03.png" alt="" class="or-get" /></div>
+        </div>
+        <div class="btn">
+            <div class="btn-ok">
+                <div class="bo-left">
+                    <span>需付金额：</span><span class="bl-true-cost"></span><span>元</span>
+                </div>
+                <div class="bo-right">
+                    <span>确认并支付</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  优惠券 --> 
+    <div class="box-vouchers">
+    	<div class="no-vouchers">
+            <img src="images/me_order_none.png" class="vouchers-img" alt="" />
+            <p class="voucher-p">您还没有可使用的南瓜券！！</p>
+        </div>
+    </div>
+    <!--  预约须知 -->
+    <div class="alert-box">
+    	<div class="alert">
+        	<div class="a-content"></div>
+        	<p class="a-btn-ok">确定</p>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

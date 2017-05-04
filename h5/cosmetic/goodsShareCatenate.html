@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" type="text/css" href="./css/goodsShareCatenate.css">
+<link rel="stylesheet" type="text/css" href="./css/swiper.min.css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="./js/swiper.min.js"></script>
+<script type="text/javascript" src="./js/goodsShareCatenate.js"></script>
+<script type="text/javascript" src="./js/params.js"></script>
+<script type="text/javascript" src="./js/md5.js"></script>
+<script>
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+
+</head>
+<body>
+    <!--轮播 -->
+     <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div> 
+    <!-- 商品介绍部分 -->
+    <div class="goodsIntroducePart">
+            <li class="firstTitle threrCommon"></li>
+            <li class="secondTitle threrCommon"></li>
+            <li class="price_contro threrCommon">
+                <span class="price_header">￥</span><span class="price_money"></span>
+            </li>
+    </div>
+    <!-- 物品图片和参数部分 -->
+    <div class="goodsPicAndPara">
+        <li class="goodsPicture goodsPicAndParaCommon orange">图文详情</li>
+        <li class="goodsParameter goodsPicAndParaCommon gray">商品参数</li>
+    </div>
+    <!-- 点击物品图片和参数有不同显示部分 -->
+    <div class="goodsIntroducePicAndPara">
+        <div class="goodsPictureChild"></div>
+        <div class="goodsParameterChild"></div>
+    </div>
+     
+    <!-- 打开APP购买 -->
+    <div id="loadAppButton" class="openApp" style="position: fixed;left: 0px;bottom: 0px;">打开APP购买</div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        autoplay:5000,
+        observer: true,
+        observeParents: true
+    });
+    </script>
+    <script type="text/javascript" src="./js/rem.js"></script>
+</html>

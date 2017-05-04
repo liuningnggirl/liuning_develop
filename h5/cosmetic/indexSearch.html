@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>首页_搜索</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/indexSearch.css" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/indexSearch.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分 
+	_czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body >
+	<div class="search_box">
+    	<img src="images/blue-arr-left.png" class="sb_left_arr" alt="" />
+        <form action="javascript:;" method="get" class="form1">
+            <input type="search" class="search" name="search" placeholder="搜索帖子、用户、商品" />
+        </form>
+        <img src="images/index_close.png" class="sb_del" alt="" />
+    </div>
+    <div class="box_content">
+    	<div class="bc_history_search">
+        	<div class="bhs">
+                <p class="bhs_p">历史搜索</p>
+                <img src="images/index_del.png" class="bhs_btn_del" alt="" />
+            </div>
+            <ul class="history_list"></ul>
+            <div class="bhs_look_more" status="no">
+            	<p>
+                	<span>查看更多搜索历史</span>
+                    <img src="images/index_search_arr_down.png" class="blm_arr" alt="" />
+                </p>
+            </div>
+        </div>
+    	<div class="bc_hot_search">
+        	<div class="bhs">
+                <p class="bhs_p">热门搜索</p>
+            </div>
+            <ul class="hot_list"></ul>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

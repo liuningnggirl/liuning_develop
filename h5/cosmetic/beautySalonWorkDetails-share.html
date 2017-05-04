@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="stylesheet" href="../cosmetic/css/beautySalon.css" />
+<title>美妆下午茶</title>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/Slide_pone.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/beautySalonWorkDetails-share.js"></script>
+<style type="text/css">
+	.header .logo{ width:3.79rem; float:left; margin:0 3.4% 0 3%;}
+	.header-right{ float:right; font-size:.93rem; color:#50c8b4; padding:.2rem .4rem; border:1px solid #50c8b4; border-radius:.9rem ;margin-top: 4%;}
+	.header-center{ float:left;}
+	.hc-top{ font-size:.86rem; font-weight:bold; color:#141e28;}
+	.hc-bottom{ font-size:.71rem; color:#8c8c8c;}
+	.header{ padding:.43rem 3.4%; overflow:hidden; border:1px solid #ecefef; background:#fff; position:relative;}
+	.close{ position:absolute; top:4%; left:1%; width:1rem;}
+	.white-tiao{ width:100%; height:.5rem; background:#f5fafa;}
+	a[title*="站长统计"]{ display:none;}
+</style>
+</head>
+<body>
+	<div class="box">
+    	<div class="header">
+        	<img src="images/close_03.png" alt="" class="close" />
+        	<img src="images/zixun-logo_03.png" class="logo" alt="" />
+            <div class="header-center">
+            	<p class="hc-top">南瓜姑娘</p>
+            	<p class="hc-bottom">获取最in时尚资讯<br />一键下单，尊享明星化妆师上门服务</p>
+            </div>
+            <a href="<%= CLI_HOST_API_URL %>/nggirl/app/getapp" class="header-right">立即下载</a>
+        </div>
+    	<!--  banner开始 -->
+        <div class="banner" id="slideBox">
+            <div class="top bd">
+                <ul class="imgw"></ul>
+            </div>
+            <div class="bot hd">
+                <ul class="clear"></ul>
+            </div>
+       	</div>
+    	<!--  banner开始 -->
+        <!--  内容开始 -->
+        <div class="xwc-content">
+        	<div class="xwc-content-title"></div>
+            <div class="xwc-des"></div>
+            <div class="xwc-time">
+                <img src="images/time.png" class="xwc-area-local" alt="" /><p class="xwc-lock-txt">活动时间</p>
+                <div class="xwc-time-txt"></div>
+                <div class="xwc-end-time">报名截止时间：<span class="xwc-end-time-txt"></span></div>
+                <div class="xwc-area">
+                	<img src="images/xwc-local_03.jpg" alt="" class="xwc-area-local" />
+                    <div class="xwc-area-txt"></div>
+                </div>
+                <!--  参团人的头像 -->
+                <div class="tuan-photo">
+                    <ul></ul>
+                    <div class="xwc-tuan">
+                        <span class="xwc-peopleLow">3</span>～<span class="xwc-peopleHigh">5</span>人成团
+                        <br />已报名<span class="xwc-resUserCount">2</span>人
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  内容结束 -->
+        <!--  活动介绍开始 -->
+        <div class="xwc-activity-content">
+        	<div class="xwc-title">活动介绍</div>
+            <ul class="xwc-activity-txt"></ul>
+        </div>
+        <!--  活动介绍结束 -->
+        
+        <!--  化妆师介绍开始 -->
+        <div class="xwc-hzs-content">
+        	<div class="xwc-title">化妆师介绍</div>
+            <img src="" class="xwc-hzs-img" alt="" />
+            <p class="xwc-hzs-txt"></p>
+            <p class="xwc-hzs-desc"></p>
+        </div>	
+        <!--  化妆师介绍结束 -->
+        
+        <!--  喜欢人的头像  -->
+        <div class="pro-kinds"></div>
+        <div class="like-num">喜欢&nbsp;<span class="num"></span></div>
+        <div class="like-photo">
+            <ul>
+                <li class="add-circle">. . .</li>
+            </ul>
+        </div>
+        
+        <!--  tab切换 -->
+        <div class="double-btn">
+            <div class="db-left db-on">评论</div>
+            <div class="db-right">晒单</div>
+        </div>
+        <div class="double-box">
+            <div class="left-box">
+                <div class="comments">
+                    <input class="comments-txt" placeholder="添加评论" />
+                    <div class="comments-btn">
+                        <div class="send-btn">发送</div>
+                    </div>
+                </div>
+                <p class="pingjia">“暂时没有评论哦～欢迎订购此妆束并分享评论~”</p>
+                <div class="review-message">
+                    <ul></ul>
+                    <div class="look-more-ping">查看更多评论</div>
+                </div>
+            </div>
+            <div class="right-box" style="display:none;">
+                <p class="shai">“暂时没有收到晒单哦～欢迎订购此妆束并晒单分享~”</p>
+                <div class="dan"></div>
+                <div class="look-more-shai">查看更多晒单</div>
+            </div>
+        </div>
+    </div>
+    <!--  预约须知 -->
+    <div class="reservation-policy">
+        <br />
+        <div class="xwc-title">预约须知</div>
+        <br />
+        <p class="rp-content"></p>
+    </div>
+    <!--  我要预约按钮 -->
+    <div class="btn">
+    	<div class="btn-ok">
+        	<div class="bo-left">
+            	<span class="bl-cost"></span><span class="bl-yuan">元/位</span>
+            </div>
+            <div class="bo-right">
+            	<span>我要预约</span>
+            </div>
+        </div>
+    	<div class="btn-cancle">
+        	<div class="bo-left">
+            	<span class="bl-cost"></span><span class="bl-yuan">元/位</span>
+            </div>
+            <div class="bo-right">
+            	<span>已结束</span>
+            </div>
+        </div>
+    	<div class="btn-man">
+        	<div class="bo-left">
+            	<span class="bl-cost"></span><span class="bl-yuan">元/位</span>
+            </div>
+            <div class="bo-right">
+            	<span>已约满</span>
+            </div>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

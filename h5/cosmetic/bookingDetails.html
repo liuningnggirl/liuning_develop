@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+
+<link rel="stylesheet" href="../cosmetic/css/themes/base/jquery.ui.all.css">
+<title>订单详情</title><style type="text/css">
+	* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+	body, html {font-size: 14px;font-family: "微软雅黑";background: #f5fafa;}
+	img {display: block;}
+	.box {max-width: 750px;margin: 0 auto;height: auto;background: #f5fafa;}
+	.box-hzs {width: 100%;border: 1px solid #cbd3d3;border-left: none;border-right: none;overflow: hidden;background: #fff;padding:.71rem 1rem;box-sizing: border-box;}
+	.bh-left {width: 19%;float: left;box-sizing: border-box;position: relative;}
+	.bh-right {float: left;width: 72%;padding: 0 0 0 1.1rem;box-sizing: border-box;}
+	.img-vip {width: 30%;position: absolute;top: -2%;display:none;}
+	.bh-name {color: #434343;font-size: 1.07rem;margin-top: 4%;}
+	.bh-start img {width: 7%;display: inline-block;}
+	.bh-start {margin-top: 4%;}
+	.content {width: 100%;overflow: hidden;background: #fff;margin: .5rem 0 .5rem 0;border: 1px solid #e3e8e8;border-left: none;border-right: none;}
+	.content li {padding: 0 5%;border-bottom: 1px solid #e3e8e8;box-sizing: border-box;overflow: hidden;background:url(images/order-arr-right_03.png) no-repeat95% 55%;background-size: 2%;}
+	.content li .left {color: #434343;font-size: .93rem;float: left;width: 30%;padding: 1.2rem 0;text-align: left;}
+	.content li .right {color: #9ba0a0;font-size: .93rem;float: right;width: 70%;padding: 1.2rem 0 1.2rem 0;text-align: right;position: relative;}
+	.pay {border: 1px solid #e3e8e8;border-left: none;border-right: none;background: #fff;padding: 1rem 0;display: block;}
+	.pay img {width: 21%;margin: 0 auto;}
+	.btn-yue {padding: .5rem 0;width: 100%;background: #fff;position: fixed;bottom: 0px;border: 1px solid #e3e8e8;border-left: none;border-right: none;}
+	.btn-ok {width: 94%;padding: .86rem 0;background: #fa6e64;border-radius: 1.5rem;display: block;margin: 0 auto;text-align: center;color: #fff;font-size: 1rem;}
+	.box-zhifu {position:relative; display:none;overflow: hidden;}
+	.choose{width:7%;position:absolute;top:26%;right:8%;}
+	.yue-address .right{ }
+	.bl-photo{border-radius:50%;	}
+	#address{position: fix;top: 0px;width: 100%;height: 1.2rem;text-align:right;}
+	#address-list{top: 1.2rem;width: 100%;}
+	/*屏蔽jQuery自动完成的状态栏*/
+	.ui-helper-hidden-accessible{
+		display: none;
+	}
+	#sw-wrapper{ color:#9ba0a0; font-size: .93rem;}
+	
+	.hzs-cover{ padding:.71rem 1rem; background:#fff; margin:0 0 .71rem 0; border-bottom:1px solid #d2dce6; overflow:hidden;}
+	.hzs-img{ width:5.71rem; border:1rem; float:left; border-radius:.7rem;}
+	.hc-right{ float:left; margin:0 0 0 5%; width: 60%;}
+	.work-type{ padding:.36rem .86rem; background:rgba(0,0,0,.5); border-radius:2rem; color:#fff; font-size:.86rem; float:left; margin: 4% 0 0 0;}
+	.work-price{ color:#fa6e64; font-size:2rem; float:left; margin:0 0 0 1.2rem;}
+	.money{ font-size:1.07rem;}
+	.hr-bottom span{margin: 0 2% 0 0;display: inline-block;padding: 0.2rem 0.36rem;font-size: 0.78rem;background: #6ed7c8;border-radius: 10px;text-align: center;border: 1px solid #6ed7c8;color: #fff;}
+	.hr-bottom{overflow: hidden; clear: both; margin: 4% 0 0 0;}
+	.hr-top{ overflow: hidden; margin-top: 2%;}
+	
+	.box-success{max-width:750px; margin:7.14rem 1.5% 0; height:auto; background:#f5fafa; padding:3rem 0 0; background:#fff; border-radius:.7rem; display:none;  }
+	.order-img{ width:38%; margin:0 auto;}
+	.btn{ width:75%; overflow:hidden; margin:1.43rem auto;}
+	.order-details{ float:left;}
+	.return-index{ float:right;}
+	.order-details,.return-index{ padding:.57rem 1.5rem; background:#fa6e64; border-radius:.7rem; color:#fff; font-size:1.07rem; margin-bottom:1.43rem;}
+	
+	.booking-details-title{ width:100%; text-align:center; padding:.57rem 0; background:#50c8b4; color:#fff; font-size:.93rem;}
+	.use-vouchers{ width:100%; margin:.5rem 0 40% 0; border-top:1px solid #d7dcdc; border-bottom:1px solid #d7dcdc; background:#fff url(images/black_right.png) no-repeat 99%; overflow:hidden;padding: 0 5%; box-sizing:border-box; font-size:.93rem; background-size:2.5%; display:none; }
+	.use-vouchers .uv-left{ float:left; padding:1.07rem 0; color:#434343;}
+	.use-vouchers .uv-right{ float:right; padding:1.07rem 0; color:#9ba0a0;}
+	
+	/*  footer */
+	.footer{ width:100%; padding:0 .93rem; box-sizing:border-box; overflow:hidden; border:1px solid #dce2e2; position:fixed; bottom:0px; background:#fff;}
+
+	.footer .cancle-booking,.cancle-tuikuan,.cancle-booking-0,.cancle-booking-7,.cancle-booking-8{ float:left; padding:.86rem 7%; text-align:center; color:#787d7d; background:#fff; font-size:1rem; border:1px solid #d7dcdc; border-radius:1.8rem; margin:.57rem 0; max-width:750px; display:none;}
+	.footer .pay-btn{ float:right; background:#fa6e64; padding:.89rem 20%; border-radius:1.8rem; color:#fff; font-size:1rem; margin:.57rem 0; display:none;}
+
+	.footer .pay-btn img{ display:inline; width:1.07rem; margin: -.1rem .2rem 0 0;}
+	
+	/*  优惠券 */
+	.box-vouchers{ padding:.3rem 1.5%; display:none;}
+	.voucher,.voucher-no{width:100%; height:7.5rem; border-radius:.71rem; box-sizing:border-box; margin:0 0 .5rem 0;background:url(images/xwc-vouchers_03.png) no-repeat; background-size:100% 100%; position:relative;}
+	.vt-left{ float:left; width:32%; text-align:center;}
+	.vt-right{ float:right; width:64%; }
+	.vl-top{ font-size:2.2rem; color:#50c8b4; font-weight:bold; margin-top: 1rem;}
+	.vl-bottom{ font-size:.73rem; color:#50c8b4;}
+	.vr-top{ font-size:.91rem; color:#9a9a9a; line-height:3rem;}
+	.vr-bottom{ color:#9a9a9a; font-size:1.1rem; margin-top: .8rem;}
+	.use-status{ text-align:center; width:32%; position:absolute; bottom:.45rem; left:0px; color:#fff; font-size:.85rem;}
+	.use-date{ text-align:center; width:68%; position:absolute; bottom:.45rem; right:0px; font-size:.85rem; color:#fff;}
+	.voucher-no{ background:url(images/xwc-vouchers-no_03.png) no-repeat; background-size:100% 100%;}
+	.gray{ color:#9a9a9a;}
+	
+	/*  灰色弹框 */
+
+	.gray-box{ width:100%; height:100%; position:fixed; top:0px; background:rgba(0,0,0,.4);}
+	.white-box{ width:90%; height:10rem; background:#fff; position:absolute; top:0px; margin:40% 5%;border-radius: .7rem;}
+	.wb-content{ text-align:center;line-height: 2;}
+	.wb-title{ text-align:center;font-size: 1.3rem; line-height: 2.6rem; font-weight: bold;}
+	.wdb-ok,.tuikuan-ok,.tuikuan-ok-btn-6{ float:left; padding:.5rem 15.15%; border-right:1px solid #9ba0a0;color:#000;}
+	.wdb-cancle,.tuikuan-cancle{ float:right; padding:.5rem 15.15%;color:#000;}
+	.wb-double-btn{ width:100%; background:#fff; position:absolute; bottom:0px; border-top:1px solid #9ba0a0; border-radius: 0 0 .7rem .7rem;}
+
+	.dresser-tel{ float:right; background:url(images/order-detail-connect-phone-btn@2x.png) no-repeat; width:2.8rem; height:2.8rem; background-size:100%; margin-top:4%; display:none;}
+	.cancle-tuikuan{ padding: .86rem 0; width:100%; color:#fff; background:#ccc; display:none;}
+	.alert-box-cancle-booking,.alert-box-tuikuan{ display:none;}
+	.cancle-booking-0,.cancle-booking-7,.cancle-booking-8{ padding: .86rem 0; width:100%; color:#fff; background:#ccc; display:none;}
+	.cancle-booking-7,.cancle-booking-8{ background:#fa6e64; }
+	.ok-tuikuan{ display:block; background:#fff; display:none;}
+	.tuikuan-ok-btn-6{ width:100%; border-right:none;padding: .3rem 0; text-align:center;line-height: 2.2rem;}
+	.wb-content{padding: .5rem 0 0 0;}
+	
+	/*  评价页面 */
+	.complain textarea{ width:90%; margin-left:2%;border: solid 1px #c3c8c8; resize: none; padding: 10px 10px;}
+	.complain_btm1 input{width: 100px; height: 95px; position: absolute; margin-top: -20px; padding-left: 8px; -webkit-tap-highlight-color: rgba(255,255,255,0);}
+	.complain_tj{width: 80px; height: 80px; overflow: hidden; padding: 10px 0 0 10px;}
+	.complain_btm{width: 100%; height: auto; padding-bottom: 10px; background: #fff; border-bottom: 1px solid #cbd3d3;}
+	.complain_btm1{position: relative; overflow: hidden; display:inline-block;}
+	.li_workDetails{width: 100%; height: auto; background: #fff; margin: 10px 0;}
+	.li_workDetails ul{border-top: 1px solid #cbd3d3;}
+	.comolain_title{font-size: 1.5em;}
+	.li_workDetails ul li{height: 50px; line-height: 50px; border-bottom: 1px solid #cbd3d3; padding: 0 10px; color: #141e28; position:relative;}
+	.li_workDetails ul li p{display: inline-block;}
+	.li_workDetails ul li p>img{width: 40px; height: 40px; border-radius: 50px; position:absolute; top:5px;}
+	.complain_footer1{width: 100%; height: 60px; border-top: solid 1px #c3c8c8; position: fixed; bottom: 0; display: block; background:#fff;}
+	.complain_footer1 p{width: 92%;height: 40px;background: #fa6e64;border-radius: 10px;margin: 0 auto;text-align: center;line-height: 40px;color: #fff;font-size: 1.5em;margin-top: 10px;}
+	.complain{width: 100%; overflow: hidden; background: #fff; padding-top: 10px;}
+
+
+    /*=========评价详情 order_evaluate.html==========*/
+.evaluate_head{
+    width: 100%;height: auto;padding-top: 20px;
+}
+.center_img{
+    width: 82px;height: 82px;margin: 0 auto;position: relative;
+}
+.center_img p>img{
+    width: 82px;height: 82px;border-radius: 50px;overflow: hidden;
+}
+.evaluate_head .vv{
+    width: 20px;position: absolute;top: 0px;
+}
+.evaluate_main{
+    margin: 20px;
+}
+.evaluate_main p{
+    text-align: center;padding-top: 10px;font-size: 1.3em;color: #9ba0a0;
+}
+.evaluate_main p>img{width: 25px;margin: 0 3px;}
+.evaluate_foot{
+    width: 90%; height: auto; font-size: 1.2em; margin: 0 auto;color: #50c8b4;border-bottom: solid 1px #c3c8c8;line-height: 20px;
+    padding-bottom: 10px;
+}
+.evaluate_btm ul{
+    text-align: center;
+}
+.evaluate_btm ul li{
+    width: 100px;height: 100px;display: inline-block; border-radius: 10px;overflow: hidden; margin: 20px 10px;
+}
+.evaluate_time{
+    font-size: 1em;
+    color: #c3c8c8;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.content li.li_workDetails{
+    width: 100%;height:auto; background: #fff;margin:10px 0 0 0; border-top: 1px solid #e3e8e8; padding: 0;
+}
+.content li.li_workDetails .pingj{
+    width:90%;height: 50px;line-height: 50px;padding: 0 5%;color: #141e28;font-size: 1em;
+}
+.content li.li_workDetails .pingj b{ margin-top: 15px;float: right;}
+
+.content li.li_workDetails .pingj b>img{width: 7px; margin:.4rem 0 0 0;}
+.content li.li_workDetails .tous{ width:90%;height: 50px;line-height: 50px;padding: 0 5%;color: #141e28;font-size: 1em;}
+.content li.li_workDetails .tous b{ margin-top: 15px;float: right;}
+.content li.li_workDetails .tous b>img{width: 7px; margin:.4rem 0 0 0;}
+.evaluate input{    background: url(images/star_p.png) no-repeat scroll right center;
+    cursor: pointer;
+    height: 30px;
+    width: 29px;
+    padding: 0;
+    border: 0;
+    position: relative;
+    top: -6px;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+.li_workDetails ul li{height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #cbd3d3;
+    padding: 0 10px;
+    color: #141e28;
+    position: relative;}
+.evaluate{width: 163px;
+    float: right;}
+.evaluate input.active{background-position: left center;
+    height: 30px;
+    width: 29px;
+    padding: 0;
+    border: 0;
+    position: relative;
+    right: -3px;
+    top: -6px;}
+.box-ping{ display:none;}
+.complain_con{ margin:0 0 10rem 0;}
+/*  返回首页logo */
+.return-homepage{ width:35px; height:35px; position:fixed; z-index:1; background:#000 url(images/return-index.png) no-repeat 50%; background-size:50%; border-radius:50%; right:2%; top:80%; border:1px solid #ccc; opacity:.3;}
+.loading{ position:fixed; width:100%; background:rgba(0,0,0,.4); top:0px; z-index:9999; display:none;}
+.loading img{ margin:20% auto 0;}
+.vouchers-img{ margin:50% auto 0; width:30%;}
+.voucher-p{ text-align:center; color:#CCC; line-height:2rem;}
+.no-vouchers{ display:none;}
+a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/bookingDetails.js"></script>
+<script src="../cosmetic/js/jquery.ui.widget.js"></script>
+<script src="../cosmetic/js/jquery.iframe-transport.js"></script>
+<script src="../cosmetic/js/jquery.fileupload.js"></script>
+
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+    <div class="loading">
+    	<img src="images/loadding2.gif" alt="" />
+    </div>
+    <a href="home_page.html?v=<%= VERSION %>" class="return-homepage"></a>
+    <div class="box">
+    	<!--  订单状态4 -->
+    	<p class="booking-details-title">化妆师已接单，请小主付费打赏</p>
+    	<div class="hzs-cover">
+        	<div class="hc-left"><img src="" class="hzs-img" alt="" /></div>
+        	<div class="hc-right">
+            	<div class="hr-top">
+                	<div class="work-type"></div>
+                	<div class="work-price"><span class="money">¥</span> <span class="cost"></span></div>
+                </div>
+            	<div class="hr-bottom"></div>
+            </div>
+        </div>
+        <div class="box-hzs">
+            <div class="bh-left">
+                <img src=""  class="bl-photo" style="width: 100%;" alt="" />
+                <img src="images/plusv_03.png" class="img-vip" alt="" />
+            </div>
+            <div class="bh-right">
+                <div class="bh-name"><!-- 于子涵 --></div>
+                <div class="bh-start">
+                </div>
+            </div>
+        </div>
+        <ul class="content">
+            <li>
+                <div class="left">预约订单编号</div>
+                <div class="right order-num"></div>
+            </li>
+            <li>
+                <div class="left">妆束类型</div>
+                <div class="right order-lei"></div>
+            </li>
+            <li>
+                <div class="left">化妆费用</div>
+                <div class="right order-price"></div>
+            </li>
+            <li  class='restimeselect'>
+                <div class="left">预约时间</div>
+                <div class="right order-time"></div>
+            </li>
+            <li class="yue-address">
+                <div class="left">预约地址</div>
+                <div class="right order-address"></div>
+            </li>
+
+           <li class="li_workDetails" style="display:none;">
+                <div class="pingj">评价 <b><img src="images/back_right.png"></b></div>
+            </li>
+             <li class="li_workDetails" style="display:none;">
+                <div class="tous">投诉 <b><img src="images/back_right.png"></b></div>
+            </li>
+        </ul>
+		<div class="box-zhifu zhifu-zfb">
+			<a class="pay" href="javascript:;">
+                <img src="images/order-zhifubao_03.png" alt="" />
+			</a>
+            <img src="images/order_detail_pay_option_hl.png" class="choose" alt="" />
+		</div>
+		<div class="box-zhifu zhifu-weixin">
+			<a class="pay" href="javascript:;">
+                <img src="images/booking-details-weixin_03.png" alt="" />
+			</a>
+            <img src="images/order_detail_pay_option_hl.png" class="choose" alt="" />
+		</div>
+        <div class="use-vouchers">
+        	<p class="uv-left">使用优惠券</p>
+            <p class="uv-right"></p>
+        </div>
+        <!--  footer -->
+        <div class="footer">
+            <a href="javascript:;" class="cancle-booking">取消预约</a>
+            <a href="javascript:;" class="cancle-tuikuan">退款</a>
+            <a href="javascript:;" class="cancle-booking-0">取消预约</a>
+            <a href="javascript:;" class="cancle-booking-7">化妆完成</a>
+            <a href="javascript:;" class="cancle-booking-8">化妆完成</a>
+            <a href="javascript:;" class="pay-btn"><img src="images/booking-detais-$_03.png" alt="" />立即支付</a>
+        </div>
+    </div>
+    
+    <!--  优惠券 --> 
+    <div class="box-vouchers">
+    	<div class="no-vouchers">
+            <img src="images/me_order_none.png" class="vouchers-img" alt="" />
+            <p class="voucher-p">您还没有可使用的南瓜券！！</p>
+        </div>
+    </div>
+    
+    <!--  弹框--取消预约 -->
+    <div class="alert-box alert-box-cancle-booking">
+        <div class="gray-box"></div>
+        <div class="white-box">
+        	<p class="wb-title">取消预约</p>
+            <p class="wb-content">真的要取消预约吗？<br />先和化妆师协商一下吧，不要让TA白跑一趟~</p>
+            <div class="wb-double-btn">
+            	<a href="javascript:;" class="wdb-ok">容我三思</a>
+            	<a href="javascript:;" class="wdb-cancle">取消预约</a>
+            </div>
+        </div>
+    </div>
+    
+    <!--  弹框--退款--状态6 -->
+<!--    <div class="alert-box alert-box-tuikuan">
+        <div class="gray-box"></div>
+        <div class="white-box tui-box">
+        	<p class="wb-title">退款</p>
+            <p class="wb-content">真的要退款并取消预约吗？<br />南瓜姑娘号桑心呢T_T</p>
+            <div class="wb-double-btn">
+            	<a href="javascript:;" class="tuikuan-ok">容我三思</a>
+            	<a href="javascript:;" class="tuikuan-cancle">确认退款</a>
+            </div>
+        </div>
+        <div class="white-box ok-tuikuan">
+            <p class="wb-content">已收到小主的退款请求<br />南瓜客服将在2小时内与您取得联系<br />请耐心等待并保持电话畅通</p>
+            <div class="wb-double-btn">
+            	<a href="javascript:;" class="tuikuan-ok-btn-6">确定</a>
+            </div>
+        </div>
+    </div>-->
+    
+    <!--  评价页面 -->
+    <div class="box-ping">
+        <div class="complain_con">
+            <div class="complain">
+                <textarea placeholder="请发表评价" style="height:100px; border-radius:0;"></textarea>
+            </div>
+            <div class="complain_btm">
+                <div style="margin :0px auto;">
+                    <div class="complain_btm1">
+                        <input type="file"  name="file" id="doc"  style=" width: 100px; height: 95px;position: absolute;margin-top: -31px;padding-left: 8px;-webkit-tap-highlight-color:rgba(255,255,255,0);" data-url="<%= PHOTOS_HOST_API_URL %>/uploadserver/app/image/uploads/3.0.0"/>
+                        <img src="images/work_xj.png" class="complain_tj" id="imgFile" type="file" class="file"/>
+                    </div>
+                    <div id="dd" style=" width:auto;">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="li_workDetails">
+                <ul>
+                    <li class="comolain_title">化妆师评分 <p><img src=""></p></li>
+                    <li>准时到达 
+                        <div class="evaluate onTimeEvaluation">
+                            <input name="1" type="button" />
+                            <input name="2" type="button" />
+                            <input name="3" type="button" />
+                            <input name="4" type="button" />
+                            <input name="5" type="button" />
+                        </div>
+                    </li>
+                    <li>妆品一致<div class="evaluate descriptionEvaluation">
+                            <input name="1" type="button" />
+                            <input name="2" type="button" />
+                            <input name="3" type="button" />
+                            <input name="4" type="button" />
+                            <input name="5" type="button" />
+                        </div>
+                    </li>
+                    <li>技法娴熟<div class="evaluate tecniqueEvaluation">
+                            <input name="1" type="button" />
+                            <input name="2" type="button" />
+                            <input name="3" type="button" />
+                            <input name="4" type="button" />
+                            <input name="5" type="button" />
+                        </div>
+                    </li>
+                    <li>服务周到<div class="evaluate serviceEvaluation">
+                            <input name="1" type="button" />
+                            <input name="2" type="button" />
+                            <input name="3" type="button" />
+                            <input name="4" type="button" />
+                            <input name="5" type="button" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="complain_footer1">
+            <p>完成评价</p>
+        </div>
+    </div>
+    
+    
+<style type="text/css">
+    #dd img{
+        border-radius:10px;
+        float:left;
+        margin-left:10px;
+        width:80px;
+        height: 80px;
+        display:block;
+    }
+   
+</style>
+<script type="text/javascript">
+
+
+$(function(){
+    /*====评价星级===*/
+    $('.evaluate input').click(function(){
+        $(this).parent().attr('num',$(this).attr('name'));
+        $(this).parent().children().each(function(){
+            if($(this).attr('name') <= $(this).parent().attr('num')){
+                $(this).addClass('active');
+            }
+        });
+    });
+
+
+
+//下面用于多图片上传预览功能
+    function setImagePreviews(avalue) {
+        var docObj = document.getElementById("doc");
+        var dd = document.getElementById("dd");
+        dd.innerHTML = "";
+        var fileList = docObj.files;
+        for (var i = 0; i < fileList.length; i++) {
+            console.info(fileList[i]);
+            if (docObj.files && docObj.files[i]) {
+                var str = '<div style="float:left;margin-top:10px;"> <img id="img'+i+'" src="'+
+                        window.URL.createObjectURL(docObj.files[i])+'" /></div>';
+                $('#dd').prepend(str);
+            }
+        }
+        $('#dd').parent().append($('.complain_btm1'));
+        return true;
+    }
+    /*跳转到评价页*/
+    /*$(".li_workDetails .pingj").on('click',function(){
+     var reservationId = getParam('reservationId');
+     var stars = $('.praisedStar');
+     if($('.praisedStar').length==0){
+     window.location.href="order_evaluatetwo.html?reservationId="+reservationId+'&v=<%= VERSION %>';
+     }else{
+     window.location.href="order_evaluate.html?reservationId="+reservationId+'&v=<%= VERSION %>';
+     }
+
+     })
+     */$(".li_workDetails .tous").on('click',function(){
+        var reservationId = getParam('reservationId');
+        window.location.href="order_complain.html?reservationId="+reservationId+'&v=<%= VERSION %>';
+    })
+});
+</script>
+<script type="text/javascript">
+/*==提交评价==*/
+$(function(){
+	/*====评价星级===*/
+/*	$('.evaluate input').click(function(){
+		$(this).parent().attr('num',$(this).attr('name'));
+		$(this).parent().children().each(function(){
+			if($(this).attr('name') <= $(this).parent().attr('num')){
+				$(this).addClass('active');
+			}
+		});
+	});
+*/
+	$('#doc').fileupload({
+		dataType: 'json',
+		done: function (e, data) {
+		var str = '<div style="float:left;margin-top:10px;"> <img class="imgs" src="';
+		str += data.result.data.url;
+		str += '" /></div>';
+		$('#dd').prepend(str); 
+		$('#dd').parent().append($('.complain_btm1'));
+			return true;
+		}
+	});
+
+	$(".complain_footer1").on('click',function(){
+		var photospath = $('.imgs');
+		
+		var imgs = '';
+		if(photospath.length>0){
+			imgs = '[';
+			for(var index =0; index < photospath.length; index++){
+				var img = photospath[index];
+				var path = "'"+$(img).attr('src')+"',";
+			
+				imgs = (imgs + path);
+			}
+			imgs = imgs.substring(0, imgs.length-1);
+			imgs = imgs+']';
+		}
+		
+		var onTimeE = $('.onTimeEvaluation .active').length;
+		var descriptionE = $('.onTimeEvaluation .active').length;
+		var tecniqueE = $('.tecniqueEvaluation .active').length;
+		var serviceE = $('.serviceEvaluation .active').length;
+		var evaluation = $('.complain textarea').val();
+		//评价限制内容
+		if($('.complain textarea').val() == ''){
+			alert('请填写评价内容!!');	
+		}else if($('.li_workDetails ul li .evaluate>.num') == 0){
+			alert('请对化妆师评分！！')
+		}else{
+			$.ajax({//采用异步
+				type: "post",
+				url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/works/evaluate',
+				data:getFinalRequestObject({accessToken: getAccessToken(), 
+					reservationId: getParam('reservationId'),
+					onTimeEvaluation: onTimeE,
+					descriptionEvaluation: descriptionE,
+					tecniqueEvaluation: tecniqueE,
+					serviceEvaluation: serviceE,
+					evaluation: evaluation,
+					photos: imgs}),
+					dataType:"json",
+					success: function(data){
+					console.log(data);
+					var reservationId = getParam('reservationId');
+					window.location.href="order_evaluate.html?reservationId="+reservationId+'&v=<%= VERSION %>';
+				},
+			});
+		}
+	});
+})
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

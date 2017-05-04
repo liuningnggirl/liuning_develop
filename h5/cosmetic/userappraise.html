@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>用户评价</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" type="text/css" href="../cosmetic/css/aboutmedetail.css">
+<link rel="stylesheet" type="text/css" href="../cosmetic/css/dropload.min.css">
+<link rel="stylesheet" href="../cosmetic/css/beautylist.css" type="text/css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/dropload.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/TouchSlide.1.1.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+
+</head>
+<body >
+	<div class="tabBoxs u_posi "id="tabBox1">
+       <div class="appraiselist hd clearfix">
+           <ul class="clearfix">
+               <li class="beau"><p>上门美妆</p></li>
+               <li class="salo"><p>美妆沙龙</p></li>
+           </ul>
+       </div>
+       <div class="bd lists " id="tabBox1-bd">
+           <div class="con">
+               <ul class="be_appraise clearfix"></ul>
+           </div>
+           <div class="con">
+               <ul class="sa_appraise clearfix"> </ul>
+           </div>
+       </div>
+   </div>
+   <div class="opbg"></div>
+   <div class="opbginner">
+   		<div class="opbgbox">
+   			<img src="" alt="" />
+        </div>
+   </div>
+<script>
+TouchSlide( { slideCell:"#tabBox1",
+		endFun:function(i){ //高度自适应
+			var bd = document.getElementById("tabBox1-bd");
+			effect:"leftLoop";
+			if(i == 0){
+				$(".sa_appraise").hide();
+				$(".be_appraise").show();
+				}else if(i == 1){
+					$(".sa_appraise").show();
+					$(".be_appraise").hide();
+				}
+			if(i>0)bd.parentNode.style.transition="200ms";//添加动画效果
+		}
+	});
+$(".opbgbox").height($(window).height());
+$(".opbgbox").width($(window).width());
+$(".be_appraise ,.sa_appraise").css("min-height",$(window).height()-64);
+$(".imgs .bigsize,.imgs .smallsize").live('click',function(){
+	var dels=$(this).attr("src");
+	$(".opbginner img").attr("src",dels);
+	$(".opbg,.opbginner,.opbginner img").show();
+	
+	/*var height1=$(".opbginner img").height();
+	$(".opbginner img").css("padding-top",($(window).height()-height1)/2+"px");*/
+	$("body").height($(window).height())
+	$("body").css("overflow","hidden");
+	$("body").bind('touchmove',function(event){
+		event.preventDefault();
+	});
+	var num1=$(this).width()/$(this).height();
+	var num2=$(window).width()/$(window).height();
+	if(num1>num2){
+		$(".opbgbox img").css({"height":"auto","width":"100%"});
+	}else{
+		$(".opbgbox img").css({"height":"100%","width":"auto"});
+	};
+})
+$(".opbg ,.opbginner").live('click',function(){
+	$(".opbg,.opbginner").hide();
+	$(".opbginner img").removeAttr("src");
+	$("body").css("overflow","auto");
+	$("body").unbind('touchmove');
+})
+var pageSize = 20;
+var pageSize1 = 20;
+$(function() {
+	getsalonInfo(0,20);
+	getapprInfo(0,20);
+	if (/iphone|ipad|ipod/.test(ua)) {
+		_czc.push(['_trackEvent','nggirl_dresser_evaluation','phoneType=iOS','浏览化妆师评价页','true','']);	
+	} else if (/android/.test(ua)) {
+		_czc.push(['_trackEvent','nggirl_dresser_evaluation','phoneType=and','浏览化妆师评价页','true','']);
+	};
+});
+//上门美妆列表
+function getapprInfo(pageNum,pageSize){
+$.ajax({//采用异步
+	type: "get",
+	url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/dresser/evaluate/listWork/1.5.0',
+	data:getFinalRequestObject({dresserId:getParam("dresserId"),pageNum:pageNum,pageSize:pageSize}),
+	dataType:"json",
+	success: function (data) {
+		$(".be_appraise .s_btn1").remove();
+		var beautywork= data.data;
+		var str5 = '';
+		for(var i = 0;i < beautywork.length;i++){
+			$(".be_appraise").css("background","#a0d7dc");
+			str5 += '<div class="userappr userappr'+pageNum+'"><div class="userapprs">';
+			str5 +='<img data-original="'+beautywork[i].userProfile+'" class="userpho lazy"></div></div>';
+			str5 += '<div class="beautyright beautyRight'+pageNum+'"><img src="images/appleft.png" class="leftsy">';
+			str5 += '<p class="u_tit" evaluateUserId="'+beautywork[i].evaluateUserId+'">'+beautywork[i].evaluateName+'';
+			for(var j = 0;j < beautywork[i].evaluateStar;j++){
+				str5 +='<img src="images/xing.png"/>';
+			}
+			str5 += '</p><p class="rightappr">'+beautywork[i].evaluateContent+'</p>';
+			if(beautywork[i].photoList.length>0){
+				str5 += '<div class="imgs clearfix">';
+				}
+			for(var x = 0;x < beautywork[i].photoList.length;x++){
+				if(beautywork[i].photoList.length==1){
+				str5 +='<div class="bigsizebox" ><img data-original="'+beautywork[i].photoList[x].photoUrl+'" class="bigsize lazy" /></div>';
+			
+				}else if(beautywork[i].photoList.length > 1 && beautywork[i].photoList.length < 5){
+					str5 +='<div class="smallsizebox clearfix"><img data-original="'+beautywork[i].photoList[x].photoUrl+'" class="smallsize lazy" /></div>';
+					
+					}
+			}
+			if(beautywork[i].photoList.length>0){
+				str5 += '</div>';
+				}
+			str5 += '<p class="beautyname clearfixs">装束：'+beautywork[i].workName+'</p>';
+			
+			str5 += '<p class="apprtime">'+getLocalTime(beautywork[i].evaluateTime)+'</p>';
+			
+			str5 += '</div></div>';
+			
+		}
+		$(".be_appraise").append(str5);
+		if(data.data.length == 0 && pageNum == 0){
+			$(".be_appraise").append('<div class="nonebeauty"><img src="images/noappraise.png"><p>暂时没有评价</p></div>');
+			$(".be_appraise").css("background","#eff4f5");
+		};
+		if( data.data.length >= pageSize){
+			$('.be_appraise').append('<div class="s_btn s_btn1" >查看更多</div>');
+		};
+		$(".be_appraise .s_btn1").die('click');
+		$(".be_appraise .s_btn1").live("click",function(){
+			getMoreDressers();
+		});
+		$(".beautyRight"+pageNum+" img.lazy,.userappr"+pageNum+" img.lazy").lazyload({effect : "fadeIn",threshold : 200});
+		$(".imgs img.lazy").on("load",function(){
+			imgaa();
+		});
+	}
+
+});
+};
+//获取美妆沙龙评价列表
+function getsalonInfo(pageNum1,pageSize1){
+$.ajax({
+	type: "get",
+	url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/dresser/evaluate/listSalon/1.5.0',
+	data:getFinalRequestObject({dresserId:getParam("dresserId"),pageNum:pageNum1,pageSize:pageSize1}),
+	dataType:"json",
+	success: function (data) {
+		$('.sa_appraise .s_btn2').remove();
+		var beautywork= data.data;
+		var str5 = '';
+		for(var i = 0;i < beautywork.length;i++){
+			$(".sa_appraise").css("background","#a0d7dc");
+			str5 += '<div class="userappr userappr'+pageNum1+'"><div class="userapprs">';
+			str5 +='<img data-original="'+beautywork[i].userProfile+'" class="userpho lazy"></div></div>';
+			str5 += '<div class="beautyright beautyright'+pageNum1+'"><img src="images/appleft.png" class="leftsy">';
+			str5 += '<p class="u_tit" evaluateUserId="'+beautywork[i].evaluateUserId+'">'+beautywork[i].evaluateName+'';
+			for(var j = 0;j < beautywork[i].evaluateStar;j++){
+				str5 +='<img src="images/xing.png"/>';
+			}
+			str5 += '</p><p class="rightappr">'+beautywork[i].evaluateContent+'</p>';
+			if(beautywork[i].photoList.length>0){
+				str5 += '<div class="imgs">';
+				}
+			for(var x = 0;x < beautywork[i].photoList.length;x++){
+				if(beautywork[i].photoList.length==1){
+				str5 +='<div class="bigsizebox"><img data-original="'+beautywork[i].photoList[x].photoUrl+'" class="bigsize lazy"/></div>';
+				
+				}else if(beautywork[i].photoList.length > 1 && beautywork[i].photoList.length < 5){
+					str5 +='<div class="smallsizebox"><img data-original="'+beautywork[i].photoList[x].photoUrl+'" class="smallsize lazy"/></div>';
+					}
+			}
+			if(beautywork[i].photoList.length>0){
+				str5 += '</div>';
+				}
+			str5 += '<p class="beautyname clearfixs">活动：'+beautywork[i].workName+'</p>';
+			str5 += '<p class="apprtime">'+getLocalTime(beautywork[i].evaluateTime)+'</p>';
+			str5 += '</div></div>';
+		}
+		$(".sa_appraise").append(str5);
+		if(data.data.length == 0 && pageNum1 == 0){
+			$(".sa_appraise").append('<div class="nonebeauty"><img src="images/noappraise.png"><p>暂时没有评价</p></div>');
+			$(".sa_appraise").css("background","#eff4f5");
+		}
+		if( data.data.length >= pageSize1){
+			$('.sa_appraise').append('<div class="s_btn s_btn2" >查看更多</div>')
+		}
+		$(".sa_appraise .s_btn2").die('click');
+		$(".sa_appraise .s_btn2").live("click",function(){
+			 getMoresalons();
+		});
+		$(".beautyright"+pageNum1+" img.lazy,.userappr"+pageNum1+" img.lazy").lazyload({effect : "fadeIn",threshold : 200});
+		$(".imgs img.lazy").on("load",function(){
+			imgaa();
+			})
+	}
+
+});
+}
+function imgaa(){
+	$(".imgs .smallsizebox").width(parseInt($(window).width()-95)*0.44);
+	$(".imgs .bigsizebox").width(parseInt($(window).width()-95)*0.8);
+	$(".imgs .smallsizebox").height(parseInt($(window).width()-95)*0.44);
+	$(".imgs .bigsizebox").height(parseInt($(window).width()-95)*0.8);
+	$(".imgs .smallsize").each(function() {
+			var del=$(this);
+			var img_url =$(this).attr("data-original");
+			// 创建对象
+			var img = new Image();
+			var imgwidth=img.width;
+			var imgheight=img.height;
+			 
+			// 改变图片的src
+			img.src = img_url;
+			var width1=$(".imgs .smallsizebox").width();
+			var height1=$(".imgs .smallsizebox").height();
+			if(img.width > img.height ){
+				del.css({"height":"100%","width":"auto"});
+				var ht=(width1-height1*img.width/img.height)/2;
+				del.css("margin-left",ht+"px");
+				}else{
+					del.css({"width":"100%","height":"auto"});
+					var wl=(height1-width1*img.height/img.width)/2;
+					del.css("margin-top",wl+"px");
+					}
+        });
+		$(".imgs .bigsize").each(function() {
+			var del=$(this);
+			var img_url =$(this).attr("data-original");
+			// 创建对象
+			var img = new Image();
+			var imgwidth=img.width;
+			var imgheight=img.height;
+			 
+			// 改变图片的src
+			img.src = img_url;
+			var width1=$(".imgs .bigsizebox").width();
+			var height1=$(".imgs .bigsizebox").height();
+			//alert((parseInt(width1)-img.width)/2)
+			if(img.width > img.height ){
+				del.css({"height":"100%","width":"auto"});
+				var ht=(width1-height1*img.width/img.height)/2;
+				del.css("margin-left",ht+"px");
+				}else{
+					del.css({"width":"100%","height":"auto"});
+					var wl=(height1-width1*img.height/img.width)/2;
+					del.css("margin-top",wl+"px");
+					}
+        });
+	}
+//时间格式化
+function getLocalTime(publishTime) {
+    var d_minutes, d_hours, d_days;
+    var timeNow = parseInt(new Date().getTime() / 1000);
+    var d;
+    d = timeNow - publishTime;
+    d_days = parseInt(d / 86400);
+    d_hours = parseInt(d / 3600);
+    d_minutes = parseInt(d / 60);
+    if (d_days > 0 && d_days < 4) {
+        return d_days + "天前";
+    } else if (d_days <= 0 && d_hours > 0) {
+        return d_hours + "小时前";
+    } else if (d_hours <= 0 && d_minutes > 0) {
+        return d_minutes + "分钟前";
+    } else {
+        var s = 0;
+        s = new Date(publishTime);
+        return (s.getFullYear() + "." + parseInt(s.getMonth() + 1)) + "." + parseInt(s.getDate()) + "";
+    }
+}
+        
+function getMoreDressers(){
+	$(".tempWrap").css("height","auto");
+		var pageNum = $('body').data('pageNum');
+		if(pageNum == undefined || parseInt(pageNum) == NaN){
+			pageNum = 0;
+		}
+		pageNum = pageNum + 1;
+		$('body').data('pageNum',pageNum);
+		getapprInfo(pageNum,pageSize);
+		imgaa();
+	}	
+function getMoresalons(){
+	$(".tempWrap").css("height","auto");
+		var pageNum1 = $('body').data('pageNum1');
+		if(pageNum1 == undefined || parseInt(pageNum1) == NaN){
+			pageNum1 = 0;
+		}
+		pageNum1 = pageNum1 + 1;
+		$('body').data('pageNum1',pageNum1);
+		getsalonInfo(pageNum1,pageSize1);
+		imgaa();
+	}	
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>测试分享信息写入app</title>
+<script>
+	function isInApp(){
+		return /nggirl/gi.test(navigator.userAgent);
+	}
+	if(isInApp()){
+		//给iOS传值
+		window.shareTitle = '测试分享信息写入', '看来是写入成功了吧';
+		window.shareContent = '看来是写入成功了吧';
+		window.sharePicture = 'https://photosd.nggirl.com.cn/work/fc8d6cf40cf945b095ee5a11732bcbc3.jpg';
+		window.shareUrl = window.location.href;
+		//给安卓传值
+		if(typeof(window.ngjsInterface)!="undefined" && typeof(window.ngjsInterface.conFigShareInfo)!="undefined"){
+			window.ngjsInterface.conFigShareInfo('测试分享信息写入', '看来是写入成功了吧','https://photosd.nggirl.com.cn/work/fc8d6cf40cf945b095ee5a11732bcbc3.jpg',window.location.href);
+		}
+	}
+</script>
+</head>
+<body>
+<h1>标题：测试分享信息写入</h1>
+<h1>内容：看来是写入成功了吧</h1>
+<h1>图片:</h1>
+<img src="https://photosd.nggirl.com.cn/work/fc8d6cf40cf945b095ee5a11732bcbc3.jpg"/>
+<a href="javascript:alert(typeof(window.ngjsInterface));">查看ngjsInterface注册情况</a>
+
+</body>
+</html>

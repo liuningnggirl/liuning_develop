@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<title>南瓜姑娘</title>
+</head>
+<body>
+	<a href="#" id="loadAppButton" style="display: none">打开APK</a>
+
+	<script type="text/javascript">
+		// 从地址栏中获取参数
+		function getParam(name) {
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if (r != null)
+		        return decodeURI(r[2]);
+		    return '';
+		}
+		
+    	function loadAppDownloadPage(){
+    		var wap_url = '';
+    		var ua = navigator.userAgent;
+        	var platform = /MicroMessenger/i.test(ua) ? "weixin" : /Android/i.test(ua) ? "android" : /iPhone|iPad|iPod/i.test(ua) ? "ios" : "other";
+
+        	if (platform == "android") {
+    	        wap_url = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+    	    } else if (platform == "ios") {
+    	        wap_url = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";
+    	    } else if (platform == "weixin") {
+    	        wap_url = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";
+    	    } else {
+    	        wap_url = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";
+    	    }    		
+    		window.location.href = wap_url;
+    	}
+		
+		var openApp = function(){
+			var toAppUrl = 'nggirl://nggirl/itemDetail?'+'type=0'+'&itemId='+getParam('seedProductId')+'&v=<%= VERSION %>';
+    		var loadAppButton = document.getElementById('loadAppButton');
+    		loadAppButton.href = toAppUrl;
+    		
+			setTimeout('loadAppDownloadPage();', 3000);
+			loadAppButton.click();
+		}
+		window.onload=function(){
+			openApp();
+		}
+	</script>
+</body>
+</html>

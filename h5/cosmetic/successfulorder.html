@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+
+<link rel="stylesheet" href="../cosmetic/css/themes/base/jquery.ui.all.css">
+<title>预约成功</title>
+<style type="text/css">
+	* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+	body, html {font-size: 10px;font-size:62.5%;font-family: "微软雅黑";background:#f6fafb; }
+	img {display: block;}
+	.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+    .box-success{width:96.4%; max-width:750px; margin:11rem auto 0;text-align:center; height:auto; background:#f5fafa;background:#fff; border-radius:.7rem;}
+	.btn{ width:74.5%; overflow:hidden; margin:2.5rem auto;}
+	.order-details{ float:left;}
+	.return-index{ float:right;}
+	.order-details,.return-index{ padding:.8rem 2rem; background:#50c8b4; border-radius:.5rem; color:#fff; font-size:1.2rem; margin-bottom:2.5rem; line-height:1;}
+	.sucontent p{ font-size:1.5rem; text-align:center; line-height:1; color:#50c8b4; padding:1em 0;}
+	.sucontent p:before{ content:""; width:7px; height:14px; display:inline-block; background:url(images/%E3%80%90.png) no-repeat; background-size:7px 14px; vertical-align:-1px;}
+	.sucontent p:after{ content:""; width:7px; height:14px; display:inline-block; background:url(images/%E3%80%91.png) no-repeat; background-size:7px 14px;vertical-align:-1px;}
+	.subox{ border:#50c8b4 solid 1px; border-radius:5px; margin:0 4%;}
+	.subox p{ text-align:center; font-size:1.2rem; color:#4c4c4c; margin:2rem 0;}
+	.imgs{ width:100%; position:relative; }
+	.imgs img{ float:left; width:12.12%;}
+	.imgs .arrow{ width:20.71%; margin:4% 2.5% 0 2.14%;}
+	.ml18{ margin-left:6.43%}
+	.subox ul{ padding-left:3.93%}
+	.subox ul li{ float:left; font-size:1.2rem; line-height:1; padding:1.25em 0;}
+	.subox ul li:first-child{width:18%; color:#50c8b4; text-align:center; margin-right:17.6%;}
+	.subox ul li:nth-child(2){width:24%;color:#bcbcbc; text-align:center; margin-right:17.6%;}
+	.subox ul li:nth-child(3){width:18%;color:#bcbcbc; text-align:center;}
+	a[title*="站长统计"]{ display:none;}
+	/*.ostatus{ width:100%; position:absolute; top:50%; margin-top:-19px;font-size:1.2rem; color: #50c8b4;}
+	.ostatus span:first-child{ display:block; float:left; margin-left:11%; width:39%; text-align:center;}
+	.ostatus span:nth-child(2){ display:block; float:left; width:36%; text-align:center;}*/
+</style>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<script type="text/javascript">
+$(function(){
+	$('.order-details').click(function(e) {
+		var redirectUrl;
+		if(isInWeixin()){
+			redirectUrl = getWeixinLinkUrl(getParam('reservationId'));
+			window.location.href=redirectUrl;
+		}else{
+			redirectUrl =  getZhifuBaoLinkUrl(getParam('reservationId'));
+			window.location.href=redirectUrl;
+		}
+    });
+	
+	function getWeixinLinkUrl(reservationId){
+		var redirectUri = encodeURIComponent(getZhifuBaoLinkUrl(reservationId));
+		var scope = 'snsapi_base';
+		var state = "weixinpay";
+		var appid = getFwhAppId();//由param.js初始化
+		return "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appid+"&redirect_uri="
+			+redirectUri+"&response_type=code&scope="+scope+"&state="+state+"#wechat_redirect";
+	}
+	
+	function getZhifuBaoLinkUrl(reservationId){
+		var str = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/orderInformation.html?reservationId="
+		+ reservationId+'&v=<%= VERSION %>';
+		if(window.location.protocol == 'https:'){
+			return str;
+		}else{
+			return 'http:' + str.substring(6)
+		}
+	}
+})
+</script>
+
+</head>
+<body>
+    <div class="box-success">
+        <div class="sucontent">
+        	<p>预约成功</p>
+        </div>
+        <div class="subox">
+        	<p>三步尊享专业美妆服务</p>
+            <div class="imgs clearfix">
+            	<img src="images/2.png" class="ml18"><img src="images/a.png" class="arrow"><img src="images/4.png"><img src="images/a.png" class="arrow"><img src="images/6.png">
+                <!--<div class="ostatus">
+            	<span>等待接单</span>
+                <span>等待支付</span>
+            	</div>-->
+            </div>
+            
+            <ul class="clearfix">
+             	<li>预约成功</li>
+                <li>化妆师接单</li>
+                <li>完成支付</li>
+            </ul>
+        </div>
+        <div class="btn">
+            <a href="javascript:;" class="order-details">查看订单</a>
+            <a href="home_page.html?v=<%= VERSION %>" class="return-index">返回美妆</a>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>美妆沙龙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" href="../cosmetic/css/styles.css" type="text/css">
+<link rel="stylesheet" href="../cosmetic/css/footer.css" type="text/css">
+<link rel="stylesheet" href="../cosmetic/css/beautylist.css" type="text/css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/yxMobileSlider.js"></script>
+<script type="text/javascript" src="../cosmetic/js/beautylist.js?_x=1"></script>
+</head>
+<body>
+	<div class="bg">
+        <div class="gray_title">
+            <p>南瓜姑娘</p>
+            <div class="select_city">
+                <img src="images/xwc-local_03.png" alt="" /> <span class="city_name">北京</span>
+            </div>
+        </div>
+        <div class="listmain">
+        </div>
+        <div class="more_top">
+            <img src="images/more_top.png">
+        </div>
+         <!--底部导航栏-->
+        <div class="footer">
+             <a href="index.html?v=<%= VERSION %>" class="footer-left">
+                <img src="images/icon_rss_nor.png" alt="" />
+                <p>首页</p>
+            </a>
+            <a href="javascript:;" class="footer-left workdetail">
+                <img src="images/bot-lbg.png" alt="" />
+                <p>上门美妆</p>
+            </a>
+            <a href="javascript:;" class="footer-center beautylist">
+                <img src="images/bot-ebg-blue.png" alt="" />
+                <p style="color:#50c8b4;">美妆沙龙</p>
+            </a>
+            <a href="mine.html?v=<%= VERSION %>" class="footer-right">
+                <img src="images/mine-center_03.png" alt="" />
+                <p>个人中心</p>
+            </a>
+        </div>
+    </div>
+    <!--  城市列表 -->
+    <div class="city_box">
+    	<ul></ul>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

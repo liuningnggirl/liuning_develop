@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>我的订单</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" type="text/css" href="../cosmetic/css/this.css">
+<link rel="stylesheet" href="../cosmetic/css/order.css" type="text/css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/order_list.js"></script>
+</head>
+<style type="text/css">
+.me_order{width: 100%;height: auto;padding-top: 100px;display: none;}
+.me_order>img{width: 100px;position: relative;left: 50%;margin-left: -50px;}
+.me_order p{text-align: center;padding-top: 10px;}
+.return-index{ width:35px; height:35px; position:fixed; z-index:1; background:#000 url(images/return-index.png) no-repeat 50%; background-size:50%; border-radius:50%; right:2%; top:80%; border:1px solid #ccc; opacity:.3;}
+a[title*="站长统计"]{ display:none;}
+</style>
+<body>
+    <a href="home_page.html?v=<%= VERSION %>" class="return-index"></a>
+    <div class="wrap">
+        <div class="tabs">
+            <a href="#" hidefocus="true" class="active" restype="1"><div class="order_text_tabs">进行中</div><span></span><b></b></a>
+            <a href="#" hidefocus="true" restype="2"><div class="order_text_tabs">待评价</div><span></span><b></b></a>
+            <a href="#" hidefocus="true" restype="3"><div class="order_text_tabs">已完成</div><span></span></a>
+        </div>    
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+            <div class="swiper-slide">
+               <div class="content-slide order_main1"></div>
+              </div>
+            <div class="swiper-slide">
+                <div class="content-slide order_main2"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="content-slide order_main3"></div>
+              </div>
+          </div>
+       </div>
+    
+       <div class="me_order">
+        <img src="images/me_order.png">
+            <p>这里还没有订单哦～</p>
+       </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>  
+</html>

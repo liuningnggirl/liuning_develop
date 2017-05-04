@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>专题详情</title>
+<style type="text/css">
+	* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+	body, html {font-size: 14px;font-family: "微软雅黑"; background: #eff4f5;}
+	.box {max-width: 750px;margin: 0 auto 20%;height: auto;background: #eff4f5;}
+	.box .top{ width:95%; border:1px solid #cbcbcd; margin:.6rem auto .91rem; border-radius:.4rem; overflow:hidden; box-shadow:0px 2px 3px #B3B3B3; background:#fff; }
+	.top .top-img{ width:100%;}
+	.top-txt .tt-top{ margin:0.79rem 0 0.59rem 0;}
+	.tt-quan{ color:#3a3a3a; font-size:0.93rem;}
+	.tt-username{ font-size:.86rem; color:#9a9a9a; margin:0 0 0 .71rem;}
+	.tt-bottom{ margin:0 4% .91rem 0; font-size:.85rem; line-height:1.6rem; color:#9a9a9a;}
+	.top-pic{ width:3.28rem; height:3.28rem; border-radius:50%; float:left; margin:.71rem 0 0 .71rem; overflow:hidden;}
+	.top-pic img{ width:100%; height:100%;}
+	.box-bottom{ width:100%; overflow:hidden; border-top:1px solid #cbcbcd; position:relative; max-width: 750px;}
+	.sort{ width:100%; overflow:hidden; margin:0 auto; background:#fff; padding:.71rem 3%;box-sizing: border-box;}
+	.inblcok{ display:inline-block; width:32%; font-size:1.07rem; color:#3a3a3a;}
+	.sort-default{ text-align:left;}
+	.sort-price{ text-align:center; width:36%;}
+	.sort-filter{ text-align:right; width:28%;}
+	.inblcok img{ width:.9rem; margin-left:.3rem;}
+	.default{ color:#50c8b4;}
+	.top-txt{ float:right; width:81%;}
+	.sd-select{ border:1px solid #d5d5d5; border-left:none; border-right:none; padding:0 0 0 3%; box-sizing:border-box; background:#fff; width:100%; display:none;}
+	.sd-select li{ border-bottom:1px solid #e9e9e9; padding:1.14rem 0; font-size:1.07rem;}
+	.blue{ color:#50c8b4; background:url(images/%E5%AF%B9@640.png) no-repeat 95%; background-size:1.21rem;}
+	.gray-box{ width:100%; position:fixed; top:0px; background:rgba(0,0,0,0.2); display:none; max-width:750px;}
+	.animate-top{ top:0px;}
+	.box-content{ width:96%; overflow:hidden; margin:.5rem auto 0;}
+	.box-content li{ padding:.43rem .5rem 0 .5rem; border:1px solid #dde0e1; margin-bottom:.5rem; background:#fff; border-radius:.5rem; box-shadow:0px 1px 2px #B3B3B3; overflow:hidden;}
+	.bc-left{ float:left; width:55.5%;}
+	.bc-right{ float:right; width:43.5%;}
+	.bc-left .bl-top{ width:100%; position:relative;}
+	.bl-top img{ width:100%; height:100%;}
+	.like-people{ width:.81rem;}
+	.like-pe{ width:.95rem; height:.95rem;}
+	.bl-bottom .like{ color:#9a9a9a; font-size:.71rem; padding:0 1.5rem 0 0; background:url(images/Oval%2011@640.png) no-repeat right; background-size:1.1rem;}
+	.bl-bottom{overflow: hidden;}
+	.bl-bottom span{color:#9a9a9a; font-size:.71rem;}
+	.bb-left{ float:left;}
+	.bb-right{ float:right; color:#9a9a9a; font-size:.71rem; line-height:1.6rem;}
+	.br-img{ width:100%; display:block;}
+	.br-txt{ color:#3a3a3a; font-size:.93rem; width:100%; text-align:right; margin:2.14rem 0 0 0;}
+	.yuan-price{ font-size:.71rem; text-align:right; float:right; color:#9a9a9a; width:100%; margin:1.71rem 0 0 0; text-decoration:line-through;}
+	.xian-price{ text-align:right; float:right; font-size:1.07rem; color:#fa6e64; width:100%;}
+	.shai-select{ width:100%; position:fixed; top:0px; background:#eff4f5; display:none; max-width:750px; }
+	.st-left{ float:left; color:#3a3a3a; font-size:1rem; line-height:2.4rem;}
+	.st-right{ float:right; color:#3a3a3a; font-size:1rem;}
+	.blue-box{ width:4.43rem; height:1.71rem; border:1px solid #50c8b4; border-radius:.5rem; margin:.3rem 0 0 0; text-align:center;}
+	.line{ color:#50c8b4;}
+	.ss-top{ overflow:hidden;}
+	.ss-bottom{ width:100%; overflow:hidden; margin:.6rem 0 0 0;}
+	.price{ width:21.3%; padding:.43rem 0; border:1px solid #50c8b4; border-radius:.5rem; float:left; margin-right:4%; color:#50c8b4; text-align:center;}
+	.ss-bottom .price:nth-child(4){ margin:0px;}
+	.ss-box{ overflow:hidden; background:#fff;padding:0 4% 1rem 4%; box-sizing:border-box; box-shadow:0px 1px 2px #B3B3B3;}
+	.order-time{ width:100%; border-top:1px solid #cbcbcd; margin-top:.5rem; background:#fff; overflow:hidden; padding:0 4%; box-sizing:border-box;}
+	.or-left{ float:left; font-size:1rem; color:#3a3a3a; line-height:2rem;}
+	.or-right{ float:right; line-height:2rem;}
+	.or-right span{font-size:1rem; color:#50c8b4;}
+	.current-blue{ color:#fff; background:#50c8b4;}
+	.ok-btn{ position:fixed; color:#fff; font-size:1rem; padding:.8rem 0; width:100%; background:#50c8b4; text-align:center; bottom:0px;max-width: 750px;}
+	.bl-top .half{width:3.21rem; height:3.21rem; position:absolute; top:0px; right:0px;}
+	.order-date{ width:100%; max-width:750px; overflow:hidden; margin:1rem 0 0 0; box-shadow:2px 1px 2px #B3B3B3; padding:1rem 0; background:#fff;}
+	.od-left{ float:left; padding:1rem 9.1%; background:none;}
+	.od-right{ float:right; padding:1rem 11.1%; background:none;}
+	.reset-btn{ padding:.36rem 0; width:5.92rem; border:1px solid #50c8b4; text-align:center; margin:1rem auto 1rem; color:#50c8b4; border-radius:.5rem;}
+	.order-content{ overflow:hidden; background:#fff;}
+	.load-more{ width:100%; max-width:750px; padding:1rem 0; text-align:center; text-decoration:underline; color:#999; position:absolute; }
+	.header .logo{ width:3.79rem; float:left; margin:0 3.4% 0 3%;}
+	.header-right{ float:right; font-size:.93rem; color:#50c8b4; padding:.2rem .4rem; border:1px solid #50c8b4; border-radius:.9rem ;margin-top: 4%;}
+	.header-center{ float:left;}
+	.hc-top{ font-size:.86rem; font-weight:bold; color:#141e28;}
+	.hc-bottom{ font-size:.71rem; color:#8c8c8c;}
+	.header{ padding:.43rem 3.4%; overflow:hidden; border:1px solid #ecefef; background:#fff; margin:.72rem 0; position:relative;}
+	.close{ position:absolute; top:4%; left:1%; width:1rem;}
+	a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/cosmeticSpecial-share.js"></script>
+</head>
+<body>
+    <div class="box" orderby="1">
+    	<div class="header">
+        	<img src="images/close_03.png" alt="" class="close" />
+        	<img src="images/zixun-logo_03.png" class="logo" alt="" />
+            <div class="header-center">
+            	<p class="hc-top">南瓜姑娘</p>
+            	<p class="hc-bottom">获取最in时尚资讯<br />一键下单，尊享明星化妆师上门服务</p>
+            </div>
+            <a href="<%= CLI_HOST_API_URL %>/nggirl/app/getapp" class="header-right">立即下载</a>
+        </div>
+    	<div class="top">
+        	<img src="" alt="" class="top-img" />
+            <div class="top-pic">
+            	<img src="" alt="" />
+            </div>
+            <div class="top-txt">
+            	<div class="tt-top">
+                	<span class="tt-quan"></span>
+                    <span class="tt-username">| 南瓜小编 |</span>
+                </div>
+            	<div class="tt-bottom"></div>
+            </div>
+        </div>
+        <div class="gray-box"></div>
+        <div class="box-bottom">
+        	<div class="sort">
+            	<font class="sort-one">
+                    <span class="inblcok sort-default default"><font>默认排序</font><img src="images/Path 16 Copy@640.png" alt="" /></span>
+                    <span class="inblcok sort-price"><font>价格排序</font><img src="images/Path 16 Copy@640.png" alt="" /></span>
+                </font>
+            	<span class="inblcok sort-filter"><font>筛选</font><img src="images/Path 16 Copy@640.png" alt="" /></span>
+            </div>
+            <div class="sd-content">
+                <ul class="sd-select">
+                    <li class="blue" value="1">默认排序</li>
+                    <li value="2">销量优先</li>
+                    <li value="3">人气优先</li>
+                </ul>
+                <ul class="sd-select">
+                    <li value="4">价格从高到低</li>
+                    <li value="5">价格从低到高</li>
+                </ul>
+            </div>
+        </div>
+        <div class="shai-select">
+            <div class="ss-box">
+                <div class="ss-top">
+                    <div class="st-left">价格区间（元）</div>
+                    <div class="st-right">
+                        <input type="text" class="blue-box bb-one" />
+                        <span class="line">--</span>
+                        <input type="text" class="blue-box bb-two" />
+                    </div>
+                </div>
+                <div class="ss-bottom">
+                    <div class="price">0-199</div>
+                    <div class="price">200-499</div>
+                    <div class="price">500-999</div>
+                    <div class="price">1000+</div>
+                </div>
+            </div>
+            <div class="order-time">
+                <div class="or-left">预约时间</div>
+                <div class="or-right">
+                    <span class="limit-date">不限日期</span>
+                    <span class="limit-time">不限时间</span>
+                </div>
+            </div>
+            <div class="order-content">
+                <div class="order-date">
+                    <select name="" id="" class="od-left"></select>
+                    <select name="" id="" class="od-right">
+                    	<option value="">不限时间</option>
+                    </select>
+                </div>
+                <div class="reset-btn">重置</div>
+            </div>
+            <div class="ok-btn">确定</div>
+        </div>
+        <!-- 内容区域  -->
+         <ul class="box-content"></ul>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+    <!-- <div class="load-more">查看更多</div> -->
+</body>
+</html>

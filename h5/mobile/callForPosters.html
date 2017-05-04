@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+
+<title>南瓜达人征集帖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript" src="../mobile/js/sea.js"></script>
+<script type="text/javascript" src="../mobile/js/zepto.min.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<style type="text/css">
+*{ margin:0px; padding:0px;font-family:"微软雅黑";color:#3a3a3a; list-style:none;-webkit-appearance:none;-webkit-tap-highlight-color:rgba(0,0,0,0); }
+body img{ width:100%; margin-bottom: -6px;}
+a[title="站长统计"]{ display:none;}
+.join_btn,.join_bottom{ display:none;} 
+</style>
+<body>
+	<img src="images/daren/daren_01.jpg" alt="" />
+    <img src="images/daren/daren_02.jpg" alt="" />
+    <img src="images/daren/daren_join_btn.jpg" alt="" class="join_btn" />
+    <img src="images/daren/daren_bottom.jpg" alt="" class="join_bottom" />
+    <script>
+        seajs.use('./js/initCallForPosters', function(initCallForPosters) {
+            initCallForPosters.initPage();
+        });
+    </script>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+</html>

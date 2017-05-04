@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+ 
+<title>我的优惠券</title>
+<style type="text/css">
+	*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none;}
+	body,html{ font-size:14px; font-family:"微软雅黑"; background:#f5fafa;}
+	img{ display:block;}
+ 	.box{max-width:750px; margin:0 auto; height:auto; }
+	.box-top{ padding:.36rem .43rem; border:1px solid #c3c8c8; overflow:hidden; background:#fff;}
+	.bt-left,.bt-right{ float:left; padding:1.14rem 0 1.14rem .8rem; width:45%; border:1px solid #c3c8c8; text-align:center; background:url(images/vouchers-share_03.png) no-repeat 18% 46%; background-size: 11%; font-size:1rem; color:#50c8b4; border-radius:.7rem;}
+	.bt-right{ float:right;background:url(images/vouchers-ling_03.png) no-repeat 17% 49%; background-size: 13%;}
+	.bt-txt{ float:left; display:block; padding:1.21rem 0 1.21rem 1rem; width:72%; border:1px solid #c3c8c8; border-radius:.7rem;}
+	.bt-btn{ float:right; padding:1.15rem 1.29rem; background:#48b4a2; border-radius:.7rem; color:#fff;}
+	.vouchers-none{ margin:21% auto 0; width:27%; display:none;}
+	.quan-box{ padding:.3rem 1.5%;}
+	.voucher,.voucher-no{width:100%; height:7.5rem; border-radius:.71rem; box-sizing:border-box; margin:0 0 .5rem 0;background:url(images/xwc-vouchers_03.png) no-repeat; background-size:100% 100%; position:relative;}
+	.vt-left{ float:left; width:32%; text-align:center;}
+	.vt-right{ float:right; width:64%; }
+	.vl-top{ font-size:2.2rem; color:#50c8b4; font-weight:bold; margin-top: 1rem; }
+	.vl-bottom{ font-size:.73rem; color:#50c8b4;}
+	.vr-top{ font-size:.91rem; color:#9a9a9a; line-height:3rem;width: 100%; overflow: hidden; height: 3rem;}
+	.vr-bottom{ color:#9a9a9a; font-size:1.1rem; margin-top: .8rem;}
+	.use-status{ text-align:center; width:32%; position:absolute; bottom:.45rem; left:0px; color:#fff; font-size:.85rem;}
+	.use-date{ text-align:center; width:68%; position:absolute; bottom:.45rem; right:0px; font-size:.85rem; color:#fff;}
+	.voucher-no{ background:url(images/xwc-vouchers-no_03.png) no-repeat; background-size:100% 100%;}
+	.gray{ color:#9a9a9a;}
+	a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/vouchers.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jweixin-1.0.0.js"></script>
+</head>
+
+<body>
+	<div class="box">
+		<div class="box-top">
+        	<div class="double-txt">
+                <input class="bt-txt" placeholder="输入邀请码" />
+                <div class="bt-btn">领取</div>
+            </div>
+        </div>
+        <img src="images/vouchers-none_03.png" class="vouchers-none" alt="" />
+        <!--  优惠券 -->
+        <div class="quan-box"></div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

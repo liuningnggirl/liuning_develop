@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+	<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+	<title>化妆师页面</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<link rel="stylesheet" type="text/css" href="../cosmetic/css/this.css">
+	<link rel="stylesheet" href="../cosmetic/css/styles.css" type="text/css">
+	<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+	<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+	<script type="text/javascript" src="../cosmetic/js/yxMobileSlider.js"></script>
+	<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+</head>
+<body>
+<div class="box">
+<div class="conter">
+		<a href="#"></a>
+		<div class="more_w">
+			<div class="more_main"></div>
+		</div>
+		<a href="#s_nav"></a>
+	</div>
+	<div class="more_top">
+        <img src="images/more_top.png">
+    </div>
+</div>
+  <script>
+  //获取首页更多a链接的url
+	function getParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return decodeURI(r[2]);
+		return '';
+	}
+	var workType = getParam('workType');
+	var pageSize = 5;
+	$(function() {
+
+		//加载第一页
+		//getMoreDressers();
+		loadDressers(0,5);
+		$(".more_main02").live('click',function(){
+			if (/iphone|ipad|ipod/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_ClickWorks','phoneType=iOS','点击作品','true','']);	
+			} else if (/android/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_ClickWorks','phoneType=and','点击作品','true','']);
+			};
+		});
+	});
+
+
+	function loadDressers(pageNum,pageSize){
+		var key = getParam('key');
+		$.ajax({//采用异步
+			type: "post",
+			url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/works/weixin/listWorksByType/1.4.1 ',
+	 		data: getFinalRequestObject({workType:workType,accessToken:getAccessToken(),page:pageNum,num:pageSize,cityName:'北京'}),
+			timeout:15000,//10s
+			dataType:"json",
+			success: initPage,
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+		}});
+	}
+	function initPage(data){
+			console.log(data)
+			$('.s_btn').remove();
+			var res=data.data;
+			var titleAdded = !(typeof(titleStr)=='undefined');
+			var str='';
+
+			titleStr='<div class="more_nav">|' + workType + '|</div>';
+			var typeStr='';
+			for (var i=0 ;i<res.length;i++){
+				if(res[i].hasDiscount == 1){
+					str +='<div class＝"more_main"><a href="workDetails.html?workId='+res[i].workId+'&v=<%= VERSION %>" style="-webkit-tap-highlight-color: rgba(0,0,0,0);"><div class="more_main01"><div class="more_main02"><img class="lazy" data-original="' + res[i].cover + '" class="cover"><img src ="'+res[i].workPromotion.icon+'" class="more-img-icon" /></div><div class="s_main_ctwo1">' + getWorkTags(res[i]) + '<span>¥' + res[i].cost + '</span></div><div class="more_main03"> <p>' + res[i].descriptions + '</p></div></div></a></div>';
+				}else{
+					str +='<div class＝"more_main"><a href="workDetails.html?workId='+res[i].workId+'&v=<%= VERSION %>" style="-webkit-tap-highlight-color: rgba(0,0,0,0);"><div class="more_main01"><div class="more_main02"><img class="lazy" data-original="' + res[i].cover + '" class="cover"></div><div class="s_main_ctwo1">' + getWorkTags(res[i]) + '<span>¥' + res[i].cost + '</span></div><div class="more_main03"> <p>' + res[i].descriptions + '</p></div></div></a></div>';
+				}
+			}
+			if( data.data.length >= pageSize){
+				str += '<div class="s_btn" id="s_click_btn">查看更多</div>';
+			}
+			 if (!titleAdded) {
+			 	$(".more_w").append(titleStr);
+			 }else{
+			 	$(".more_w").append();
+			};
+			$(".more_w").append(str);
+			$(".s_btn").unbind('click');
+			$(".s_btn").on("click", getMoreDressers);
+
+			$("img.lazy").lazyload({effect : "fadeIn",threshold : 200});
+			$("img").removeClass("lazy");//解决点击查看更多时重新加载图片
+			
+	}
+	/*分页 加载更多 共用*/
+	function getMoreDressers(){
+		var pageNum = $('body').data('pageNum');
+		if(pageNum == undefined || parseInt(pageNum) == NaN){
+			pageNum = 0;
+		}
+		pageNum = pageNum + 1;
+		$('body').data('pageNum',pageNum);
+		loadDressers(pageNum,pageSize);
+	}
+	function getWorkTags(work){
+	var str = '';
+	for(var i=0;i<work.tags.length;i++){
+		str += '<p>'+work.tags[i].tag+'</p>';
+	}
+	return str;
+}
+
+
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

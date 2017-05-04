@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>从今以后你可以和明星有同一个造型师啦_南瓜姑娘</title>
+
+<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no"/>
+
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../mobile/js/jquery-1.7.2.min.js"></script>
+
+
+<style>
+
+*{
+
+padding:0px;
+
+margin:0px;
+
+border:0px;
+
+}
+
+body{
+
+	width:100%;
+
+	height:100%;
+
+	text-align:center;
+
+}
+
+.main{
+
+
+
+	width:100%;
+
+	height:100%;
+
+}
+
+
+
+.main img{
+
+	display:block;
+
+	margin:0px auto;
+
+	width:100%;
+
+}
+
+.video_container{
+
+	padding-left: 0;
+
+	padding-right: 0;
+
+	margin: auto;
+
+}
+
+
+
+.video_container video{
+
+	width: 100%;
+
+}
+/*  footer底部开始 */
+	.footer{ width:100%; height:3.5rem; position:fixed; bottom:0px; border-top:1px solid #ccd0d0; background:rgba(0,0,0,0.5);}
+	.footer .log{ width:2.86rem; height:2.86rem; border-radius:50%; margin:.29rem 0 0 1.72rem; float:left;}
+	.footer .log img{ width:100%; height:100%;}
+	.log-txt{ overflow:hidden; float:left;padding: .6rem 0 0 .5rem; box-sizing:border-box;}
+	.log-txt .txt{ color:#fff; font-size:.86rem;}
+	.log-txt .txt-title{ font-size:.79rem; color:#8fcfc7;}
+	.down-load{ padding:.4rem .64rem; background:#fa6e64; text-align:center; color:#fff; font-size:.72rem; float:right; border-radius:20px;margin: .8rem 0 0 0rem;}
+	.btn-close{ display:block; float:right; width:.64rem; margin: .3rem .5rem 0 .5rem;}
+	.btn-close img{ width:100%; }
+	a[title*="站长统计"]{ display:none;}
+/*  footer底部结束 */
+</style>
+
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+ </script>
+
+
+</head>
+
+
+
+<body>
+
+<div class="main">
+
+	<img class="top" src="images/c_focus_content1_01.jpg" />
+	<img class="top" src="images/c_focus_content1_02.jpg" />
+	<img class="top" src="images/c_focus_content1_03.jpg" />
+	<img class="top" src="images/c_focus_content1_04.jpg" />
+	<img class="top" src="images/c_focus_content1_05.jpg" />
+	<img class="top" src="images/c_focus_content1_06.jpg" />
+	<img class="top" src="images/c_focus_content1_07.jpg" />
+	<img class="top" src="images/c_focus_content1_08.jpg" />
+	<img class="top" src="images/c_focus_content1_09.jpg" />
+	<img class="top" src="images/c_focus_content1_10.jpg" />
+	<img class="top" src="images/c_focus_content1_11.jpg" />
+	<div class="video_container">
+		<video  src="//nggirl-product-res.oss-cn-beijing.aliyuncs.com/sysres/pumpkingirl-showvideo-small.mp4" controls poster="images/c_focus_content1_12.jpg"></video>
+	</div>	
+	<img class="top" src="images/c_focus_content1_13.jpg" />
+</div>
+<!--  footer -->
+        <div class="footer">
+            <div class="log"><img src="images/nggirl-logo_03.png" alt="" /></div>
+            <div class="log-txt">
+                <p class="txt">南瓜姑娘</p>
+                <p class="txt-title">陪伴你人生的“美”一段旅程</p>
+            </div>
+            <a href="javascript:;" class="btn-close"><img src="images/close-btn_03.png" alt="" /></a>
+            <a id="btn_download"  href="<%= CLI_HOST_API_URL %>/nggirl/app/getapp"><div  class="down-load">立即下载</div></a>
+        </div>
+
+
+<script type="text/javascript">
+function getParam(name){
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if (r!=null) return unescape(r[2]); return null;
+}
+
+<!--  点击关闭按钮关闭底部悬浮框 -->
+$('.btn-close').click(function(e) {
+    $('.footer').slideUp();
+});
+
+$('#btn_download').click(function(e) {
+	var fromValue = getParam('from') || '';
+	if (/iphone|ipad|ipod/.test(ua)) {
+         _czc.push(['_trackEvent','tuiguang','phoneType=iOS','download',fromValue]);   
+    } else if (/android/.test(ua)) {
+         _czc.push(['_trackEvent','tuiguang','phoneType=and','download',fromValue]);
+    };
+});
+
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+
+
+
+</html>

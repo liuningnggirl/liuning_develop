@@ -1,0 +1,15 @@
+{
+  "description": "正式服务器配置,部署到cli服务器上",
+  "configName": "remote",
+  "isDebug": false,
+  "FWH_APPID": "wxe3cc2de340e70bcb",
+  "UGC_HOST_API_URL": "https://ugc.nggirl.com.cn",
+  "CLI_HOST_API_URL": "https://cli.nggirl.com.cn",
+  "PHOTOS_HOST_API_URL": "https://photos.nggirl.com.cn",
+  "WEIXIN_BOUND_DOMAIN_URL":"https://cli.nggirl.com.cn",
+  "CNZZ_STAT_CODE_ID": "1259610672",
+  "CNZZ_STAT_CODE_WEB_ID": "1259610672",
+  "dest": {
+    "packageDir": "target/h5/"
+  }
+}

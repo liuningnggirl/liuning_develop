@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/pointsInstruction.css" />
+<title>赚取积分</title>
+<!--<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>-->
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+
+<body>
+    <div class="top">
+    	<p>温馨提示：用户参与互动不仅可以获得相应积分同时还可以获得相同的经验值</p>
+    </div>
+    <div class="rank">
+    	<div class="rankstyle rankTit clearfix">
+        	<div class="left">等级</div>
+            <div class="right">经验值</div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV0</div>
+            <div class="right">
+            	<span class="rightL">0</span>
+                <span class="range"></span>
+                <span class="rightR">499</span>
+            </div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV1</div>
+            <div class="right">
+            	<span class="rightL">500</span>
+                <span class="range"></span>
+                <span class="rightR">999</span>
+            </div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV2</div>
+            <div class="right">
+            	<span class="rightL">1000</span>
+                <span class="range"></span>
+                <span class="rightR">2999</span>
+            </div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV3</div>
+            <div class="right">
+            	<span class="rightL">3000</span>
+                <span class="range"></span>
+                <span class="rightR">9999</span>
+            </div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV4</div>
+            <div class="right">
+            	<span class="rightL">10000</span>
+                <span class="range"></span>
+                <span class="rightR">29999</span>
+            </div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV5</div>
+            <div class="right">
+            	<span class="rightL">30000</span>
+                <span class="range"></span>
+                <span class="rightR">49999</span>
+            </div>
+        </div>
+        <div class="rankstyle rankDet">
+        	<div class="left">LV6</div>
+            <div class="right">
+            	<span class="rightL">50000</span>
+                <span class="range"></span>
+                <span class="rightR">99999</span>
+            </div>
+        </div>
+         <div class="rankstyle rankDet">
+        	<div class="left">LV7</div>
+            <div class="right">
+            	<span class="rightL">100000以上</span>
+                <span class="range"></span>
+                <span class="rightR"></span>
+            </div>
+        </div>
+    </div>
+    <div class="pointsRuler">
+    	<h3>积分获取与经验值规则</h3>
+        <div>
+        	<p class="rulerTit rulerTit0">签到<span>(仅在app中获取)</span></p>
+            <p>每日签到<span>+3积分</span></p>
+            <p>连续签到7天额外<span>+20积分</span></p>
+        </div>
+        <div>
+        	<p class="rulerTit rulerTit1">互动</p>
+            <p>喜欢<span>+1积分*3次/天</span>取消后扣除所得积分</p>
+            <p>收藏<span>+1积分*3次/天</span>取消后扣除所得积分</p>
+            <p>点赞<span>+1积分*3次/天</span>取消后扣除所得积分</p>
+            <p>评论<span>+2积分*3次/天</span>删除/被删除后扣除所得积分</p>
+            <p>分享微信/微博<span>+3积分*5次/天</span> </p>
+            <p>提交试用报告<span>+10积分*无限制/天</span> </p>
+            <p>发布文章通过审核<span>+20积分*无限制/天</span> </p>
+            <p>文章被选为精选<span>+40积分*无限制/天</span> </p>
+        </div>
+        <div>
+        	<p class="rulerTit rulerTit2">上门美妆</p>
+            <p>上门美妆订单实付金额x元<span>+5*x积分</span></p>
+            <p>退款后扣除所得积分</p>
+        </div>
+        <div>
+        	<p class="rulerTit rulerTit3">美妆沙龙</p>
+            <p>美妆沙龙订单实付金额x元<span>+5*x积分</span></p>
+            <p>退款后扣除所得积分</p>
+        </div>
+        <div>
+        	<p class="rulerTit rulerTit4">注册<span>(仅在app中获取)</span></p>
+            <p>新用户注册<span>+100积分</span></p>
+        </div>
+        <div>
+        	<p class="rulerTit rulerTit5">评价订单</p>
+            <p>成功评价订单<span>+100积分</span></p>
+        </div>
+       <!-- <div class="hidden">
+        	<p class="rulerTit rulerTit6">邀请好友赚取积分</p>
+            <p>好友注册成功<span>+100积分</span></p>
+        </div>-->
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+   <!-- <script type="text/javascript">
+	$(function(){
+		if(isInApp()){
+			$(".hidden").removeClass("hidden");
+		}
+	})
+	</script>-->
+</body>
+</html>

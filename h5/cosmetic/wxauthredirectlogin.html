@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title></title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<style type="text/css">
+a[title*="站长统计"]{ display:none;}
+</style>
+<script>
+$(function(){
+	var code = getParam('code');
+	var redirectUrl = getRedirectUrlAfterLogin();
+	if (code != null && code != '' && code != localStorage.code) //若已请求过code,且和记录的code不同，防止回退页面时code过期
+	{
+		$.ajax({
+			type : 'GET',
+			dataType : 'json',
+			url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/register/weixin/getInfo/1.4.2',
+			data : {
+				code : code
+			},
+			success : function(data) {
+				setAccessToken(data.data.accessToken);
+				localStorage.setItem("code", code);
+				localStorage.setItem("isThirdLogon", "1");
+				if(redirectUrl == null || redirectUrl == undefined || strIsEmpty(redirectUrl)){
+					location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>";
+				}else{
+					location.href = redirectUrl;
+				}
+			}				
+		});
+	}else{
+		if(redirectUrl == null || redirectUrl == undefined || strIsEmpty(redirectUrl)){
+			location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>";
+		}else{
+			location.href = redirectUrl;
+		}
+	}
+});
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</head>
+<body>
+</body>
+</html>

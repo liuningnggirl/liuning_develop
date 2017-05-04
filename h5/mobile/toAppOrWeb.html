@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<title>南瓜姑娘</title>
+</head>
+<body>
+	<a href="#" id="openApp" style="display: none">打开APK</a>
+
+	<script type="text/javascript">
+
+		// 从地址栏中获取参数
+		function getParam(name) {
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if (r != null)
+		        return decodeURI(r[2]);
+		    return '';
+		}
+
+		var toUrl = getParam('toUrl');
+
+		var ifrSrc = 'nggirl://web?url='+toUrl;
+		var wap_url = toUrl;
+		if (navigator.userAgent.match(/android/i)
+				|| navigator.userAgent.match(/(iPhone|iPod);?/i)
+				|| navigator.userAgent.match(/(iPad);?/i)) {
+			document.getElementById('openApp').onclick = function(e) {
+				// 通过iframe的方式试图打开APP，如果能正常打开，会直接切换到APP，并自动阻止a标签的默认行为
+				// 否则打开a标签的href链接
+				if (ifrSrc) {
+					var ifr = document.createElement('iframe');
+					ifr.src = ifrSrc;
+					ifr.style.display = 'none';
+					document.body.appendChild(ifr);
+				}
+				var loadDateTime = new Date();
+				// 设置时间阈值，在规定时间里面没有打开对应App的话，直接去wap url。
+				window.setTimeout(function() {
+					var timeOutDateTime = new Date();
+					if (timeOutDateTime - loadDateTime < 3000) {
+						if (wap_url) {
+							window.location = wap_url;
+						}
+					} else {
+						window.close();
+					}
+				}, 500);
+			}
+
+			if (document.all) {
+				document.getElementById('openApp').click();
+			}
+			// 其它浏览器
+			else {
+				var e = document.createEvent("MouseEvents");
+				e.initEvent("click", true, true);
+				document.getElementById("openApp").dispatchEvent(e);
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none; -webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-appearance:none;font-size:14px; font-family:"微软雅黑";}
+body{ background:#fff;}
+.box{ text-align:center;}
+.box_title{ text-align:center; color:#3a3a3a; font-size:18px; margin:25px 0 40px 0;}
+.box .box_return{ position:absolute; top:29px; left:15px; width:20px;}
+.box .box_input{ width:100%; padding:0 25px; box-sizing:border-box; position:relative;}
+.tel,.yzm{ display:block; width:100%; height:55px; border-radius:5px; padding:0 15px; box-sizing:border-box; font-size:15px; color:#4c4c4c; border:1px solid #50c8b4;}
+.yzm{ margin:10px 0 30px 0; color:#4c4c4c;}
+.get_yzm{ position:absolute; top:14px; right:40px; border:1px solid #50c8b4; padding:5px 0; width:70px; color:#50c8b4; font-size:12px; border-radius:5px;}
+.del_tel{ position:absolute; right:120px; top:20px; width:16px; display:none;}
+.del_yzm{ position:absolute; right:40px; top:85px; width:16px; display:none;}
+.yz_btn{ width:100%; height:45px; line-height:45px; color:#fff; text-align:center; background:#b3b3b3; border-radius:5px; font-size:18px; letter-spacing:5px;}
+.box_p{ text-align:center; color:#50c8b4; font-size:14px; letter-spacing:2px; width:100%;}
+.box_p a{ color:#50c8b4; font-size:14px; text-decoration:underline;}

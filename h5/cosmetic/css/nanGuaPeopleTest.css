@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0px; padding:0px;-webkit-appearance:none;-webkit-tap-highlight-color: transparent; outline:none;}
+body {background: #fff;font-family:"微软雅黑";font-size: 14px;padding: 0; border:none;}
+a[title=站长统计]{ display:none;}
+.leve_type .leve_type_zhuang,.leve_type .leve_type_fu{ width:48.6vw; font-size:36px; background:#ffb27d; text-align:center; padding:8px 0; border-radius:5px; margin:0 auto; color:#fff;}
+.leve_type .leve_type_zhuang{ margin:0 auto 60px;}
+.leve_type_caizhuang .leve_type_cai_title,.leve_type_hufu .leve_type_cai_title{ text-align:center; font-size:48px; color:#ee750c; padding:30px 0;}
+.leve_type_question_box .box_question .bq_textarea{ resize:none; border:1px solid #ffb27d; width:100%;box-sizing: border-box; font-size:14px; color:#3a3a3a; border-radius: 0 0 5px 5px; padding: 20px; min-height: 200px; text-align: justify;}
+.box_question .bb_ques{ font-size:16px; color:#fff; text-align:center; background:#ffb27d; padding:30px 10px; box-sizing:border-box; border-radius:5px 5px 0 0 ; width:100%;}
+.leve_type_caizhuang .leve_type_question_box,.leve_type_hufu .leve_type_question_box{ padding:0 20px; margin:30px 0 0 0;}
+.leve_type_caizhuang .leve_type_question_box .box_question,.leve_type_hufu .leve_type_question_box .box_question{border-radius:5px; }
+.box_question .bq_box{ position:relative; width:100%;}
+.box_question .bb_circle{ width:55px; height:55px; border-radius:50%; border:1px solid #ffb27d; text-align:center; line-height:55px; color:#ffb27d; background:#fff;position: absolute;top: -30px;left: 37%;}
+.bq_next_question{ width:100px; height:40px; background:#ffb27d; color:#fff; font-size:18px; text-align:center; line-height:40px; border-radius:5px; margin:50px auto 60px;}
+.btn_double .prve_question{ float:left; border:1px solid #ffb27d; background:#fff; color:#ee750c; width:98px; height:38px; line-height:38px;}
+.btn_double .next_question{ float:right;}
+.btn_double{ padding:0 35px; box-sizing:border-box;}
+.question_hide{ display:none;}
+.btn_double .clear_float{ float:none;}
+.window_white_half{ position:fixed; width:100%; height:100%; background:rgba(204,204,204,.5); top:0px; left:0px;}
+.window_sure{ width:100%; background:#fff; border-radius:5px; padding: 0 0 20px 0;}
+.window_sure .window_sure_title{ text-align:center; color:#ee750c; font-size:16px; padding:20px 0;}
+.window_sure .window_sure_message{ text-align:center; color:#3a3a3a; font-size:16px; margin:0 0 40px 0; padding: 0 25px; box-sizing: border-box;}
+.ws_double_btn .ws_double_btn_cancle{ width:100px; padding:7px 0; border:1px solid #ffb27d; border-radius:5px; text-align:center; color:#ee750c; float:left;}
+.ws_double_btn .ws_double_btn_ok{ width:100px; padding:7px 0; border:1px solid #ffb27d; border-radius:5px; text-align:center; float:right; background:#ffb27d; color:#fff;}
+.ws_double_btn{ padding:0 10%; box-sizing:border-box;overflow: hidden;}
+.window_box{ padding:0 20px; box-sizing:border-box;margin: 32vh 0 0 0;}
+.ws_double_btn .ws_double_btn_queren{ width:100px; padding:7px 0; border:1px solid #ffb27d; border-radius:5px; text-align:center; margin:0 auto;background:#ffb27d; color:#fff;}
+.bar{ height:7px; background:#F0F5F5; }
+.leve_type{ margin:30vh 0 0 0;}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../busteach/css/spinningwheel-ng.css" />
+<link rel="stylesheet" href="../busteach/css/normalize3.0.2.min.css" />
+<link href="../busteach/css/mobiscroll.css" rel="stylesheet" />
+<link href="../busteach/css/mobiscroll_date.css" rel="stylesheet" />
+
+<title>预约页面</title>
+<style type="text/css">
+	* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+	body, html {font-size: 14px;font-family: "微软雅黑";background: #f5fafa;}
+	img {display: block;}
+	.box {max-width: 750px;margin: 0 auto;height: auto;background: #f5fafa;}
+	.box-hzs {width: 100%;border: 1px solid #cbd3d3;border-left: none;border-right: none;overflow: hidden;background: #fff;padding: .71rem;
+box-sizing: border-box;}
+	.bh-left {width: 19%;float: left;box-sizing: border-box;position: relative;}
+	.bh-right {float: left;width: 72%;padding: 0 0 0 1.1rem;box-sizing: border-box;}
+	.img-vip {width: 30%;position: absolute;top: -2%;display:none;}
+	.bh-name {color: #434343;font-size: 1.07rem;margin-top: 4%;}
+	.bh-start img {width: 7%;display: inline-block;}
+	.bh-start {margin-top: 4%;}
+	.content {width: 100%;overflow: hidden;background: #fff;margin: 0 0 .5rem 0;border: 1px solid #e3e8e8;border-left: none;border-right: none;}
+	.content li {padding: 0 5%;border-bottom: 1px solid #e3e8e8;box-sizing: border-box;overflow: hidden; }
+	.content li .left {color: #434343;font-size: .93rem;float: left;width: 30%;padding: 1.2rem 0;text-align: left;}
+	.content li .right {color: #9ba0a0;font-size: .93rem;float: right;width: 60%;padding: 1.2rem 5% 1.2rem 0;text-align: right;position: relative;}
+	.pay {border: 1px solid #e3e8e8;border-left: none;border-right: none;background: #fff;padding: 1rem 0;display: block;}
+	.pay img {width: 21%;margin: 0 auto;}
+	.btn-yue {padding: .5rem 0;width: 100%;background: #fff;position: fixed;bottom: 0px;border: 1px solid #e3e8e8;border-left: none;border-right: none;}
+	.btn-ok {width: 94%;padding: .86rem 0;background: #fa6e64;border-radius: 1.5rem;display: block;margin: 0 auto;text-align: center;color: #fff;font-size: 1rem;}
+	.box-bottom {margin-bottom: 25%;position:relative;}
+	.gray-box {width: 100%;height: 100%;position: fixed;background: rgba(0, 0, 0, .5);top: 0px;z-index: 33;display: none;}
+	.choose{width:7%;position:absolute;top:26%;right:8%;}
+	.bl-photo{border-radius:50%;	}
+	#address{position: fix;top: 0px;width: 100%;height: 1.2rem;text-align:right;}
+	#address-list{top: 1.2rem;width: 100%;}
+	/*屏蔽jQuery自动完成的状态栏*/
+	.ui-helper-hidden-accessible{display: none;}
+	#sw-wrapper{ color:#9ba0a0; font-size: .93rem;}
+	a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="../busteach/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../busteach/js/spinningwheel.js"></script>
+<script type="text/javascript" src="../busteach/js/md5.js"></script>
+<script type="text/javascript" src="../busteach/js/params.js"></script>
+<script type="text/javascript" src="../busteach/js/company-order.js"></script>
+<script src="../busteach/js/mobiscroll_date.js" charset="gb2312"></script> 
+<script src="../busteach/js/mobiscroll.js"></script>
+<!-- <script src="../busteach/js/mobiscroll.custom-2.16.1.min.js"></script>  -->
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+	</script>
+</head>
+    <body>
+		<div class="box">
+			<ul class="content">
+				<li  class='classtypeselect'>
+					<div class="left">课程类型</div>
+					<div class="right" id="result"><!-- 职业妆 --></div>
+				</li>
+				<li>
+					<div class="left">课程费用</div>
+					<div class="right" id="price"></div>
+				</li>
+				<li  class='resnumselect'>
+					<div class="left">预约人数</div>
+					<div class="right" id="resultnum">请选择预约人数</div>
+				</li>
+				<li>
+					<div class="left">预约时间</div>
+                    <input type="text" class="right data-txt" name="USER_AGE" id="USER_AGE" readonly class="input" placeholder="请选择预约日期" />
+				</li>
+				<li class="yue-address">
+					<div class="left">预约地址</div>
+					<div class="right">
+						<input type="text" id="address" style="color: #9ba0a0;" name="keyword" placeholder="请输入详细地址" />
+					</div>
+				</li>
+				<li>
+					<div class="left">联系电话</div> <input class="right" id="phoneNum" type="text" value="" placeholder="请输入联系电话" />
+				</li>
+			</ul>
+			<div class="gray-box"></div>
+		<div class="box-bottom">
+			<a class="pay" href="javascript:;">
+                <img src="images/img-company/order-zhifubao_03.png" alt="" />
+			</a>
+            <img src="images/img-company/order_detail_pay_option_hl.png" class="choose" alt="" />
+			<div class="btn-yue">
+				<a href="javascript:reservationAndPay();" id="tj" class="btn-ok submit">确定预约并支付</a>
+			</div>
+		</div>
+		</div>
+
+
+    <script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();	
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.datetime = {preset : 'datetime'};
+        opt.time = {preset : 'time'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            dateFormat: 'yyyy-mm-dd',
+            lang: 'zh',
+
+            startYear: currYear, //开始年份
+            endYear: currYear + 1 //结束年份
+        };
+    
+        $("#USER_AGE").mobiscroll($.extend(opt['date'], opt['default']));
+    });
+    </script>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+    </body>
+</html>

@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>来自南瓜姑娘的优惠券_南瓜姑娘</title>
+<style type="text/css">
+	a[title*="站长统计"]{ display:none;}
+	*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none;}
+	body,html{ font-size:14px; font-family:"微软雅黑";background:#a0d7dc;}
+	img{ display:block;}
+ 	.box{margin:0 auto; height:auto; background:#a0d7dc;  }
+	.box-big-logo{ width:100%; margin:0 auto; box-sizing:border-box;}
+	.yq-box{ width:55%; line-height:3rem; margin:0 auto; text-align:center; }
+	.yq-txt{ width:40%; color:#fff; font-size:1.1rem; pointer-events:none; pointer-events:none;font-size:.7rem;}
+	.yq-num{ width:60%; color:#fa6e64; font-size:1.1rem;}
+	.look-btn,.app-btn{ display:block;  width:76%; height:45px; line-height:45px; color:#9a9a9a; font-size:18px; background:#fa6e64; text-align:center; border-radius:5px; font-size:18px; color:#fff; cursor:pointer; -webkit-tap-highlight-color:rgba(0,0,0,0); margin:10px auto 20px; box-sizing:border-box;}
+	.box-01{ overflow:hidden;}
+	.num{ background:#fff; text-align:center; color:#9a9a9a; margin:30px auto 0; padding:13px 0; width:76%; display:block; border-radius:5px; font-size:18px;}
+	.msg-box{ width:300px; height:60px; background:#fff; position:fixed; left:50%; top:50%; display:none;border:1px solid #b8b9b4; text-align: center;padding-top: 20px;border-radius: 10px;}
+	.regular{ padding:0 15px 20px; width:100%; box-sizing:border-box;}
+	.regular_content{ padding:25px 30px; box-sizing:border-box; background:#cce9e5; border-radius:5px;}
+	.rc_img{ width:100%; text-align:center; display:inline-block; font-size:14px; color:#3a3a3a; margin:0 0 20px 0; background:url(images/line.png) no-repeat center center; background-size: 100%;}
+	.rc_content p{ font-size:13px; color:#4c4c4c; line-height:24px; text-align:justify;}\
+</style>
+<script type="text/javascript" src="../../mobile/tuiguang/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../mobile/tuiguang/js/md5.js"></script>
+<script type="text/javascript" src="../../mobile/tuiguang/js/params.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+ </script>
+</head>
+
+<body>
+	<div class="box">
+        <div class="box-01">
+			<img src="" alt="" class="box-big-logo" />
+			<input type="tel" class="num" value="输入您的手机号" maxlength="11"  />
+			<a href="javascript:;" class="look-btn">立即领取</a>
+        </div>
+        <div class="regular">
+        	<div class="regular_content">
+            	<span class="rc_img">活动规则</span>
+            	<span class="rc_content">
+                	<p>1.下载南瓜姑娘APP,用手机号注册后即可使用；</p>
+                    <p>2.优惠券可与“新用户首单五折”活动叠加使用；</p>
+                    <p>3.使用优惠券时注册手机号需与领取优惠券时的手机号一致；</p>
+                    <p>4.每笔订单只可使用一张优惠券，且不设找零不设提现；</p>
+                    <p>5.最终解释权归南瓜姑娘拥有。</p>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="msg-box" ></div>
+	<script type="text/javascript">
+		var SysSecond;
+		var InterValObj;
+		$(document).ready(function(){
+			var amount = getParam('amount');
+			if(amount != undefined){
+				initImage(amount);
+			}
+			$('.num').focus(function(e) {
+				$('.num').val('').css('color','#4c4c4c');
+			});
+			
+			$('.num').blur(function(){
+				if($('.num').val() == ""){
+					$('.num').val('输入您的手机号').css('color','#9a9a9a');	
+				}
+			})
+
+			$('.look-btn').click(function(e){
+				_czc.push(['_trackEvent','youhuiquan','click','youhuiquan','true','']);
+				var phoneNum = $('.num')[0].value;
+				if(strIsEmpty(phoneNum)){
+					msgFn('您还未输入手机号哦～');
+					return;
+				}
+
+
+				var telReg = !!phoneNum.match('^(1[3|5|7|8|4])[0-9]{9}$');
+
+				if(telReg == true){
+					var requestData = getFinalRequestObject({phoneNum:phoneNum, code:getParam('code')});
+
+					$.ajax({
+						type : 'POST',
+						url : '/nggirl/app/cli/personalInfo/createUnbindCoupon/1.4.2',
+						data : requestData,
+						success : function(result) {
+							result = $.parseJSON(result);
+							if (result.code == '1') {
+								msgFn(result.data.error);
+							} else {
+								_czc.push(['_trackEvent',getParam('amount'),'click','lingquan','true','']);
+								msgFn('领取成功～');
+							}
+						}
+					});
+				}else{
+					msgFn('手机号格式不正确!');
+					$('.num').val('请输入您的手机号');
+				}
+			});
+
+
+		});
+
+		function initImage(amount){
+			$('.box-01 .box-big-logo').attr('src','images/'+amount+'-img-vouchers/logo.png');
+		}
+
+		function msgFn(msg){
+			var top = ($(window).height() - $('.msg-box').height())/2;
+			var left = ($(window).width() - $('.msg-box').width())/2;
+			var doc =  $(document);
+			var scrollTop = $(document).scrollTop();
+			var scrollLeft = $(document).scrollLeft();
+			$('.msg-box').html(msg);
+			$('.msg-box').css( { position : 'absolute', 'top' : top + scrollTop, left : left + scrollLeft }).show();
+			$(document).ready(function () {
+				SysSecond = parseInt(1); //这里获取倒计时的起始时间
+				InterValObj = window.setInterval(SetRemainTime, 1000); //间隔函数，1秒执行
+			});
+			//将时间减去1秒，计算天、时、分、秒
+			function SetRemainTime() {
+				if (SysSecond > 0) {
+					SysSecond = SysSecond - 1;
+					var second = Math.floor(SysSecond % 60);             // 计算秒
+					var minite = Math.floor((SysSecond / 60) % 60);      //计算分
+					var hour = Math.floor((SysSecond / 3600) % 24);      //计算小时
+					var day = Math.floor((SysSecond / 3600) / 24);        //计算天
+				} else {//剩余时间小于或等于0的时候，就停止间隔函数
+					window.clearInterval(InterValObj);
+					//当两秒执行完后让弹框隐藏
+					$('.msg-box').hide();
+				}
+			}
+		}
+	</script>
+	<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+</html>

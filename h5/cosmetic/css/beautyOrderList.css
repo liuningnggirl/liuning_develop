@@ -1,0 +1,28 @@
+* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+body, html {font-size: 14px;font-family: "微软雅黑";background: #f5fafa;}
+img {display: block;}
+.box {max-width: 750px;margin: 0 auto 20%;height: auto;background: #f5fafa;}
+.box-title{ color:#3a3a3a; font-size:1.14rem; padding:.79rem 0; background:#fff; box-sizing:border-box;text-align:center; border-top:1px solid #dce3e3; border-bottom:1px solid #dce3e3; position:relative;}
+.box-title .bt-ping{ margin:0 15%;}
+.box-title .current{ color:#50c8b4; border-bottom:1px solid #50c8b4; padding-bottom:2px;}
+.bt-ing .bc-num,.bt-ping .bc-num{ position:absolute; width:1.2rem; height:1.2rem; background:#fa6e64; color:#fff; border-radius:50%; text-align:center; font-size:.71rem;  padding:.1rem; top:0px; line-height:1.5rem;}
+.box-content .bc-center,.box-content .bc-right{ display:none;}
+.bt-ing,.bt-ping{ position:relative;}
+.bc-left .bl-title,.bc-center .bl-title,.bc-right .bl-title{ text-align:center; font-size:.93rem; padding:.5rem 0; background:#50c8b4; color:#fff;}
+.bl-content{ padding:1.21rem 2.2%; box-sizing:border-box; background:#fff; overflow:hidden;}
+.bl-content .left{ width:5rem; height:5rem; float:left; border-radius:.71rem; overflow:hidden;}
+.bl-content .right{ float:left; margin-left:3%; width:73%;}
+.bl-content .left img{ width:100%; height:100%;}
+.bl-content .right .right-title{ color:#3a3a3a; font-size:1.14rem; margin-bottom: .5rem; font-weight:600;}
+.bl-content .right .rt-cost{ color:#9a9a9a; font-size:1.07rem;}
+.bl-content .right .rt-yuan{ color:#fa6e64; font-size:1.14rem;}
+.bl-content .right .rt-str{ color:#fa6e64; font-size:.7rem;}
+.rt-date{ color:#9a9a9a; font-size:.86rem; padding:0 0 0 1.2rem; background:url(../images/lock-small_03.png) no-repeat 0px; background-size:13px; margin:.3rem 0 0 0;}
+.bc-left ul li,.bc-center ul li,.bc-right ul li{ border:1px solid #d7dcdc; border-radius:.71rem; overflow:hidden; margin:.57rem 0 0 0; position:relative;}
+.bc-left ul,.bc-center ul,.bc-right ul{ padding:0 2%; box-sizing:border-box;}
+.bc-left .bl-gray,.bc-center .bl-gray,.bc-right .bl-gray{ background:#b3b3b3;}
+.status-img{ width:4rem;position: absolute; right: .5rem; top: 3.5rem;}
+.bc-no-message img{ margin:30% auto 0; width:30%;}
+.bc-no-message p{ text-align:center; color:#ccc; margin:.5rem 0 0 0;}
+.bc-no-message{ display:none;}
+a[title*="站长统计"]{ display:none;}

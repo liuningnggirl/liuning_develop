@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="../cosmetic/css/videoDetail.css" />
+<link rel="stylesheet" href="../cosmetic/css/postsdeatil.css" />
+<link rel="stylesheet" href="../cosmetic/css/biaoqing.css" />
+<title>视频详情页</title>
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico">
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" charset="utf-8" src="../cosmetic/js/bcloud.js"></script>
+<script type="text/javascript" src="../cosmetic/js/biaoqing.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/videoDetail.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body id="cube">
+	<div class="hiddenright"><div><img src="images/hiddenrightimg.png">松开进入本期相关商品<span>></span></div></div>
+	
+    
+<!--  视频 -->
+        <div id="player" style="width:100%;">
+            <script>
+            <!--  获取帖子详情 -->
+            $.get('<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/3.0.0',getFinalRequestObject({accessToken: getAccessToken(),postId: getParam('postId'),postType:2}),function(data){
+                var data = $.parseJSON(data);
+                if(data.code == 0){
+					var videoHeight=$('#player').width()/1.78;
+                    $('#player').height(videoHeight);
+					$('.dresser_message').css('margin-top',videoHeight);
+                    var player = new CloudVodPlayer();
+                    player.init({uu:"660fwidmfe",vu:data.data.videoId},'player');
+					$(".dm_top").attr('postid',data.data.postId);
+                    $('.dl_header_img').attr('src',data.data.userProfile);//化妆师头像
+                    $('.dr_title').html(data.data.title);//title
+					if(data.data.labels.length>0){
+						$('.ad_label1').show();
+						for( var t=0;t<data.data.labels.length;t++){
+							$('.ad_label1').append('<span>'+data.data.labels[t]+'</span>');
+						}
+					}
+					$('.user_name,.dl_header_img').attr("createUserId",data.data.createUserId);
+                    $('.user_name').html(data.data.userName);
+					if(data.data.userRole!=""){
+						$('.user_role').html('| '+data.data.userRole +' |');//角色
+					}
+                    
+                    if(data.data.viewNum > 99999){//浏览量
+                        $('.look_num').html("9999+");
+                    }else{
+                        $('.look_num').html(data.data.viewNum);
+                    }
+                    if(data.data.commentNum > 99999){//评论条数
+                        $('.ping_num').html("9999+");
+                    }else{
+                        $('.ping_num').html(data.data.commentNum);
+                    }
+                    if(data.data.isCollected == 0){//获取收藏状态,0未收藏
+                        $('.db_collect img').attr('src','images/collect_qian.png');
+                        $('.db_collect').attr('flag',0);
+                    }else{
+                        $('.db_collect img').attr('src','images/collect_hou.png');
+                        $('.db_collect').attr('flag',1);
+                    }
+                    if(data.data.isPraised == 0){//获取点赞状态,0未点赞
+                        $('.db_like img').attr('src','images/zan_qian.png');
+                        $('.db_like').attr('flag',0);
+                    }else{
+                        $('.db_like img').attr('src','images/zan_hou.png');
+                        $('.db_like').attr('flag',1);
+                    }
+					if(data.data.isNoTalk == 1){
+						$(".de_bot").addClass("isNoTalks");
+						$(".talkTime").html(data.data.noTalkTime);
+					};
+					var str='';
+					if(data.data.article.length>0){
+						str +='<div class="ad_detail"><p class="ad_artical">文章详情</p><div class="ad_det">';
+						for(var i = 0;i < data.data.article.length;i++){
+							var videoGoods=data.data.article [i];
+							if(videoGoods.type== "1"){
+								str +='<p class="ad_tit">'+videoGoods.content+'</p>';
+							}else if(videoGoods.type=="2"){
+								str +='<p class="ad_pro">'+ParagraphTransHelper(videoGoods.content)+'</p>';
+							}else if(videoGoods.type=="3"){
+								str +='<img data-original="'+videoGoods.content+'" extend="'+videoGoods.extend+'" class="ad_img lazy" />';
+							}else if(videoGoods.type=="4"){
+								str +='<p class="ad_note">'+videoGoods.content+'</p>';
+							}else if(videoGoods.type=="5"){
+								str +='<div seedProductId='+videoGoods.seedProductId+' class="postShop postShopa productDetail clearfix">';
+								str +='<div class="shopLeft"><img src="'+videoGoods.picture+'"></div>';
+								str +='<div class="shopCenter"><p>'+videoGoods.name+'</p><p class="productprize">参考价：<span>¥ '+videoGoods.price+'</span></p><p class="productTui">推荐度：';
+								for(var j = 0; j < 5; j++){
+									if(j < parseInt(videoGoods.recommendation/2)){
+										str +='<img src="images/product_start.png" class="xingXing">'
+									}else if(videoGoods.recommendation % 2 == 1 && parseInt(videoGoods.recommendation/2) == j){
+										str +='<img src="images/product_half_start.png" class="xingXing">'
+									}else{
+										str +='<img src="images/product_white_start.png" class="xingXing">'
+									}
+								};
+								str +='</p></div>';
+								str +='<div class="shopRight">';
+								str +='<span class="productDetails" seedProductId='+videoGoods.seedProductId+'><img src="images/order-arr-right_03.png"></span></div></div>';
+								str +='<div class="goodsbot" seedProductId='+videoGoods.seedProductId+'>';
+								if(videoGoods.isSeed == "0"){
+									str +='<p class="zhongcao zhongcao1">'+videoGoods.seedNum+'</p>';
+								}else{
+									str +='<p class="zhongcao zhongcao2">'+videoGoods.seedNum+'</p>';
+								}
+								if(videoGoods.isAllowBuy == "0"){
+									str +='<p class="goToBuy goToBuy1">去买</p></div>';
+								}else{
+									str +='<p class="goToBuy goToBuy2" urlStr="'+videoGoods.tb_detail_url+'">去买</p></div>';
+								}
+								
+							}else if(videoGoods.type=="6"){
+								str +='<div workId='+videoGoods.workId+' class="postShop postShopa  workDetails clearfix">';
+								str +='<div class="shopLeft"><img src="'+videoGoods.workPhoto+'"></div>';
+								str +='<div class="shopCenter"><p>'+videoGoods.workName+'</p>';
+								if(videoGoods.workPrice == "0"){
+									str +='<p class="productprize"><span>¥ '+videoGoods.workCost+'</span></p></div>';
+								}else{
+									str +='<p class="productprize"><span>¥ '+videoGoods.workPrice+'</span><span class="oldCost">¥ '+videoGoods.workCost+'</span></p></div>';
+								}
+								
+								str +='<div class="shopRight">';
+								str +='<span class="workDetail" workId='+videoGoods.workId+'><img src="images/order-arr-right_03.png"></span>';
+								if(videoGoods.workIsCollected == "0"){
+									str +='<p class="z-kinds zhongcao1">收藏</p>';
+								}else{
+									str +='<p class="z-kinds zhongcao2">已收藏</p>';
+								}
+								str +='<p class="zhongcaonum"><span>'+videoGoods.collectNum+'</span>人已收藏</p></div></div>';
+							};		
+						};
+					};
+					str +='</div>';
+					$(".dm_top").after(str);
+					//微信分享
+                    if(isInWeixin()){
+                        var title = '【南瓜姑娘】'+data.data.columnName+'-'+data.data.title;
+                        var desc = data.data.shareContent;
+                        var link = window.location.href;
+                        var imgUrl = data.data.detailImg;
+                        var from = getParam('apptype');
+                        if(!strIsEmpty(from) && from == 'appb'){
+                            desc = data.data.shareContent;
+                        }
+                        weixinConfig(title,desc,link,imgUrl);
+                    }	
+
+					//h5,app同步分享内容
+					if(isInApp()){
+						window.shareTitle = '【南瓜姑娘】'+data.data.columnName+'-'+data.data.title;
+						window.shareContent = data.data.shareContent;
+						window.sharePicture = data.data.detailImg;
+						window.shareUrl = window.location.href;
+					};	
+					//给安卓传值
+					if(typeof(window.ngjsInterface)!="undefined" && typeof(window.ngjsInterface.conFigShareInfo)!="undefined"){
+						window.ngjsInterface.conFigShareInfo('【南瓜姑娘】'+data.data.columnName+'-'+data.data.title, data.data.shareContent,data.data.detailImg,window.location.href);
+					};
+                }else{
+                    alert(data.data.error);	
+                }	
+            });
+			 //微信分享
+				function weixinConfig(title,desc,link,imgUrl){
+					wx.ready(function(){
+				
+						//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+						wx.onMenuShareTimeline({
+							title: title, // 分享标题
+							link: link, // 分享链接
+							imgUrl: imgUrl, // 分享图标
+							success: function () {
+								if (/iphone|ipad|ipod/.test(ua)) {
+									_czc.push(['_trackEvent','nggirl_column_post_video_share','phoneType=iOS','视频分享','postId',$(".dm_top").attr('postid')]);	
+								} else if (/android/.test(ua)) {
+									_czc.push(['_trackEvent','nggirl_column_post_video_share','phoneType=and','视频分享','postId',$(".dm_top").attr('postid')]);
+								};
+							},
+							cancel: function () {
+								// 用户取消分享后执行的回调函数
+							}
+						});
+				
+				
+						//获取“分享给朋友”按钮点击状态及自定义分享内容接口
+						wx.onMenuShareAppMessage({
+							title: title, // 分享标题
+							desc: desc, // 分享描述
+							link: link, // 分享链接
+							imgUrl: imgUrl, // 分享图标
+							type: 'link', // 分享类型,music、video或link，不填默认为link
+							dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+							success: function () {
+								 if (/iphone|ipad|ipod/.test(ua)) {
+									_czc.push(['_trackEvent','nggirl_column_post_video_share','phoneType=iOS','视频分享','postId',$(".dm_top").attr('postid')]);	
+								} else if (/android/.test(ua)) {
+									_czc.push(['_trackEvent','nggirl_column_post_video_share','phoneType=and','视频分享','postId',$(".dm_top").attr('postid')]);
+								};	
+							},
+							cancel: function () {
+								// 用户取消分享后执行的回调函数
+							}
+						});
+					});
+				
+					var currenturl = window.location.href;
+					//初始化配置信息
+					$.ajax({
+						url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/weixinjs/config',
+						type: 'post',
+						dataType: 'json',
+						data: getFinalRequestObject({url: currenturl, accessToken: getAccessToken()}),
+						success: function (data) {
+							//初始化配置
+							wx.config({
+								debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+								appId: data.data.appId, // 必填，公众号的唯一标识
+								timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+								nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+								signature: data.data.signature,// 必填，签名，见附录1
+								jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+							});
+						}
+					});
+				};
+		</script>
+        </div>
+        <div class="forinput">
+        <div class="forinputlength">
+        <div class="dresser_message">
+            <div class="dm_top">
+                <div class="dt_left">
+                    <img src="" class="dl_header_img" alt="" />
+                </div>
+                <div class="dt_right">
+                    <p class="dr_title"></p>
+                	<p class="ad_label1 hidden"></p>
+                    <p class="dr_name"><span class="user_name"></span> <span class="user_role"></span></p>
+                    <div class="dr_message">
+                        <img src="images/small_look_num.png" alt="" /> <span class="look_num"></span>
+                        <img src="images/small_ping.png" alt="" class="small_ping" /> <span class="ping_num"></span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!--<div class="postShopbox">
+        </div>-->
+        <div class="loverCount">
+            <h3>喜欢<span></span></h3>
+            <ul class="loverUser clearfix">
+            </ul>
+        </div>
+        <div class="ad_comment">
+            <p class="ad_com">评论</p>
+            <div class="ad_comdet" ></div>
+        </div>
+        
+    </div>
+    </div>
+    <div class="tc_box">
+        <!--/*/*禁言提示框*/*/-->
+        <div class="isNoTalk">
+            <h3>提示</h3>
+            <p>（*>.<*）小主，您因违反社区规定被禁言24小时，将于<span class="talkTime"></span>时解封~</p>
+            <p class="talkBtn">知道了</p>
+        </div>
+        <div class="ad_flbot"> </div>
+        <div class="ad_flbtn">
+            <p class="ad_report">举报</p>
+            <p class="ad_aelbtn">删除该楼层</p>
+            <p class="ad_delinner">删除</p>
+            <p class="ad_clobtn">取消</p>
+        </div>
+         <div class="ad_flbtn1">
+            <p class="ad_replay1">回复</p>
+            <p class="ad_report1">举报</p>
+            <p class="ad_clobtn">取消</p>
+        </div>
+        <div class="ad_sure ad_tcbox">
+            <h3>提示</h3>
+            <p class="ad_suremessage">删除此评论后，该楼层下的所有评论都将<br>被删除</p>
+            <p class="adfor"><span class="ad_notsure">取消</span><span class="ad_suredel">删除</span></p>
+        </div>
+         <div class="ad_sure ad_tcbox1">
+            <h3>提示</h3>
+            <p class="ad_suremessage">确定要删除评论吗？</p>
+            <p class="adfor"><span class="ad_notsure">取消</span><span class="adin_suredel">删除</span></p>
+        </div>
+        <div class="ad_sure ad_tcbox2">
+            <h3>提示</h3>
+            <p class="ad_suremessage">确定要举报吗？</p>
+            <p class="adfor"><span class="ad_notsure">取消</span><span class="ad_surereport">举报</span></p>
+        </div>
+        <div class="successtips"></div>
+        <div class="form-tip">请输入评论内容</div>
+    </div>
+    <div class="isWei hidden">
+        <img src="images/guide.jpg" >
+    </div>
+    <!--背景放大-->
+    <div class="opbg"></div>
+    <div class="opbginner">
+        <div class="opbgbox">
+            <img src="" alt="" />
+        </div>
+    </div>
+   <!-- 评论 -->
+   <div class="dm_bottom ad_btn">
+   		<div class="ad_btn_left">
+            <span class="db_comment"><img src="images/commentgreen.png" alt="" id="db_comment"/>评论</span>
+            <span class="db_collect"><img src="images/collect_qian.png" alt="" id="db_collect"/>收藏</span>
+            <span class="db_like"><img src="images/zan_qian.png" alt="" id="db_like"/>喜欢</span>
+        </div>
+        <p class="lookGoods" id="lookGoods">查看商品</p>
+    </div>
+    <div class="de_bot  clearfix">
+        <img src="images/ping_face_icon.png" class="ping_icon" alt="" />
+        <div class="de_box">
+            <textarea class="form-control" id="textarea" onkeydown="myInput.listen(this, event)"; placeholder="请输入评论内容" style="width:100%;overflow-y:scroll;max-height:95px;" onpaste="return false" maxlength="600"></textarea>
+        </div>
+        <div class="send_message" id="send_message">发送</div>
+        <div class="page_emotion box_swipe" id="page_emotion">
+            <dl id="list_emotion" class="list_emotion pt_10"></dl>
+        </div>
+    </div>
+     <!--评论规则-->
+     <div class="gray hidden">
+        <div class="integral_window">
+        	<p class="iw_title">评论规则</p>
+            <div class="iw_content">
+               	小主您好，为了维护南瓜家和谐的互动环境，请小主自觉按照评论规则进行回复，不按规则发帖没有积分，而且还有可能受到处罚哟~<br/>
+                ╮(╯_╰)╭评论规则详情如下：<br/>
+                一.符合以下任意一条的即为水帖：<br/>
+                1.发布无实质意义或者不相关内容<br/>
+                2.发布频繁甚至刷屏,影响他人正常看帖<br/>
+                3.不注重自然互动<br/>
+                4.不以交流为目的，有赚积分嫌疑者<br/>
+                二.禁言判定标准：<br/>
+                1.发言中带有攻击辱骂言论<br/>
+                2.发布广告<br/>
+                3.发布政治相关信息<br/>
+                4.昵称不和谐<br/>
+                5.反复发水贴<br/>
+                三.封号判定标准：<br/>
+                1.禁言后屡教不改<br/>
+                2.与工作人员及用户发生恶意争吵及在评论区搞破坏<br/>
+                3.恶意举报他人<br/>
+                <br/>
+                希望您为建设和谐有爱的南瓜社区做出贡献~          
+			</div>
+            <div class="integral_btn">
+            	<div class="btn_ok">知道了</div>
+            </div>
+        </div>
+    </div>
+    <div class="goToTop"><img src="images/backtop.png"></div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+    <script> 
+	var autoTextarea = function (elem, extra, maxHeight) {
+        extra = extra || 0;
+        var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+        isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+                addEvent = function (type, callback) {
+                        elem.addEventListener ?
+                                elem.addEventListener(type, callback, false) :
+                                elem.attachEvent('on' + type, callback);
+                },
+                getStyle = elem.currentStyle ? function (name) {
+                        var val = elem.currentStyle[name];
+ 
+                        if (name === 'height' && val.search(/px/i) !== 1) {
+                                var rect = elem.getBoundingClientRect();
+                                return rect.bottom - rect.top -
+                                        parseFloat(getStyle('paddingTop')) -
+                                        parseFloat(getStyle('paddingBottom')) + 'px';        
+                        };
+ 
+                        return val;
+                } : function (name) {
+                                return getComputedStyle(elem, null)[name];
+                },
+                minHeight = parseFloat(getStyle('height'));
+ 
+        elem.style.resize = 'none';
+ 
+        var change = function () {
+                var scrollTop, height,
+                        padding = 0,
+                        style = elem.style;
+ 
+                if (elem._length === elem.value.length) return;
+                elem._length = elem.value.length;
+ 
+                if (!isFirefox && !isOpera) {
+                        padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+                };
+                scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+ 
+                elem.style.height = minHeight + 'px';
+                if (elem.scrollHeight > minHeight) {
+                        if (maxHeight && elem.scrollHeight > maxHeight) {
+                                height = maxHeight - padding;
+                                style.overflowY = 'auto';
+                        } else {
+                                height = elem.scrollHeight - padding;
+                                style.overflowY = 'scroll';
+                        };
+                        style.height = height + extra + 'px';
+                        scrollTop += parseInt(style.height) - elem.currHeight;
+                        document.body.scrollTop = scrollTop;
+                        document.documentElement.scrollTop = scrollTop;
+                        elem.currHeight = parseInt(style.height);
+                };
+        };
+ 
+        addEvent('propertychange', change);
+        addEvent('input', change);
+        addEvent('focus', change);
+        change();
+};
+		var text = document.getElementById("textarea");
+		autoTextarea(text);// 调用
+	</script>
+</body>
+</html>

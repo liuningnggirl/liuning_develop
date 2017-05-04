@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/register_two.css" />
+<title>用户注册(2/2)</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/register_two.js"></script>
+<script> 
+  //声明_czc对象: 
+  var _czc = _czc || []; 
+  //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+   _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+	<div class="box">
+		<p class="box_title">注册（2/2）</p>
+        <img src="images/login_new_return_2.4.0.png" alt="" class="box_return" />
+        <img src="images/login_new_2.4.0_lno_useImg.png" alt="" class="user_img" />
+        <input type="file" name="file0" id="file0" multiple data-url="<%= PHOTOS_HOST_API_URL %>/uploadserver/app/image/uploads/3.0.0"/>
+        <p class="upload">上传头像</p>
+        <div class="box_input">
+        	<input type="text" class="tel" placeholder="请输入昵称（必填）" maxlength="30" />
+            <img src="images/new_login_del.png" alt="" class="del_tel" />
+        	<input type="password" class="yzm" placeholder="请输入密码（6-20位）" id="pwd" maxlength="20" />
+            <img src="images/new_login_del.png" alt="" class="del_yzm" />
+            <img src="images/new_login_pwd_eyes.png" alt="" class="eyes" pwd="no" />
+            <div class="yz_btn">完成注册</div>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

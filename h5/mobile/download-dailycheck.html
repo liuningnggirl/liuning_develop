@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>用户端应用下载_南瓜姑娘</title>
+<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no"/>
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../mobile/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<style>
+*{
+padding:0px;
+margin:0px;
+border:0px;
+	-moz-user-select: text; /*火狐*/
+    -webkit-user-select: text; /*webkit浏览器*/
+    -ms-user-select: text; /*IE10*/
+    -khtml-user-select: text; /*早期浏览器*/
+    user-select: text;
+}
+body{
+    -webkit-text-size-adjust:none;
+    font-family:"Hiragino Sans GB", "Microsoft YaHei",\5fae\8f6f\96c5\9ed1,Helvetica,arial;
+	background:#f4ead5;
+}
+.main{
+	width:100%;
+	height:100%;
+	position:relative;
+	text-align:center;
+}
+.main img.mmainbg{
+	display:block;
+	margin:0px auto;
+	width:100%;
+	
+}
+
+.main .bot{ position:absolute; top:82.4%; margin::0 30px;}
+.main .bot a{ width:50%; box-sizing:border-box; display:inline-block; float: left;}
+.left {padding:0 15px 0 30px;}
+.right{padding:0 30px 0 15px;cursor: pointer;}
+.main .download{ width:100%;}
+.guide{ position:absolute; top:0; left:0;}
+.guide img{ width:100%; display:block;}
+.hidden{display:none;}
+a[title*="站长统计"]{ display:none;}
+.app_daohang{ width:100%; position:fixed; top:0px; left:0px;}
+.down_btn{letter-spacing: 2px; padding:12px 30px; border-radius:40px; color:#ee750c; font-size:14px; font-weight:bold; margin:0 auto 55px; background:#fff; display:inline-block;cursor: pointer;}
+.header_content{ width:100%;position:fixed; top:0px; left:0px;cursor: pointer; }
+.header_content .left{ width:1%; float:left;}
+.header_content .right{ width:25%; float:right;}
+</style>
+</head>
+<body>
+<section class="main" >
+    <img src="images/app_daohang.png" alt="" class="app_daohang header_title" />
+    <div class="header_content">
+    	<div class="left"></div>
+    	<div class="right"></div>
+    </div>
+    <img data-original="images/app_01.png" alt="" class="mmainbg lazy" />
+    <img data-original="images/app_02.png" alt="" class="mmainbg lazy" />
+    <img data-original="images/app_03.png" alt="" class="mmainbg lazy" />
+    <img data-original="images/app_04.png" alt="" class="mmainbg lazy" />
+    <img data-original="images/app_05.png" alt="" class="mmainbg lazy" />
+    <img data-original="images/app_06.png" alt="" class="mmainbg lazy" />
+    <div class="down_btn">立即下载APP</div>
+</section>
+<section class="guide hidden">
+	<img src="images/guide.jpg" >
+</section>
+<script type="text/javascript">
+$(function(){
+
+	$('.header_content .left,.header_content .right').height($('.header_title').height());
+	$("img.lazy").lazyload({effect : "fadeIn",threshold : 100});
+	//关闭悬浮条
+	$('.header_content .left').click(function(e) {
+
+        $('.header_content,.header_title').hide();
+    });
+	
+	var browser = {
+		versions: function () {
+			var u = navigator.userAgent, app = navigator.appVersion;
+			return {         //移动终端浏览器版本信息
+				trident: u.indexOf('Trident') > -1, //IE内核
+				presto: u.indexOf('Presto') > -1, //opera内核
+				webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+				gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+				mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+				ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+				android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+				iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+				iPad: u.indexOf('iPad') > -1, //是否iPad
+				webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+			};
+		}(),
+		language: (navigator.browserLanguage || navigator.language).toLowerCase()
+	};
+	
+	$(".header_content").live('click','.right',function(){
+		openApp()
+	});
+	$(".header_content").live('click',function(){
+		openApp()
+	});
+	$(".down_btn").live('click',function(){
+		openApp()
+	});
+	
+
+
+	/*$(".guide").show();  
+	$(".main").hide();*/
+	function openApp(){
+		if (/iphone|ipad|ipod/.test(ua)) {
+			_czc.push(['_trackEvent','phoneType=iOS','用户端应用下载_南瓜姑娘']);	
+		} else if (/android/.test(ua)) {
+			_czc.push(['_trackEvent','phoneType=and','用户端应用下载_南瓜姑娘']);
+		}; 
+	    var ua = window.navigator.userAgent.toLowerCase();  
+	    //微信  
+	    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+	    	if(navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)){
+	    		/*alert("微信中的ios打开")*/
+	    		var loadDateTime = new Date();  
+	            window.setTimeout(function() {  
+	                var timeOutDateTime = new Date();  
+	                if (timeOutDateTime - loadDateTime < 300) {  
+	                    window.location.href= "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";//ios下载地址 
+	                    $(".main").hide();
+	                    return false;
+	                } else {  
+
+	                  	return false;
+	                }  
+	            },25);
+	            
+	    	}else if(navigator.userAgent.match(/android/i)){
+	    		/*alert("安卓--即将离开微信内部浏览器")*/
+	    		var state = null;  
+	            try { 
+	                setTimeout(function(){ 
+	                    $(".guide").show();  
+	  					$(".main").hide();
+						return false;
+	                },200);
+	                /*window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=<%= VERSION %>';*/
+	            } catch(e) {}
+	    	} 
+	    }else{//非微信浏览器  
+	        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {  
+	        	/*alert('ios--非微信浏览器')*/
+	            var loadDateTime = new Date();  
+	            window.setTimeout(function() {  
+	                var timeOutDateTime = new Date();  
+	                if (timeOutDateTime - loadDateTime < 2000) {  
+	                    window.location.href= "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";//ios下载地址  
+	                } else {  
+
+	                  	$(".main").hide();
+						return false;
+	                }  
+	            },25);
+	             
+	          }else if (browser.versions.android) { 
+	          	/*alert("安卓--非微信浏览器")*/
+	            var state = null;  
+	            try {  
+	                setTimeout(function(){  
+	                    window.location.href='http://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.1_jinzhengu_release.apk'; //android下载地址  
+	  					$(".main").hide(); 
+						return false; 
+	                },400); 
+	              	/*window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=<%= VERSION %>';*/
+	            } catch(e) {}  
+	        }  
+	    }  
+	} 
+});
+
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+
+</html>

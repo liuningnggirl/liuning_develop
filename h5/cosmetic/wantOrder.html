@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+
+<link href="../cosmetic/css/mobiscroll.css" rel="stylesheet" />
+<link href="../cosmetic/css/mobiscroll_date.css" rel="stylesheet" />
+<title>我要下单</title>
+<style type="text/css">
+* {margin: 0px;padding: 0px;border: none;text-decoration: none;list-style: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none; border:none;}
+body, html {font-size: 14px;font-family: "微软雅黑";background: #f5fafa;}
+.box {max-width: 750px;margin: 0 auto;height: auto;background: #f5fafa;}
+.box-hzs {width: 100%;border: 1px solid #cbd3d3;border-left: none;border-right: none;overflow: hidden;background: #fff;padding:.71rem 1rem;box-sizing: border-box;}
+.bh-left {width: 60px; height:60px;float: left;box-sizing: border-box;position: relative;border-radius:50%; border:#d7dcdc solid 1px;}
+.bh-right {float: left;width: 72%;padding: 0 0 0 1.1rem;box-sizing: border-box;}
+.img-vip {width: 30%;position: absolute;top: -2%;display:none; left:70%;}
+.bh-name {color: #434343;font-size: 1.07rem;margin-top: 8px; position:relative;}
+.bh-start img {width: 15px;display: inline-block;}
+.bh-start {margin-top: 36px; clear:both;}
+.content {width: 100%;overflow: hidden;background: #f5fafa;margin: .5rem 0 .5rem 0;border: 1px solid #e3e8e8;border-left: none;border-right: none;}
+.content li {padding: 0 5%;border-bottom: 1px solid #e3e8e8;box-sizing: border-box;overflow: hidden;background:url(images/black_right.png) no-repeat95% 55%;background-size: 2%; background:#fff;}
+.content li .left {color: #434343;font-size: .93rem;float: left;width: 30%;padding: 1.2rem 0;text-align: left;}
+.content li .right {color: #9ba0a0;font-size: .93rem;float: right;width: 60%;padding: 1.2rem 0 1.2rem 0;text-align: right;position: relative; background:none; }
+.content li #right{ direction: rtl;}
+.pay {border: 1px solid #e3e8e8;border-left: none;border-right: none;background: #fff;padding: 1rem 0;display: block;}
+.pay img {width: 21%;margin: 0 auto;}
+.btn-yue {width: 100%;background: #fff;position: fixed;bottom: 0px;border: 1px solid #e3e8e8;border-left: none;border-right: none;}
+.btn-ok {width: 100%; height:50px; line-height:50px;background: #51c8b4;display: block;margin: 0 auto;text-align: center;color: #fff;font-size: 1.29rem;}
+.box-bottom {margin-bottom: 25%;position:relative;}
+.gray-box {width: 100%;height: 100%;position: fixed;background: rgba(0, 0, 0, .5);top: 0px;z-index: 33;display: none;}
+.choose{width:7%;position:absolute;top:26%;right:8%;}
+.yue-address .right{ }
+.bl-photo{border-radius:50%; height:60px; width:60px;	}
+#address{top: 0px;width: 100%;height: 1.2rem;text-align:right;}
+#address-list{top: 1.2rem;width: 100%;}
+/*屏蔽jQuery自动完成的状态栏*/
+.ui-helper-hidden-accessible{
+	display: none;
+}
+#sw-wrapper{ color:#9ba0a0; font-size: .93rem;}
+
+.hzs-cover{ padding:.71rem 1rem; background:#fff; margin:0 0 .71rem 0; border-bottom:1px solid #d2dce6; overflow:hidden;}
+.hzs-img{ width:5.71rem; border:1rem; float:left; border-radius:.7rem;}
+.hc-right{ float:left; margin:0 0 0 5%; width: 60%;}
+.work-type{ padding:.36rem .86rem; background:rgba(0,0,0,.5); border-radius:2rem; color:#fff; font-size:.86rem; float:left; margin: 4% 0 0 0;}
+.work-price{ color:#fa6e64; font-size:2rem; float:left; margin:0 0 0 1.2rem;}
+.money,.cost{ font-size:18px; font-weight:600;}
+.hr-bottom span{margin: 0 2% 0 0;display: inline-block;padding: 0.2rem 0.36rem;font-size: 0.78rem;background: #6ed7c8;border-radius: 10px;text-align: center;border: 1px solid #6ed7c8;color: #fff;}
+.hr-bottom{overflow: hidden; clear: both; margin: 4% 0 0 0;}
+.hr-top{ overflow: hidden; margin-top: 2%;}
+
+.box-success{max-width:750px; margin:7.14rem 1.5% 0; height:auto; background:#f5fafa; padding:3rem 0 0; background:#fff; border-radius:.7rem; display:none;  }
+.order-img{ width:38%; margin:0 auto;}
+.btn{ width:75%; overflow:hidden; margin:1.43rem auto;}
+.order-details{ float:left;}
+.return-index{ float:right;}
+.order-details,.return-index{ padding:.57rem 1.5rem; background:#fa6e64; border-radius:.7rem; color:#fff; font-size:1.07rem; margin-bottom:1.43rem;}
+#phoneNum,#address{ direction:inherit;}
+.mine-city,.mine-area{ padding: 1.2rem 0 1.2rem 0; float:right; color:#9ba0a0;direction:rtl; background:none; text-align:right; overflow:hidden; display:inline-block; -webkit-direction:rtl;}
+.right .detail{ text-align:right;}
+.detail-arr{ float:right; width:8px; margin: 4px -10px 0 4px;}
+.content .yue-address .right{ width:70%;}
+.alert-box{ width:300px; height:130px; background:#fff; position:absolute; top:30%; left:50%; margin-left:-150px; border-radius:10px; text-align:center; overflow:hidden;  border:1px solid #ccc; }
+.alert-box h3{ padding:10px 0;}
+.alert-box p{padding:10px; box-sizing:border-box;}
+.alert-box .ab-ok{ width:100%; background:#fff; position:absolute; bottom:0px; height:30px; line-height:30px;  border-top:1px solid #ccc;}
+.alert-box .ab-cancle{ width:50%; background:#fff; position:absolute; bottom:0px; height:30px; line-height:30px;  border-top:1px solid #ccc; right:0px;}
+.alert-window{ width:100%; background:rgba(0,0,0,.5); position:fixed; top:0px; left:0px; display:none;}
+.bh-name img{ float:left; width: 18px;height: 18px; margin-left: 5px;}
+.bh-name p{ float:left;}
+/*  加载动画 */
+.gray_box_load{ position:fixed; left:0px; z-index:1; top:0px; width:100%; background:rgba(0,0,0,.5); text-align:center; display:none;}
+.gray_box_load img{ margin-top:40%;}
+a[title*="站长统计"]{ display:none;}
+.mine_yzm{ float:left; color:#4c4c4c; font-size:.93rem; padding: 18px 0; background:none; width:40%;}
+.mine_yzm_btn{ float:right; width:70px; height:23px; line-height:23px; text-align:center; color:#50c8b4; font-size:.71rem; border-radius:5px; border:1px solid #50c8b4; margin-top:14px;}
+.yzm{ margin:10px 0 0 0; border-top: 1px solid #e3e8e8; display:none;}
+
+</style>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/wantOrder.js"></script>
+<script type="text/javascript" src="../cosmetic/js/mobiscroll_date.js" charset="gb2312"></script> 
+<script type="text/javascript" src="../cosmetic/js/mobiscroll.js"></script>
+<script type="text/javascript" src="../cosmetic/js/Slide_pone.js"></script>
+
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+
+<body>
+	<div class="gray_box_load">
+    	<img src="images/loadding2.gif" alt="" />
+    </div>
+    <div class="box">
+    	<div class="hzs-cover">
+        	<div class="hc-left"><img src="" class="hzs-img" alt="" /></div>
+        	<div class="hc-right">
+            	<div class="hr-top">
+                	<div class="work-type"></div>
+                	<div class="work-price"><span class="money">¥</span><span class="cost"></span></div>
+                </div>
+            	<div class="hr-bottom"></div>
+            </div>
+        </div>
+        <div class="box-hzs">
+            <div class="bh-left">
+                <img src=""  class="bl-photo" alt="" />
+                <img src="images/plusv_03.png" class="img-vip" alt="" />
+            </div>
+            <div class="bh-right">
+                <div class="bh-name">
+                	<p></p>
+                    <img src="images/girl.png" alt="" />
+                </div>
+                <div class="bh-start">
+                </div>
+            </div>
+        </div>
+        <ul class="content">
+            <li>
+                <div class="left">化妆费用</div>
+                <div class="right price">
+                	<span style=" color:#fa6e64;" class="xianjia"></span> <span class="price-yuan"></span>
+                </div>
+            </li>
+            <li class="resdateselect">
+            	<div class="left">预约日期</div>
+                <input type="text" name="USER_AGE" class="right ot-data" id="USER_AGE" readonly placeholder="请选择预约日期" />
+            </li>
+            <li  class='restimeselect'>
+                <div class="left">预约时间</div>
+                <select name="" class="right" style="padding: 1.2rem 0% 1.2rem 0; width:auto;">
+                	<option value="">请选择预约时间</option>
+                </select>
+            </li>
+            <li class="yue-address">
+                <div class="left">预约地址</div>
+                <div class="right">
+                    <img src="images/black_right.png" class="detail-arr" alt="" />
+                    <span class="detail">请选择服务地址</span>
+                </div>
+            </li>
+            <li>
+                <div class="left">预约电话</div> <input class="right" id="phoneNum"
+                type="text" value="" placeholder="请输入联系电话" />
+            </li>
+        	<li class="yzm">
+                <input type="tel" class="mine_yzm" placeholder="请输入短信验证码" />
+            	<div class="mine_yzm_btn">获取验证码</div>
+            </li>
+        </ul>
+        <div class="gray-box"></div>
+        <div class="box-bottom">
+            <div class="btn-yue">
+                <a href="javascript:;" class="btn-ok">立即预约</a>
+            </div>
+        </div>
+    </div>
+    <div class="box-success">
+        <img src="images/order-success_03.png" class="order-img" alt="" />
+        <div class="btn">
+            <a href="javascript:;" class="order-details">订单详情</a>
+            <a href="home_page.html?v=<%= VERSION %>" class="return-index">返回首页</a>
+        </div>
+    </div>
+    <div class="alert-window">
+        <div class="alert-box">
+        	<h3>提示</h3>
+            <p>您的预约地址不属于此化妆师的服务商圈，有可能会拒单哦~</p>
+            <div class="ab-ok">确定</div>
+        </div>
+    </div>
+<script type="text/javascript">
+	$(function () {
+		/*var currYear = (new Date()).getFullYear();	
+		var opt={};*/
+		var maxYear='';
+		//console.log(currYear);
+		if((new Date()).getMonth() <5){
+			maxYear=(new Date()).getFullYear();
+		}else{
+			maxYear=(new Date()).getFullYear()+1;
+		}
+		$("#USER_AGE").mobiscroll({ 
+				preset: 'date',
+				theme: 'android-ics light',
+				display: 'modal',
+				mode: 'scroller',
+				dateFormat: 'yyyy-mm-dd',
+				dateOrder : 'yymmdd',
+				setText:'确定',
+				cancelText:'取消',
+				dayText:'日',
+				monthText:'月', 
+				yearText :'年',
+				minDate: new Date(),
+				maxDate: new Date(maxYear, 11, 31)
+				
+			});
+	});
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

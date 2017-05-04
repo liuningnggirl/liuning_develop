@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+<title>南瓜姑娘</title>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no"/>
+<link  rel="stylesheet" type="text/css" href="../mobile/css/focuscontent.css" >
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../mobile/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../mobile/js/focuscontent.js"></script>
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript" src="../mobile/js/jquery.lazyload.js"></script>
+<script type="text/javascript">
+	//声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+	
+	function getParam(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return decodeURI(r[2]).replace(new RegExp("(%3D)","g"),'=');
+		return '';
+	}
+	var contentId;
+	$(function(){
+		contentId=getParam('contentId');
+		$.get("<%= CLI_HOST_API_URL %>/nggirl/app/focuscontent/getContent",{contentId:contentId},function(result){
+			var j_result= $.parseJSON(result);
+			$("#m_body").html(j_result.data.content.content);
+			if(isInApp() == true){
+				$(".notShowInApp").hide();
+			}
+			/*$(".ele-content-img img").each(function(index, element) {
+                $(this).attr("data-original",$(this).attr("src")+ '@320w_320h.jpg').addClass("lazy");
+				$(".ele-content-img img").remove($(this).attr("src"));
+            });*/
+			
+			$("img.lazy").lazyload({effect : "fadeIn"})//由于更多部分的作品处于隐藏状态，添加threshold后会导致，隐藏的作品提前加载，而没有了渐入效果
+			$(".ele-del").remove();	
+			$(".ele-down").remove();
+			$(".ele-up").remove();
+			document.title = j_result.data.content.title;
+			var title = '【南瓜姑娘】' + j_result.data.content.title;
+			var desc = j_result.data.content.description;
+			var link = j_result.data.content.contentUrl;
+			var imgUrl = j_result.data.content.coverImage;
+			weixinConfig(title,desc,link,imgUrl);
+			//h5,app同步分享内容
+			if(isInApp()){
+				window.shareTitle = title;
+				window.shareContent = desc;
+				window.sharePicture = imgUrl;
+				window.shareUrl = link;
+			};	
+			//给安卓传值
+			if(typeof(window.ngjsInterface)!="undefined" && typeof(window.ngjsInterface.conFigShareInfo)!="undefined"){
+				window.ngjsInterface.conFigShareInfo(title, desc,imgUrl,link);
+			};
+		});
+	});
+	
+	function weixinConfig(title,desc,link,imgUrl){
+		wx.ready(function(){
+			//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+			wx.onMenuShareTimeline({
+				title : title,
+				link : link,
+				imgUrl : imgUrl,
+				success : function(){
+					// 用户确认分享后执行的回调函数
+				},
+				cancel : function(){
+					// 用户取消分享后执行的回调函数
+				}
+			});
+			//获取“分享给朋友”按钮点击状态及自定义分享内容接口
+			wx.onMenuShareAppMessage({
+				title : title,
+				desc : desc,
+				link : link,
+				imgUrl : imgUrl,
+				type : 'link',
+				dataUrl : '',
+				success : function(){
+					// 用户确认分享后执行的回调函数
+				},
+				cancel : function(){
+					// 用户取消分享后执行的回调函数
+				}
+			});
+		});
+	
+		var currenturl = window.location.href;
+		//初始化配置信息
+		$.ajax({
+			url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/weixinjs/config',
+			type: 'post',
+			dataType: 'json',
+			data: getFinalRequestObject({url: currenturl, accessToken: getAccessToken()}),
+			success: function (data) {
+				//初始化配置
+				wx.config({
+					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					appId: data.data.appId, // 必填，公众号的唯一标识
+					timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+					nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+					signature: data.data.signature,// 必填，签名，见附录1
+					jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+			}
+		});
+	}
+	
+	function initList(data){
+		/*解析数据*/
+		var results=data.data;
+		for(var i=0;i<results.length;i++)
+		{
+			if(results[i].id != contentId){
+				var temp='<div class="head01"><a href="'+results[i].contentUrl+'&v=<%= VERSION %>"><img  data-original="' + results[i].coverImage + '" class="lazy" pageNum="'+getPageNum()+'"" /></a></div>';
+				$("#div1").append(temp);
+				var filter = "img.lazy[pageNum="+getPageNum()+"]";
+				$(filter).lazyload({effect : "fadeIn"})//由于更多部分的作品处于隐藏状态，添加threshold后会导致，隐藏的作品提前加载，而没有了渐入效果
+			}
+		}
+		$("#div1").append($('#div1 .btn'));
+		$('#div1 .btn').unbind('click');
+		$('#div1 .btn').click(onClickGetMore);
+		setPageNum(getParams().pageNum);
+		if(results.length == 0){
+			$('#div1 .btn').remove();
+		}
+	}
+
+	function getParams(){
+		var params = new Object();
+		params.pageNum = getPageNum()+1;
+		params.pageSize = 4;
+		return params;
+	}
+
+	function setPageNum(pageNum){
+		$('#div1').data('page',pageNum);
+		console.info("chun chu=="+$('#div1').data('page'));
+	}
+	
+	function getPageNum(){
+		var pageNum =  $('#div1').data('page') == undefined ? -1 :$('#div1').data('page');
+		console.info("huoqu pageNum="+pageNum);
+		return parseInt(pageNum);
+	}
+
+	function onClickGetMore(){
+		$.ajax({//采用同步
+			type: "get",
+			url: '<%= CLI_HOST_API_URL %>/nggirl/app/focuscontent/list',
+			data:getParams(),
+			dataType:"json",
+			success: initList,
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				console.log( XMLHttpRequest )
+			}
+		});
+	}
+
+	$(document).ready(function(){
+		$('#div1 .btn').unbind('click');
+		$('#div1 .btn').click(onClickGetMore);
+		$('#div1 .btn').click();
+
+	})
+</script>
+<title>无标题文档</title>
+</head>
+<body>
+    <div class="main" >
+        <div id="m_body"></div>
+        <div id="div1">
+        	<h1 class="tiele"><img src="images/focuscontent/event-icon-1.png">往期回顾</h1>
+            <div  class="btn">查看更多</div>
+    	</div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+</html>
+

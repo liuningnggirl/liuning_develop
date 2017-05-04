@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="../cosmetic/css/orderInformation.css" />
+<link rel="stylesheet" href="../cosmetic/css/themes/base/jquery.ui.all.css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>订单详情</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/orderInformation.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.raty.js"></script>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+    <!--  gif动画 -->
+    <div class="loading">
+    	<img src="images/loadding2.gif" alt="" />
+    </div>
+	<div class="box">
+    	<!--  tab切换 -->
+    	<div class="box-tab">
+        	<div class="bt-left bt-current" act="act">订单流程</div>
+        	<div class="bt-right">订单详情</div>
+        </div>
+        <!--  对应切换内容 -->
+        <div class="box-tab-content">
+            <!--  第一页 -->
+        	<div class="btc-left">
+                <!--  三步 -->
+                <div class="three-steps">
+                    <p class="ts-title">三步尊享专业美妆服务</p>
+                    <img src="images/steps-one.png" alt="" class="ts-img" />
+                </div>
+                <!--  时间轴 -->
+                <div class="time-line">
+                    <div class="line"></div>
+                    <ul></ul>
+                </div>
+            </div>
+            
+            <!--  第二页 -->
+        	<div class="btc-right">
+            	<!--  订单状态 -->
+            	<p class="orderInfo-title">化妆师已接单，请小主付费打赏</p>
+                <div class="hzs-cover">
+                    <div class="hc-left"><img src="" class="hzs-img" alt="" /></div>
+                    <div class="hc-right">
+                        <div class="hr-top"></div>
+                        <div class="hr-middle">
+                            <div class="work-type"></div>
+                            <div class="work-price"></div>
+                        </div>
+                        <div class="hr-bottom"></div>
+                    </div>
+                </div>
+                <!--  化妆师 -->
+                <div class="box-hzs">
+                    <div class="bh-left">
+                        <img src=""  class="bl-photo" alt="" />
+                        <img src="images/plusv_03.png" class="img-vip" alt="" />
+                    </div>
+                    <div class="bh-right">
+                        <span class="bh-name"></span><img src="images/girl.png" alt="" class="sex" />
+                        <div class="bh-start"></div>
+                    </div>
+                </div>
+                
+                <!--  费用内容列表 -->
+                <ul class="content-cost">
+                    <li>
+                        <div class="left">化妆费用</div>
+                        <div class="right content-count"></div>
+                    </li>
+                    <li class="use-discount">
+                        <div class="left">首单五折优惠</div>
+                        <div class="right content-half"></div>
+                    </li>
+                    <li class="use-vouchers">
+                        <div class="left">南瓜券优惠</div>
+                        <div class="right content-vouchers"></div>
+                    </li>
+                    <li class="use-act-pay">
+                        <div class="left">需付金额</div>
+                        <div class="right content-payment">¥<span class="cp-content"></span></div>
+                    </li>
+                </ul>
+                <div class="use-voucherss">
+                    <p class="uv-left">使用优惠券</p>
+                    <p class="uv-right">未选择优惠券</p>
+                </div>
+                
+                <!--  订单内容列表 -->
+                <ul class="content-order">
+                    <li>
+                        <div class="left">预约订单号</div>
+                        <div class="right content-orderid"></div>
+                    </li>
+                    <li>
+                        <div class="left">预约时间</div>
+                        <div class="right content-time"></div>
+                    </li>
+                    <li>
+                        <div class="left">预约地址</div>
+                        <div class="right content-address"></div>
+                    </li>
+                    <li class="reason">
+                        <div class="left">退单理由</div>
+                        <div class="content-chargeback" disabled="disabled"></div>
+                    </li>
+                </ul>
+                <!--  评价 -->
+                <div class="ping">
+                	<div class="ping-left">评价</div>
+                	<div class="ping-right"></div>
+                </div>
+                <div class="box-zhifu zhifu-zfb">
+                    <a class="pay" href="javascript:;">
+                        <img src="images/order-zhifubao_03.png" alt="" />
+                    </a>
+                    <img src="images/order_detail_pay_option_hl.png" class="choose" alt="" />
+                </div>
+                <div class="box-zhifu zhifu-weixin">
+                    <a class="pay" href="javascript:;">
+                        <img src="images/booking-details-weixin_03.png" alt="" />
+                    </a>
+                    <img src="images/order_detail_pay_option_hl.png" class="choose" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn">
+    	<div class="btn-cancle">取消预约</div>
+    	<div class="btn-four">
+        	<div class="bf-cancle">取消预约</div>
+        	<div class="bf-pay">立即支付</div>
+        </div>
+    	<div class="btn-again">再次预约</div>
+    	<div class="btn-five">
+        	<div class="bf-another">选择其他妆容</div>
+        	<div class="bf-again">再次预约</div>
+        </div>
+    	<div class="btn-another">选择其他妆容</div>
+        <div class="btn-six">申请退款</div>
+        <div class="btn-seven">化妆完成</div>
+        <div class="btn-ten">评价领券</div>
+    </div>
+    
+    <!--  评价页面 -->
+    <div class="box-ping">
+        <div class="complain_con">
+            <div class="complain">
+                <textarea placeholder="评论5字以上或晒图即可获取南瓜券哦~" style="height:100px; border-radius:0;"></textarea>
+            </div>
+            <div class="complain_btm">
+                <div style="margin :0px auto;">
+                    <div class="complain_btm1">
+                        <input type="file" id="choose" accept="image/*" multiple>
+                        <img src="images/work_xj.png" class="complain_tj" id="upload" type="file"/>
+                        <ul class="img-list"></ul>
+                    </div>
+                    <div id="dd" style=" width:auto;">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="li_workDetails">
+                <ul>
+                    <li class="comolain_title">化妆师评分 <p><img src=""></p></li>
+                    <li>准时到达 
+                        <div class="evaluate onTimeEvaluation">
+                            <div id="star1"></div>
+                            <div id="result1"></div>
+                        </div>
+                    </li>
+                    <li>妆品一致
+                    	<div class="evaluate descriptionEvaluation">
+                            <div id="star2"></div>
+                            <div id="result2"></div>
+                        </div>
+                    </li>
+                    <li>技法娴熟
+                    	<div class="evaluate tecniqueEvaluation">
+                            <div id="star3"></div>
+                            <div id="result3"></div>
+                        </div>
+                    </li>
+                    <li>服务周到
+                    	<div class="evaluate serviceEvaluation">
+                            <div id="star4"></div>
+                            <div id="result4"></div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="white-box"></div>
+            </div>
+        </div>
+        <div class="complain_footer1">
+            <p>完成评价</p>
+        </div>
+    </div>
+    
+    <!--  优惠券 --> 
+    <div class="box-vouchers">
+    	<div class="no-vouchers">
+            <img src="images/me_order_none.png" class="vouchers-img" alt="" />
+            <p class="voucher-p">您还没有可使用的南瓜券！！</p>
+        </div>
+    </div>
+    
+    <!--  作品下线的弹框 -->
+    <div class="alert-box">
+    	<div class="alert">
+            <h3 class="ab-title">提示</h3>
+            <p>非常抱歉，该作品已经下线啦T-T</p>
+            <p class="btn-ok">确定</p>
+        </div>
+    </div>
+    
+    <!--  化妆完成的弹框 -->
+    <div class="hz-alert-box">
+    	<div class="alert">
+            <h3 class="ab-title">提示</h3>
+            <p>欢迎再次预约哦~</p>
+            <div class="btn">
+            	<div class="btn-left">还未完成</div>
+            	<div class="btn-right">确认完成</div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+rat('star1','result1',1);
+rat('star2','result2',2);
+rat('star3','result3',3);
+rat('star4','result4',4);
+rat('star5','result5',5);
+function rat(star,result,m){
+	star= '#' + star;
+	result= '#' + result;
+	$(result).hide();//将结果DIV隐藏
+
+	$(star).raty({
+		hints: [],
+		path: "css/img",
+		starOff: 'star-off-big.png',
+		starOn: 'star-on-big.png',
+		size: 24,
+		start: 40,
+		showHalf: true,
+		target: result,
+		targetKeep : true,//targetKeep 属性设置为true，用户的选择值才会被保持在目标DIV中，否则只是鼠标悬停时有值，而鼠标离开后这个值就会消失
+		click: function (score, evt) {
+			//第一种方式：直接取值
+		}
+	});
+}
+</script>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

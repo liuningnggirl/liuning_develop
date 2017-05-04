@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="../cosmetic/css/beautySalon.css?_x=1" />
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>美妆下午茶</title>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/Slide_pone.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/beautySalonWorkDetails.js?_x=1"></script>
+</head>
+<body>
+	<div class="box">
+        <!--  内容开始 -->
+        <div class="xwc-content">
+            <!--  banner开始 -->
+            <div class="banner" id="slideBox">
+                <div class="top bd">
+                    <ul class="imgw"></ul>
+                </div>
+                <div class="bot hd">
+                    <ul class="clear clearfix"></ul>
+                </div>
+            </div>
+            <!--  banner结束 -->
+            <div class="padding">
+                <div class="xwc-content-title"></div>
+                <div class="xwc-des"></div>
+                <div class="xwc-time">
+                    <img src="images/time.png" class="xwc-area-local" alt="" /><p class="xwc-lock-txt">活动时间</p>
+                    <div class="xwc-time-txt"></div>
+                    <div class="xwc-end-time">报名截止时间：<span class="xwc-end-time-txt"></span></div>
+                    <div class="xwc-area">
+                        <img src="images/xwc-local_03.jpg" alt="" class="xwc-area-local" />
+                        <div class="xwc-area-txt"></div>
+                    </div>
+                    <!--  参团人的头像 -->
+                    <div class="tuan-photo">
+                        <ul></ul>
+                        <div class="xwc-tuan">
+                            <span class="xwc-peopleLow">3</span>～<span class="xwc-peopleHigh">5</span>人成团
+                            <br />已报名<span class="xwc-resUserCount">2</span>人
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  内容结束 -->
+        <!--  活动介绍开始 -->
+        <div class="xwc-activity-content">
+        	<div class="xwc-title">活动介绍</div>
+            <ul class="xwc-activity-txt"></ul>
+        </div>
+        <!--  活动介绍结束 -->
+        
+        <!--  化妆师介绍开始 -->
+        <div class="xwc-hzs-content">
+        	<div class="xwc-title">化妆师介绍</div>
+            <img src="" class="xwc-dresser-img" alt="" />
+            <div class="xwc-dresser">
+            	<div class="xd-left">
+                	<img src="" class="xl-dresser-img" alt="" />
+                    <img src="images/v.png" class="v" alt="" />
+                </div>
+            	<div class="xd-right">
+                	<div class="xr-top">
+                    	<span class="xt-name"></span><img src="" class="xt-sex" alt="" />
+                        <img src="images/black_right.png" class="xt-arr" alt="" />
+                    </div>
+                    <!--  星级个数 -->
+                	<div class="xr-bottom"></div>
+                </div>
+            </div>
+            <!--  化妆师简介 -->
+            <div class="xwc-content-txt"></div>
+            <div class="xwc-content-experience">
+            	<div class="xce-top">
+                	<img src="images/experience.png" class="log" alt="" /><span>从业经历</span>
+                </div>
+            	<p class="xce-bottom"></p>
+            </div>
+            <div class="xwc-content-cooperation">
+            	<div class="xce-top">
+                	<img src="images/cooperation.png" class="log" alt="" /><span>合作艺人</span>
+                </div>
+            	<p class="xce-bottom"></p>
+            </div>
+            <div class="xwc-content-ping">
+            	<div class="xce-top">
+                	<img src="images/big-ping.png" alt="" class="log" /><span>用户评价</span>
+                    <img src="images/black_right.png" class="xt-arr" alt="" />
+                </div>
+            </div>
+        </div>	
+        <!--  化妆师介绍结束 -->
+        
+        <!--  喜欢人的头像  -->
+        <div class="pro-kinds">
+            <div class="like-num">喜欢&nbsp;<span class="num"></span></div>
+            <div class="like-photo">
+                <ul>
+                    <li class="add-circle">. . .</li>
+                </ul>
+            </div>
+            <!--  预约须知 -->
+            <div class="reservation-policy">
+                <div class="xwc-title">预约须知</div>
+                <p class="rp-content"></p>
+            </div>
+        </div>
+    </div>
+        
+    <!--  我要预约按钮 -->
+    <div class="btn">
+    	<div class="btn-ok">
+        	<div class="bo-left">
+            	<span class="bl-cost"></span><span class="bl-yuan">元/位</span>
+            </div>
+            <div class="bo-right">
+            	<span>我要预约</span>
+            </div>
+        </div>
+    	<div class="btn-cancle">
+        	<div class="bo-left">
+            	<span class="bl-cost"></span><span class="bl-yuan">元/位</span>
+            </div>
+            <div class="bo-right">
+            	<span>已结束</span>
+            </div>
+        </div>
+    	<div class="btn-man">
+        	<div class="bo-left">
+            	<span class="bl-cost"></span><span class="bl-yuan">元/位</span>
+            </div>
+            <div class="bo-right">
+            	<span>已约满</span>
+            </div>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

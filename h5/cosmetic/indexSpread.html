@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>引导页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="X-Frame-Options" content="deny">
+<link rel="stylesheet" href="../cosmetic/css/swiper.min.css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/indexCss.css" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/swiper.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/yxMobileSlider.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/index.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分 
+	_czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<style>
+html,body,iframe{width: 100%;height: 100%;padding: 0;margin: 0}
+#wrap{width: 100%;height: 100%;}
+iframe{border: none;}
+.scroll-wrapper {  
+-webkit-overflow-scrolling: touch;  
+overflow-y: scroll;  
+}  
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+	$('#wrap').before('<div class="download"><img src="images/guideTop.png" class="down_btn" alt=""><div class="down_close"></div></div>');
+	//点击叉号收起下载条
+	$('.down_close').click(function(e) {
+		e.stopPropagation();
+        $('.download').slideUp();
+    });
+	
+	//点击下载条
+	$('.download').click(function(e) {
+		//判断机型
+		if(sUserAgent.match(/iphone os/i) == "iphone os"){
+			window.location.href = "//itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";
+		}else{
+			window.location.href = window.location.protocol+"//"+window.location.host+"/nggirl/app/getapp/byChannel?channel=shenma";
+		}
+    });
+}
+</script>
+</head>
+<body>
+    <div id="wrap" class="scroll-wrapper">
+        <iframe src="index.html" ></iframe>
+    </div>
+</body>
+</html>

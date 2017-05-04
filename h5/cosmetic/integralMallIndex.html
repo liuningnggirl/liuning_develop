@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>积分商城首页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/integralMallIndex.css" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/swiper.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/yxMobileSlider.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../cosmetic/js/integralMallIndex.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+    <div class="box_content" id="box_content">
+    	<p class="mine_integral">我的积分： <span></span></p>
+        <div class="slider">
+            <ul></ul>
+        </div>
+        <div class="integral_tab">
+        	<div class="left"><img src="images/integral.png" alt="" />  如何赚取积分</div>
+        	<div class="right"><img src="images/integral_list.png" alt="" />  兑换记录</div>
+            <div class="integral_line"></div>
+        </div>
+        <div class="integral_exchange">
+        	<p class="left">积分兑换区</p>
+        	<p class="right">活动规则<img src="images/black_right.png" alt="" /></p>
+        </div>
+        <ul class="integral_list"></ul>
+        <span class="pullUpIcon"></span>
+    </div>
+    <div class="gray">
+        <div class="integral_window">
+        	<p class="iw_title">活动规则</p>
+            <div class="iw_content">
+                1、礼品数量有限，先到先得，兑换成功后，礼品将在一周内发出；<br/>
+                2、兑换礼品时请正确填写收货人的配送地址，如派送时因联系不到收件人致使投递失败，礼品与积分将不做返还；<br/>
+                3、实物礼品由南瓜姑娘提供与发货，虚拟礼品（如上门美妆优惠券）兑换后及时同步到账户；<br/>
+                4、积分商城中，所有礼品一经兑换，一律不返还积分，请用户兑换前仔细阅读活动规则、兑换活动时间等重要信息；<br/>
+                5、如对礼品兑换相关有疑问，可在南瓜姑娘App“我的”“联系客服”，进行咨询，时间为08:00-21:00（除法定节假日）；<br/>
+                6、凡采用不正当手段，如：作弊、扰乱系统、实施网络攻击等刷新积分，或使用同一设备兑换限量兑换的商品，一经发现，南瓜姑娘有权取消该账户兑换资格，并对账户作冻结处理；<br/>
+                7、本活动最终解释权归北京旭洋群美科技有限公司所有。            
+			</div>
+            <div class="line"></div>
+            <div class="integral_btn">
+            	<div class="btn_ok">知道了</div>
+            </div>
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

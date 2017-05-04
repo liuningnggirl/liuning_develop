@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>来自南瓜姑娘的优惠券_南瓜姑娘</title>
+<style type="text/css">
+	*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none;}
+	body,html{ font-size:14px; font-family:"微软雅黑";background:#d2e3e0;}
+	img{ display:block;}
+	input[placeholder], [placeholder], *[placeholder] { 
+	color:red !important; 
+	}
+ 	.box{max-width:750px; margin:0 auto; height:auto; background:#d2e3e0;  }
+	.box-big-logo{ width:55%; margin:0 auto; padding:16% 0 0 0; box-sizing:border-box;}
+	.ng-txt{ color:#fff; font-size:0.8rem; text-align:center; margin:4.5% 0 0 0; line-height:1.6rem; pointer-events:none; letter-spacing: .2rem;}
+	.box-ng-quan{ width:56%; margin:0 auto; pointer-events:none;}
+	.yq-box{ width:55%; line-height:3rem; margin:0 auto; text-align:center; }
+	.yq-txt{ width:40%; color:#fff; font-size:1.1rem; pointer-events:none; pointer-events:none;font-size:.7rem;}
+	.yq-num{ width:60%; color:#fa6e64; font-size:1.1rem;}
+	.look-btn,.app-btn,.num{ display:block; width:56%; padding:0.7rem 0; background:#fa6e64; text-align:center; margin:0 auto; border-radius:.5rem; font-size:.9rem; color:#fff; cursor:pointer; -webkit-tap-highlight-color:rgba(0,0,0,0); margin: 0 auto .64rem;}
+	.box-logo{ width:25%; margin:1.2rem auto 1.57rem; position: relative; bottom: 0px;}
+	.box-01{ overflow:hidden;}
+	.num{ background:#fff; text-align:center; color:#fa6e64;}
+	a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="../mobile/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var bheight= $(window).height();
+		$('.box-02').css('height',''+bheight+'px');
+		
+		$('.num').focus(function(e) {
+            $('.num').val('');
+        });
+		
+		$('.look-btn').click(function(e){
+			var phoneNum = $('.num')[0].value;
+			var telReg = !!phoneNum.match('^(1[3|5|7|8|4])[0-9]{9}$');
+			
+			if(telReg == true){
+				var data = {phoneNum:phoneNum, code:getParam('code')};
+				
+				data = getFinalRequestObject(data);
+				
+				$.ajax({
+					type : 'POST',
+					url : '/nggirl/app/cli/personalInfo/createUnbindCoupon',
+					data : data,
+					success : function(result) {
+						result = $.parseJSON(result);
+						if (result.code == '1') {
+							alert(result.data.error);
+						} else {
+							location.href = 'vouchers-success.html?v=<%= VERSION %>';
+						}
+					}
+				});
+			}else{
+				alert('手机号格式不正确!');
+			}
+		});
+		
+		
+		function getParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null)
+				return unescape(r[2]);
+			return '';
+		}
+	});
+</script>
+</head>
+
+<body>
+	<div class="box">
+        <div class="box-01">
+          <img src="images/img-vouchers/ng-big-logo_03.png" alt="" class="box-big-logo" />
+          <p class="ng-txt">我是南瓜姑娘，送你美丽基金</p>
+          <img src="images/img-vouchers/ng-quan_03.png" alt="" class="box-ng-quan" />
+          <div class="yq-box">
+                <span class="yq-txt">－－－现在注册立即领取－－－</span>
+          </div>
+          <input type="tel" class="num" value="输入手机号"  />
+          <a href="javascript:;" class="look-btn">立即领取</a>
+          <img src="images/img-vouchers/ng-logo_03.png" alt="" class="box-logo" />
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

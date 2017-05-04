@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>南瓜姑娘_专业上门美妆</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<style type="text/css">
+*{ margin:0px; padding:0px;}
+.box{ background:url(images/index_images/index_back_03.jpg) no-repeat; background-size:100% 100%; position:relative; overflow:hidden;}
+.box_one_percent{ width:100%;}
+.box_title_01{ margin:35px 0 52px 0; display:none;}
+.box_many_people{ position:relative; margin:0 0 56px 0; text-align:center;}
+.bmp_img{ position:absolute; top:-20px; width:40%; left:-40%;}
+.bmp_circle{ width:60px; position:absolute; bottom:0%; left:50%; margin:0 0 0 -30px; display:none;}
+.box_title_02{ margin:44px 0 30px 0; opacity:0;}
+.box_img_many_people01{ width:90.6%; margin:0 0 0 4.5%;}
+.box_title_03{ margin:30px 0 45px 0; opacity:0;}
+.bv_video{ width:57.5%; margin:0 0 0 4.5%;}
+.box_video{ position:relative;opacity: 0;}
+.bv_video_photo{ width:33.5%; position:absolute; top:-15px; left:58%;}
+.bv_video_title{ width:37.5%; position:absolute; top:42%; left:56%;}
+.box_title_04{ margin:65px 0 33px 0; opacity:0;}
+.box_img_four .bif_one{ width:48.5%; float:left; margin:0 0 0 -70%;}
+.box_img_four .bif_two{ width:48.5%; float:right; margin:0 -70% 0 0;}
+.box_img_four .bif_three{ width:63%; float:left; margin:10px 0 0 -70%;}
+.box_img_four .bif_four{ width:34%; float:right; margin:10px -70% 0 0;}
+.box_img_four{ padding:0 4.5%; box-sizing:border-box; overflow:hidden;}
+.box_down_app{ margin:61px 0 37px 0;}
+.box_wang_many_people{ display:none;}
+.box_img_many_people{position:inherit; -webkit-transform:translate(-40px,-10px) rotate(-10deg);-ms-transform: translate(-40px,-10px) rotate(-10deg);transform: translate(-40px,-10px) rotate(-10deg); -webkit-animation:box_img_many_people 1s 1.3s 1 ease-in-out both; animation: box_img_many_people 1s 1.3s 1 ease-in-out both;
+}
+@-webkit-keyframes box_img_many_people{0%{-webkit-transform:translate(-100px,0px) rotate(-10deg); transform:translate(-100px,0px) rotate(-10deg); opacity:0}50%{-webkit-transform:translate(0px,10px) rotate(-10deg); transform:translate(0px,10px) rotate(0deg); opacity:1;}100%{  -webkit-transform:translate(0px,0px) rotate(0deg); transform:translate(0px,-0px) rotate(0deg); opacity:1;}}
+@keyframes box_img_many_people{0%{-webkit-transform:translate(-100px,0px) rotate(-10deg); transform:translate(-100px,0px) rotate(-10deg); opacity:0}50%{-webkit-transform:translate(0px,10px) rotate(-10deg); transform:translate(0px,10px) rotate(0deg); opacity:1;}100%{  -webkit-transform:translate(0px,0px) rotate(0deg); transform:translate(0px,-0px) rotate(0deg); opacity:1;}}
+a{ display:none;}
+</style>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<script type="text/javascript">
+$(function(){
+	var sUserAgent=navigator.userAgent.toLowerCase();
+	$('.box_title_01').fadeIn();
+	$('.box_wang_many_people').fadeIn(1000);
+	$('.bmp_img').animate({left:"30%"},1200,function(){
+		$('.bmp_circle').animate({bottom:"-30%"}).show().fadeIn();
+	});
+	$(window).scroll(function(e) {
+		$('.box_img_many_people01').addClass('box_img_many_people');
+		if($(document).scrollTop() > 200 && $(document).scrollTop() < 900){
+			$('.box_title_02').animate({opacity:1},500);
+			$('.box_title_03').animate({opacity:1},500);	
+			$('.box_video').animate({opacity:1},500).hide().show();
+		}else if($(document).scrollTop() > 900){
+			$('.box_title_04').animate({opacity:1},500,function(){
+				$('.bif_one').animate({margin:"0 0 0 0"},500);	
+				$('.bif_two').animate({margin:"0 0 0 0"},500);	
+				$('.bif_three').animate({margin:"10px 0 0 0"},500);	
+				$('.bif_four').animate({margin:"10px 0 0 0"},500);	
+			});	
+		}
+    });
+	
+	//点击下载条
+	$('.box_down_app').click(function(e) {
+		//判断机型
+		if(sUserAgent.match(/iphone os/i) == "iphone os"){
+			window.location.href = "//itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";
+		}else{
+			window.location.href = window.location.protocol+"//"+window.location.host+"/nggirl/app/getapp/byChannel?channel=dsp21";
+		}
+    });
+})
+</script>
+</head>
+
+<body>
+    <img src="images/index_images/index_part_01_01.png" class="box_header box_one_percent" alt="" />
+    <div class="box">
+		<img src="images/index_images/index_title_01_03.png" class="box_one_percent box_title_01" alt="" />
+        <div class="box_many_people">
+        	<img src="images/index_images/index_wang_many_people_02.png" class="box_one_percent box_wang_many_people" alt="" />
+            <img src="images/index_images/index_phone_03.png" class="bmp_img" alt="" />
+            <img src="images/index_images/index_circle_03.png" class="bmp_circle" alt="" />
+        </div>
+        <img src="images/index_images/index_title_02_02.png" class="box_one_percent box_title_02" alt="" />
+        <img src="images/index_images/index_many_people_03.png" class="box_img_many_people01" alt="" />
+        <img src="images/index_images/index_title_03_02.png" class="box_one_percent box_title_03" alt="" />
+        <div class="box_video">
+        	<img src="images/index_images/index_video_03.png" class="bv_video" alt="" />
+            <img src="images/index_images/index_kouhong_phone_03.png" class="bv_video_photo" alt="" />
+            <img src="images/index_images/index_kouhong_title_03.png" class="bv_video_title" alt="" />
+        </div>
+        <img src="images/index_images/index_title_04_02.png" class="box_one_percent box_title_04" alt="" />
+        <div class="box_img_four">
+        	<div style="overflow:hidden;">
+                <img src="images/index_images/index_photo_03.png" alt="" class="bif_one" />
+                <img src="images/index_images/index_photo_05.png" alt="" class="bif_two" />
+            </div>
+            <div style=" overflow:hidden; clear:both;">
+                <img src="images/index_images/index_photo_09.png" alt="" class="bif_three" />
+                <img src="images/index_images/index_photo_11.png" alt="" class="bif_four" />
+            </div>
+        </div>
+        <img src="images/index_images/index_down_app_02.png" class="box_one_percent box_down_app" alt="" />
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+</body>
+</html>

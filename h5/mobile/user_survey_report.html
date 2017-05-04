@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<title>调研报告</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript" src="../mobile/js/zepto.min.js"></script>
+<style type="text/css">
+*{ margin:0px; padding:0px;font-family:"微软雅黑";color:#000;cursor:pointer; -webkit-tap-highlight-color: transparent;  }
+body{ background:#eff4f5; margin-bottom:60px; }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.detail,.suggest{ border-radius:5px; background:#fff; margin:7px;}
+.detail{ padding:5px 0 20px;}
+.content .top{ background:#9fd7dc; font-size:10px; color:#fff; line-height:15px; padding:6px 20px;}
+.detail label{ padding-left:12px;display: inline-block; line-height:1; margin:20px 0 10px; font-size:14px; color:#3a3a3a; }
+.detail .label{ background:url(images/reportbitian.png) center left no-repeat; background-size:5px 5px; margin-left:6px;}
+.detail input{ -webkit-appearance:none;border:#d7dcdc solid 1px; outline:none; margin:20px 0 5px; height:14px; padding:5px; line-height:14px; font-size:14px; color:#4c4c4c;}
+
+.button{ background:#51c8b4; color:#fff; font-size:18px; text-align:center; height:55px; line-height:55px; letter-spacing:2px; position:fixed; bottom:0; left:0; width:100%;}
+a[title="站长统计"]{ display:none;}
+.checkbox{ margin-left:17px;}
+.checkbox span{width:49%; box-sizing: border-box; display:inline-block; line-height:1; font-size:14px; color:#4c4c4c; margin:5px 0; padding-left:16px; background:url(images/report0.png) left center no-repeat; background-size:10px 10px;}
+.checkbox span:nth-child(2n){  float:right; }
+.checkbox .on{ color:#50c8b4;background:url(images/report1.png) left center no-repeat !important; background-size:10px 10px !important;}
+.suggest {padding:0 13px 15px;     margin-bottom: 60px;}
+.suggest p{ font-size:14px; color:#3a3a3a; height:45px; line-height:45px; padding-left:7px;}
+.suggest textarea{ -webkit-appearance:none;outline:none; resize:none; height:140px;width:100%; border:#d7dcdc solid 1px; padding:10px; font-size:14px; color:#9a9a9a; line-height:20px; box-sizing:border-box;}
+</style>
+<script type="text/javascript" src="../mobile/js/sea.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+
+<body>
+	<div class="content">
+    	<div class="top">感谢您对南瓜姑娘的关注和支持！我们好了这么久，协助我做个调研好不好？认真填写问卷的，都是颜值爆表的小仙女喔~</div>
+        <div class="detail">
+        	<label>您的姓名：</label><input type="text" value="" class="name"><br/>
+            <label class="label">您的年龄：</label>
+            <div class="ageRadio checkbox">
+            	<span>18~29岁</span>
+                <span>30~39岁</span>
+                <span>40~49岁</span>
+                <span>50岁以上</span>
+            </div>
+            <label class="label">您的职业：</label>
+            <div class="workRadio checkbox clearfix">
+            	<span>学生/教师</span>
+                <span>医生/护士</span>
+                <span>企业/公务员</span>
+                <span>自营企业</span>
+                <span>其他</span>
+            </div>
+            <label class="label">您所在的城市：</label><input type="text" value="" class="city"><br/>
+            <label class="label">您是从哪种方式关注的南瓜姑娘：（可多选）</label>
+            <div class="wayBox checkbox clearfix">
+            	<span>苹果商店（app store）</span>
+                <span>安卓应用市场</span>
+                <span>美妆下午茶</span>
+                <span>线下美妆课活动</span>
+                <span>南瓜姑娘微信公众号</span>
+                <span>南瓜家的后花园（商店）</span>
+                <span>朋友推荐</span>
+                <span>南瓜家的微信群</span>
+            </div>
+        </div>
+        <div class="suggest">
+        	<p>您的意见：</p>
+            <textarea placeholder="请在这里：卖萌、表白、拍砖...以及一切您想说的~"></textarea>
+        </div>
+        <div class="button">提交</div>
+    </div>
+    <script>
+        seajs.use('./js/report', function(init) {
+            init.initPage();
+        });
+    </script>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+</html>

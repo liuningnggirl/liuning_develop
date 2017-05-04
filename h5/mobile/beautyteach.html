@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta name="format-detection" content="telephone=no">
+<title>燃爆你的精英气场——南瓜姑娘上门美妆教学【企业版】限时免费</title>
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../mobile/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<style>
+*{padding:0px;margin:0px;border:0px;}
+body{width:100%;height:100%;text-align:center; background:#ed7683; font-family:"兰亭黑-纤黑";}
+.main{width:100%;height:100%;}
+.main .top{pointer-events:none;}
+.main img{display:block;margin:0 auto;width:100%; }
+.btn{ width:100%; display:block; text-decoration:none;}
+.btn img{ width:60%;color:#fff; cursor:pointer;}
+.btn p{  font-size:13px; line-height:1; padding:15px 0 11px; color:#fff; letter-spacing:2px; }
+.btn p:before { content: ""; width: 9px;height: 14px; display: inline-block;  background:url(images/beautyteach/images/toparrow.png) no-repeat;background-size: 4px 14px; vertical-align: -1px;}
+.content11 p{ width:79%;margin:10px auto 0; background:#000; color:#fff; font-size:10px; line-height:14px; letter-spacing:2px; padding:10px 13px; box-sizing:border-box;}
+.content12{ width:79%;margin:0 auto 36px; box-sizing:border-box; border:#000 solid 4px; text-align:center;}
+.content12 img{ width:69%; margin:15px 15.5% 0;}
+.content12 p{ font-size:18px; font-weight:bold; margin:10px 0;}
+.phone img { margin-top:7px; width:100%;}
+.phone p{ font-size:6vw; border:#000 solid 1.2vw; width:85.3%; margin:0 7.35% 0 7.35%; box-sizing:border-box; heigh:55px; line-height:55px; letter-spacing:2px; }
+.phone .firstp{margin:-18px 7.35% 12px;}
+a[title*="站长统计"]{ display:none;}
+</style>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+ </script>
+<script type="text/javascript">
+	$(function(){
+		/*$(".phone p").height($(".phone p").width()*0.207);
+		$(".phone p").css('line-height',$(".phone p").width()*0.207);*/
+		 if(isInApp()){
+			 $(".btn").hide();
+		 }
+		 $(".btn .btnimg").click(function(){
+		 	if (/iphone|ipad|ipod/.test(ua)) {
+		         _czc.push(['_trackEvent','beautyteach','phoneType=iOS','downloadclick','downloadclickAlert']);   
+		    } else if (/android/.test(ua)) {
+		         _czc.push(['_trackEvent','beautyteach','phoneType=and','downloadclick','downloadclickAlert']);
+		    };
+			 window.location.href="<%= CLI_HOST_API_URL %>/nggirl/app/getapp";
+		});
+		//微信分享
+		if(isInWeixin()){
+			var title = '燃爆你的精英气场——南瓜姑娘上门美妆教学【企业版】限时免费';
+			var desc = '让气质颜值成为工作助力，燃爆你的精英气场。';
+			var link = window.location.href;
+			var imgUrl = 'https://photosd.nggirl.com.cn/work/93fe5addc24c4561bfa225157cf39291.jpg';
+			var from = getParam('apptype');
+			if(!strIsEmpty(from) && from == 'appb'){
+				desc = '让气质颜值成为工作助力，燃爆你的精英气场。';
+			}
+			weixinConfig(title,desc,link,imgUrl);
+		};	
+		//h5,app同步分享内容
+		if(isInApp()){
+			window.shareTitle = '燃爆你的精英气场——南瓜姑娘上门美妆教学【企业版】限时免费';
+			window.shareContent = '让气质颜值成为工作助力，燃爆你的精英气场。';
+			window.sharePicture = 'https://photosd.nggirl.com.cn/work/93fe5addc24c4561bfa225157cf39291.jpg';
+			window.shareUrl = window.location.href;
+		};
+		//给安卓传值
+		if(typeof(window.ngjsInterface)!="undefined" && typeof(window.ngjsInterface.conFigShareInfo)!="undefined"){
+			window.ngjsInterface.conFigShareInfo('燃爆你的精英气场——南瓜姑娘上门美妆教学【企业版】限时免费', '让气质颜值成为工作助力，燃爆你的精英气场。','https://photosd.nggirl.com.cn/work/93fe5addc24c4561bfa225157cf39291.jpg',window.location.href);
+		};
+	})
+	//初始化微信分享功能
+	function weixinConfig(title,desc,link,imgUrl) {
+
+		wx.ready(function(){
+
+			//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+			wx.onMenuShareTimeline({
+				title: title, // 分享标题
+				link: link, // 分享链接
+				imgUrl: imgUrl, // 分享图标
+				success: function () {
+					// 用户确认分享后执行的回调函数
+					alert("分享成功!");
+				},
+				cancel: function () {
+					// 用户取消分享后执行的回调函数
+				}
+			});
+
+
+			//获取“分享给朋友”按钮点击状态及自定义分享内容接口
+			wx.onMenuShareAppMessage({
+				title: title, // 分享标题
+				desc: desc, // 分享描述
+				link: link, // 分享链接
+				imgUrl: imgUrl, // 分享图标
+				type: 'link', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function () {
+					// 用户确认分享后执行的回调函数
+					alert("分享成功!");
+				},
+				cancel: function () {
+					// 用户取消分享后执行的回调函数
+				}
+			});
+		});
+
+		var currenturl = window.location.href;
+		//初始化配置信息
+		$.ajax({
+			url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/weixinjs/config',
+			type: 'post',
+			dataType: 'json',
+			data: getFinalRequestObject({url: currenturl, accessToken: getAccessToken()}),
+			success: function (data) {
+				//初始化配置
+				wx.config({
+					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					appId: data.data.appId, // 必填，公众号的唯一标识
+					timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+					nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+					signature: data.data.signature,// 必填，签名，见附录1
+					jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+			}
+		});
+	}	
+</script>
+</head>
+<body>
+<div class="main" >
+	<img class="top" src="images/beautyteach/images/teachdetail_01.png" />
+	<img class="top" src="images/beautyteach/images/teachdetail_02.png" />
+    <img class="top" src="images/beautyteach/images/teachdetail_03.png" />
+    <img class="top" src="images/beautyteach/images/teachdetail_04.png" />
+    <img class="top" src="images/beautyteach/images/teachdetail_05.png" />
+    <img class="top" src="images/beautyteach/images/teachdetail_06.png" />
+	<img class="top" src="images/beautyteach/images/teachdetail_07.png" />
+    <img class="top" src="images/beautyteach/images/teachdetail_08.png" />
+    <img class="top" src="images/beautyteach/images/teachdetail_09.png" />
+    <div class="content11"><p>没有丑女人，只有懒女人。如果先天的美貌不能由自己决定，那么后天的美丽一定要由自己主宰！<br>
+南瓜姑娘企业教学——轻松学化妆，教你做有颜有实力的强女人！</p></div>
+    <div class="content12"><img src="images/beautyteach/images/teachdetail_ew.png"><p>关注微信公众号</p></div>
+    <div  class="btn"><img  src="images/beautyteach/images/downloadbtn.png"  class="btnimg"/><p>点击下载APP</p></div> 
+    <div class="phone">
+    	<img src="images/beautyteach/images/phone.png">
+        <p class="firstp">130-0242-4910 曹益铭</p>
+        <p>139-1186-8389 叔文龙</p>
+    </div>
+	<img class="top" src="images/beautyteach/images/teachdetail_12.png"  />
+</div>
+<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+
+</html>

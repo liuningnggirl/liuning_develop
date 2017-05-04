@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>预约页面</title>
+<style type="text/css">
+	*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none; -webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-appearance:none;}
+	body,html{ font-size:14px; font-family:"微软雅黑";background:#fff;}
+	img{ display:block;}
+	.box{max-width:750px; margin:0 auto; height:auto; background:#fff;  }
+	.logo{ width:27%; margin:8% auto 0;}
+	.p-txt{ text-align:center; color:#030000; font-size:.85rem; line-height:1.6rem;}
+	.box-txt{ width:72%; height:auto; margin:9% auto 0;}
+	.user-name{ width:100%; padding:1.07rem 11%; border-bottom:1px solid #f6f6f7; display:block; background:url(images/img-company/login-user_03.png) no-repeat 4% center; background-size:5.5%;  box-sizing:border-box;}
+	.user-key{ width:100%; padding:1.07rem 11%; border-bottom:1px solid #f6f6f7; display:block; box-sizing:border-box; background:url(images/img-company/login-key_03.png) no-repeat 3% center; background-size:6%;}
+	.forget{ text-align:right; color:#8ecfc7; font-size:.86rem; padding:1.07rem 0; display:block;}
+	.login-btn{ width:100%; padding:1.07rem 0; background:#ff6567; text-align:center; color:#fff; font-size:1.07rem; border-radius:2rem; display:block;}
+	.register{ display:block; text-align:center; padding:1.07rem 0; color:#ff6567; }
+	
+/*  找回密码 */
+	.find-pwd{ display:none;}
+	.find-pwd,.reset-pwd,.register-pwd,.register-success{ width:94%; margin:0 auto;}
+	.reset-box,.find-box,.register-box{  border-radius:1.07rem; border:1px solid #e3e5e5; width:100%; margin:4% 0 0 0; position:relative;}
+	.reset-box{ margin:2% 0 0 0;}
+	.rp-name,.fp-name{ display:block;  width:100%; padding:1.07rem 3%; border-bottom:1px solid #e3e5e5; box-sizing:border-box; border-radius:1.07rem 1.07rem 0 0; position:relative;}
+	.rp-key,.fp-key{ display:block;  width:100%; padding:1.07rem 3%; box-sizing:border-box; border-radius:1.07rem;}
+	.yzm{ color:#fff; background:#8c96a0; border-radius:1.07rem; padding:.3rem; position:absolute; top:10%; right:4%; display:block; width:25%; text-align:center;}
+	.btn-ok,.btn-yz{ width:100%; padding:.71rem 0; background:#fa6e64; color:#fff; text-align:center; border-radius:2rem; clear:both; margin:2% 0 0 0;}
+	
+/*  重置密码 */
+	.rp-message{ color:#000; text-align:left; font-size:.85rem; margin:2% 0 0 0; padding: 0 0 0 3%}
+	.num{ color:red;}
+	.reset-pwd{ display:none;}
+		
+/*  注册 */
+	.register-pwd{ display:none; }
+	.tiao-k{ color:#CCC; text-align:center; font-size:.71rem; width:100%; text-align:center;position: fixed; bottom: 2%;}
+	.special{ color:#666; text-decoration:underline;}
+	
+/*  注册成功，绑定密码 */
+	.register-success{ display:none;}
+
+	.hidden{
+		display: none;
+	}
+	.showblock{
+		display: block;
+	}
+    a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="../busteach/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../busteach/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../busteach/js/md5.js"></script>
+<script type="text/javascript" src="../busteach/js/params.js"></script>
+<script type="text/javascript" src="../busteach/js/login.js"></script>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+    </script>
+</head>
+
+<body>
+	<div class="box">
+        <!--  登录 -->
+    	<div class="login">
+            <img src="images/img-company/login-logo_03.png" class="logo" alt="" />
+            <p class="p-txt">南瓜姑娘</p>
+            <form action="" class="box-txt">
+            	<p class= 'formtips hidden'></p>
+                <input type="text" placeholder="输入账号" class="user-name required" />
+                <input type="password" placeholder="输入密码" class="user-key required" />
+                <a href="javascript:;" class="forget">忘记密码？</a>
+                <a href="javascript:;" class="login-btn">登录</a>
+                <a href="javascript:;" class="register">注册账号</a>
+            </form>
+        </div>
+        
+        <!--  找回密码 -->
+        <div class="find-pwd">
+        	<form action="" class="find-box">
+                <input type="text" placeholder="注册手机号码" class="fp-name" />
+                <a href="javascript:;" class="yzm" id="remainTime">获取验证码</a>
+                <input type="password" placeholder="验证码" class="fp-key" />
+            </form>
+            <input type="button" value="验证" class="btn-yz" />
+        </div>
+        
+        <!--  重置密码 -->
+        <div class="reset-pwd">
+        	<p class="rp-message">手机号<span class="num"></span>验证成功，请绑定密码</p>
+        	<form action="" class="reset-box">
+                <input type="password" placeholder="新密码" class="rp-name" />
+                <input type="password" placeholder="确认新密码" class="rp-key" />
+            </form>
+            <input type="button" value="确定" class="btn-ok" />
+        </div>
+        
+        <!--  注册 -->
+        <div class="register-pwd">
+        	<form action="" class="register-box">
+                <input type="text" placeholder="手机" class="fp-name" />
+                <a href="javascript:;" class="yzm" id="remainTime01">获取验证码</a>
+                <input type="password" placeholder="验证码" class="fp-key" />
+            </form>
+            <input type="button" value="验证" class="btn-yz" />
+            <p class="tiao-k">注册账户表示同意南瓜姑娘的<a href="javascript:;" class="special">用户服务条款</a></p>
+        </div>
+        
+        <!--  注册成功，绑定密码 -->
+        <div class="register-success">
+        	<p class="rp-message">手机号<span class="num"></span>验证成功，请绑定密码</p>
+        	<form action="" class="reset-box">
+                <input type="password" placeholder="密码" class="rp-name" />
+                <input type="password" placeholder="认新密码" class="rp-key" />
+            </form>
+            <input type="button" value="立即注册" class="btn-ok" />
+        </div>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+</html>

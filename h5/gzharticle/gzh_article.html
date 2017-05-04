@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>南瓜姑娘_推荐公众号文章</title>
+<style type="text/css">
+	*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none;}
+	body,html{ font-size:14px; font-family:"微软雅黑";background:#f5fafa;}
+	img{ display:block;}
+ 	.box{max-width:750px; margin:0 auto; height:auto; background:#f5fafa;  }
+	.header .logo{ width:3.79rem; float:left; margin:0 3.4% 0 3%;}
+	.header-right{ float:right; font-size:.93rem; color:#50c8b4; padding:.2rem .4rem; border:1px solid #50c8b4; border-radius:.9rem ;margin-top: 4%;}
+	.header-center{ float:left;}
+	.hc-top{ font-size:.86rem; font-weight:bold; color:#141e28;}
+	.hc-bottom{ font-size:.71rem; color:#8c8c8c;}
+	.header{ padding:.43rem 3.4%; overflow:hidden; border:1px solid #ecefef; background:#fff; margin:.72rem 0; position:relative;}
+	.close{ position:absolute; top:4%; left:1%; width:1rem;}
+	iframe{ width:100%;}
+	a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="../gzharticle/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../gzharticle/js/md5.js"></script>
+<script type="text/javascript" src="../gzharticle/js/params.js"></script>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+ </script>
+<script type="text/javascript">
+	$(function(){
+		var windowH = $(window).height();
+		$('iframe').height(windowH);
+		
+		var requestArticleId = getParam('articleId');
+		$.ajax({
+			url: '<%= CLI_HOST_API_URL %>/nggirl/app/rss/subscribe/articleDetail',
+			type: 'get',
+			data: getFinalRequestObject({articleId:requestArticleId}),
+			dataType: 'json',
+			success: function (data) {
+				$('iframe').attr('src',data.data.articleUrl);
+				$('title').html(data.data.title);
+
+
+				//设置微信分享,和2次分享
+				var title = '【南瓜姑娘】资讯文章－'+data.data.title;
+				var desc = data.data.brief;
+				var link = window.location.href;
+				var imgUrl = data.data.cover;
+				weixinConfig(title,desc,link,imgUrl);
+				//h5,app同步分享内容
+				if(isInApp() && typeof(window.ngjsInterface) != "undefined" && typeof(window.ngjsInterface.conFigShareInfo) != "undefined"){
+					window.ngjsInterface.conFigShareInfo(title,desc,imgUrl,link);
+				};
+				//h5,app同步分享内容
+				if(isInApp()){
+					window.shareTitle = title;
+					window.shareContent = desc;
+					window.sharePicture = imgUrl;
+					window.shareUrl = link;
+				};	
+			}
+		});
+
+		$('.header-right').click(function(){
+			if (/iphone|ipad|ipod/.test(ua)) {
+		         _czc.push(['_trackEvent','gzh_article','phoneType=iOS','download','downloadclickAlert']);   
+		    } else if (/android/.test(ua)) {
+		         _czc.push(['_trackEvent','gzh_article','phoneType=and','download','downloadclickAlert']);
+		    };
+			window.location.href = '<%= CLI_HOST_API_URL %>/nggirl/app/getapp';
+		});
+		
+		var width = $('iframe').scrollWidth;
+		
+		//关闭顶部悬浮框
+		$('.close').click(function(e) {
+            $('.header').slideUp();
+        });
+	});
+
+	function weixinConfig(title,desc,link,imgUrl) {
+
+		wx.ready(function(){
+
+			//获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
+			wx.onMenuShareTimeline({
+				title: title, // 分享标题
+				link: link, // 分享链接
+				imgUrl: imgUrl, // 分享图标
+				success: function () {
+					// 用户确认分享后执行的回调函数
+				},
+				cancel: function () {
+					// 用户取消分享后执行的回调函数
+				}
+			});
+
+
+			//获取“分享给朋友”按钮点击状态及自定义分享内容接口
+			wx.onMenuShareAppMessage({
+				title: title, // 分享标题
+				desc: desc, // 分享描述
+				link: link, // 分享链接
+				imgUrl: imgUrl, // 分享图标
+				type: 'link', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function () {
+					// 用户确认分享后执行的回调函数
+				},
+				cancel: function () {
+					// 用户取消分享后执行的回调函数
+				}
+			});
+		});
+
+		var currenturl = window.location.href;
+		//初始化配置信息
+		$.ajax({
+			url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/weixinjs/config',
+			type: 'post',
+			dataType: 'json',
+			data: getFinalRequestObject({url: currenturl, accessToken: getAccessToken()}),
+			success: function (data) {
+				//初始化配置
+				wx.config({
+					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+					appId: data.data.appId, // 必填，公众号的唯一标识
+					timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+					nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+					signature: data.data.signature,// 必填，签名，见附录1
+					jsApiList: ["onMenuShareTimeline","onMenuShareAppMessage"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+				});
+			}
+		});
+	}
+</script>
+</head>
+
+<body>
+	<div class="box">
+    	<div class="header">
+        	<img src="images/close_03.png" alt="" class="close" />
+        	<img src="images/zixun-logo_03.png" class="logo" alt="" />
+            <div class="header-center">
+            	<p class="hc-top">南瓜姑娘</p>
+            	<p class="hc-bottom">获取最in时尚资讯<br />一键下单，尊享明星化妆师上门服务</p>
+            </div>
+            <a href="<%= CLI_HOST_API_URL %>/nggirl/app/getapp" class="header-right">立即下载</a>
+        </div>
+        <iframe name="Info1" id="Info1" src="" onload="this.height=Info1.document.body.scrollHeight" width="100%" frameborder="0"></iframe>
+    </div>
+    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+</body>
+</html>

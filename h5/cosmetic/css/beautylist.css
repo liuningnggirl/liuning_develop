@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+.bg{background:#f0f5f5; margin-bottom:60px; }
+.listbox{ background:#fff; width:96%; border-radius:10px; overflow:hidden; margin:10px auto 10px auto;box-shadow: 2px 2px 2px rgba(0,0,0,.1);}
+.listbox img{ width:100%; }
+.delist{ position:relative;min-height: 56px;}
+.delist .de-left{ margin: 0 95px 0 7.5px; }
+.delist .de-left .b-title{ font-size:15px; color:#3a3a3a; font-weight:600; padding-top:15px; white-space: nowrap;text-overflow: ellipsis; overflow:hidden;}
+.delist .de-left .b-desc{ font-size:14px; color:#4c4c4c; margin:12px 0; line-height:20px;-webkit-line-clamp: 2;-webkit-box-orient: vertical;display: -webkit-box; overflow:hidden; word-break:break-all;}
+.delist .de-right{ position:absolute; top:-8px; right:8px; width:64px; height:64px; background:#fff; border-radius:50%;}
+.delist .de-right .simgbox{ background:#d7dcdc;width:58px; height:58px;margin:3px ;border-radius:50%;}
+.delist .de-right img{ width:56px; height:56px; margin:1px ; border-radius:50%; }
+.listbot{ border-top:#e7eded solid 1px; margin:0 7px;}
+.listbot p{ color:#9a9a9a; font-size:13px; } 
+.listbot .timebg{ background:url(../images/xwc-lock_03.jpg) no-repeat; background-size:15px 15px; padding-left:20px; line-height:15px; margin-top:12px;}
+.listbot .adressbg{ background:url(../images/xwc-local_03.jpg) no-repeat; background-size:15px 17.5px; padding-left:20px; line-height:18px; margin-top:9px;}
+.botright{ text-align:right; font-size:12px !important; color:#fa6e64 !important; margin:12px 0 15px 0;}
+.botright b{ font-weight:normal; font-size:18px;}
+.s_btn {width: 100%;height: 40px;line-height: 40px;text-align: center;border-top: solid 1px #dee2e2;border-bottom: solid 1px #dee2e2; margin-top:-10px;color: #8c96a0;background: #fff;font-size: 12px;}
+.more_top {position: fixed;bottom: 70px;right: 10px; z-index:90;}
+.more_top>img {width: 40px;}
+a[title*="站长统计"]{ display:none;}
+.gray_title{ width:100%; height:50px; line-height:50px; color:#fff; background:#1c1b21; font-size:18px; text-align:center; position:relative;}
+.select_city{ position:absolute; top:0px; left:15px; }
+.select_city img{ width:15px; margin-bottom: 5px;}
+.select_city span{ color:#50c8b4; font-size:}
+.city_box ul li,.city_box{ width:100%;}
+.city_box ul li .city_caps{ width:100%; height:25px; line-height:25px; background:#f0f5f5; padding:0 15px; box-sizing:border-box;font-size: 10px;color: #4c4c4c;}
+.city_box ul li .city_name{ width:100%; height:40px; line-height:40px; background:#fff; padding:0 15px; box-sizing:border-box; border-top:1px solid #d7dcdc; border-bottom:1px solid #d7dcdc;font-size: 10px;color: #4c4c4c;}
+.city_box{ display:none;}
+
