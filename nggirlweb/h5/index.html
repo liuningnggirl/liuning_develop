@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理后台</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/index.css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="My97DatePicker/WdatePicker.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/jquery.page.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/functions.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/part/listReservations.js" charset="utf-8"></script>
+<script src="js/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script>
+<script>
+function  onInputNum(){
+	var val = parseFloat($('.quan-create-dis').val()).toFixed(1);
+	if(val > 10 || val <0 || val == 0){
+		alert('折扣值再0~10之间');	
+		$('.quan-create-dis').val('');
+		$('.quan-create-dis').focus();
+	}
+}
+</script>
+</head>
+
+<body>
+	<div class="header">
+        <header>
+          
+            <a href="javascript:void(0);"  class="exit">退出管理</a>
+		
+        </header>
+        <img src="images/logo.png" alt="" />
+    </div>
+    <div class="content">
+<!--  左侧列表 -->
+    	<div class="content-left">
+        	<ul>
+            	<li url="/web/admin/reservation/listReservations">
+                	<a href="javascript:;">
+                        <img src="images/order-magement_03.png" alt="" />
+                        <span>订单管理</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/user/listUsers">
+                	<a href="javascript:;">
+                        <img src="images/user-management_03.png" alt="" />
+                        <span>用户管理</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/dresser/listDressers">
+                	<a href="javascript:;">
+                        <img src="images/user-management_03.png" alt="" />
+                        <span>化妆师管理</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/work/listWorks">
+                	<a href="javascript:;">
+                    	<img src="images/work-management_03.png" alt="" />
+                        <span>作品管理</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/banner/getBanners">
+                	<a href="javascript:;">
+                    	<img src="images/banner-management_03.png" alt="" />
+                        <span>Banner管理</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/sysmessage/listMessages">
+                	<a href="javascript:;">
+                    	<img src="images/official-push_03.png" alt="" />
+                        <span>官方推送</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/withdraw/listWithdrawRequires">
+                	<a href="javascript:;">
+                    	<img src="images/cash-management_03.png" alt="" />
+                        <span>提现管理</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/reservationComplaint/listComplaints">
+                	<a href="javascript:;">
+                    	<img src="images/order-complaints_03.png" alt="" />
+                        <span>订单投诉</span>
+                    </a>
+                </li>
+            	<li url="/web/admin/feedback/listFeedbacks">
+                	<a href="javascript:;">
+                    	<img src="images/feedback_03.png" alt="" />
+                        <span>反馈意见</span>
+                    </a>
+                </li>
+                <li url="/web/admin/invitecode/listInviteCodes">
+             		<a href="javascript:;">
+                        <img src="images/order-magement_03.png" alt="" />
+                        <span>普通邀请码管理</span>
+                    </a>
+                </li> 
+                <li url="/web/admin/invitecodesuper/listSuperInviteCodes">
+                    <a href="javascript:;">
+                        <img src="images/order-magement_03.png" alt="" />
+                        <span>超级邀请码管理</span>
+                    </a>
+                </li>   
+                <li url="/web/admin/invitecoderandom/listRandomInviteCodes">
+                    <a href="javascript:;">
+                        <img src="images/order-magement_03.png" alt="" />
+                        <span>随机邀请码管理</span>
+                    </a>
+                </li>                         
+            	<li url="/web/admin/focuscontent/list">
+                	<a href="javascript:;">
+                    	<img src="images/order-magement_03.png" alt="" />
+                        <span>资讯管理</span>
+                    </a>
+                </li>                
+ 			</ul>
+        </div>
+<!--  右侧列表 -->
+    	<div class="content-right">
+            <div class="order-magement">
+                <img src="images/block-9_03.png" alt="" />
+                <span>订单管理</span>
+            </div>
+            <ul class="total-message">
+                <li>
+                    <div class="total-page">
+                        <div class="f32">0</div>
+                        <div class="f13">今日订单</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="total-page">
+                        <div class="f32">0</div>
+                        <div class="f13">今日作品</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="total-page">
+                        <div class="f32">0</div>
+                        <div class="f13">总订单数</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="total-page">
+                        <div class="f32">0</div>
+                        <div class="f13">总化妆师数</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="total-page">
+                        <div class="f32">0</div>
+                        <div class="f13">总注册用户数</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="total-page">
+                        <div class="f32">0</div>
+                        <div class="f13">总交易金额</div>
+                    </div>
+                </li>
+            </ul>
+            <div class="wb">
+<!--  订单详情 -->
+                <div class="weight-box ddxqq ddxqq-search">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>订单详情</h5>
+                    </div>
+                    <div class="ddxq-list">
+        <!--  search订单编号 -->
+                        <div class="order-num">
+                            <input type="text" class="search bianhao" placeholder="订单编号" />
+                            <input type="text" class="search nicheng" placeholder="用户昵称" />
+                            <input type="text" class="search name" placeholder="化妆师姓名" />
+                            <label for="" style="margin:0 0 0 20px;">下单时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                            <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                            <select name="" id="" class="order-status">
+                            	<option value="">请选择订单状态</option>
+                            	<option value="0">等待化妆师确认</option>
+                            	<option value="1">订单已取消</option>
+                            	<option value="2">订单已取消</option>
+                            	<option value="3">化妆师未接受预约</option>
+                            	<option value="4">化妆师已确认，等待支付</option>
+                            	<option value="5">订单已取消</option>
+                            	<option value="6">支付成功，等待化妆师上门</option>
+                            	<option value="7">化妆进行中</option>
+                            	<option value="8">化妆结束，请确认完成</option>
+                            	<option value="9">美丽行程，圆满结束</option>
+                            	<option value="10">自动结束。美丽行程，圆满结束</option>
+                            	<option value="11">退款订单</option>
+                            </select>
+                            <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input class="create-order" type="button" value="创建订单" style=" width:80px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input type="button" class="all-cancle" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                        </div>
+        <!--  订单表格信息 -->
+                        <table class="table-message ddxq" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>订单编号</th>
+                                <th>下单时间</th>
+                                <th>用户姓名</th>
+                                <th>用户电话</th>
+                                <th>化妆师</th>
+                                <th>预约地址</th>
+                                <th>预约时间</th>
+                                <th>金 额</th>
+                                <th>订单状态</th>
+                                <th>支付金额</th>
+                                <th>退款处理</th>
+                                <th>操作</th>
+                            </tr>
+                     </table>
+                        <!--  页码 -->
+                        <div class="tcdPageCode"></div>
+                    </div>
+                    <!-- 创建订单 -->
+                    <div class="order-create">
+						<form action="">
+                            <label for="" class="yc-isforever">下单用户:</label>
+                            <input type="text" class="order-user" />
+                            <br><br>
+                            <label for="" class="yc-isforever">作 品:</label>
+                            <input type="text" class="order-pro" />
+                            <br><br>
+                            <label for="" class="yc-isforever">预约时间:</label>
+                            <select name="" id="" class="order-year"></select>
+                            <br><br>
+                            <label for="" class="yc-isforever">预约地点:</label>
+                            <input type="text" class="order-area" />
+                            <br><br>
+                            <label for="" class="yc-isforever">用户手机号:</label>
+                            <input type="text" class="order-user-tel" />
+                            <br><br>
+                            <label for="" class="yc-isforever">预约价格:</label>
+                            <input type="text" class="order-price" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                            <br><br>
+                            <input type="button" value="返回" class="return-order" />
+                            <input type="button" value="创建订单" class="create-order" />
+                        </form>
+                    </div>
+                    
+                    <!--  用户查询 -->
+                    <div class="user-select">
+                    	<div class="us-search">
+                        	<input type="text" class="us-name" placeholder="昵称" />
+                        	<input type="text" class="us-tel" placeholder="手机号" />
+                            <input type="button" value="搜索" class="us-btn-search" />
+                            <input type="button" value="全部取消" class="us-cancle-btn" />
+                        </div>
+                        <table class="select-table" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>用户编号</th>
+                                <th>昵称</th>
+                                <th>手机号</th>
+                                <th>注册时间</th>
+                                <th>用户地址</th>
+                                <th>操作</th>
+                            </tr>
+                        </table>
+                        <!--  页码 -->
+                        <div class="tcdPageCode"></div>
+                    </div>
+                    
+                    <!--  作品查询 -->
+                    <div class="works-select">
+                    	<div class="ws-search">
+                        	<input type="text" class="ws-name" placeholder="化妆师名称" />
+                            <label for="">作品类型：</label>
+                            <select name="" id="" class="ws-kinds">
+                            	<option value="">请选择装束类型</option>
+                            </select>
+                            <input type="button" value="搜索" class="ws-btn-search" />
+                            <input type="button" value="全部取消" class="ws-cancle-btn" />
+                        </div>
+                        <!--  页码 -->
+                        <table class="works-select-table" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>化妆师编号</th>
+                                <th>化妆师姓名</th>
+                                <th>化妆师电话</th>
+                                <th>作品编号</th>
+                                <th>作品类型</th>
+                                <th>作品价格</th>
+                                <th>作品描述</th>
+                                <th>操作</th>
+                            </tr>
+                        </table>
+                        <div class="tcdPageCode"></div>
+                    </div>
+                    <!--  订单创建成功提示框 -->
+                    <div class="order-success">
+                    	<p class="order-txt">创建订单成功，订单号为:<span class="dd-num"></span>,用户<span class="dd-name"></span>(<span class="dd-user-tel"></span>)，化妆师<span class="dd-hzs"></span>(<span class="dd-hzs-tel"></span>),<span class="dd-dresstype"></span>,<span class="dd-price"></span>元,<span class="dd-time"></span>,<span class="dd-address"></span></p>
+                        <div class="os-btn">
+                            <input type="button" value="返回列表" class="osbtn-return" />
+                            <input type="button" value="继续创建" class="osbtn-create"/>
+                        </div>
+                    </div>
+                </div>
+<!--  用户详情 -->
+                <div class="weight-box yhxqq">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>用户详情</h5>
+                    </div>
+    <!--  search订单编号 -->
+                    <div class="order-num">
+                    	<form action="">
+                            <input type="text" class="search" placeholder="用户名称" />
+                            <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input type="button" value="全部取消" class="cancle-btn" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                        </form>
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message yhxq" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>会员编号</th>
+                            <th>注册时间</th>
+                            <th>昵称</th>
+                            <th>电话</th>
+                            <th>约化妆师</th>
+                            <th>消费金额</th>
+                            <th>用户地址</th>
+                        </tr>
+                    </table>
+    <!--  页码 -->
+    				<div class="tcdPageCode"></div>
+                </div>
+<!--  化妆师详情 -->
+                <div class="weight-box hzsxqq">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>化妆师详情</h5>
+                    </div>
+    <!--  search订单编号 -->
+                    <div class="order-num">
+                        <input type="text" class="search" placeholder="化妆师姓名" />
+                        <label for="" style="margin:0 0 0 20px;">认证情况:</label>
+                        <select name="" id="" class="on-select">
+                            <option value="">全部</option>
+                            <option value="0">未认证</option>
+                            <option value="1">已认证</option>
+                        </select>
+                        <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                        <input type="button" class="cancle-btn" value="全部取消" style=" height:30px; background:#cccccc; margin:0 10px 0 0; float:right;" />
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message hzsxq" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>化妆师编号</th>
+                            <th>姓名</th>
+                            <th>电话</th>
+                            <th>身份证</th>
+                            <th>城市</th>
+                            <th>地区</th>
+                            <th>认证</th>
+                            <th>加V</th>
+                            <th>详细资料</th>
+                        </tr>
+                    </table>
+    <!--  页码 -->
+    				<div class="tcdPageCode"></div>
+                </div>
+<!--  作品详情 -->
+                <div class="weight-box zpxqq">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>作品详情</h5>
+                    </div>
+    <!--  search订单编号 -->
+                    <div class="order-num">
+                        <input type="text" class="search" placeholder="化妆师姓名" />
+                        <label for="" style="margin:0 0 0 20px;">作品发布时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                        <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                        <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                        <input type="button" class="cancle-btn" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message zpxq" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>作品编号</th>
+                            <th>发布时间</th>
+                            <th>化妆师姓名</th>
+                            <th>联系电话</th>
+                            <th>作品详情</th>
+                            <th>作品类型</th>
+                            <th>作品价格</th>
+                            <th>作品描述</th>
+                            <th>推荐</th>
+                            <th>删除</th>
+                        </tr>
+                   </table>
+				   <!--  页码 -->
+    			   <div class="tcdPageCode"></div>
+                </div>
+<!--  Banner详情 -->
+                <div class="weight-box">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>Banner详情</h5>
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message banner" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                        </tr>
+                    </table>
+                </div>
+                <!--  弹出框 -->
+                <div class="add-box-hide add-box-show">
+                        <div class="modal-header">
+                            添加
+                            <span class="close-btn" style="width: 20px;display: inline-block;float: right;"><img src="images/close.png" alt="" /></span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-left">上传图片:</div>
+                            <div class="mb-right">
+                                <input type="file" name="file0" id="file0" multiple style="background:#fff; overflow:hidden;" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploads/3.0.0"/><br><img src="" id="img0" >
+                            </div>
+                            <div style="clear:both;">
+                                <label for="">跳转地址：</label><input type="text" class="tz-address" style="width:440px; border:1px solid #eee; height:20px;" /><br><br>
+                                <label for="">分享内容：</label><input type="text" class="fx-content" style="width:440px; border:1px solid #eee; height:20px;"/>
+                            </div>
+                            <br />
+                        </div>
+                        <div style="text-align:center; padding: 5px 0; background:#fff;">
+                            <input type="button" class="banner-cancle" value="取消" style="padding:4px 12px; font-size:14px; border:1px solid #666; background:" />
+                            <input type="button" value="提交" class="banner-submit" style="padding:4px 12px; font-size:14px; border:1px solid #666; background:#04c; color:#fff;" />
+                            <input type="button" value="提交" class="banner-submit-edit" style="padding:4px 12px; font-size:14px; border:1px solid #666; background:#51A351; color:#fff; display:none;" /><br /><br />
+                        </div>
+                </div>
+<!--  官方推送详情 -->
+                <div class="weight-box">
+                	<textarea class="text-area" name="" id="" cols="30" rows="10" style=" width:600px; height:200px;border-bottom: 1px dotted #aebdc8; margin:10px 0 0 10px; resize:none;">
+                    </textarea>
+                    <select name="" id="" class="sel-option">
+                    	<option value="">请选择推送类型</option>
+                    	<option value="1">仅百度推送</option>
+                    	<option value="2">仅系统消息</option>
+                    	<option value="3">同时发送</option>
+                    </select>
+                    <select name="" id="" class="messagetype">
+                    	<option value="">请选择通知类型</option>
+                    	<option value="sysmessage">系统通知</option>
+                    	<option value="marketingactivity">营销活动通知</option>
+                    </select>
+                    <input type="text" class="forwardkey" placeholder="营销活动通知跳转地址"/>
+                    <p style="margin:10px 0 0 10px;width:600px; height:20px;" class="radio-btn">
+                    	<div class="radiobtn">
+                            <input type="radio" name="usertype" value="1" style="float:left; margin:0 0 0 10px;" checked="checked" />
+                            <span style=" float:left; font-size:12px; margin:0 20px 0 0 ;">用户端</span>
+                            <input type="radio" name="usertype" value="2" style="float:left;" />
+                            <span style=" float:left; font-size:12px; margin:0 20px 0 0 ;">化妆师</span>
+                        </div>
+                        <input type="button" value="提交" class="submit-btn" style="float:left; margin:0 0 0 32%;  " /><br />
+                    </p>
+    <!--  官方推送语 -->               
+                <div class="recent-posts">
+                	<ul></ul>
+                </div>
+    <!--  页码 -->
+                    <div class="tcdPageCode"></div>
+                </div>
+<!--  提现详情 -->
+                <div class="weight-box txgl">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>提现详情</h5>
+                    </div>
+    <!--  search订单编号 -->
+                    <div class="order-num">
+                    	<form action="">
+                            <input type="text" class="search" placeholder="化妆师姓名" />
+                            <label for="" style="margin:0 0 0 20px;">提现时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                            <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                            <input type="button" class="all-cancle" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                            <label for="" style="margin:0 0 0 20px;">处理情况:</label>
+                            <select name="" id="" class="on-select">
+                                <option value="">全部</option>
+                                <option value="0">未处理</option>
+                                <option value="1">已处理</option>
+                            </select>
+                            <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                        </form>
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message txgll" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>化妆师编号</th>
+                            <th>化妆师姓名</th>
+                            <th>化妆师电话</th>
+                            <th>账号余额</th>
+                            <th>申请提现</th>
+                            <th>银行</th>
+                            <th>银行卡号</th>
+                            <th>提现时间</th>
+                            <th>受理时间</th>
+                            <th>提现状态</th>
+                        </tr>
+                   </table>
+    <!--  页码 -->
+                    <div class="tcdPageCode"></div>
+                </div>
+<!--  投诉详情 -->
+                <div class="weight-box tsxq">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>投诉详情</h5>
+                    </div>
+    <!--  search订单编号 -->
+                    <div class="order-num">
+                        <input type="text" class="search" placeholder=" 订单号搜索" />
+                        <label for="" style="margin:0 0 0 20px;">处理情况：</label>
+                        <select name="" id="" class="on-select">
+                            <option value="">全部</option>
+                            <option value="0">未处理</option>
+                            <option value="1">已处理</option>
+                        </select>
+                        <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                        <input type="button" class="all-cancle" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message tsxqq" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>订单编号</th>
+                            <th>用户姓名</th>
+                            <th>电话</th>
+                            <th>化妆师</th>
+                            <th>预约地点</th>
+                            <th>预约时间</th>
+                            <th>金额</th>
+                            <th>投诉</th>
+                            <th>处理</th>
+                        </tr>
+                    </table>
+    <!--  页码 -->
+    				<div class="tcdPageCode"></div>
+                </div>
+<!--  反馈详情 -->
+                <div class="weight-box fkxq">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>反馈详情</h5>
+                    </div>
+    <!--  search订单编号 -->
+                    <div class="order-num">
+                        <input type="text" class="search" placeholder=" 联系电话" />
+                        <label for="" style="margin:0 0 0 20px;">反馈类型：</label>
+                        <select name="" id="" class="on-select">
+                            <option value="1">用户反馈</option>
+                            <option value="2">化妆师反馈</option>
+                        </select>
+                        <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                        <input type="button" class="cancle-btn" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                    </div>
+    <!--  订单表格信息 -->
+                    <table class="table-message fkxqq" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <th>用户姓名</th>
+                            <th>联系电话</th>
+                            <th>类型</th>
+                            <th>意见及建议</th>
+                            <th>处理状态</th>
+                            <th>处理人</th>
+                            <th>处理时间</th>
+                        </tr>
+                    </table>
+    <!--  页码 -->
+    				<div class="tcdPageCode"></div>
+                </div>
+<!--  邀请码管理 -->    
+                <div class="weight-box yhqgl">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>邀请码详情</h5>
+                    </div>
+                    <!--  优惠券列表 -->
+                    <div class="yhq-list">
+        <!--  search -->
+                        <div class="order-num">
+                            <input type="text" class="search yhq" placeholder="邀请码编号" />
+                            <label for="" style="margin:0 0 0 20px;">是否永久有效：</label>
+                            <select name="" id="" class="on-select">
+                                <option value="">请选择</option>
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                            <input type="text" class="search creater" placeholder="创建者" />
+                            <input class="create-btn" type="button" value="创建邀请码" style=" width:75px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input type="button" class="cancle-btn" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                        </div>
+        <!--  订单表格信息 -->
+                        <table class="table-message yhqgll" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>邀请码名称</th>
+                                <th>编号</th>
+                                <th>面值</th>
+                                <th>可以使用次数</th>
+                                <th>已使用次数</th>
+                                <th>永久有效</th>
+                                <th>开始日期</th>
+                                <th>结束日期</th>
+                                <th>备注</th>
+                                <th>创建者姓名</th>
+                                <th>是否是折扣券</th>
+                                <th>折扣是多少</th>
+                                <th>删除</th>
+                            </tr>
+                        </table>
+        <!--  页码 -->
+                        <div class="tcdPageCode"></div>
+                    </div>
+                    
+                    <!-- 创建优惠券 -->
+                    <div class="yhq-create">
+						<form action="">
+                            <label for="" class="yc-isforever">是否永久有效:</label>
+                            <select name="" id="" class="on-select" style="width:135px;">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select><br><br>
+                            <label for="" class="start-time">有效开始时间：</label><input class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br><br>
+                            <label for="" class="end-time">有效结束时间：</label><input class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br><br>
+                            <label for="" class="yc-isforever">券　名:</label>
+                            <input type="text" class="quan-name" />
+                            <br><br>
+                            <label for="" class="yc-isforever">面　值:</label>
+                            <input type="text" class="quan-money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                            <br><br>
+                            <label for="" class="yc-isforever">适用产品:</label>
+                            <select name="" id="" class="quan-pro">
+                            	<option value="1">美妆上门服务</option>
+                            	<option value="2">化妆师教学服务</option>
+                            </select>
+                            <br><br>
+                            <label for="" class="yc-isforever">使用时最低限额:</label>
+                            <input type="text" class="quan-low-money" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                            <br><br>
+                            <label for="" class="yc-isforever">单张可适用次数:</label>
+                            <input type="text" class="quan-use-num" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                            <br><br>
+                            <label for="" class="yc-isforever">生成个数:</label>
+                            <input type="text" class="quan-create-num" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                            <br><br>
+                            <label for="" class="yc-isforever">是否是折扣券：</label>
+                            <select name="" id="" class="is-select">
+                                <option value="0">否</option>
+                                <option value="1">是</option>
+                            </select>
+                            <br><br>
+                            <label for="" class="yc-isforever">折扣是多少:</label>
+                            <input type="text" class="quan-create-dis" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d.]/g,'')" onBlur=" onInputNum()" />
+                            <br><br>
+                            <label for="" class="yc-isforever">备　注:</label>
+                            <textarea name="" id="" cols="30" rows="10" class="quan-content"></textarea>
+                            <br><br>
+                            <input type="button" value="返回" class="return-yhq" />
+                            <input type="button" value="创建" class="create-yhq" />
+                        </form>
+                    </div>
+                    <!--  成功创建优惠券 -->
+                    <div class="yhq-success">
+                    	<p class="ys-txt">您已经成功创建了<span class="ys-num">n</span>个优惠券，优惠码分别为：<span style="word-wrap: break-word;" class="ys-code"></span>
+                        <div class="ys-btn">
+                            <input type="button" value="返回列表" class="ysbtn-return" />
+                            <input type="button" value="继续创建" class="ysbtn-create"/>
+                        </div>
+                    </div>
+                </div>    
+<!--  资讯管理 -->
+                <div class="weight-box zxgll">
+                    <div class="weight-title">
+                        <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+                        <h5>资讯详情</h5>
+                    </div>
+                    <div class="zxgl-box">
+        <!--  search -->
+                        <div class="order-num">
+                            <label for="" style="margin:0 0 0 20px;">开始时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                            <label for="" style="margin:0 0 0 20px;">结束时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+                            <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input type="button" class="new-zx-btn" value="新建" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                            <input type="button" class="cancle-btn" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+                            
+                        </div>
+        <!--  订单表格信息 -->
+        				<div style="max-width:1920px; overflow:hidden; overflow-x: scroll;">
+                            <table class="table-message zxgl" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th>编号</th>
+                                    <th>标题</th>
+                                    <th>描述</th>
+                                    <th>访问地址</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
+                                    <th>发布状态</th>
+                                </tr>
+                            </table>
+                        </div>
+        <!--  页码 -->
+                        <div class="tcdPageCode"></div>
+                    </div>
+                    <!-- 新建资讯  -->
+                    <div class="add-zxgl"></div>
+                </div>    
+<!--  查看详情 -->
+                <div class="weight-box ckxq">
+					<div class="ckxq-box">
+                    	<div class="cb-left">
+                        	<form action="">
+                            	<div class="ckxq-title">详细信息</div>
+                                <div class="ckxq-name">
+                                	<label for="" class="ckxq-string">名字：</label><input type="text" class="ckxq-text ct-name" />
+                                </div>
+                                <div class="ckxq-name">
+                                	<label for="" class="ckxq-string">电话：</label><input type="text" class="ckxq-text ct-tel" />
+                                </div>
+                                <div class="ckxq-name">
+                                	<label for="" class="ckxq-string">身份证号码：</label><input type="text" class="ckxq-text ct-id" /><br><br><br>
+
+                                    <div style="text-align: right;margin-right: 33px;">
+                                    	<img src="" width="200" alt="" class="qian" />
+                                    	<img src="" width="200" alt="" class="hou" />
+                                    </div>
+                                </div>
+                                <div class="ckxq-name cn-city">
+                                    <select name="province" class="cityid" id="province">
+                                        <option>北京</option>
+                                    </select>
+                                    <select name="city" class="city"></select>
+                                    <select name="city" class="city" style="display:none;"></select><br />
+                                    <input type="button" class="city-btn" value="确定" style="padding:5px; background:#5bb75b; float:right; color: #fff; margin: 7px;" />
+                                 </div>
+                            </form>
+                        </div>
+                    	<div class="cb-right">
+                            <div class="ckxq-title zpgl">作品管理</div>
+                            <table class="table-message tm-zpgl" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <th>作品编号</th>
+                                    <th>发布时间</th>
+                                    <th>作品详情</th>
+                                    <th>作品类型</th>
+                                    <th>作品价格</th>
+                                    <th>作品描述</th>
+                                    <th>推荐</th>
+                                    <th>删除</th>
+                                </tr>
+                            </table>
+            <!--  页码 -->
+                            <div class="tcdPageCode"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

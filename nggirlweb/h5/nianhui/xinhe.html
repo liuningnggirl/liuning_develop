@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<title>信和年会-用户验证系统</title>
+<style type="text/css">
+	*{ margin:0px; margin:0px; border:none; -webkit-appearance:none;}
+	.box-title{ text-align:center; padding:20px 0;}
+	.box-tel,.box-yzm{ border:1px solid #666; padding:10px 10px; width:250px;}
+	.box-input{ overflow:hidden; text-align:center;}
+	.box-table{ margin:30px auto 200px; text-align:center;}
+	.box-table tr td{ border:1px solid #333; padding:5px 20px; text-align:center;}
+	.box-btn-select{ padding:11px 123px; background: rgb(0,153,51); color:#fff;}
+	.btn-use{ padding:5px 8px; background:rgb(0,153,51); color:#fff;}
+</style>
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/xinhe.js"></script>
+</head>
+
+<body>
+	<div class="box" id="contain">
+    	<p class="box-title">信和年会-用户验证系统</p>
+        <div class="box-input">
+            <input type="text" placeholder="请输入手机号" class="box-tel" /><br /><br /><input type="text" placeholder="请输入入场码" class="box-yzm" /><br /><br /><input type="button" value="查询" class="box-btn-select"/>
+        </div>
+        <table cellpadding="0" cellspacing="0" class="box-table">
+        	<tr>
+            	<td>入场码</td>
+            	<td>手机号</td>
+            	<td>订单号</td>
+            	<td>套餐类型</td>
+            	<td>金额</td>
+            	<td>使用状态</td>
+            	<td>操作</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

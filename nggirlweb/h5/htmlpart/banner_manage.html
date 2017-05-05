@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Banner Manage</title>
+</head>
+<body>
+    <div class="weight-box" id="banner_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>Banner详情</h5>
+        </div>
+        <div class="banner-table">            
+            <div class="banner_content_index">
+                <h1>首页 — Banner管理</h1><br />
+                <div class="check-id">
+                    <label for="" class="ci">1</label> <input type="text" class="ci-txt ct0" placeholder="BannerID" />
+                    <label for="" class="ci">2</label> <input type="text" class="ci-txt ct1" placeholder="BannerID" />
+                    <label for="" class="ci">3</label> <input type="text" class="ci-txt ct2" placeholder="BannerID"  /><br /><br /><br />
+                    <label for="" class="ci">4</label> <input type="text" class="ci-txt ct3" placeholder="BannerID"  />
+                    <label for="" class="ci">5</label> <input type="text" class="ci-txt ct4" placeholder="BannerID"  />
+                    <label for="" class="ci">6</label> <input type="text" class="ci-txt ct5" placeholder="BannerID"  /><br /><br />
+                    <input type="button" value="发布" class="ci-btn" />
+                </div><br /><br />
+                <h3>上线中的banner</h3><br />
+                <div class="check-online">
+                    <ul>
+                        <li><label for="" class="ci">1</label> <span class="co-txt ct0"></span></li>
+                        <li><label for="" class="ci">2</label> <span class="co-txt ct1"></span></li>
+                        <li><label for="" class="ci">3</label> <span class="co-txt ct2"></span></li>
+                        <li><label for="" class="ci">4</label> <span class="co-txt ct3"></span></li>
+                        <li><label for="" class="ci">5</label> <span class="co-txt ct4"></span></li>
+                        <li><label for="" class="ci">6</label> <span class="co-txt ct5"></span></li>
+                    </ul>
+                </div><br />
+            </div>
+            <div class="banner_content_integralMall">
+                <h1>积分商城 — Banner管理</h1><br />
+                <div class="check-id">
+                    <label for="" class="ci">1</label> <input type="text" class="ci-txt ct0" placeholder="BannerID" />
+                    <label for="" class="ci">2</label> <input type="text" class="ci-txt ct1" placeholder="BannerID" />
+                    <label for="" class="ci">3</label> <input type="text" class="ci-txt ct2" placeholder="BannerID"  /><br /><br /><br />
+                    <label for="" class="ci">4</label> <input type="text" class="ci-txt ct3" placeholder="BannerID"  />
+                    <label for="" class="ci">5</label> <input type="text" class="ci-txt ct4" placeholder="BannerID"  />
+                    <label for="" class="ci">6</label> <input type="text" class="ci-txt ct5" placeholder="BannerID"  /><br /><br />
+                    <input type="button" value="发布" class="ci-btn" />
+                </div><br /><br />
+                <h3>上线中的banner</h3><br />
+                <div class="check-online">
+                    <ul>
+                        <li><label for="" class="ci">1</label> <span class="co-txt ct0"></span></li>
+                        <li><label for="" class="ci">2</label> <span class="co-txt ct1"></span></li>
+                        <li><label for="" class="ci">3</label> <span class="co-txt ct2"></span></li>
+                        <li><label for="" class="ci">4</label> <span class="co-txt ct3"></span></li>
+                        <li><label for="" class="ci">5</label> <span class="co-txt ct4"></span></li>
+                        <li><label for="" class="ci">6</label> <span class="co-txt ct5"></span></li>
+                    </ul>
+                </div><br />
+            </div>
+            
+            <!--  新增banner -->
+            <input type="button" value="新增banner" class="bt-add-btn" />
+            <table cellpadding="0" cellspacing="0" class="add-banner-table">
+                <tr>
+                    <th>BannerID</th>
+                    <th>分享内容</th>
+                    <th>封面图</th>
+                    <th>可进行操作</th>
+                </tr>
+            </table>
+        	<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>               
+    </div>
+    <!--  弹出框 -->
+    <div class="add-box-hide add-box-show">
+            <div class="modal-header">
+                <b>添加</b>
+                <span class="close-btn" style="width: 20px;display: inline-block;float: right;"><img src="images/close.png" alt="" /></span>
+            </div>
+            <div class="modal-body">
+                <div class="mb-left">上传图片:</div>
+                <div class="mb-right">
+                    <input type="file" name="file0" id="file0" multiple style="background:#fff; overflow:hidden;" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"/><br><img src="" id="img0" >
+                </div>
+                <div style="clear:both;">
+                    <label for="">跳转地址：</label><input type="text" class="tz-address" style="width:440px; border:1px solid #eee; height:20px;" /><br><br>
+                    <label for="">分享内容：</label><input type="text" class="fx-content" style="width:440px; border:1px solid #eee; height:20px;"/><br><br>
+                    <div>
+                        <label for="" class="mb-left" style="float:left;">分享小图：</label><input type="file" class="fx-img-address" multiple id="fx-img-address" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" style="float:left;" /><br><img src="" id="fx-img0" style="width:100px; height:100px; " >
+                    </div>
+                </div>
+                <br />
+                <br />
+                <label for="">选择类型：</label>
+                <select name="" id="mb_select_kinds" style="border: 1px solid #cdcdcd; padding:10px;">
+                	<option value="" forwardtype="" isForwardkeyRequired="" forwardkeyDesc="">请选择类型</option>
+                </select> <input type="button" value="获取跳转地址" class="mb_redirect_href" style="padding:12px;" /><br /><br />
+                <span class="mb_forwardkey">
+                	<label for="">forwardkey：</label><img src="images/tip.png" alt="" class="tip" />
+                    <input type="text" class="mb_forward_href" style=" padding:10px 0; width:300px;border: 1px solid #cdcdcd;" /><br /><br />
+                </span>
+                <span class="mb_forwardkey_desc"><label for="">forwardkey描述：</label><span class="mb_forward_desc">请先选择类型</span></span>
+            </div>
+            <div style="text-align:center; padding: 5px 0; background:#fff; clear:both;">
+                <input type="button" class="banner-cancle" value="取消" style="padding:4px 12px; font-size:14px; border:1px solid #666; background:" />
+                <input type="button" value="提交" class="banner-submit" style="padding:4px 12px; font-size:14px; border:1px solid #666; background:#04c; color:#fff;" />
+                <input type="button" value="提交" class="banner-submit-edit" style="padding:4px 12px; font-size:14px; border:1px solid #666; background:#51A351; color:#fff; display:none;" /><br /><br />
+            </div>
+    </div>
+    <div class="banner-gray-box"></div>
+</body>
+</html>

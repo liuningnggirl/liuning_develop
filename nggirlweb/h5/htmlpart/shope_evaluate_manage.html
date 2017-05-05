@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商品评价管理</title>
+</head>
+<body>
+    <div class="weight-box shope_evaluate_manage" id="shope_evaluate_manage">
+	        <div class="weight-title">
+	            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+	            <h5>商品评价管理1</h5>
+	        </div> 
+		    <div class="now_position">
+		    	您当前的位置><span class="now_position_later">商品评价管理</span><span class="lookAll_someManagement">&gt;查看商品全部所属评价</span>
+		    </div>
+            <div class="allShopComments">
+                <div class="find_something">
+                    <!--<select class="select_Comment select_commone">
+                        <option value="">评价状态</option>
+                        <option value="0">未评价</option>
+                        <option value="1">已评价</option>
+                    </select>-->
+                    <select class="select_onlineStatus select_commone">
+                        <option value="">上线状态</option>
+                        <option value="0">待审核</option>
+                        <option value="1">审核通过</option>
+                        <option value="2">审核不通过</option>
+                    </select>
+                    <input type="text" class="evaluateManagement_name evaluateManagement_input_one" placeholder="用户昵称">
+                    <input type="text" class="evaluateManagement_shop evaluateManagement_input_one" placeholder="商品名称">
+                    <span>发布时间</span>
+                    <input type="text" class="evaluateManagement_start evaluateManagement_input_two" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <span>至</span>
+                    <input type="text" class="evaluateManagement_end evaluateManagement_input_two" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <button class="my_search_first">搜索</button>
+                    <button class="all_cancel">全部取消</button>
+                </div>
+                <div class="management_controller_sort">
+                    <input type="checkbox" class="management_controller_checkout">
+                    <input type="button" value="上线" class="management_controller_shangxian">
+                    <input type="button" value="下线" class="management_controller_xiaxian">
+                </div>
+<!--                <div class="management_top_shuoming">
+                    <li>编号</li>
+                    <li>发布时间</li>
+                    <li>评价商品名称</li>
+                    <li>用户昵称</li>
+                    <li>评价状态</li>
+                    <li>评价内容</li>
+                    <li>上线状态</li>
+                    <li>操作</li>
+                </div>-->
+                <table class="table-message management_Summary_comment" cellspacing="0">
+               		 <thead>
+                    	<tr>
+                        <th>编号</th>
+                        <th>发布时间</th>
+                        <th>评价商品名称</th>
+                        <th>用户昵称</th>
+                        <th>评价内容</th>
+                        <th>上线状态</th>
+                        <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="first_tbody">
+                    
+                    </tbody>
+				</table>
+				 <!--  页码 -->
+                <div class="tcdPageCode" style="float:right;"></div>
+                <div class="goto_page_box" style="float:left; padding: 15px 20px;">
+                    共<span class="totNum">5</span>条
+                    跳转到 <input type="text" class="goto_redirect_page_num" style=" text-align:center;padding:4px 0; width:25px; border:1px solid #ccc;" /> 页
+                    <input type="button" value="确定" style="padding:5px;" class="goto_page_btn" />
+                </div>
+			</div>
+			<div class="singleShopComments hidden">
+            	<input type="button" name="/" class="callback_prevs" value="返回">
+                <div class="find_something">
+                   <!-- <select class="select_Comment select_commone">
+                        <option value="">评价状态</option>
+                        <option value="0">未评价</option>
+                        <option value="1">已评价</option>
+                    </select>-->
+                    <select class="select_onlineStatus select_commone">
+                        <option value="">上线状态</option>
+                        <option value="0">待上线</option>
+                        <option value="1">已上线</option>
+                        <option value="2">已下线</option>
+                    </select>
+                    <input type="text" class="evaluateManagement_name evaluateManagement_input_one" placeholder="用户昵称">
+                    <input type="text" class="evaluateManagement_shop evaluateManagement_input_one" placeholder="商品名称">
+                    <span>发布时间</span>
+                    <input type="text" class="evaluateManagement_start evaluateManagement_input_two" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <span>至</span>
+                    <input type="text" class="evaluateManagement_end evaluateManagement_input_two" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <button class="my_search_first">搜索</button>
+                    <button class="all_cancel">全部取消</button>
+                </div>
+                <div class="management_controller_sort">
+                	<div class="notsort">
+                        <input type="checkbox" class="management_controller_checkout">
+                        <input type="button" value="上线" class="management_controller_shangxian">
+                        <input type="button" value="下线" class="management_controller_xiaxian">
+                        <input type="button" class="management_paixu management_paixu_timer" value="评论排序">
+                   </div>
+                   <div class="sort hidden finish">
+                        <input type="button" class="management_Qpaixu management_paixu_moren" value="完成排序">
+                   </div>
+                    <input type="button" name="/" value="虚拟用户评价内容池" class="management_controller_evaluatePond">
+                </div>
+              <!--  <div class="management_top_shuoming">
+                    <li>编号</li>
+                    <li>发布时间</li>
+                    <li>评价商品名称</li>
+                    <li>用户昵称</li>
+                    <li>评价状态</li>
+                    <li>评价内容</li>
+                    <li>上线状态</li>
+                    <li>操作</li>
+                </div>-->
+                <table class=" table-message management_Summary_comment"  cellspacing="0">
+                	<thead>
+                    	<tr>
+                        <th>编号</th>
+                        <th>发布时间</th>
+                        <th>评价商品名称</th>
+                        <th>用户昵称</th>
+                        <th>评价内容</th>
+                        <th>上线状态</th>
+                        <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="second_tbodys">
+                        
+                    </tbody>
+				</table>
+				 <!--  页码 -->
+                <div class="tcdPageCode" style="float:right;"></div>
+                <div class="goto_page_box" style="float:left; padding: 15px 20px;">
+                    共<span class="totNum">5</span>条
+                    跳转到 <input type="text" class="goto_redirect_page_num" style=" text-align:center;padding:4px 0; width:25px; border:1px solid #ccc;" /> 页
+                    <input type="button" value="确定" style="padding:5px;" class="goto_page_btn" />
+                </div>
+			</div>
+			<!-- 商品信息 -->
+			<div class="management_Popups">
+					<table class="management_Popups_first">
+						
+					</table>
+            </div>
+            <!-- 添加虚拟评价 -->
+            <div class="increase_virtual_user" style="display: none;">
+                <span class="Evaluator_id">评价者id</span>
+                <input type="text" name="" class="Fill_Evaluator_id thereCommonTwo">
+                <span class="choice_virtual_user">选择虚拟用户</span>
+                <input type="text" name="" class="Fill_choice_virtual_user thereCommonTwo" contenteditable="false">
+                <ul style="position:absolute;width: 133px; max-height: 280px;overflow-y: scroll; display:none;" class="increase_user_list">
+                 </ul>
+                <span class="virtual_user_shuoming">*评价者与虚拟用户只能填一个,两个都填情况下默认使用评价者id用户</span>
+                <div class="editor_content"></div>
+                <span class="virtual_user_fabu">发布</span>
+                <span class="virtual_user_cancel">取消</span>
+            </div>
+			<!--</div>-->
+			<div class="huoqu_huifu_neirong">
+				<span class="huoqu_huifu_neirong_one">回复内容</span>
+				<textarea  class="huoqu_huifu_neirong_two"></textarea>
+				<button class="huoqu_huifu_neirong_three thereCommon">发布</button><button class="huoqu_huifu_neirong_four thereCommon">取消</button>
+			</div>
+
+    </div>
+</body>
+</html>

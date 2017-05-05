@@ -1,0 +1,34 @@
+{
+  "VERSION": "3.0.0",
+  "websiteTitle": "南瓜瓜娘",
+  "source": {
+    "rootDir": "h5/",
+    "jsFiles": [
+      "h5/**/*.js"
+    ],
+    "cssFiles": [
+      "h5/**/*.css"
+    ],
+    "imageFiles": [
+      "h5/**/*.png",
+      "h5/**/*.gif",
+      "h5/**/*.jpg",
+      "h5/**/*.jpeg",
+      "h5/**/*.bmp"
+    ],
+    "htmlFiles": [
+      "h5/**/*.html",
+      "h5/**/*.htm"
+    ],
+    "specialHtmlFiles":[
+      "h5/**/*.shtml"
+    ]
+  },
+  "dest": {
+    "rootDir": "target/",
+    "packageDir": "target/h5/",
+    "jsRevJsonDir": "target/jsrev",
+    "cssRevJsonDir": "target/cssrev",
+    "imageRevJsonDir": "target/imagerev"
+  }
+}

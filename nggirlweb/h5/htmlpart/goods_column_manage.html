@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+	<div class="weight-box goods_column_manage" id="goods_column_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>商品专栏管理</h5>
+        </div>
+       
+ <!--  积分商城列表 -->
+        <div class="goods_column_list">
+<!--  search -->
+			<div class="gcSearch">
+            	<input type="text" class="search goods_column_name" placeholder="专题名称">
+                <input type="text" class="search goods_column_ID" placeholder="专题ID">
+                <input type="text" class="search goods_column_content" placeholder="专题内容">
+				<!-- <label for="">发布时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate gcStartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate gcEndTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"> -->
+              	<input class="goods_column_search data0" type="button" value="搜索" >
+                <input class="cancle_btn" type="button" value="全部取消" >
+                <br><br>
+                <input class="gc_create" type="button" value="新增专题" style=" color:#000; width:75px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;">
+                <label style=" vertical-align: middle;">原始链接地址链接：</label><b class="gclink" style=" color:red; vertical-align: middle;">https://cli.nggirl.com.cn/nggirl/h5/cosmetic/goodsSale.html?columnId=2(2为商品专题ID)</b>
+                <!-- <input class="goods_column_back" type="button" value="返回" style=" float:right; color:#000; width:75px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;"> -->
+               <br><br>
+            </div>
+<!--  商品信息 -->
+            <table class="table-message goodsColumnDetail" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>商品专题ID</th>
+                        <th>专题名称</th>
+                        <th>活动头图</th>
+                        <th>专题内容</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+        
+        <!-- 新建商品 -->
+        <div class="goods_column_create hidden">
+            <form action="">
+                <img src="images/tip.png" alt="" /><label>专题名称：</label> <input type="text" placeholder="请输入专题名称"  maxlength="50" class="gcnameVal"/><br /><br />
+                <img src="images/tip.png" alt="" /><label>专题头图：</label><input type="file" class="inputborder goods_column_head_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+                <label for="" style="vertical-align:top;">(360*180):</label><img style="width:360px; height:180px;" src="" alt="" class="upImg gc_head_img" /> <br /><br />
+                <img src="images/tip.png" alt="" /><label>专题内容：</label><br /><br />
+                <textarea class="gcContent"></textarea><br /><br />
+                <div class="editor_content"></div><br /><br />
+           </form>
+           <div class="gcbotbtn">
+               <input type="button" value="保存" class="goodsColumnSave" style=" padding:7px; background:#ccc;">
+               <input type="button" value="返回" class="goodsColumnBack" style=" padding:7px; background:#ccc;">
+           </div>
+        </div>
+     </div>
+    <style type="text/css">
+        .riqian_create .editor_content .article_editor p.title{
+            text-align:center;
+        }
+    </style>
+    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.work.selector.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+</body>
+</html>

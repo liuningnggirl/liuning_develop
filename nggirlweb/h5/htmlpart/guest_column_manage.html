@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+ <div class="weight-box guest_column_manage" id="guest_column_manage">
+        <!--<div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>客座小编帖子录../h5>
+        </div>-->
+ <!--  审核通过的帖子列表 -->
+        <div class="guest_column_list">
+        	<div class="guestTopBtn">
+                <p class="greyBtn online_column on">审核通过的帖子</p>
+                <p class="greyBtn going_column">草稿箱</p>
+                <p class="greyBtn guest_add_column">新增文章</p>
+            </div>
+<!--  search -->
+			<div class="guest_online_column_search">
+           		<label>帖子题目：</label>
+                <input type="text" class="column guest_online_tit" placeholder="请输入帖子题目"  />
+           		<label>所属专栏名称：</label>
+            	<select name="" id="" class="column columnNameId">
+                    <option value="">请选择专栏</option> 
+                </select>
+                <label for="" >帖子提交时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate tjstartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate tjendTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="" >帖子审核时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate shstartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate shendTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <input class="columnbtn search_column_btn" type="button" value="搜索"  />
+                <input class="columnbtn close_column_btn" type="button" value="全部取消"  />
+            </div>
+<!--  商品信息 -->
+            <table class="table-message guest_online_column_list" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>昵称</th>
+                        <th>帖子提交时间</th>
+                        <th>帖子审核通过时间</th>
+                        <th>帖子题目</th>
+                        <th>帖子所属专栏名称</th>
+                        <th>封面图</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+        <!-- 预览页面 -->
+        <div class="look_guest_column hidden">
+        	<input type="button" value="返回" class="backToOnlineList">
+            <p class="look_guest_column_tit"></p>
+            <div class="look_guest_column_det"></div>
+        </div>
+        <!-- 新建帖子 -->
+        <div class="guest_column_create hidden">
+        	<img src="images/tip.png" alt="" /><label>帖子题目：</label><input type="text" placeholder="请输入帖子题目"  class="inputborder guest_tit"/><br /><br />
+            <div class="editor_content"></div>
+            <div class="articleBtn">
+               <span class="guest_column_save">保存</span><span class="guest_column_back">返回</span>
+            </div>
+        </div>
+      
+
+ <!--  草稿箱列表 -->
+        <div class="going_column_list">
+        	<div class="guestTopBtn">
+                <p class="greyBtn online_column">审核通过的帖子</p>
+                <p class="greyBtn going_column on">草稿箱</p>
+                <p class="greyBtn guest_add_column">新增文章</p>
+            </div>
+<!--  search -->
+			<div class="going_column_search">
+           		<label>帖子题目：</label>
+                <input type="text" class="column guest_online_tit" placeholder="请输入帖子题目"  />
+                <input class="columnbtn search_column_btn" type="button" value="搜索"  />
+                <input class="columnbtn close_column_btn" type="button" value="取消"  />
+            </div>
+            <table class="table-message going_column_list_detail" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>昵称</th>
+                        <th>帖子题目</th>
+                        <th>审核状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+    </div>   
+    
+    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.work.selector.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+</body>
+</html>

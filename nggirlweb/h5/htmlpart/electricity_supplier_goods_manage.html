@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>electricity_supplier_goods_manage</title>
+</head>
+<body>
+    <div class="weight-box electricity_supplier_goods_manage" id="electricity_supplier_goods_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>商品管理</h5>
+        </div>
+        <div class="electricity_father_zong">
+           	<div class="electricity_find_title">
+            	<span>您当前位置</span>
+    	        <span class="default_color">&gt;商品管理</span>
+    	        <span class="default_color"><span>&gt;</span><span class="change_everyTime">总商品</span></span>
+            </div>
+            <div class="electricity_adopt_find">
+                
+            </div>
+            <div class="search_input_fillin">
+                <input type="text" placeholder="商品编码" class="itemId"/>
+                <input type="text" placeholder="商品货码" class="itemBarcode"/>
+                <input type="text" placeholder="商品分类" class="input_focus_click categoryId" />
+                <input type="text" placeholder="品牌名" class="brandName"/>
+                <input type="text" placeholder="产地/国家" class="country"/>
+                <input type="text" placeholder="商品名称" class="reamTitle"/>
+                <input type="text" placeholder="创建者id账号" class="createUserName"/>
+            </div>
+            <div class="search_input_second">
+                <span>剩余库存</span>
+                <input type="text" name="/" class="Rest_first Rest_common">
+                <span>至</span>
+                <input type="text" name="/" class="Rest_second Rest_common">
+                <span>下架时间</span>
+                <input type="text" name="/" class="search_time_first time_common" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <span>至</span>
+                <input type="text" name="/" class="search_time_second time_common" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <input type="button" value="查询" class="start_search_now" />
+                <input type="button" value="全部取消" class="All_cancel_search" />
+            </div>
+            <div class="search_input_three">
+                <input type="checkbox" name="/" class="checkbox_first_now">
+                <span>全选</span>
+                <input type="button" value="上架" class="controller_shangjai controller_common_shangxia" />
+                <input type="button" value="下架" class="controller_xiajia controller_common_shangxia" />
+                <input type="button" value="删除" class="controller_remove controller_common_shangxia" />
+                <input type="button" value="新增商品" class="controller_newzeng his_background_green zengjia_pointer">
+            </div>
+            <div class="controller_first">
+                <table class="main_body_table_main">
+                    <div class="pondkscusue">
+                        <thead>
+                            <tr class="yao_hu_lve_de">
+                                <th style="padding: 0px 25px;min-width: 150px;">商品信息</th>
+                                <th>价格</th>
+                                <th class="orderByStr" name="a.total_stock_quantity" value="-1">总库存量<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="f.stock_quantity" value="-1">剩余库存量<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="a.puton_time" value="-1">上架时间<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="a.putoff_time" value="-1">下架时间<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="f.seed_num" value="-1">长草数量<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
+                                <th><select><option>商品状态</option><option>自主上架</option><option>自主下架</option></select></th>
+                                <th>操作</th>
+                                <th>创建者</th>
+                                <th>修改者</th>
+                            </tr>
+                        </thead>
+                        <tbody class="pondkscusueddd suuuuuuu"> 
+                        </tbody>     
+                    </div>
+                </table>
+                <!--  页码 -->
+                <div class="tcdPageCode" style="float:right;"></div>
+                <div class="goto_page_box" style="float:left; padding: 15px 20px;">
+                    共<span class="totNum">5</span>条
+                    跳转到 <input type="text" class="goto_redirect_page_num" style=" text-align:center;padding:4px 0; width:25px; border:1px solid #ccc;" /> 页
+                    <input type="button" value="确定" style="padding:5px;" class="goto_page_btn" />
+                </div>
+              </div>    
+              <div class="goods_management_focus_click" style="display: none">
+                  <div class="goods_management_focus_click_input">
+                      <input type="text" placeholder="请输入名称" />
+                      <input type="text" placeholder="请输入名称" />
+                      <input type="text" placeholder="请输入名称" />
+                  </div>
+                  <div class="goods_management_focus_click_chilComn goods_management_focus_click_chilComn_one">
+    <!-- 一级列表 -->
+                  </div>
+                  <div class="goods_management_focus_click_chilComn goods_management_focus_click_chilComn_two">
+    <!-- 二级列表 -->
+                  </div>
+                  <div class="goods_management_focus_click_chilComn goods_management_focus_click_chilComn_three">
+    <!--  三级列表 -->
+                  </div>
+                  <div class="goods_management_focus_click_chilComn goods_management_focus_click_chilComn_four">
+    <!--  四级列表 -->
+                  </div>
+                  <div class="goods_management_focus_click_chilComn goods_management_focus_click_chilComn_five">
+    <!--  五级列表 -->
+                  </div>
+                  <div class="goods_management_focus_click_chilComn goods_management_focus_click_chilComn_six">
+    <!--  六级列表 -->
+                  </div>
+                  <div class="goods_management_focus_click_tf">
+                      <span class="goods_management_focus_click_t">确定</span>
+                      <span class="goods_management_focus_click_f">取消</span>
+                  </div>
+              </div>
+        </div>
+        <!--  商品新增与编辑页面 -->
+        <div class="goods_newCrease_edit">
+            <span style=" padding: 10px;display: inline-block;">您当前位置</span>
+            <span class="controller_color shopMang">&gt;商品管理</span>
+            <span class="controller_color addOrEditShop">&gt;新增商品</span>
+            <div class="title_six_button">
+                <span class="title_six_button_basic click_skyblue">商品基本信息</span>
+                <span class="title_six_button_parameter click_skyblue">商品参数信息</span>
+                <span class="title_six_button_property click_skyblue">商品销售属性信息(sku)</span>
+                <span class="title_six_button_logistics click_skyblue">商品物流信息</span>
+                <span class="title_six_button_buyNotice click_skyblue">购买须知</span>
+                <span class="title_six_button_aboutPost click_skyblue">关联帖子</span>
+            </div>
+            <div class="goods_newCrease_new_edit">
+
+                <div class="goods_basic_information_now_to">
+                    <div class="choice_goods_category">
+                        <span style="width: 15%">
+                            <div class="choice_goods_category_ul_one search_input_common">
+                            </div>
+                        </span>
+                        <span class="choice_goods_category_ul_important" style="width: 85%;border: 1px solid black">
+                           
+                        </span>
+                    </div>
+                    <div class="goods_newCrease_name">
+                        <span style="color: red">您所编辑的商品:</span>
+                        <span class="goods_newCrease_name_span"></span>
+                    </div>
+                    <div class="lujing_gooods">
+                        当前选中商品:<span style="color: red" class="lujing_gooods_choice"></span>
+                    </div>
+                    <div class="input_pinpai_title">
+                        
+                        
+                       
+                        <span class="gooods_pinpai">商品品牌:</span>  
+                        <input type="text" name="/" id="select_id" value="" class="input_select_value three_input_common" style="margin-left: 23px;"/>
+                            <!-- <option value="/">接口中数据一</option> -->
+                        <div class="three_input_common_div">
+                          
+
+
+                        </div>
+                        
+                        
+                        <br>
+                        <span class="gooods_pinpai">商品主标题:</span>
+                        <input type="text" placeholder="商品营销文案" class="goods_yingxiao_case three_input_common goods_yingxiao_case_one" />
+                        <div class="ouenfuenndueuf"><span style="color: red">*</span>商品主标题字数不能超过100</div><br>
+                        <span class="gooods_pinpai">商品副标题:</span>
+                        <input type="text" placeholder="商品名称" class="goods_yingxiao_case three_input_common goods_yingxiao_case_two" /><div class="ouenfuenndueuf"><span style="color: red">*</span>商品副标题字数不能超过100</div><br>
+                        <span class="gooods_pinpai">商品参考价:</span>
+                        <input type="text" placeholder="商品参考价" class="goods_yingxiao_case three_input_common goods_yingxiao_case_three" />
+                         <div class="ouenfuenndueuf"><span style="color: red">*</span>商品参考价字数不能超过10</div>
+                    </div>
+                    <!-- 增加图片 -->
+                    <div class="choice_goods_picture_more clearfix">
+                        <div>商品图片:</div>
+                        <input type="file" class="now_goChoice_picture_change_second" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" style="display: none" />
+                        <div class="choice_goods_picture_more_first">
+                            <span>商品展示位图片:&nbsp;比例(1:1)</span>
+                            <span class="choice_goods_picture_more_first_controlpic">
+                                <!-- 商品图片插入区 -->
+                                <input type="button" value="选取文件" class="now_goChoice_picture editImg" />
+                                <img src=""+data.data.headImgs[i].url+"" id="'+data.data.headImgs[i].id+'" style="width: 100%;height: 84%" class="needEditImg">
+
+                                
+                            </span>
+                        </div>
+                        <div class="choice_goods_picture_more_last">
+                            <span>商品详情页头图:&nbsp;&nbsp;&nbsp;<p style="color: red;display: inline-block;">注:至少上传一张头图,高度大于等于宽度</p></span>
+<!--                            <input type="file" style="display: none" class="now_goChoice_picture_change"  multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" />
+-->                            <div class="choice_goods_picture_more_last_choicePic">
+                               
+                            </div>
+                        </div>
+                        <div class="controller_increse_picture">
+                            <img src="images/u2188.png">
+                        </div>
+                    </div><br/>
+                    <!-- 规格的选择 -->
+                    <div class="choice_goods_guige_now">
+                        规格:
+                        <select class="choice_goods_guige_select_one select_commone_newcode">
+                            <option value="/">单品</option>
+                            <option value="/">套装</option>
+                        </select>
+                        销售单位:
+                        <select class="choice_goods_guige_select_two select_commone_newcode">
+                            <option value="瓶">瓶</option>
+                            <option value="支">支</option>
+                            <option value="片">片</option>
+                            <option value="套">套</option>
+                        </select>
+                        推荐度:
+                        <input type="text" name="/" class="choice_goods_guige_tuijiandu select_commone_newcode">
+                    </div>
+                    <!--  判断商品是否可购买 -->
+                    <div class="judge_goods_shopping">
+                        <span>商品是否可购买:</span>
+                        <form style="display: inline-block;" class="sundenun">
+                            <label for="judge_goods_shopping_one">可购买</label>
+                            <input type="radio" name="item" id="judge_goods_shopping_one" value="1">
+                            <label for="judge_goods_shopping_two">不可购买</label>
+                            <input type="radio" name="item" id="judge_goods_shopping_two" value="0">
+                        </form>
+                        <br/>
+                        <span>商品是否可进行售后:</span>
+                        <label for="judge_goods_shopping_three">可售后:</label>
+                        <input type="radio" name="ssssss" id="judge_goods_shopping_three" value="可售后">
+                        <label for="judge_goods_shopping_four">不可售后:</label>
+                        <input type="radio" name="ssssss" id="judge_goods_shopping_four" value="不可售后">
+                        <span>可支持售后期限</span>
+                        <input type="text" value="" class="judge_goods_shopping_days" />天
+                    </div>
+                    <div>
+                       商品图文介绍/说明:
+                    </div>
+                    <div class="title_duanluo_picture">
+                    	<div class="editor_content">
+                        </div>
+                      
+                    </div>
+                <button class="store_information_now">保存当前信息</button>
+
+              </div>
+            
+
+
+            <!-- 商品参数信息 -->
+            <div class="goods_canshu_information">
+                商品参数:<br>
+                <div class="goods_canshu_information_child">
+                    <div class="goods_canshu_information_zong">
+                         <div class="for_cha_create for_cha_create_create">
+                             <input type="text" placeholder="参数id" class="input_common_show input_common_show_one" />
+                             <input type="text" placeholder="参数名称" class="input_common_show input_common_show_two" />
+                             <input type="text" placeholder="参数值" class="input_common_show input_common_show_three">
+                             <button class="canshu_baocun_now">保存</button>
+                         </div>
+                         <div class="goods_canshu_information_zong_child">
+                             <!-- <li class="goods_canshu_information_zong_child_one">
+                                 <select class="goods_canshu_information_seelect_one">
+                                     
+                                 </select>
+                                 <select class="goods_canshu_information_seelect_two">
+                                   <option></option>
+                                 </select>
+                                 <span>
+                                     <img class="goods_canshu_information_img" src="./images/ele-del.png">
+                                 </span>
+                             </li> -->
+                         </div>
+                         <span><img class="img_increase_informatiion" src="./images/add.jpg"></span>
+                         <span class="store_goods_informatiion">保存当前商品参数
+                         </span>
+                    </div>
+                   <!--  保存商品参数 -->
+                   
+                </div>
+            </div>
+    <!--  商品销售属性信息(sku) -->
+            <div class="goods_shaling_information_sku">
+                销售属性:<button class="goods_shaling_information_sku_button">新增商品属性
+                        <span class="uonubbndf">注意:属性值的字数应控制在200字以内</span>
+                        <img src="./images/tian_jia.png">
+                        </button>
+                        <div class="goods_shaling_information_sku_chilr">
+
+                        </div>
+                        <div class="shaling_sku_information_three">
+                            <span class="shaling_one_span">生成sku</span><span class="shaling_two_span">取消</span>
+                        </div>
+                        <div class="shaling_table_sku_management">
+                            <table class="shaling_table_sku_management_body">
+                                <tr>
+                                    <th>型号</th>
+                                    <th>价格</th>
+                                    <th>商品保质期(截至时间)</th>
+                                    <th>总库存量</th>
+                                    <th>商品货码</th>
+                                    <th>剩余库存</th>
+                                    <th>操作</th>
+                                </tr>
+                            </table>
+                        </div>
+            </div>
+    <!--  商品物流信息 -->
+            <div class="shangpin_wuliu_information">
+                物流管理:
+                <button class="store_now_information" style="display: block;">保存当前商品物流信息</button>
+            </div>
+
+    <!--  购买须知 -->
+            <div class="shopping_need_know">
+                <div class="shopping_need_know_one clearfix">
+                    购买须知:<br>
+                        
+                </div>
+                <div class="shopping_need_know_two">
+                    <div class="shopping_need_know_two_position">
+                        <div class="duanluo_div_haalo duanluo_div_haalo2">
+                        <input type="radio" name="chooseKnow" class="chooseKnow" value="">
+                        <div class=" editor_content editor_content1"></div>
+                        </div>
+                    </div>
+                    <div class="btnBox">
+                    	<button class="shopping_need_know_two_button">保存当前购买须知</button>
+                    </div>
+                </div>
+            </div>
+    <!--  关联帖子 -->
+            <div class="abouting_goods_Posts">
+                <div class="abouting_goods_Posts_children_one">
+                    商品链接帖子id:<button class="abouting_goods_choice_Posts">选择帖子</button>
+                    <div class="abouting_goods_input_Posts">
+                        <!-- <span>1
+                            <span class="abouting_goods_input_Posts_remove"><img src="./images/remove_one.png"></span>
+                        </span> -->
+                    </div>
+                </div>
+                <div class="abouting_goods_Posts_children_two">
+                    <button class="abouting_goods_Posts_children_two_back">返回</button>
+                    <div class="abouting_goods_Posts_children_two_neirong datas">
+                        <label>所属专栏名称：</label>
+                        <select name="" id="" class="column columnNameId">
+                            <option value="">请选择专栏</option> 
+                        </select>
+                        类型:<select class="postType">
+                                <option value="1">文章</option>
+                                <option value="2">视频</option>
+                             </select>
+                              帖子ID:<input type="text" placeholder="请输入id" name="" class="postId">
+                                题目:<input type="text" placeholder="请输入帖子题目" name="" class="title">
+                          发布者昵称:<input type="text" placeholder="请输入发布者昵称" name="" class="nickName">
+                            发布时间:<input style="height:29px; border:1px solid #cdcdcd;" class="Wdate pstartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate pendTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                                 <button class="abouting_goods_Posts_children_two_search">搜索</button><button class="abouting_goods_Posts_children_two_chancelAll">全部取消</button>
+                    </div>
+                    <div class="abouting_goods_Posts_children_two_biaoge">
+                        <table cellpadding="0" cellspacing="0" class="bouting_goods_Posts_table">
+                            <tr>
+                                <th>帖子id</th>
+                                <th>类型</th>
+                                <th>所属专栏</th>
+                                <th>题目</th>
+                                <th>发布者昵称</th>
+                                <th>操作</th>
+                            </tr>
+                            <tbody class="dongtai_store_tr">
+                                
+                            </tbody>
+                        </table>
+                        <div class="tcdPageCode" style="float:right;"></div>
+                        <div class="goto_page_box" style="float:left; padding: 15px 20px;">
+                            共<span class="totNum">5</span>条
+                            跳转到 <input type="text" class="goto_redirect_page_num" style=" text-align:center;padding:4px 0; width:25px; border:1px solid #ccc;" /> 页
+                            <input type="button" value="确定" style="padding:5px;" class="goto_page_btn" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+  </div>
+    
+</body>
+</html>
