@@ -1,0 +1,19 @@
+/* beautysalon.wxss */
+.beauty_list .beauty_list_li image{ width: 100%;}
+.delist .de_right .simgbox{ width: 57px; height: 57px; border-radius: 50%; border:5px solid #fff;}
+.delist .de_right .simgbox image{ width: 57px; height: 57px; border-radius: 50%;}
+.delist{ position: relative;}
+.delist .de_right{position: absolute; top:-16px; right: 8px;}
+.delist .de_left{margin: 0 95px 0 7.5px;}
+.de_left .b_desc{ margin: 12px 0; font-size: 14px; color: #4c4c4c;line-height:20px;-webkit-line-clamp:2;-webkit-box-orient:vertical;display:-webkit-box;overflow:hidden;word-break:break-all;}
+.listbot{border-top: #e7eded solid 1px;margin: 0 7px;}
+.listbot .listbot_time{line-height: 15px;margin-top: 12px;}
+.listbot_time .time_icon{ width: 15px;height: 15px;}
+.beauty_list .beauty_list_li .listbot_time .time_icon{ width: 15px;margin:0 5px 0 0;}
+.beauty_list .beauty_list_li .listbot_address .time_icon{ width: 15px; height: 18px; margin: 9px 5px 0 0;}
+.listbot_time label,.listbot_address label{ font-size: 13px; color: #9a9a9a;vertical-align:bottom;}
+.de_left .b_title{font-size: 15px;color: #3a3a3a;font-weight: 600;}
+.listbot_address label{ vertical-align: text-top;}
+.listbot_message{ text-align: right; color: #fa6e64 ; font-size: 12px; margin: 12px 0 15px 0;}
+.listbot_message b{ font-size: 18px;}
+.beauty_list .beauty_list_li{border-radius: 10px;overflow: hidden;margin: 10px auto 10px auto;box-shadow: 2px 2px 2px rgba(0,0,0,.1); width: 96%;}

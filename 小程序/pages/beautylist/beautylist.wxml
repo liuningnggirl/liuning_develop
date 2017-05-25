@@ -1,0 +1,34 @@
+<view class="box">
+  <view class="box_top_content">
+    <swiper class="swiper_content" indicator-dots="{{indicatorDots}}"
+    autoplay="true" interval="5000" duration="1000" indicator-color="#666" indicator-active-color="#fff">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="padding">
+        <view class="xwc-content-title">问问</view>
+        <view class="xwc-des">水水水水水水水水水水水水</view>
+        <view class="xwc-time">
+            <image src="../images/xwc-lock_03.jpg" class="xwc-area-local" alt=""></image><view class="xwc-lock-txt">活动时间</view>
+            <view class="xwc-time-txt">2017.05.14 17:30 17:30</view>
+            <view class="xwc-end-time">报名截止时间：<span class="xwc-end-time-txt">2017.05.18 17:30</span></view>
+            <view class="xwc-area">
+                <image src="../images/xwc-local_03.jpg" alt="" class="xwc-area-local"></image>
+                <view class="xwc-area-txt">水水水水水水水水水水水水水水水水</view>
+            </view>
+            <!--  参团人的头像 -->
+            <view class="tuan-photo">
+                <ul><li style="width:2.5rem; height:2.5rem;"><image style="width:100%; height:100%;" src="https://testphotosd.nggirl.com.cn/work/b7f9fb9791624c95a900cacf02994fda.jpg"></image></li></ul>
+                <view class="xwc-tuan">
+                    <span class="xwc-peopleLow">2</span>～<span class="xwc-peopleHigh">11</span>人成团
+                    <view class="margin_top">已报名<span class="xwc-resUserCount">1</span>人</view>
+                </view>
+            </view>
+        </view>
+    </view>
+  </view>  
+</view>
+

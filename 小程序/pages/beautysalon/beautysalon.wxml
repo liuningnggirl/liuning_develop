@@ -1,0 +1,29 @@
+<!--beautysalon.wxml-->
+<view class="beauty_list" wx:for="{{dataContent}}" wx:for-item="value">
+  <navigator url="beautysalon_details?title={{value.title}}">
+    <view class="beauty_list_li" >
+      <image src="{{value.cover}}"></image>
+      <view class="delist">
+        <view class="de_left">
+          <view class="b_title">{{value.title}}</view>
+          <view class="b_desc">{{value.descr}}</view>
+        </view>
+        <view class="de_right">
+          <view class="simgbox">
+            <image src="{{value.dresserProfile}}" alt="" />
+          </view>
+        </view>
+        <view class="listbot">
+          <view class="listbot_time">
+            <image src="../images/xwc-lock_03.jpg" class="time_icon"></image><label>{{value.holdTime}}</label>
+          </view>
+          <view class="listbot_address">
+            <image src="../images/xwc-local_03.jpg" class="time_icon"></image>
+            <label>{{value.holdPlace}}</label>
+          </view>
+          <view class="listbot_message"><b>{{value.price}}</b>元/位</view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+</view>

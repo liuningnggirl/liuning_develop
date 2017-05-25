@@ -1,0 +1,638 @@
+<!--index.wxml-->
+<!--<view class="section">
+    <view class="section__title" hover="true" hover-start-time="20" hover-class="bc_green">flex-direction: row111111111</view>
+    <view class="flex-wrp" style="flex-direction:row;">
+      <view class="flex-item bc_green" hover-stay-time="3">1</view>
+      <view class="flex-item bc_red">2</view>
+      <view class="flex-item bc_blue">3</view>
+      <view class="flex-item bc_green">4</view>
+      <view class="flex-item bc_red">5</view>
+      <view class="flex-item bc_green">6</view>
+    </view>
+  </view>
+  <view class="section">
+    <view class="section__title">flex-direction: column</view>
+    <view class="flex-wrp" style="height: 300px;flex-direction:column;">
+      <view class="flex-item bc_green">1</view>
+      <view class="flex-item bc_red">2</view>
+      <view class="flex-item bc_blue">3</view>
+    </view> 
+  </view>
+ 
+hover-class:指定按下去的样式
+hover-start-time:按住后多久出现点击态
+hover-stay-time:手指松开后点击态保留时间
+hover:是否启用点击态
+  -->
+
+
+<!-- scroll-view -->
+<!--<view class="section">
+  <view class="section__title">vertical scroll</view>
+  <scroll-view scroll-y="true" style="height: 200px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view id="green" class="scroll-view-item bc_green"></view>
+    <view id="red"  class="scroll-view-item bc_red"></view>
+    <view id="yellow" class="scroll-view-item bc_yellow"></view>
+    <view id="blue" class="scroll-view-item bc_blue"></view>
+  </scroll-view>
+
+  <view class="btn-area">
+    <button size="mini" bindtap="tapTest">click me to scroll into view </button>
+    <button size="mini" bindtap="tapMove">click me to scroll</button>
+    <button size="default" bindtap="test">defaule</button>
+  </view>
+</view>
+<view class="section section_gap">
+  <view class="section__title">horizontal scroll</view>
+  <scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
+    <view id="green" class="scroll-view-item_H bc_green"></view>
+    <view id="red"  class="scroll-view-item_H bc_red"></view>
+    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
+    <view id="blue" class="scroll-view-item_H bc_blue"></view>
+  </scroll-view>
+</view>-->
+
+<!-- swiper -->
+<!--<view class="page">
+  <view class="page__bd">
+    <view class="section section_gap swiper">
+      <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="red" indicator-active-color="yellow">
+        <block wx:for="{{background}}">
+          <swiper-item>
+            <view class="swiper-item bc_{{item}}"></view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="btn-area">
+      <button type="default" bindtap="changeIndicatorDots">indicator-dots</button>
+      <button type="default" bindtap="changeVertical">{{vertical?'horizontal':'vertical'}}</button>
+      <button type="default" bindtap="changeAutoplay">autoplay</button>
+    </view>
+    <slider bindchange="durationChange" value="{{duration}}" show-value min="500" max="2000"/>
+    <view class="section__title">duration</view>
+    <slider bindchange="intervalChange" value="{{interval}}" show-value min="2000" max="10000"/>
+    <view class="section__title">interval</view>
+  </view>
+</view>-->
+
+
+<!-- icon -->
+<!--<view class="page">
+  <view class="page__bd">
+    <view class="section section_gap">
+      <view class="group">
+        <block wx:for="{{iconSize}}">
+          <icon type="success" size="{{item}}"/>
+        </block>
+      </view>
+    </view>
+
+    <view class="section section_gap">
+      <view class="group">
+        <block wx:for="{{iconType}}">
+          <icon type="{{item}}" size="45"/>
+        </block>
+      </view>
+    </view>
+
+    <view class="section section_gap">
+      <view class="group">
+        <block wx:for="{{iconColor}}">
+          <icon type="success" size="45" color="{{item}}"/>
+        </block>
+      </view>
+    </view>
+
+    <view class="">
+      <block wx:for="{{arr}}">
+        <view>{{item}}</view>
+      </block>
+    </view>
+
+    <view class="">
+      <block wx:for="{{str}}">
+        <view>{{item}}</view>
+      </block>
+    </view>   
+  </view>
+  <view class="">
+    <icon type="warn" size="45"/>
+  </view>
+  <icon type="waiting" size="45"/>
+</view>-->
+
+
+
+<!-- text -->
+<!--<view class="page">
+  <view class="page__hd">
+    <text class="page__title">text</text>
+    <text class="page__desc">文字标签</text>
+    <text>我是文字标签</text>
+  </view>
+  <view class="page__bd">
+    <view class="btn-area">
+      <view class="body-view">
+        <text>{{text}}</text>
+        <button bindtap="add">add line</button>
+        <button bindtap="remove">remove line</button>
+        <button bindtap="test" size="default">test</button>
+      </view>
+    </view>
+  </view>
+</view>-->
+
+
+
+<!--      progress   
+show-info:在进度条右侧显示百分比
+stroke-width:进度条线的宽度，单位px
+activeColor:已选择的进度条的颜色
+backgroundColor:未选择的进度条的颜色
+active:进度条从左往右的动画
+-->
+<!--<view class="page">
+  <view class="page__hd">
+    <text class="page__title">progress</text>
+    <text class="page__desc">进度条</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap">
+      <progress percent="20" show-info/>
+      <progress percent="40" active show-info/>
+      <progress percent="60" stroke-width="10"/>
+      <progress percent="80" color="#10AEFF"/>
+      <progress percent="20" active show-info />
+    </view>
+  </view>
+</view>-->
+
+
+<!--   button  
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">button</text>
+    <text class="page__desc">按钮</text>
+  </view>
+  <view class="page__bd">
+    <view class="btn-area" id="buttonContainer">
+      <view class="button-wrapper">
+        <button type="default" size="{{defaultSize}}" loading="{{loading}}" plain="{{plain}}"
+          disabled="{{disabled}}" bindtap="default"> default
+        </button>
+      </view>
+
+      <view class="button-wrapper">
+        <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+          disabled="{{disabled}}" bindtap="primary"> primary
+        </button>
+      </view>
+      <view class="button-wrapper">
+        <button type="warn" size="{{warnSize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}"
+          bindtap="warn"> warn
+        </button>
+      </view>
+      <view class="button-wrapper">
+        <button bindtap="setDisabled">点击设置以上按钮disabled属性</button>
+      </view>
+      <view class="button-wrapper">
+        <button bindtap="setPlain">点击设置以上按钮plain属性</button>
+      </view>
+      <view class="button-wrapper">
+        <button bindtap="setLoading">点击设置以上按钮loading属性</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="">
+  <button type="primary" open-type="contact"  size="mini">测试按钮</button>
+  <button open-type="contact">进入客服会话</button>
+</view>
+<!--
+loading:名称前是否带loading标识
+plain:是否镂空（背景色透明）
+disabled:按钮是否可用
+-->
+
+
+<!--   checkbox  
+bindchange:<checkbox-group/>中选中项发生改变是触发 change 事件，detail = {value:[选中的checkbox的value的数组]}
+-->
+<!--<view class="page">
+  <view class="page__hd">
+    <text class="page__title">checkbox</text>
+    <text class="page__desc">多选框</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap">
+      <checkbox-group bindchange="checkboxChange">
+        <label class="checkbox" wx:for="{{items}}">
+          <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+        </label>
+      </checkbox-group>
+    </view>
+  </view>
+</view>
+<checkbox-group bindchange="checkboxChange">
+  <label class="checkbox" wx:for="{{items}}">
+    <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+  </label>
+</checkbox-group>-->
+
+
+<!-- form 
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">form</text>
+    <text class="page__desc">表单</text>
+  </view>
+  <form class="page__bd" catchsubmit="formSubmit" catchreset="formReset">
+    <view class="section section_gap">
+      <view class="section__title">switch</view>
+      <switch name="switch"/>
+    </view>
+    <view class="section section_gap">
+      <view class="section__title">slider</view>
+      <slider value="50" name="slider" show-value ></slider>
+    </view>
+
+    <view class="section">
+      <view class="section__title">input</view>
+      <input name="input" placeholder="please input here" />
+    </view>
+    <view class="section section_gap">
+      <view class="section__title">radio</view>
+      <radio-group name="radio-group">
+        <label><radio value="radio1"/>radio1</label>
+        <label><radio value="radio2"/>radio2</label>
+      </radio-group>
+    </view>
+    <view class="section section_gap">
+      <view class="section__title">checkbox</view>
+      <checkbox-group name="checkbox">
+        <label><checkbox value="checkbox1"/>checkbox1</label>
+        <label><checkbox value="checkbox2"/>checkbox2</label>
+      </checkbox-group>
+    </view>
+    <view class="btn-area">
+      <button formType="submit">Submit</button>
+      <button formType="reset">Reset</button>
+    </view>
+  </form>
+</view>
+滑块选择器
+<view class="">滑块选择器</view>
+<switch name="switch"/>
+
+<!--滑动选择器
+<view class="">滑动选择器</view>
+<slider show-value value="20" />
+
+<!--输入框
+<input type="text" placeholder="String" placeholder-style="color:red" />
+
+<!--单项选择器
+<radio-group>
+  <label><radio value="value" checked="" />radio_01</label>
+  <label><radio value="value" checked="" />radio_02</label>
+</radio-group>
+
+<!--多项选择器
+<checkbox-group>
+  <label><checkbox value="value" checked="" />checkbox_01</label>
+  <label><checkbox value="value" checked="" />checkbox_02</label>
+</checkbox-group>
+
+<!--按钮
+<button form-type="submit">提交按钮</button>
+<button form-type="reset" size="mini">重置按钮</button>
+<button type="primary" size="mini" >普通</button>-->
+
+
+<!--   input   
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">input</text>
+    <text class="page__desc">输入框</text>
+  </view>
+  <view class="page__bd">
+    <view class="section">
+      <input placeholder="这是一个可以自动聚焦的input" auto-focus/>
+    </view>
+    <view class="section">
+      <input placeholder="此处只有在点击下方按钮时才聚焦" focus="{{focus}}" />
+      <view class="btn-area">
+        <button bindtap="bindButtonTap">使得输入框获取焦点</button>
+      </view>
+    </view>
+    <view class="section">
+      <input  maxlength="10" placeholder="最大输入长度10" />
+    </view>
+    <view class="section">
+      <view class="section__title">你输入的是：{{inputValue}}</view>
+      <input  bindinput="bindKeyInput" placeholder="输入同步到view中"/>
+    </view>
+    <view class="section">
+      <input  bindinput="bindReplaceInput" placeholder="连续的两个1会变成2" />
+    </view>
+    <view class="section">
+      <input  bindinput="bindHideKeyboard" placeholder="输入123自动收起键盘" />
+    </view>
+    <view class="section">
+      <input password type="number" placeholder="这是一个数字输入框" />
+    </view>
+    <view class="section">
+      <input password type="text" placeholder="这是一个密码输入框" />
+    </view>
+    <view class="section">
+      <input type="digit" placeholder="带小数点的数字键盘"/>
+    </view>
+    <view class="section">
+      <input type="idcard" placeholder="身份证输入键盘" />
+    </view>
+    <view class="section">
+      <input placeholder-style="color:red" placeholder="占位符字体是红色的" />
+    </view>
+  </view>
+</view>
+
+<!--这是一个可以自动聚焦的文本框
+<input placeholder="这是一个可以自动聚焦的文本框" focus="true" />
+
+<!--此处只有在点击下方按钮时才聚焦
+<input placeholder="此处只有在点击下方按钮时才聚焦"  />
+<button bindtap="get_focus" type="primary" size="mini">获得焦点</button>
+
+<!--收起键盘
+<button size="mini" bindtap="slider_up" type="primary">收起键盘</button>
+
+<!--输入同步到view
+<view>你输入的是：{{inputStr}}</view>
+<input  bindinput="bindStr" placeholder="输入同步到view中"/>
+
+<!--这是一个密码输入框
+<input type="password" placeholder="这是一个密码输入框" maxlength="5"  />
+
+<!--这是一个输入输入框
+<input type="number" placeholder="这是一个数字输入框" />
+
+<!--这是一个带小数点的数字键盘
+<input type="digit" placeholder="带小数点的数字键盘" />
+
+<!--身份证输入键盘
+<input type="idcard" placeholder="身份证输入键盘" />
+
+<!--占占位符样式
+<input type="text" placeholder-style="color:red" placeholder="String" />-->
+
+
+
+<!--            label           
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">label</text>
+    <text class="page__desc">标签</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap">
+      <view class="section__title">表单组件在label内</view>
+      <checkbox-group class="group" bindchange="checkboxChange">
+        <view class="label-1" wx:for="{{checkboxItems}}">
+          <label>
+            <checkbox value="{{item.name}}" checked="{{item.checked}}"></checkbox>
+            <text class="label-1__text">{{item.value}}</text>
+          </label>
+        </view>
+      </checkbox-group>
+    </view>
+
+    <view class="section section_gap">
+      <view class="section__title">label用for标识表单组件</view>
+      <radio-group class="group" bindchange="radioChange">
+        <view class="label-2" wx:for="{{radioItems}}">
+          <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}"></radio>
+          <label class="label-2__text" for="{{item.name}}"><text>{{item.name}}</text></label>
+        </view>
+      </radio-group>
+    </view>
+
+    <view class="section section_gap">
+      <view class="section__title">label内有多个时选中第一个</view>
+      <label class="label-4">
+        <checkbox> 选中我 </checkbox>
+        <checkbox> 选不中 </checkbox>
+        <checkbox> 选不中 </checkbox>
+        <checkbox> 选不中 </checkbox>
+        <view class="label-4_text">点我会选中第一个</view>
+      </label>
+    </view>
+  </view>
+</view> -->
+
+
+<!--        picker
+从底部弹起的滚动选择器，现支持三种选择器，通过mode来区分，分别是普通选择器，时间选择器，日期选择器，默认是普通选择器。
+普通选择器：mode = selector
+
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">picker</text>
+    <text class="page__desc">选择器</text>
+  </view>
+  <view class="page__bd">
+    <view class="section">
+      <view class="section__title">地区选择器</view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          当前选择：{{array[index]}}
+        </view>
+      </picker>
+    </view>
+    <view class="section">
+      <view class="section__title">时间选择器</view>
+      <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+        <view class="picker">
+          当前选择: {{time}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <view class="section__title">日期选择器</view>
+      <picker mode="date" fields="day" value="{{date}}" start="1987-01-01" end="2017-09-01" bindchange="bindDateChange">
+        <view class="picker">
+          当前选择: {{date}}
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>-->
+
+
+<!--  navigator
+<view>
+    <navigator url="../logs/logs" >页面跳转，可以返回</navigator>
+</view>
+<view>
+    <navigator url="../test/test" hover-class="changestyle" redirect>页面跳转，无法返回</navigator>
+</view>
+<navigator url="../test/test?title=我是新页面" >
+  <button type="default">跳转到新页面</button>
+</navigator>
+<navigator url="../test/test?title=在当前页面打开" redirect>
+  <button type="default">在当前页打开</button>
+</navigator>-->
+
+<!--audio
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">audio</text>
+    <text class="page__desc">音频</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap" style="text-align: center;">
+      <audio src="{{current.src}}" poster="{{current.poster}}" name="{{current.name}}" author="{{current.author}}" action="{{audioAction}}" controls></audio>
+    </view>
+  </view>
+</view>
+<audio poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio>
+
+<button type="primary" bindtap="audioPlay">播放</button>
+<button type="primary" bindtap="audioPause">暂停</button>
+<button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
+<button type="primary" bindtap="audioStart">回到开头</button>-->
+
+
+
+<!--image
+mode:图片裁剪，缩放模式
+
+<view class="page">
+    <view class="page__hd">
+        <text class="page__title">image</text>
+        <text class="page__desc">图片</text>
+    </view>
+    <view class="page__bd">
+        <view class="section section_gap">
+            <view class="section__title"> local image</view>
+            <view class="section__ctn">
+                <image class="image" src="../images/01_blue.png" />
+            </view>
+        </view>
+        <view class="section section_gap">
+            <view class="section__title"> internet image</view>
+            <view class="section__ctn">
+                <image class="image" src="../images/02_blue.png" />
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">image</text>
+    <text class="page__desc">图片</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap" wx:for="{{array}}" wx:for-item="item">
+      <view class="section__title">{{item.text}}</view>
+      <view class="section__ctn">
+        <image style="width: 200px; height: 200px; background-color: #eeeeee;" mode="{{item.mode}}" src="{{src}}"></image>
+      </view>
+    </view>
+  </view>
+</view>-->
+
+
+<!--video-->
+<!--<view class="page">
+    <view class="page__hd">
+        <text class="page__title">video</text>
+        <text class="page__desc">视频</text>
+    </view>
+    <view class="page__bd">
+        <view class="section section_gap">
+            <view class="body-view" style="text-align: center;">
+                <video src="{{src}}"></video>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="section tc">
+  <video id="myVideo" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" danmu-list="{{danmuList}}" enable-danmu danmu-btn controls></video>
+  <view class="btn-area">
+    <button bindtap="bindButtonTap">获取视频</button>
+    <input bindblur="bindInputBlur"/>
+    <button bindtap="bindSendDanmu">发送弹幕</button>
+  </view>
+</view>
+
+enable-danmu:是否默认显示弹屏
+danmu-btn:是否显示弹屏按钮
+
+<video danmu-btn="false" controls="false" src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400" ></video> -->
+
+
+<!--map
+latitude:维度
+longitude：经度
+markers:标记点
+
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">map</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap">
+      <map
+        style="width: 100%; height: 500px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        markers="{{markers}}"
+        covers="{{covers}}"
+        >
+      </map>
+    </view>
+  </view>
+</view>-->
+
+
+
+
+
+<!--首页-->
+<view class="search_box">
+  <input placeholder="搜索贴子、用户、商品" auto-focus class="search"/>
+  <icon type="search" color="#fff" size="15" class="search_btn"/>
+</view>
+<view class="">
+  <swiper class="swiper_content" indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#666" indicator-active-color="#fff">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image"/>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<view class="box_content" >
+  <view class="box_content_title">后花园</view>
+  <scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
+    <view id="green" class="scroll-view-item_H bc_green"></view>
+    <view id="red"  class="scroll-view-item_H bc_red"></view>
+    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
+    <view id="blue" class="scroll-view-item_H bc_blue"></view>
+  </scroll-view>
+</view>
+<view class="box_content" style="background:lightblue;" >
+  <view class="box_content_title">后花园</view>
+  <scroll-view class="scroll-view_H" scroll-x="true" style="width: 100%">
+    <view id="green" class="scroll-view-item_H bc_green"></view>
+    <view id="red"  class="scroll-view-item_H bc_red"></view>
+    <view id="yellow" class="scroll-view-item_H bc_yellow"></view>
+    <view id="blue" class="scroll-view-item_H bc_blue"></view>
+  </scroll-view>
+</view>
+
