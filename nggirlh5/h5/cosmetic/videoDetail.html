@@ -27,22 +27,27 @@
 </script>
 </head>
 <body id="cube">
-	<div class="hiddenright"><div><img src="images/hiddenrightimg.png">松开进入本期相关商品<span>></span></div></div>
+	<div class="downLoad hidden"><img src="images/close.png" class="closeTip"><img src="images/downLoad.png" class="imgDes"><span class="gtload">打开</span></div>
+    <div class="isWei hidden">
+        <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
+    </div>
+	<div class="hiddenright"><div><img src="images/goods.png">松开进入本期相关商品<span>></span></div></div>
 	
     
 <!--  视频 -->
         <div id="player" style="width:100%;">
             <script>
             <!--  获取帖子详情 -->
-            $.get('<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/3.0.0',getFinalRequestObject({accessToken: getAccessToken(),postId: getParam('postId'),postType:2}),function(data){
+            $.get('<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/4.0.0',getFinalRequestObject({accessToken: getAccessToken(),postId: getParam('postId'),postType:2}),function(data){
                 var data = $.parseJSON(data);
                 if(data.code == 0){
+					var shopNum=0;
 					var videoHeight=$('#player').width()/1.78;
                     $('#player').height(videoHeight);
 					$('.dresser_message').css('margin-top',videoHeight);
                     var player = new CloudVodPlayer();
                     player.init({uu:"660fwidmfe",vu:data.data.videoId},'player');
-					$(".dm_top").attr('postid',data.data.postId);
+					/*$(".dm_top").attr('postid',data.data.postId);
                     $('.dl_header_img').attr('src',data.data.userProfile);//化妆师头像
                     $('.dr_title').html(data.data.title);//title
 					if(data.data.labels.length>0){
@@ -75,19 +80,36 @@
                         $('.db_collect').attr('flag',1);
                     }
                     if(data.data.isPraised == 0){//获取点赞状态,0未点赞
-                        $('.db_like img').attr('src','images/zan_qian.png');
+                        $('.db_like img').attr('src','images/unlike.png');
                         $('.db_like').attr('flag',0);
                     }else{
-                        $('.db_like img').attr('src','images/zan_hou.png');
+                        $('.db_like img').attr('src','images/lnum.png');
                         $('.db_like').attr('flag',1);
                     }
 					if(data.data.isNoTalk == 1){
 						$(".de_bot").addClass("isNoTalks");
 						$(".talkTime").html(data.data.noTalkTime);
-					};
+					};*/
 					var str='';
+					str +='<div class="ad_tops clearfix" postId="'+data.data.postId+'" postType="1">';
+		
+					str +='<div class="ad_imgbox" createUserId="'+data.data.createUserId+'"><img class="dressimg" src="'+data.data.userProfile+'"/></div><div class="dressname" createUserId="'+data.data.createUserId+'">';
+					str +='<span class="ad_user_name" createUserId="'+data.data.createUserId+'">'+data.data.userName+'</span>';
+					if(data.data.userRole == ''){
+						str +='<span class="ad_userrole" style=" border:none;"></span>';
+					}else{
+						str +='<span class="ad_userrole">'+data.data.userRole+'</span>';
+					}
+					if(data.data.isAttention == 0 && data.data.isMyPost == 0){
+						str +='<div class="head_attention atten2">关注</div>';
+					}else if(data.data.isAttention == 1 && data.data.isMyPost == 0){
+						str +='<div class="head_attention atten1">已关注</div>';
+					}
+					str +='</div>';
+			
+					str +='</div><div class="ad_detail">';
 					if(data.data.article.length>0){
-						str +='<div class="ad_detail"><p class="ad_artical">文章详情</p><div class="ad_det">';
+						str +='<div class="ad_detail"><div class="ad_det"><p class="ad_title">'+data.data.title+'</p>';
 						for(var i = 0;i < data.data.article.length;i++){
 							var videoGoods=data.data.article [i];
 							if(videoGoods.type== "1"){
@@ -99,32 +121,20 @@
 							}else if(videoGoods.type=="4"){
 								str +='<p class="ad_note">'+videoGoods.content+'</p>';
 							}else if(videoGoods.type=="5"){
-								str +='<div seedProductId='+videoGoods.seedProductId+' class="postShop postShopa productDetail clearfix">';
-								str +='<div class="shopLeft"><img src="'+videoGoods.picture+'"></div>';
-								str +='<div class="shopCenter"><p>'+videoGoods.name+'</p><p class="productprize">参考价：<span>¥ '+videoGoods.price+'</span></p><p class="productTui">推荐度：';
-								for(var j = 0; j < 5; j++){
-									if(j < parseInt(videoGoods.recommendation/2)){
-										str +='<img src="images/product_start.png" class="xingXing">'
-									}else if(videoGoods.recommendation % 2 == 1 && parseInt(videoGoods.recommendation/2) == j){
-										str +='<img src="images/product_half_start.png" class="xingXing">'
-									}else{
-										str +='<img src="images/product_white_start.png" class="xingXing">'
-									}
-								};
-								str +='</p></div>';
-								str +='<div class="shopRight">';
-								str +='<span class="productDetails" seedProductId='+videoGoods.seedProductId+'><img src="images/order-arr-right_03.png"></span></div></div>';
-								str +='<div class="goodsbot" seedProductId='+videoGoods.seedProductId+'>';
-								if(videoGoods.isSeed == "0"){
-									str +='<p class="zhongcao zhongcao1">'+videoGoods.seedNum+'</p>';
+								shopNum++;
+								var articleGoods=data.data.article[i];
+								str +='<div isAllowBuy='+articleGoods.isAllowBuy+' seedProductId='+articleGoods.seedProductId+' class="postShop postShopa productDetail clearfix">';
+								str +='<div class="shopLeft"><img src="'+articleGoods.picture+'"></div>';
+								str +='<div class="shopCenter"><p>'+articleGoods.name+'</p><p class="productprize1"><span>¥ '+articleGoods.price+'</span></p>';
+				
+								str +='</div>';
+								str +='<div class="goodsRight" seedProductId='+articleGoods.seedProductId+'>';
+								if(articleGoods.isSeed == "0"){
+									str +='<p class="zhongcao zhongcao1"></p>';
 								}else{
-									str +='<p class="zhongcao zhongcao2">'+videoGoods.seedNum+'</p>';
+									str +='<p class="zhongcao zhongcao2"></p>';
 								}
-								if(videoGoods.isAllowBuy == "0"){
-									str +='<p class="goToBuy goToBuy1">去买</p></div>';
-								}else{
-									str +='<p class="goToBuy goToBuy2" urlStr="'+videoGoods.tb_detail_url+'">去买</p></div>';
-								}
+								str +='</div></div>';
 								
 							}else if(videoGoods.type=="6"){
 								str +='<div workId='+videoGoods.workId+' class="postShop postShopa  workDetails clearfix">';
@@ -148,7 +158,73 @@
 						};
 					};
 					str +='</div>';
-					$(".dm_top").after(str);
+					if(data.data.labels.length>0 && data.data.labels !=""){
+						str +='<p class="ad_label">';
+						for( var t=0;t<data.data.labels.length;t++){
+							str +='<span class="comLabel">';
+							str += data.data.labels[t];
+							str +='</span>';
+						}
+						for( var n=0;n<data.data.topics.length;n++){
+							str +='<span class="topicLabel" topicId="'+data.data.topics[n].topicId+'">';
+							str += data.data.topics[n].name;
+							str +='</span>';
+						}
+						str +='</p>';
+					}
+					str +='<div class="view_detail"><span class="sendtime">'+getLocalTime(data.data.createTime)+'</span><div class="flRight">';
+					if(data.data.commentNum > 9999){//评论条数
+						str +='<span class="commentnum">9999+</span>';
+					}else{
+						str +='<span class="commentnum">'+data.data.commentNum+'</span>';
+					}
+					if(data.data.viewNum > 9999){//浏览量
+						str +='<span class="viewnum">9999+</span>';
+					}else{
+						str +='<span class="viewnum">'+data.data.viewNum+'</span>';
+					}
+					
+					if(data.data.loverCount > 9999){//xihuan
+						str +='<span class="lovenum">9999+</span>';
+					}else{
+						str +='<span class="lovenum">'+data.data.loverCount+'</span>';
+					}
+					str +='<span class="jubaoBtn"><img src="images/more.png"></span>';
+					str +='</div></div>';
+					$(".ad_btn").attr("postId",data.data.postId);
+					if(data.data.isPraised==1){
+						$(".Praised").addClass("Praised1");
+						$(".Praised").attr('isPraised',0);
+					}else{
+						$(".Praised").attr('isPraised',1);
+					}
+					if(data.data.isCollected==1){
+						$(".Collected").addClass("Collected1");
+						$(".Collected").attr('isCollected',0);
+					}else{
+						$(".Collected").attr('isCollected',1);
+					}
+					str +='</div>';	
+					$(".dresser_message").append(str);
+					if(data.data.isNoTalk == 1){
+						$(".de_bot").addClass("isNoTalks");
+						$(".talkTime").html(data.data.noTalkTime);
+					}
+					 if(data.data.isCollected == 0){//获取收藏状态,0未收藏
+                        $('.db_collect img').attr('src','images/collect.png');
+                        $('.db_collect').attr('flag',0);
+                    }else{
+                        $('.db_collect img').attr('src','images/collect1.png');
+                        $('.db_collect').attr('flag',1);
+                    }
+					 if(data.data.isPraised == 0){//获取点赞状态,0未点赞
+                        $('.db_like img').attr('src','images/unlike.png');
+                        $('.db_like').attr('flag',0);
+                    }else{
+                        $('.db_like img').attr('src','images/lnum.png');
+                        $('.db_like').attr('flag',1);
+                    }
+					$(".lookGoods").text(shopNum);
 					//微信分享
                     if(isInWeixin()){
                         var title = '【南瓜姑娘】'+data.data.columnName+'-'+data.data.title;
@@ -240,36 +316,74 @@
 						}
 					});
 				};
+				function getLocalTime(publishTime) {
+					var d_minutes, d_hours, d_days;
+					var timeNow = parseInt(new Date().getTime() / 1000);
+					var d;
+					d = timeNow - publishTime/1000;
+					d_days = parseInt(d / 86400);
+					d_hours = parseInt(d / 3600);
+					d_minutes = parseInt(d / 60);
+					var s = 0;
+					s = new Date(publishTime);
+					var sthours=parseInt(s.getHours());
+					var nohours=parseInt(new Date().getHours());
+					var m=parseInt(s.getMonth() + 1);
+						if(m<10){
+							m="0"+m;
+							}
+						var day=parseInt(s.getDate());
+						if(day<10){
+							day="0"+day;
+							}
+						 var hours=parseInt(s.getHours());
+						if(hours<10){
+							hours="0"+hours;
+							}
+						var minutes=parseInt(s.getMinutes());
+						if(minutes<10){
+							minutes="0"+minutes;
+							}
+					if (d_days <= 0 && d_hours >= 0 && nohours>=sthours) {
+						if(nohours=sthours && d_hours>10){
+							return (s.getFullYear() + "-" + m) + "-" +day ;
+						}
+						return (hours + ":" +  minutes) ;
+					} else {
+					 return (s.getFullYear() + "-" + m) + "-" +day ;
+					}
+				}
+
 		</script>
         </div>
         <div class="forinput">
         <div class="forinputlength">
         <div class="dresser_message">
             <div class="dm_top">
-                <div class="dt_left">
+            <!--  <div class="dt_left">
                     <img src="" class="dl_header_img" alt="" />
                 </div>
                 <div class="dt_right">
+                	<p class="dr_name"><span class="user_name"></span> <span class="user_role"></span></p>
                     <p class="dr_title"></p>
                 	<p class="ad_label1 hidden"></p>
-                    <p class="dr_name"><span class="user_name"></span> <span class="user_role"></span></p>
+                    
                     <div class="dr_message">
                         <img src="images/small_look_num.png" alt="" /> <span class="look_num"></span>
                         <img src="images/small_ping.png" alt="" class="small_ping" /> <span class="ping_num"></span>
                     </div>
-                </div>
+                </div>-->
             </div>
             
         </div>
         <!--<div class="postShopbox">
         </div>-->
-        <div class="loverCount">
+      <!--  <div class="loverCount">
             <h3>喜欢<span></span></h3>
             <ul class="loverUser clearfix">
             </ul>
-        </div>
-        <div class="ad_comment">
-            <p class="ad_com">评论</p>
+        </div>-->
+        <div class="ad_comment ad_comment1">
             <div class="ad_comdet" ></div>
         </div>
         
@@ -284,6 +398,7 @@
         </div>
         <div class="ad_flbot"> </div>
         <div class="ad_flbtn">
+        	<p class="clickReplay">回复</p>
             <p class="ad_report">举报</p>
             <p class="ad_aelbtn">删除该楼层</p>
             <p class="ad_delinner">删除</p>
@@ -292,6 +407,10 @@
          <div class="ad_flbtn1">
             <p class="ad_replay1">回复</p>
             <p class="ad_report1">举报</p>
+            <p class="ad_clobtn">取消</p>
+        </div>
+        <div class="ad_flbtn2">
+            <p class="ad_report2">举报</p>
             <p class="ad_clobtn">取消</p>
         </div>
         <div class="ad_sure ad_tcbox">
@@ -313,7 +432,7 @@
         <div class="form-tip">请输入评论内容</div>
     </div>
     <div class="isWei hidden">
-        <img src="images/guide.jpg" >
+        <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
     </div>
     <!--背景放大-->
     <div class="opbg"></div>
@@ -323,13 +442,23 @@
         </div>
     </div>
    <!-- 评论 -->
-   <div class="dm_bottom ad_btn">
+<!--   <div class="dm_bottom ad_btn">
    		<div class="ad_btn_left">
             <span class="db_comment"><img src="images/commentgreen.png" alt="" id="db_comment"/>评论</span>
             <span class="db_collect"><img src="images/collect_qian.png" alt="" id="db_collect"/>收藏</span>
             <span class="db_like"><img src="images/zan_qian.png" alt="" id="db_like"/>喜欢</span>
         </div>
         <p class="lookGoods" id="lookGoods">查看商品</p>
+    </div>-->
+    <div class="ad_btn ad_btns">
+    	<div class="ad_btn_left">
+           <!-- <p class="pinglun" id="pinglun">评论</p>
+            <p class="Collected" id="collect">收藏</p>-->
+            <p class="toCom">我有话说...</p>
+            <span class="db_collect"><img src="images/collect.png" alt="" id="db_collect"/></span>
+            <span class="db_like"><img src="images/unlike.png" alt="" id="db_like"/></span>
+        </div>
+        <p class="lookGoods" id="lookGoods"></p>
     </div>
     <div class="de_bot  clearfix">
         <img src="images/ping_face_icon.png" class="ping_icon" alt="" />

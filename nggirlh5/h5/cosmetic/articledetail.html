@@ -26,25 +26,24 @@
 </head>
 
 <body  class="bg1" id="cube">
-	<div class="hiddenright"><div><img src="images/hiddenrightimg.png">松开进入本期相关商品<span>></span></div></div>
+	<div class="downLoad hidden"><img src="images/close.png" class="closeTip"><img src="images/downLoad.png" class="imgDes"><span class="gtload">打开</span></div>
+    <div class="isWei hidden">
+        <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
+    </div>
+	<div class="hiddenright"><div><img src="images/goods.png">松开进入本期相关商品<span>></span></div></div>
     <div class="forinput">
     	
         <div class="forinputlength">
             <div class="ad_content">
             </div>
-            <div class="loverCount">
-                <h3>喜欢<span></span></h3>
-                <ul class="loverUser clearfix">
-                </ul>
-            </div>
             <div class="ad_comment ad_comment1">
-                <p class="ad_com">评论</p>
                 <div class="ad_comdet" ></div>
             </div>
         </div>
     </div>
     <div class="ad_flbot"> </div>
     <div class="ad_flbtn">
+    	<p class="clickReplay">回复</p>
     	<p class="ad_report">举报</p>
         <p class="ad_aelbtn">删除该楼层</p>
         <p class="ad_delinner">删除</p>
@@ -53,6 +52,10 @@
     <div class="ad_flbtn1">
         <p class="ad_replay1">回复</p>
     	<p class="ad_report1">举报</p>
+        <p class="ad_clobtn">取消</p>
+    </div>
+   	<div class="ad_flbtn2">
+    	<p class="ad_report2">举报</p>
         <p class="ad_clobtn">取消</p>
     </div>
     <div class="ad_sure ad_tcbox">
@@ -72,14 +75,16 @@
     </div>
   	<div class="ad_btn ad_btns">
     	<div class="ad_btn_left">
-            <p class="pinglun" id="pinglun">评论</p>
-            <p class="Collected" id="collect">收藏</p>
-            <p class="Praised" id="praised">喜欢</p>
+           <!-- <p class="pinglun" id="pinglun">评论</p>
+            -->
+            <p class="toCom">我有话说...</p>
+            <p class="Collected" id="collect"></p>
+            <p class="Praised" id="praised"></p>
         </div>
-        <p class="lookGoods" id="lookGoods">查看商品</p>
+        <p class="lookGoods" id="lookGoods"></p>
     </div>
     <div class="isWei hidden">
-        <img src="images/guide.jpg" >
+        <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
     </div>
     <div class="de_bot  clearfix">
         <img src="images/ping_face_icon.png" class="ping_icon" alt="" />

@@ -43,7 +43,7 @@ $(function(){
 	
 	//获取个人资料
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/personalInfo/getUserInfo/3.0.0',  
+		url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/personalInfo/getUserInfo/4.0.0',  
 		type : 'get',
 		data : getFinalRequestObject({accessToken : localStorage.getItem('accessToken')}),
 		dataType : 'json',  
@@ -80,6 +80,14 @@ $(function(){
 				$('.yzm').show();	
 			}
 			$('.num').html(data.data.addressNum);    //常用地址数量
+			if(data.data.summary == ''){
+				$('.mine-introduce-message').html('一句话介绍自己');
+				$('.box_introduce_content').val('');
+			}else{
+				$('.mine-introduce-message').html(data.data.summary);
+				$('.box_introduce_content').val(data.data.summary);
+				$('.current_num').html((data.data.summary).length);
+			}
 			
 			//设置日期
 			var currYear = (new Date()).getFullYear();	
@@ -154,6 +162,7 @@ $(function(){
 			var end = new Date(birthday.replace("-", "/").replace("-", "/"));
 			var skinType = $('.mine-cover-kinds option:checked').attr('value');
 			var skinProblem = '';
+			var summary = $.trim($('.box_introduce_content').val());
 			$('.cq_li .cq_circle').each(function(index, element) {
                 if($(this).hasClass('cq_circle_selcted')){
 					skinProblem += $(this).html()+' ';
@@ -170,9 +179,9 @@ $(function(){
 				$('.mine-birth').val('');
 			}else if($.trim($('.mine-tel').val()) == ''){
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/uploadUserInfo/3.0.0',
+					url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/uploadUserInfo/4.0.0',
 					type : 'post',
-					data : getFinalRequestObject({accessToken : accessToken,nickName:nickName,profile:profile,sex:sex,birthday:birthday,phoneNum:phoneNum,skinType:skinType,skinProblem:skinProblem}),
+					data : getFinalRequestObject({accessToken : accessToken,nickName:nickName,profile:profile,sex:sex,birthday:birthday,phoneNum:phoneNum,skinType:skinType,skinProblem:skinProblem,summary:summary}),
 					dataType : 'json',  
 					success : function(data){
 						if(data.code == 0){
@@ -187,9 +196,9 @@ $(function(){
 					if($('.mine-tel').val() == $('.mine-tel').attr('tel')){//手机号相等
 						$('.yzm').hide();
 						$.ajax({
-							url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/uploadUserInfo/3.0.0',
+							url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/uploadUserInfo/4.0.0',
 							type : 'post',
-							data : getFinalRequestObject({accessToken : accessToken,nickName:nickName,profile:profile,sex:sex,birthday:birthday,phoneNum:phoneNum,skinType:skinType,skinProblem:skinProblem}),
+							data : getFinalRequestObject({accessToken : accessToken,nickName:nickName,profile:profile,sex:sex,birthday:birthday,phoneNum:phoneNum,skinType:skinType,skinProblem:skinProblem,summary:summary}),
 							dataType : 'json',  
 							success : function(data){
 								if(data.code == 0){
@@ -207,7 +216,7 @@ $(function(){
 						//判断验证码
 						if($('.yzm').attr('code') == $('.mine_yzm').val()){
 							$.ajax({
-								url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/uploadUserInfo/3.0.0',
+								url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/uploadUserInfo/4.0.0',
 								type : 'post',
 								data : getFinalRequestObject({accessToken : accessToken,nickName:nickName,profile:profile,sex:sex,birthday:birthday,phoneNum:phoneNum,skinType:skinType,skinProblem:skinProblem}),
 								dataType : 'json',  
@@ -263,7 +272,41 @@ $(function(){
 		}else{
 			$('.yzm').hide();
 		}
-	})
+	});
+	
+	//简介
+	$('.mine-message-introduce').click(function(e) {
+        $('.box_introduce').removeClass('hidden');
+		$('.box,.footer').addClass('hidden');
+    });
+	
+	//输入简介
+	$('.box_introduce_content').keydown(function(e) {
+		if($.trim($(this).val()).length > 15){
+			var currentnum=$(this).val().substring(0,15);
+			$(this).val(currentnum);
+		}else{
+			$('.current_num').html($.trim($('.box_introduce_content').val()).length);
+		}
+    });
+	
+	//返回到个人资料
+	$('.return_arr').click(function(e) {
+        $('.box_introduce').addClass('hidden');
+		if($.trim($('.mine-introduce-message').html()) != '一句话介绍自己'){
+			
+		}else{
+			$('.box_introduce_content').val('');
+		}
+		$('.box,.footer').removeClass('hidden');
+    });
+	
+	//保存简介
+	$('.bi_save').click(function(e) {
+        $('.box_introduce').addClass('hidden');
+		$('.box,.footer').removeClass('hidden');
+        $('.mine-introduce-message').html($.trim($('.box_introduce_content').val()));
+    });
 });
 
 //验证手机号

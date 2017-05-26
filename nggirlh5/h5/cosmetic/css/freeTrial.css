@@ -60,6 +60,10 @@ body{ background:#f0f5f5; color:#3a3a3a; margin-bottom:62px;}
 .tcstyle{ position:fixed; height:100%; top:0; left:0;}
 .guideTop{ position:fixed; top:0; left:0; width:100%;z-index:98;}
 .freeguideimg{ width:100%;}
-.guideTop .freetryclose{ position:absolute; top:50%; margin-top:-1.5%; left:2.5%; width:3.2%; opacity:0;}
+/*.guideTop .freetryclose{ position:absolute; top:50%; margin-top:-1.5%; left:2.5%; width:3.2%; opacity:0;}*/
 .guide{ position:absolute; top:0; left:0; z-index:99;}
 .guide img{ width:100%; display:block;}
+.guideTop{ height:64px; position:absolute; top:0; left:0; width:100%;z-index:999; background:#f4f4f4; }
+.guideTop .freetryclose{ vertical-align:top; margin:25px 15px 0 12px; width:14px;}
+.guideTop img.imgDes{ width:248px;}
+.guideTop .freeguideimg{ display:inline-block; position:absolute; right:12px; top:14px; width:60px; height:36px; line-height:36px; text-align:center; background:#ffb27d; color:#fff; font-size:16px;}

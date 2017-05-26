@@ -101,7 +101,7 @@ $(".guideTop .freeguideimg,.fortrailForLoad").live('click',function(){
 				$(".part1").hide();
 				return false;
         }
-        if (ua.match(/QQ/i) == "qq") {
+        if (ua.match(/QQ/i) == "QQ") {
                 //在QQ空间打开
 				$(".guide").show();
 				$(".part1").hide();

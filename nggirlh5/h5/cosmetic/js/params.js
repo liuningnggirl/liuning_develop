@@ -151,31 +151,18 @@ function getAccessToken() {
     if(isInApp() && typeof(window.ngjsInterface) != "undefined" && typeof(window.ngjsInterface.getToken) != "undefined"){
     	accessToken = window.ngjsInterface.getToken();
     }else{
-        $.ajax({
-                url:'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=appid&secret=secret',
-                type:"get",
-                dataType:"jsonp",
-                async: true,
-                success: function (result) {
-                   console.log(result)
-                },
-                error: function (result) {
-                    console.log(result);
-                }
-            });
     	var appAccessToken = localStorage.accessToken;
         var queryAccessToken = getParam("accessToken");
         if (!strIsEmpty(appAccessToken) || !strIsEmpty(queryAccessToken)) {
             accessToken = !strIsEmpty(queryAccessToken) ? queryAccessToken : appAccessToken;
         }
     }
-
+    
 
     // localStorage中始终存储最新的accessToken
     setAccessToken(accessToken);
     return accessToken;
 }
-
 //设置accessToken
 function setAccessToken(accessToken){
     localStorage.accessToken = accessToken;
@@ -395,7 +382,7 @@ function alertNewScore(score){
 	alert_box.setAttribute('class','alert_box');
 	gray_boxs.appendChild(alert_box);
 	var ab_title = document.createElement('img');
-	ab_title.style.backgroundImage="url(images/integral_small_icon.png)";
+	ab_title.style.backgroundImage="url(images/point.png)";
 	ab_title.setAttribute('class','ab_title');
 	var ab_title_p = document.createElement('p');
 	ab_title_p.appendChild(document.createTextNode(score))

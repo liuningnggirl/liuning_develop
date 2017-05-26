@@ -1,12 +1,12 @@
 {
   "description": "测试服务器配置,部署到testcli服务器上",
   "configName": "local",
-  "isDebug": false,
+  "isDebug": true,
   "FWH_APPID": "wx3715cedfd51757dc",
-  "UGC_HOST_API_URL": "",
-  "CLI_HOST_API_URL": "",
-  "PHOTOS_HOST_API_URL": "",
-  "WEIXIN_BOUND_DOMAIN_URL":"https://testcli.nggirl.com.cn",
+  "UGC_HOST_API_URL": "https://testugc.nggirl.com.cn",
+  "CLI_HOST_API_URL": "https://testcli.nggirl.com.cn",
+  "PHOTOS_HOST_API_URL": "https://testphotos.nggirl.com.cn",
+  "WEIXIN_BOUND_DOMAIN_URL":"https://teststatic.nggirl.com.cn",
   "CNZZ_STAT_CODE_ID": "1259610547",
   "CNZZ_STAT_CODE_WEB_ID": "1259610547",
   "dest": {

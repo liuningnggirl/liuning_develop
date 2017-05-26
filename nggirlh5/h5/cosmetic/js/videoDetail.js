@@ -1,4 +1,17 @@
+var ua = navigator.userAgent.toLowerCase();	
 $(function(){
+	if(!isInApp()){
+		$(".downLoad").show();
+	}
+	$(".downLoad .closeTip").click(function(){
+		$(".downLoad").hide();
+		$("#player").css("top","0");
+		$(".ad_tops").css("margin-top","7px");
+	})
+	$(".downLoad .gtload").click(function(){
+		APPCommon.openApp();
+		return false;
+	})
 	$('.forinput').scroll(function(e) {
         $("img.lazy").lazyload({effect : "show"});
     });
@@ -39,7 +52,7 @@ $(function(){
 	getcommentmessage(0,20);	
 	var h1=$("#video").height();
 	$(".dresser_message").css("margin-top",h1);
-	$(".forinput").height($(window).height()-56);
+	$(".forinput").height($(window).height()-51);
 	$("body").height($(window).height());
 	/*评论规则*/
 	//localStorage.removeItem("showonce");
@@ -75,6 +88,38 @@ $(function(){
 			}
 		}, 'videoDetail.html' + window.location.search);
     });
+	//举报
+	
+	$(".jubaoBtn").live('click',function(){
+		$(".ad_flbot").show();
+		$(".ad_flbtn2").show();
+	})
+	$(".ad_report2").live('click',function(){
+		$(".ad_flbot").hide();
+		$(".ad_flbtn2").hide();
+		checkAccessTokenLogin(function () {
+			 var data = getFinalRequestObject({
+				 accessToken: getAccessToken()
+			 });
+			$.ajax({//采用异步
+				type: "post",
+				url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/report/post/4.0.0',
+				data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:2}),
+				dataType:"json",
+				success: function (data) {
+					if(data.code == 0){
+						$(".successtips").html("举报成功");
+						$(".successtips").fadeIn(100).delay(1500).fadeOut(100);
+					}else{
+						$(".successtips").html(data.data.error);
+						$(".successtips").fadeIn(100).delay(1500).fadeOut(100);
+					}
+				},
+			});
+		}, 'videoDetail.html' + window.location.search);
+		//window.location.href="report.html?postId=" +getParam("postId") +'&postType='+2+'&v=<%= VERSION %>';
+	})
+
 	//查看全部商品
 	$(".ad_btn .lookGoods").live('click',function(){
 		if (/iphone|ipad|ipod/.test(ua)) {
@@ -83,13 +128,14 @@ $(function(){
 			_czc.push(['_trackEvent','nggirl_column_post_video_relevant_product','phoneType=and','点击往期商品按钮','true','']);
 		};
 		window.location.href="goodsList.html?postId=" +getParam("postId") +'&postType='+2+'&v=<%= VERSION %>';	
+
 	});
 	//点击跳转到妆品详情页
 	$(".workDetails").live('click',function(){
 		window.location.href="workDetails.html?workId=" +$(this).attr("workId")+'&v=<%= VERSION %>';	
 	});
 	var mnum = 0;
-	getLoverCount();
+	//getLoverCount();
 	$(".de_box .form-control").click(function(){
 		$(".form-control").attr("contenteditable","true");
 		$(this).focus();
@@ -106,7 +152,12 @@ $(function(){
 		} else if (/android/.test(ua)) {
 			_czc.push(['_trackEvent','nggirl_column_post_seedProduct_view','phoneType=and','商品浏览','seedProductId',$(this).attr("seedProductId")]);
 		};
-		window.location.href="productDetails.html?seedProductId=" +$(this).attr("seedproductId") +'&targetType='+2+'&targetId='+getParam("postId")+'&v=<%= VERSION %>';		
+		if($(this).attr("isAllowBuy") == 0){
+			window.location.href="productDetails.html?seedProductId=" +$(this).attr("seedProductId") +'&targetType='+2+'&targetId='+getParam("postId")+'&v=<%= VERSION %>';	
+		}else{
+			window.location.href = "goodsShareCatenate.html?itemId="+$(this).attr("seedProductId")+"&v=<%= VERSION %>";		
+		}	
+		
 	});
 	//超出两屏出现置顶图标
 	$(".forinput").scroll(function(){
@@ -156,11 +207,14 @@ $(function(){
 		return false;
 	});
 	//跳转到标签页
-	$(".ad_label1 span").live('click',function(){
+	$(".ad_label .comLabel").live('click',function(){
 		window.location.href="label.html?labelName="+ $(this).html()+'&v=<%= VERSION %>';
 	});
+	$(".ad_label .topicLabel").live('click',function(){
+		window.location.href="hotTopicDetail.html?topicId="+ $(this).attr("topicId")+'&v=<%= VERSION %>';
+	});
 	//跳转到作者页
-	$(".dressname,.ad_imgbox").live('click',function(){
+	$(".dressname .ad_user_name,.ad_imgbox").live('click',function(){
 		window.location.href="myHomePage.html?userId="+ $(this).attr("createUserId")+'&v=<%= VERSION %>';
 	});
 	 //点击查看放大图片
@@ -239,8 +293,8 @@ $(function(){
 						_czc.push(['_trackEvent','nggirl_column_post_video_collect','phoneType=and','视频收藏','postId',$(".dm_top").attr('postid')]);
 					};
 					$('.db_collect').attr('flag',1);
-					$('.db_collect img').attr('src','images/collect_hou.png');
-					if(data.data.addScore != "0"){
+					$('.db_collect img').attr('src','images/collect1.png');
+					if(data.data.addScore != "0" && data.data.addScore != undefined){
 						alertNewScore("积分 +"+data.data.addScore);
 					}
 				}else{
@@ -252,7 +306,7 @@ $(function(){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.db_collect').attr('flag',0);
-					$('.db_collect img').attr('src','images/collect_qian.png');
+					$('.db_collect img').attr('src','images/collect.png');
 				}else{
 					alert(data.data.error);	
 				}
@@ -278,9 +332,9 @@ $(function(){
 						_czc.push(['_trackEvent','nggirl_column_post_video_praise','phoneType=and','视频点赞','postId',$(".dm_top").attr('postid')]);
 					};
 					$('.db_like').attr('flag',1);
-					$('.db_like img').attr('src','images/zan_hou.png');
-					getLoverCount();
-					if(data.data.addScore != "0"){
+					$('.db_like img').attr('src','images/lnum.png');
+					//getLoverCount();
+					if(data.data.addScore != "0" && data.data.addScore != undefined){
 						alertNewScore("积分 +"+data.data.addScore);
 					}
 				}else{
@@ -292,8 +346,8 @@ $(function(){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.db_like').attr('flag',0);
-					$('.db_like img').attr('src','images/zan_qian.png');
-					getLoverCount();
+					$('.db_like img').attr('src','images/unlike.png');
+					//getLoverCount();
 				}else{
 					alert(data.data.error);	
 				}
@@ -301,11 +355,24 @@ $(function(){
 		}
 		}, 'videoDetail.html' + window.location.search);
     });
+	//点击评论按钮
+$(".ad_btn .toCom").live('click',function(){
+	$(".ad_flbot").hide();
+	$(".ad_flbtn").hide();
+	var del=$(this);
+	$(".form-tip").html("请输入评论内容");
+	$(".form-control").attr("placeholder","请输入评论内容");
+	$("#send_message").removeClass().addClass("send_message");
+	$(".de_bot").show();
+	$(".ad_btn").hide();
+	$(".form-control").focus();
+})
+
 //喜欢详情
-function getLoverCount(){
+/*function getLoverCount(){
 $.ajax({//采用异步
 	type: "get",
-	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/3.0.0',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/4.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:2,isCountViewNum:0}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -340,8 +407,124 @@ $.ajax({//采用异步
 	}
 });
 }
+*/
 //评论详情
 function getcommentmessage(pageNum,pageSize){
+	$.ajax({//采用异步
+		type: "get",
+		url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getComments/2.4.2',
+		data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:2,page:pageNum,num:pageSize,queryTime:$(".ad_comdet").attr("queryTime")}),
+		timeout:15000,//10s
+		dataType:"json",
+		success: function (data) {
+			if(data.code == 0){
+				$(".ad_comdet").attr("queryTime",data.data.queryTime);
+			var str1 = "";
+			var floors=data.data.comments.length>5?5:data.data.comments.length;
+			for(var i = 0;i < floors;i++){
+				str1 +='<div class="ad_floor" userId="'+data.data.comments[i].userId+'" commentId="'+data.data.comments[i].commentId+'" floor="'+data.data.comments[i].floorNum+'"  >';
+				str1 +='<div class="adf_det clearfix">';
+				str1 +='<div class="adf_img " ><img src="'+data.data.comments[i].profile+'"></div>';
+				str1 +='<div class="adf_name"><span class="adf_nickname">'+data.data.comments[i].nickName+'</span><p class="ad_fnum"><span>'+data.data.comments[i].floorNum+'楼</span>'+getLocalTime(data.data.comments[i].commentTime)+'</p></div>';
+				str1 +='<div class="adf_btn">';
+				/*添加评乱点赞*/
+				if(data.data.comments[i].isPraised=="0"){
+					str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
+					if(data.data.comments[i].praiseCount>999){
+						str1 +='<b class="zq_count">999+</b></span>';
+					}else{
+						str1 +='<b class="zq_count">'+data.data.comments[i].praiseCount+'</b></span>';
+					}
+				}else{
+					str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/zanhou.png" class="qx_dianzan">';
+					if(data.data.comments[i].praiseCount>999){
+						str1 +='<b class="zh_count">999+</b></span>';
+					}else{
+						str1 +='<b class="zh_count">'+data.data.comments[i].praiseCount+'</b></span>';
+					}
+				}
+				str1 +='<span class="comleft"><img src="images/commentnum.png" class="ad_gtcom"></span>';
+				str1 +='</div></div>';
+				/*if(data.data.comments[i].isMyComment=="1"){
+					str1 +='<span class="comright ad_morea"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
+				}else{
+					str1 +='<span class="comright ad_moreb"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
+					}*/
+				if(data.data.comments[i].isMyComment=="1"){
+					str1 +='<div class="adf_comdetail ad_morea" replyType="1">';
+				}else{
+					str1 +='<div class="adf_comdetail ad_moreb" replyType="1">';
+				}
+				if(data.data.comments[i].isIllegal=="0"){
+					str1 +=getImgUrl(htmlEscape(data.data.comments[i].comment))+'</div>';
+				}else{
+					str1 +='!@#$%^&*()</div>';
+					}
+				str1 +='<div class="adf_reply">';
+				if(data.data.comments[i].replies.length>0){
+				
+				for(var j = 0;j < data.data.comments[i].replies.length;j++){
+					if(j == 0){
+						str1 +='<img src="images/Triangular.png" class="arr"><div class="first"></div>';
+					}
+					if(j<2){
+						if(data.data.comments[i].replies[j].isMyReply==1){
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis">';
+						}else{
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys">';
+						}
+					}else{
+						if(data.data.comments[i].replies[j].isMyReply==1){
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis hidden">';
+						}else{
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys hidden">';
+						}
+					}
+					
+					str1 +='<span replyUserId="'+data.data.comments[i].replies[j].replyUserId+'" class="replyUser infloor">'+data.data.comments[i].replies[j].replyUserNickName+'</span>';
+					if(data.data.comments[i].replies[j].replyType=="1"){
+						if(data.data.comments[i].replies[j].isIllegal=="0"){
+							str1 += ':<span class="replyDetail">'+getImgUrl(data.data.comments[i].replies[j].reply) +'</span>';
+						}else{
+							str1 += ':!@#$%^&*()';
+						}
+					}else{
+						str1 += '回复<span replyToUserId="'+data.data.comments[i].replies[j].replyToUserId+'" class="replyToUser">'+data.data.comments[i].replies[j].replyToUserNickName+'</span>';
+						if(data.data.comments[i].replies[j].isIllegal=="0"){
+							str1 += ':<span class="replyDetail">'+getImgUrl(data.data.comments[i].replies[j].reply) +'</span>';
+						}else{
+							str1 += ':!@#$%^&*()';
+						}
+					}
+					str1 += '</div>';//<p class="adf_time">'+getLocalTime(data.data.comments[i].replies[j].replyTime)+'</p>
+					
+				}
+				if(data.data.comments[i].replies.length>2){
+						str1 += '<div class="lookAllRep">共'+data.data.comments[i].replies.length+'条回复 ></div>';
+					}
+				}
+				str1 +='</div>';
+				str1 +='</div>';
+				}
+			if(data.data.comments.length== "0"  && pageNum == 0){
+				str1 +='<div class="nonecom"><img src="images/pingjia.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
+			}else{
+				$(".ad_comment").append('<p class="postMore"><span class="goToAllComment">查看全部评论</span></p>');
+			}
+			$(".ad_comdet").append(str1);
+			
+			}else{
+				alert(data.data.error);
+				}
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			//console.log( XMLHttpRequest )
+			//$(".main").html("尚未发布任何信息！");
+		}
+	});
+};
+//评论详情
+/*function getcommentmessage(pageNum,pageSize){
 $.ajax({//采用异步
 	type: "get",
 	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getComments/2.4.2',
@@ -359,16 +542,16 @@ $.ajax({//采用异步
 			str1 +='<div class="adf_img " ><img src="'+data.data.comments[i].profile+'"></div>';
 			str1 +='<div class="adf_name"><span class="adf_nickname">'+data.data.comments[i].nickName+'</span><p class="ad_fnum"><span>'+data.data.comments[i].floorNum+'楼</span>'+getLocalTime(data.data.comments[i].commentTime)+'</p></div>';
 			str1 +='<div class="adf_btn">';
-			/*添加评乱点赞*/
+			
 			if(data.data.comments[i].isPraised=="0"){
-				str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/cdianzan.png" class="co_dianzan">';
+				str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
 				if(data.data.comments[i].praiseCount>999){
 					str1 +='<b class="zq_count">999+</b></span>';
 				}else{
 					str1 +='<b class="zq_count">'+data.data.comments[i].praiseCount+'</b></span>';
 				}
 			}else{
-				str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/cdianzanhou.png" class="qx_dianzan">';
+				str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/zanhou.png" class="qx_dianzan">';
 				if(data.data.comments[i].praiseCount>999){
 					str1 +='<b class="zh_count">999+</b></span>';
 				}else{
@@ -419,7 +602,7 @@ $.ajax({//采用异步
 			str1 +='</div>';
 			}
 		if(data.data.comments.length== "0"  && pageNum == 0){
-			str1 +='<div class="nonecom"><img src="images/noappraise.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
+			str1 +='<div class="nonecom"><img src="images/pingjia.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
 		}else{
 			$(".ad_comment").append('<p class="postMore"><span class="goToAllComment">查看全部评论</span></p>');
 		}
@@ -433,7 +616,21 @@ $.ajax({//采用异步
 		//$(".main").html("尚未发布任何信息！");
 	}
 });
-}
+}*/
+
+//展开全部子评论
+$(".lookAllRep").live('click',function(){
+	$(this).siblings(".hidden").removeClass("hidden");
+	$(this).html("收起").removeClass("lookAllRep").addClass("stopRep");
+	$(this).css("padding-bottom","7px");
+});	
+//收起评论
+$(".stopRep").live('click',function(){
+	$(this).parent().children(":gt(3)").addClass("hidden");
+	var i=$(this).parent().children().length-3;
+	$(this).show().removeClass("stopRep").addClass("lookAllRep");
+	$(this).html("共"+i+"条回复 >").css("padding-bottom","7px");
+});
 function getMorecomment(){
 		var pageNum = $('body').data('pageNum');
 		if(pageNum == undefined || parseInt(pageNum) == NaN){
@@ -443,18 +640,107 @@ function getMorecomment(){
 		$('body').data('pageNum',pageNum);
 		getcommentmessage(pageNum,pageSize);
 	}
+//评论帖子
+$(".send_message").live('click',function(){
+	$('.page_emotion').hide();
+	$('.ping_icon').removeClass('open');
+	if($.trim($(".form-control").val()).length > 10){
+		if (/iphone|ipad|ipod/.test(ua)) {
+			_czc.push(['_trackEvent','nggirl_column_post_article_comment','phoneType=iOS','文章评论','postId',getParam('postId')]);	
+		} else if (/android/.test(ua)) {
+			_czc.push(['_trackEvent','nggirl_column_post_article_comment','phoneType=and','文章评论','postId',getParam('postId')]);
+		};
+		$(".form-control").blur();
+		commentinfo();
+		//localStorage["a"]= "";
+	}else{
+		$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
+		$(".successtips").html("亲亲要写10个汉字以上哟~");
+		$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
+	};
+});
+//评论帖子
+function commentinfo(){
+	$.ajax({//采用异步
+	type: "post",
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/comment/2.5.3',
+	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:getParam('postType'),content:eraseStyleInCopyText($(".form-control").val())}),
+	timeout:15000,//10s
+	dataType:"json",
+	beforeSend:function(){
+		$(".send_message").off("click"); //解绑事件，用户在次点击在未返回数据时候，提交按钮不起作用
+		$(".send_message").removeClass("send_message");//在请求发送之后，清空input，即使当时看不到结果，再次输入提交时，也是属于第二次评论了
+	},
+	success: function (data) {
+		if(data.code == 0){
+			$("#send_message").addClass("send_message");
+			var floors="";
+			if($(".ad_comdet").children(".ad_floor").length == 0){
+			    floors=1;
+			}else{
+				floors=parseInt($(".ad_comdet").children(".ad_floor:eq(0)").attr("floor"))+1;
+				} 
+			var str2 = "";
+			str2 +='<div class="ad_floor" userId="'+data.data.userId+'" commentId="'+data.data.commentId+'" floor= "'+floors+'" >';
+			str2 +='<div class="adf_det clearfix">';
+			str2 +='<div class="adf_img " ><img src="'+data.data.profile+'"></div>';
+			str2 +='<div class="adf_name"><p class="adf_nickname">'+data.data.nickName+'</p><p class="ad_fnum"><span>'+floors+'楼</span>'+getLocalTime(data.data.commentTime)+'</p></div>';
+			str2 +='<div class="adf_btn">';
+			str2 +='<span class="comleftz" status="1" commentId="'+data.data.commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
+			str2 +='<b class="zq_count">0</b></span>';
+			str2 +='<span class="comleft"><img src="images/commentnum.png" class="ad_gtcom"></span>';
+			str2 +='</div></div>';
+			if(data.data.isIllegal=="0"){
+			str2 +='<div class="adf_comdetail ad_morea" replyType="1">'+getImgUrl(data.data.comment)+'</div>';
+			}else{
+				str2 +='<div class="adf_comdetail ad_morea">!@#$%^&*()</div>';
+				}
+			str2 +='<div class="adf_reply"></div>';
+			str2 +='</div>';
+			
+		$(".ad_comdet").prepend(str2);
+		$(".form-control").attr("placeholder","请输入评论内容");
+		$(".form-control").val("").css("height","19px");;
+		$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
+		$(".successtips").html("评论成功");
+		$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
+		$(".nonecom").remove();
+		//localStorage["a"] == "";
+		if(data.data.addScore != "0"){
+			alertNewScore("积分 +"+data.data.addScore);
+			//$(".send_message").bind("click",commentinfo);
+		}
+		$(".de_bot").hide();
+		$(".ad_btn").show();
+		}else{
+				alert(data.data.error);	
+		}
+	},
+	error: function (XMLHttpRequest, textStatus, errorThrown) {
+		//console.log( XMLHttpRequest )
+		//$(".main").html("尚未发布任何信息！");
+		//$(".send_message").bind("click",commentinfo);  //无论返回数据成功或者失败，都会给提交按钮添加绑定事件
+	}
+	});
+}
 //回复评论
 $(".adf_comdetail").live('click',function(){
 	var del=$(this);
-	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");
+	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");	
+	$(".oncom").attr("replyType",$(this).attr("replyType"));
+	})
+//点击回复
+$(".clickReplay").live('click',function(){
+	$(".ad_flbot").hide();
+	$(".ad_flbtn").hide();
+	var del=$(this);
 	$(".form-tip").html("回复层主");
-	$(".form-control").attr('placeholder',"回复层主");
+	$(".form-control").attr("placeholder","回复层主");
 	$("#send_message").removeClass().addClass("replymessage");
 	$(".de_bot").show();
 	$(".ad_btn").hide();
 	$(".form-control").focus();
-	$(".oncom").attr("replyType",$(this).attr("replyType"));
-	})
+});
 $(".ad_gtcom").live('click',function(){
 	var del=$(this);
 	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");
@@ -538,9 +824,12 @@ function replycommentinfo(){
 	dataType:"json",
 	success: function (data) {
 		if(data.code == 0){
+				$(".oncom").children(".adf_reply").children(".hidden").removeClass("hidden");
+				$(".oncom").children(".adf_reply").children(".lookAllRep").remove();
+				$(".oncom").children(".adf_reply").children(".stopRep").remove();
 				var str4="";
 				if($(".oncom .adf_reply").children().length == 0){
-					str4 +='<img src="images/Triangular.png" class="arr">';
+					str4 +='<img src="images/Triangular.png" class="arr"><div class="first"></div>';
 					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="'+data.data.isMyReply+'" replyType="'+ data.data.replyType+'" class="adf_dis">';
 				}else{
 					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="'+data.data.isMyReply+'" replyType="'+ data.data.replyType+'" class="adf_dis">';
@@ -560,7 +849,10 @@ function replycommentinfo(){
 						str4 += '!@#$%^&*()';
 						}
 					}
-				str4 += '<p class="adf_time">'+getLocalTime(data.data.replyTime)+'</p></div>';
+				str4 += '</div>';//<p class="adf_time">'+getLocalTime(data.data.replyTime)+'</p>
+				if($(".oncom .adf_reply").children().length>3){
+					str4 +='<div class="stopRep">收起</div>';
+				}
 				$(".oncom .adf_reply").append(str4);
 				$(".form-control").attr('placeholder',"请输入评论内容");
 				$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
@@ -568,7 +860,7 @@ function replycommentinfo(){
 				$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
 				//localStorage["a"]= "";
 				$(".form-control").val("");
-				if(data.data.addScore != "0"){
+				if(data.data.addScore != "0" && data.data.addScore != undefined){
 					alertNewScore("积分 +"+data.data.addScore);
 				}
 			}else{
@@ -583,31 +875,37 @@ function replycommentinfo(){
 	}
 
 //发布人点击...
-$(".adf_btn .ad_morea").live('click',function(){
+$(".ad_floor .ad_morea").live('click',function(){
 	$(".ad_flbot").show();
 	$(".ad_flbtn").show();
+	$(".ad_flbtn .clickReplay").show();
 	$(".ad_flbtn .ad_report").hide();
 	$(".ad_flbtn .ad_delinner").hide();
-	$(this).parent().parent().parent().addClass("readydelthis").siblings().removeClass("readydelthis");
-})
+	$(".ad_flbtn .ad_aelbtn").show();
+	
+	$(this).parent().addClass("readydelthis").siblings().removeClass("readydelthis");
+});
 //非发布人点击...
-$(".adf_btn .ad_moreb").live('click',function(){
+$(".ad_floor .ad_moreb").live('click',function(){
 	checkAccessTokenLogin(function () {
 		$(".ad_flbot").show();
 		$(".ad_flbtn").show();
+		$(".ad_flbtn .clickReplay").show();
+		$(".ad_flbtn .ad_report").show();
 		$(".ad_flbtn .ad_aelbtn").hide();
 		$(".ad_flbtn .ad_delinner").hide();
-	},'videoDeatil.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
-	$(this).parent().parent().siblings().children().removeClass("reportthis");
-	$(this).parent().parent().parent().addClass("reportthis").siblings().removeClass("reportthis");
-	$(this).parent().parent().parent().siblings().children("adf_reply").children().removeClass("reportthis");
-	$(this).parent().parent().parent().attr("targetType","1");
-	$(this).parent().parent().parent().attr("targetId",$(this).parent().parent().parent().attr("commentid"));
+	},'articledetail.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
+	$(".reportthis").removeClass("reportthis");
+	//$(this).parent().siblings().children().removeClass("reportthis");
+	$(this).parent().addClass("reportthis")//.siblings().removeClass("reportthis");
+	//$(this).parent().siblings().children("adf_reply").children().removeClass("reportthis");
+	$(this).parent().attr("targetType","1");
+	$(this).parent().attr("targetId",$(this).parent().attr("commentid"))
 });
 //点击取消按钮
 $(".ad_flbot,.ad_clobtn").live('click',function(){
 	$(".ad_flbot").hide();
-	$(".ad_flbtn,.ad_flbtn1").hide();
+	$(".ad_flbtn,.ad_flbtn1,.ad_flbtn2").hide();
 	$(".ad_flbtn .ad_report").show();
 	$(".ad_flbtn .ad_aelbtn").show();
 	$(".ad_flbtn .ad_delinner").show();
@@ -621,6 +919,8 @@ $(".ad_flbot,.ad_clobtn").live('click',function(){
 $(".adf_dis").live('click',function(){
 	$(".ad_flbot").show();
 	$(".ad_flbtn").show();
+	$(".ad_flbtn .ad_delinner").show();
+	$(".ad_flbtn .clickReplay").hide();
 	$(".ad_flbtn .ad_report").hide();
 	$(".ad_flbtn .ad_aelbtn").hide();
 	$(".adf_dis").removeClass("delthis");
@@ -695,7 +995,7 @@ $(".adin_suredel").live('click',function(){
 			$(".ad_flbtn .ad_aelbtn").show();
 			$(".ad_flbtn .ad_delinner").show();
 			$(".ad_sure").hide();
-			if($(".delthis").parent().children().length == 2){
+			if($(".delthis").parent().children().length == 3){
 				$(".delthis").parent().empty();
 			}else{
 				$(".delthis").remove();
@@ -794,7 +1094,7 @@ $(".talkBtn").live('click',function(){
 							del.addClass("zhongcao2").removeClass("zhongcao1");
 							del.html("已收藏");
 							delnum.html(parseInt(delnum.html())+1);
-							if(data.data.addScore != "0"){
+							if(data.data.addScore != "0" && data.data.addScore != undefined){
 								alertNewScore("积分 +"+data.data.addScore);
 							}
 						}else{
@@ -806,6 +1106,59 @@ $(".talkBtn").live('click',function(){
         }, 'videoDetail.html' + window.location.search);
 		return false;
     });
+//关注按钮点击
+$(".head_attention").live('click',function(){
+	 checkAccessTokenLogin(function () {
+         var data = getFinalRequestObject({
+             accessToken: getAccessToken()
+         });
+		
+		if($(".head_attention").hasClass("atten1")){
+				cancelFollowUser();
+				
+			}else{
+				FollowUser();
+				
+				}
+	}, 'myHomePage.html' + window.location.search);
+});
+//关注
+function FollowUser(del){
+	$.ajax({//采用异步
+		type: "post",
+		url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/personal/addFollowUser/2.2.0',
+		data:getFinalRequestObject({accessToken:getAccessToken(),followedUserId:$(".dressname").attr("createUserId")}),
+		dataType:"json",
+		success: function (data) {
+			if(data.code == 0){
+				$(".head_attention").html("已关注");
+				$(".head_attention").removeClass("atten2").addClass("atten1");
+				
+			}else{
+				alert(data.data.error)
+			}
+		},
+	
+	});
+}
+//取消关注
+function cancelFollowUser(){
+	$.ajax({//采用异步
+		type: "post",
+		url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/personal/cancelFollowUser/2.2.0',
+		data:getFinalRequestObject({accessToken:getAccessToken(),followedUserId:$(".dressname").attr("createUserId")}),
+		dataType:"json",
+		success: function (data) {
+			if(data.code == 0){
+				$(".head_attention").html("关注");
+				$(".head_attention").removeClass("atten1").addClass("atten2");
+			}else{
+				alert(data.data.error)
+			}
+		},
+	
+	});
+}
 //留言时间格式化
 function getLocalTime(publishTime) {
     var d_minutes, d_hours, d_days;
@@ -864,7 +1217,6 @@ $(".zhongcao").live('click',function(){
 				success: function (data) {
 					if(data.code == 0){
 						del.addClass("zhongcao1").removeClass("zhongcao2");
-						del.text(parseInt(del.text())-1);
 					}else{
 						alert(data.data.error);
 					}	
@@ -889,8 +1241,7 @@ $(".zhongcao").live('click',function(){
 							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=and','商品收藏','seedProductId',$(this).attr("seedProductId")]);
 						};
 						del.addClass("zhongcao2").removeClass("zhongcao1");
-						del.text(parseInt(del.text())+1);
-						if(data.data.addScore != "0"){
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
 					}else{
@@ -922,15 +1273,15 @@ $(".adf_btn .comleftz").live('click',function(){
 				if(data.code == 0){
 					if(del.attr("status") == "0"){
 						del.attr("status","1");
-						del.children("img").attr('src','images/cdianzan.png');
+						del.children("img").attr('src','images/zanqian.png');
 						del.children("b").text(parseInt(del.children("b").text())-1);
 						del.children("b").css('color','#9a9a9a');
 					}else{
 						del.attr("status","0");
-						del.children("img").attr('src','images/cdianzanhou.png');
+						del.children("img").attr('src','images/zanhou.png');
 						del.children("b").text(parseInt(del.children("b").text())+1);
-						del.children("b").css('color','#50c8b4');
-						if(data.data.addScore != "0"){
+						del.children("b").css('color','#ee750c');
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
 					}
@@ -946,7 +1297,7 @@ $(".adf_btn .comleftz").live('click',function(){
 function isNoTalk(){
 	$.ajax({//采用异步
 	type: "get",
-	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/3.0.0',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/4.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:2,isCountViewNum:0}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -1124,6 +1475,68 @@ window.addEventListener('load',function(){
 				_czc.push(['_trackEvent','nggirl_column_post_video_relevant_product','phoneType=and','点击往期商品按钮','true','']);
 			};
 			window.location.href="goodsList.html?postId=" +getParam("postId") +'&postType='+2+'&v=<%= VERSION %>';	
+		   
 		}			
 	 })
 })
+var APPCommon = {
+    iphoneSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>',
+    iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
+    androidSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>',
+    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    openApp: function(){
+        var this_  =  this;
+        //微信
+		
+       /* if(this_.isWeixin()){
+            $(".isWei").css("height",$(window).height());
+            $(".isWei").show();
+            $('.isWei').on('touchstart', function () {
+                $(".isWei").hide();
+            });
+ 
+        }else{//非微信浏览器*/
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+				if(this_.isWeixin()){
+					 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+		 
+				}else{
+                var loadDateTime = new Date();
+                window.setTimeout(function() {
+                    var timeOutDateTime = new Date();
+                    if (timeOutDateTime - loadDateTime < 5000) {
+                        window.location = this_.iphoneDownUrl;//ios下载地址
+                    } else {
+                        window.close();
+                    }
+                },1500);
+				window.location = this.iphoneSchema;
+				}
+                
+            }else if (navigator.userAgent.match(/android/i)) {
+				if(this_.isWeixin()){
+					$(".isWei").css("height",$(window).height());
+					$(".isWei").show();
+		 
+				}else{
+					try {
+						window.location = this_.androidSchema;
+						setTimeout(function(){
+							window.location=this_.androidDownUrl; //android下载地址
+	 
+						},1500);
+					} catch(e) {}
+				}
+            }
+       /* }*/
+    },
+    isWeixin: function(){ //判断是否是微信
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+ 
+};

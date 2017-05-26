@@ -1,5 +1,6 @@
 // JavaScript Document
 $(function(){
+	
 	getGoodsList(0,10);
 	$(".back").live('click',function(){
 		if(getParam('postType') == 1){//文章
@@ -9,6 +10,7 @@ $(function(){
 				_czc.push(['_trackEvent','nggirl_column_post_article_view','phoneType=and','文章浏览','postId',getParam('postId')]);
 			};
 			window.location.href="articledetail.html?postType=" + getParam('postType') +'&postId=' +getParam('postId')+'&v=<%= VERSION %>';	
+
 		}	
 		if(getParam('postType') == 2){//视频
 			if (/iphone|ipad|ipod/.test(ua)) {
@@ -17,6 +19,7 @@ $(function(){
 				_czc.push(['_trackEvent','nggirl_column_post_video_view','phoneType=and','视频浏览','postId',getParam('postId')]);
 			};
 			window.location.href="videoDetail.html?postType=" + getParam('postType') +'&postId=' +getParam('postId')+'&v=<%= VERSION %>';	
+
 		}	
 	});
 });
@@ -36,7 +39,7 @@ function getGoodsList(page,size){
 						alertFn("没有更多了~");
 					}
 					$.each(data.data,function(key,val){
-						str += '<li ><div class="box" seedProductId="'+val.seedProductId+'"><img class="seeProduct" src="'+val.picture+'">';
+						str += '<li ><div class="box" seedProductId="'+val.seedProductId+'"><img class="seeProduct" isAllowBuy="'+val.isAllowBuy +'" src="'+val.picture+'">';
 						str +='<p class="title">'+val.name+'</p>';
 						str +='<p class="price">参考价：<span>¥ '+val.price+'</p>';
 						if(val.isSeed == "0"){
@@ -149,17 +152,23 @@ $(".zhongcao").live('click',function(){
 });
 //点击商品跳转到商品详情页
 	$(".seeProduct").live('click',function(){
+		var delId = $(this).parent().attr("seedproductId");
 		if (/iphone|ipad|ipod/.test(ua)) {
 			_czc.push(['_trackEvent','nggirl_column_post_seedProduct_view','phoneType=iOS','帖子商品浏览','seedProductId',$(this).parent().attr("seedProductId")]);	
 		} else if (/android/.test(ua)) {
 			_czc.push(['_trackEvent','nggirl_column_post_seedProduct_view','phoneType=and','帖子商品浏览','seedProductId',$(this).parent().attr("seedProductId")]);
 		};
-		if(getParam('postType') == 1){//文章
+		if($(this).attr("isAllowBuy") == 0){
+			window.location.href="productDetails.html?seedProductId=" +$(this).parent().attr("seedProductId") +'&targetType='+getParam('postType')+'&targetId='+getParam("postId")+'&v=<%= VERSION %>';	
+		}else{
+			window.location.href = "goodsShareCatenate.html?itemId="+delId+"&v=<%= VERSION %>";		
+		}
+		/*if(getParam('postType') == 1){//文章
 			window.location.href="productDetails.html?seedProductId=" +$(this).parent().attr("seedProductId") +'&targetType='+1+'&targetId='+getParam("postId")+'&v=<%= VERSION %>';	
 		}	
 		if(getParam('postType') == 2){//视频
 			window.location.href="productDetails.html?seedProductId=" +$(this).parent().attr("seedProductId") +'&targetType='+2+'&targetId='+getParam("postId")+'&v=<%= VERSION %>';	
-		}	
+		}	*/
 	});
 //点击购买
 	$('.goToBuy2').die('click');
@@ -174,11 +183,28 @@ $(".zhongcao").live('click',function(){
 			};
 			//alert(delId);
 			//判断如果是在微信打开
-			if(isInWeixin()){
+			/*if(isInWeixin()){
 				$('.isWei').show();	
 			}else{
-				$('.isWei').hide();	
-				window.location.href = del.attr('urlStr');
-			}
+				$('.isWei').hide();	*/
+				window.location.href = "goodsShareCatenate.html?itemId="+delId+"&v=<%= VERSION %>";
+			/*}*/
+		}, 'goodsList.html' + window.location.search);
+    });
+//点击购买
+	$('.goToBuy1').die('click');
+	$('.goToBuy1').live('click',function(e) {
+		var del = $(this);
+		var delId = $(this).parent().attr("seedproductId");
+		checkAccessTokenLogin(function () {
+			if (/iphone|ipad|ipod/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_relevant_product_gobuy','phoneType=iOS','去买按钮','seedProductId',delId]);	
+			} else if (/android/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_relevant_product_gobuy','phoneType=and','去买按钮','seedProductId',delId]);
+			};
+			//alert(delId);
+			//判断如果是在微信打开
+			window.location.href = "productDetails.html?seedProductId="+delId+"&targetType="+getParam("postType")+"&targetId="+getParam("postId")+"&v=<%= VERSION %>";
+			
 		}, 'goodsList.html' + window.location.search);
     });

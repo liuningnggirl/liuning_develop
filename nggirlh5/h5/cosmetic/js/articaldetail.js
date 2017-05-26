@@ -1,5 +1,17 @@
 var pageSize = 20;
+var ua = navigator.userAgent.toLowerCase();	
 $(function(){
+	if(!isInApp()){
+		$(".downLoad").show();
+	}
+	$(".downLoad .closeTip").click(function(){
+		$(".downLoad").hide();
+		$(".ad_tops").css("margin-top","7px");
+	})
+	$(".downLoad .gtload").click(function(){
+		APPCommon.openApp();
+		return false;
+	})
 	$('.forinput').scroll(function(e) {	
 	 $("img.lazy").lazyload({effect : "show"});
     });
@@ -122,11 +134,14 @@ $(function(){
 		return false;
 	});
 	//跳转到标签页
-	$(".ad_label span").live('click',function(){
+	$(".ad_label .comLabel").live('click',function(){
 		window.location.href="label.html?labelName="+ $(this).html()+'&v=<%= VERSION %>';
 	});
+	$(".ad_label .topicLabel").live('click',function(){
+		window.location.href="hotTopicDetail.html?topicId="+ $(this).attr("topicId")+'&v=<%= VERSION %>';
+	});
 	//跳转到作者页
-	$(".dressname,.ad_imgbox").live('click',function(){
+	$(".dressname .ad_user_name,.ad_imgbox").live('click',function(){
 		window.location.href="myHomePage.html?userId="+ $(this).attr("createUserId")+'&v=<%= VERSION %>';
 	});
 	//设置显示框高度
@@ -185,6 +200,38 @@ $(function(){
 		$(".opbginner img").removeAttr("style");
 		$("body").css("overflow","auto");
 	});
+	//举报
+	
+	$(".jubaoBtn").live('click',function(){
+		$(".ad_flbot").show();
+		$(".ad_flbtn2").show();
+	})
+	$(".ad_report2").live('click',function(){
+		$(".ad_flbot").hide();
+		$(".ad_flbtn2").hide();
+		var del=$(this);
+		checkAccessTokenLogin(function () {
+			 var data = getFinalRequestObject({
+				 accessToken: getAccessToken()
+			 });
+			$.ajax({//采用异步
+				type: "post",
+				url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/report/post/4.0.0',
+				data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:1}),
+				dataType:"json",
+				success: function (data) {
+					if(data.code == 0){
+						$(".successtips").html("举报成功");
+						$(".successtips").fadeIn(100).delay(1500).fadeOut(100);
+					}else{
+						$(".successtips").html(data.data.error);
+						$(".successtips").fadeIn(100).delay(1500).fadeOut(100);
+					}
+				},
+			});
+		}, 'articledetail.html' + window.location.search);
+		//window.location.href="report.html?postId=" +getParam("postId") +'&postType='+1+'&v=<%= VERSION %>';
+	})
 	//点击购买
 	$('.goToBuy2').die('click');
 	$('.goToBuy2').live('click',function(e) {
@@ -232,45 +279,32 @@ function getAccessToken(){
 function getarticalmessage(){
 $.ajax({//采用异步
 	type: "get",
-	url:'<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/3.0.0',
+	url:'<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/4.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:1}),
 	timeout:15000,//10s
 	dataType:"json",
 	success: function (data) {
+		var shopNum=0;
 		if(data.code == 0){
 		var str = "";
-		str +='<div class="ad_tops" postId="'+data.data.postId+'" postType="1">';
-		str +='<div class="adbgbox"><img src="'+data.data.detailImg+'" class="ad_bg" alt=""/></div>';
-		str +='<p class="ad_title">'+data.data.title+'</p>';
-		if(data.data.labels.length>0 && data.data.labels !=""){
-			str +='<p class="ad_label">';
-			for( var t=0;t<data.data.labels.length;t++){
-				str +='<span>';
-				str += data.data.labels[t];
-				str +='</span>';
-			}
-			str +='</p>';
-		}
+		str +='<div class="ad_tops clearfix" postId="'+data.data.postId+'" postType="1">';
+		
 		str +='<div class="ad_imgbox" createUserId="'+data.data.createUserId+'"><img class="dressimg" src="'+data.data.userProfile+'"/></div><div class="dressname" createUserId="'+data.data.createUserId+'">';
-		str +='<span class="ad_user_name">'+data.data.userName+'</span>';
+		str +='<span class="ad_user_name" createUserId="'+data.data.createUserId+'">'+data.data.userName+'</span>';
 		if(data.data.userRole == ''){
-			str +='<span class="ad_userrole" style=" border:none;"></span></div>';
+			str +='<span class="ad_userrole" style=" border:none;"></span>';
 		}else{
-			str +='<span class="ad_userrole">'+data.data.userRole+'</span></div>';
+			str +='<span class="ad_userrole">'+data.data.userRole+'</span>';
 		}
-		str +='<div class="view_detail">';
-		if(data.data.viewNum > 9999){//浏览量
-				str +='<span class="viewnum">9999+</span>';
-			}else{
-				str +='<span class="viewnum">'+data.data.viewNum+'</span>';
-			}
-			if(data.data.commentNum > 99999){//评论条数
-				str +='<span class="commentnum">9999+</span>';
-			}else{
-				str +='<span class="commentnum">'+data.data.commentNum+'</span>';
-			}
-		str +='<span class="sendtime">'+getLocalTime(data.data.createTime)+'</span></div></div><div class="ad_detail">';
-		str +='<p class="ad_artical">文章详情</p><div class="ad_det">';
+		if(data.data.isAttention == 0 && data.data.isMyPost == 0){
+			str +='<div class="head_attention atten2">关注</div>';
+		}else if(data.data.isAttention == 1 && data.data.isMyPost == 0){
+			str +='<div class="head_attention atten1">已关注</div>';
+		}
+		str +='</div>';
+
+		str +='</div><div class="ad_detail">';
+		str +='<div class="ad_det"><p class="ad_title">'+data.data.title+'</p>';
 		for(var i = 0;i < data.data.article.length;i++){
 			if(data.data.article[i].type== "1"){
 				str +='<p class="ad_tit">'+data.data.article[i].content+'</p>';
@@ -281,44 +315,31 @@ $.ajax({//采用异步
 			}else if(data.data.article[i].type=="4"){
 				str +='<p class="ad_note">'+data.data.article[i].content+'</p>';
 			}else if(data.data.article[i].type=="5"){
+				shopNum ++;
 				var articleGoods=data.data.article[i];
 				str +='<div isAllowBuy='+articleGoods.isAllowBuy+' seedProductId='+articleGoods.seedProductId+' class="postShop postShopa productDetail clearfix">';
 				str +='<div class="shopLeft"><img src="'+articleGoods.picture+'"></div>';
-				str +='<div class="shopCenter"><p>'+articleGoods.name+'</p><p class="productprize">参考价：<span>¥ '+articleGoods.price+'</span></p><p class="productTui">推荐度：';
-				for(var j = 0; j < 5; j++){
-					if(j < parseInt(articleGoods.recommendation/2)){
-						str +='<img src="images/product_start.png" class="xingXing">'
-					}else if(articleGoods.recommendation % 2 == 1 && parseInt(articleGoods.recommendation/2) == j){
-						str +='<img src="images/product_half_start.png" class="xingXing">'
-					}else{
-						str +='<img src="images/product_white_start.png" class="xingXing">'
-					}
-				};
-				str +='</p></div>';
-				str +='<div class="shopRight">';
-				str +='<span class="productDetails" seedProductId='+articleGoods.seedProductId+'><img src="images/order-arr-right_03.png"></span></div></div>';
-				str +='<div isAllowBuy='+articleGoods.isAllowBuy+' class="goodsbot" seedProductId='+articleGoods.seedProductId+'>';
+				str +='<div class="shopCenter"><p>'+articleGoods.name+'</p><p class="productprize1"><span>¥ '+articleGoods.price+'</span></p>';
+
+				str +='</div>';
+				str +='<div class="goodsRight" seedProductId='+articleGoods.seedProductId+'>';
 				if(articleGoods.isSeed == "0"){
-					str +='<p class="zhongcao zhongcao1">'+articleGoods.seedNum+'</p>';
+					str +='<p class="zhongcao zhongcao1"></p>';
 				}else{
-					str +='<p class="zhongcao zhongcao2">'+articleGoods.seedNum+'</p>';
+					str +='<p class="zhongcao zhongcao2"></p>';
 				}
-				if(articleGoods.isAllowBuy == "0"){
-					str +='<p class="goToBuy goToBuy1">去买</p></div>';
-				}else{
-					str +='<p class="goToBuy goToBuy2" urlStr="'+articleGoods.tb_detail_url+'">去买</p></div>';
-				}
+				str +='</div></div>';
 			}else if(data.data.article[i].type=="6"){
 				var articleGoods=data.data.article[i];
 				str +='<div isAllowBuy='+articleGoods.isAllowBuy+' workId='+articleGoods.workId+' class="postShop postShopa  workDetails clearfix">';
 				str +='<div class="shopLeft"><img src="'+articleGoods.workPhoto+'"></div>';
-				str +='<div class="shopCenter"><p>'+articleGoods.workName+'</p>';
+				str +='<div class="shopCenter"><p class="workName">'+articleGoods.workName+'</p>';
 				if(articleGoods.workPrice == "0"){
 					str +='<p class="productprize"><span>¥ '+articleGoods.workCost+'</span></p></div>';
 				}else{
 					str +='<p class="productprize"><span>¥ '+articleGoods.workPrice+'</span><span class="oldCost">¥ '+articleGoods.workCost+'</span></p></div>';
 				}
-				str +='<div class="shopRight">';
+				str +='<div class="shopRight workRight">';
 				str +='<span class="workDetail" workId='+articleGoods.workId+'><img src="images/order-arr-right_03.png"></span>';
 				if(articleGoods.workIsCollected == "0"){
 					str +='<p class="z-kinds zhongcao1">收藏</p>';
@@ -329,6 +350,39 @@ $.ajax({//采用异步
 			};		
 		};
 		str +='</div>';
+		if(data.data.labels.length>0 && data.data.labels !=""){
+			str +='<p class="ad_label">';
+			for( var t=0;t<data.data.labels.length;t++){
+				str +='<span class="comLabel">';
+				str += data.data.labels[t];
+				str +='</span>';
+			}
+			for( var n=0;n<data.data.topics.length;n++){
+				str +='<span class="topicLabel" topicId="'+data.data.topics[n].topicId+'">';
+				str += data.data.topics[n].name;
+				str +='</span>';
+			}
+			str +='</p>';
+		}
+		str +='<div class="view_detail"><span class="sendtime">'+getLocalTime(data.data.createTime)+'</span><div class="flRight">';
+		if(data.data.commentNum > 9999){//评论条数
+			str +='<span class="commentnum">9999+</span>';
+		}else{
+			str +='<span class="commentnum">'+data.data.commentNum+'</span>';
+		}
+		if(data.data.viewNum > 9999){//浏览量
+			str +='<span class="viewnum">9999+</span>';
+		}else{
+			str +='<span class="viewnum">'+data.data.viewNum+'</span>';
+		}
+		
+		if(data.data.loverCount > 9999){//xihuan
+			str +='<span class="lovenum">9999+</span>';
+		}else{
+			str +='<span class="lovenum">'+data.data.loverCount+'</span>';
+		}
+		str +='<span class="jubaoBtn"><img src="images/more.png"></span>';
+		str +='</div></div>';
 		$(".ad_btn").attr("postId",data.data.postId);
 		if(data.data.isPraised==1){
 			$(".Praised").addClass("Praised1");
@@ -349,6 +403,7 @@ $.ajax({//采用异步
 			$(".de_bot").addClass("isNoTalks");
 			$(".talkTime").html(data.data.noTalkTime);
 		}
+		$(".lookGoods").text(shopNum);
 		// myScroll.refresh();
 		//微信分享
 		if(isInWeixin()){
@@ -388,7 +443,7 @@ $.ajax({//采用异步
 function getLoverCount(){
 $.ajax({//采用异步
 	type: "get",
-	url:'<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/3.0.0',
+	url:'<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/4.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:1,isCountViewNum:0}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -443,68 +498,85 @@ function getcommentmessage(pageNum,pageSize){
 				str1 +='<div class="adf_btn">';
 				/*添加评乱点赞*/
 				if(data.data.comments[i].isPraised=="0"){
-					str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/cdianzan.png" class="co_dianzan">';
+					str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
 					if(data.data.comments[i].praiseCount>999){
 						str1 +='<b class="zq_count">999+</b></span>';
 					}else{
 						str1 +='<b class="zq_count">'+data.data.comments[i].praiseCount+'</b></span>';
 					}
 				}else{
-					str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/cdianzanhou.png" class="qx_dianzan">';
+					str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/zanhou.png" class="qx_dianzan">';
 					if(data.data.comments[i].praiseCount>999){
 						str1 +='<b class="zh_count">999+</b></span>';
 					}else{
 						str1 +='<b class="zh_count">'+data.data.comments[i].praiseCount+'</b></span>';
 					}
 				}
-				str1 +='<span class="comleft"><img src="images/commentgreen.png" class="ad_gtcom"></span>';
-				if(data.data.comments[i].isMyComment=="1"){
-				str1 +='<span class="comright ad_morea"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
+				str1 +='<span class="comleft"><img src="images/commentnum.png" class="ad_gtcom"></span>';
+				str1 +='</div></div>';
+				/*if(data.data.comments[i].isMyComment=="1"){
+					str1 +='<span class="comright ad_morea"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
 				}else{
 					str1 +='<span class="comright ad_moreb"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
-					}
-				
-				if(data.data.comments[i].isIllegal=="0"){
-					str1 +='<div class="adf_comdetail" replyType="1">'+getImgUrl(htmlEscape(data.data.comments[i].comment))+'</div>';
+					}*/
+				if(data.data.comments[i].isMyComment=="1"){
+					str1 +='<div class="adf_comdetail ad_morea" replyType="1">';
 				}else{
-					str1 +='<div class="adf_comdetail" replyType="1">!@#$%^&*()</div>';
+					str1 +='<div class="adf_comdetail ad_moreb" replyType="1">';
+				}
+				if(data.data.comments[i].isIllegal=="0"){
+					str1 +=getImgUrl(htmlEscape(data.data.comments[i].comment))+'</div>';
+				}else{
+					str1 +='!@#$%^&*()</div>';
 					}
 				str1 +='<div class="adf_reply">';
 				if(data.data.comments[i].replies.length>0){
 				
 				for(var j = 0;j < data.data.comments[i].replies.length;j++){
 					if(j == 0){
-						str1 +='<img src="images/Triangular.png" class="arr">';
+						str1 +='<img src="images/Triangular.png" class="arr"><div class="first"></div>';
 					}
-					if(data.data.comments[i].replies[j].isMyReply==1){
-						str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis">';
+					if(j<2){
+						if(data.data.comments[i].replies[j].isMyReply==1){
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis">';
+						}else{
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys">';
+						}
 					}else{
-						str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys">';
+						if(data.data.comments[i].replies[j].isMyReply==1){
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis hidden">';
+						}else{
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys hidden">';
+						}
 					}
-					str1 +='<span replyUserId="'+data.data.comments[i].replies[j].replyUserId+'" class="replyUser infloor">'+data.data.comments[i].replies[j].replyUserNickName+'</span>:';
+					
+					str1 +='<span replyUserId="'+data.data.comments[i].replies[j].replyUserId+'" class="replyUser infloor">'+data.data.comments[i].replies[j].replyUserNickName+'</span>';
 					if(data.data.comments[i].replies[j].replyType=="1"){
 						if(data.data.comments[i].replies[j].isIllegal=="0"){
-							str1 += '<span class="replyDetail">'+getImgUrl(data.data.comments[i].replies[j].reply) +'</span>';
+							str1 += ':<span class="replyDetail">'+getImgUrl(data.data.comments[i].replies[j].reply) +'</span>';
 						}else{
-							str1 += '!@#$%^&*()';
+							str1 += ':!@#$%^&*()';
 						}
 					}else{
-						str1 += '回复<span replyToUserId="'+data.data.comments[i].replies[j].replyToUserId+'" class="replyToUser">'+data.data.comments[i].replies[j].replyToUserNickName+'</span>:';
+						str1 += '回复<span replyToUserId="'+data.data.comments[i].replies[j].replyToUserId+'" class="replyToUser">'+data.data.comments[i].replies[j].replyToUserNickName+'</span>';
 						if(data.data.comments[i].replies[j].isIllegal=="0"){
-							str1 += '<span class="replyDetail">'+getImgUrl(data.data.comments[i].replies[j].reply) +'</span>';
+							str1 += ':<span class="replyDetail">'+getImgUrl(data.data.comments[i].replies[j].reply) +'</span>';
 						}else{
-							str1 += '!@#$%^&*()';
+							str1 += ':!@#$%^&*()';
 						}
 					}
-					str1 += '<p class="adf_time">'+getLocalTime(data.data.comments[i].replies[j].replyTime)+'</p></div>';
+					str1 += '</div>';//<p class="adf_time">'+getLocalTime(data.data.comments[i].replies[j].replyTime)+'</p>
+					
 				}
-				
+				if(data.data.comments[i].replies.length>2){
+						str1 += '<div class="lookAllRep">共'+data.data.comments[i].replies.length+'条回复 ></div>';
+					}
 				}
 				str1 +='</div>';
 				str1 +='</div>';
 				}
 			if(data.data.comments.length== "0"  && pageNum == 0){
-				str1 +='<div class="nonecom"><img src="images/noappraise.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
+				str1 +='<div class="nonecom"><img src="images/pingjia.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
 			}else{
 				$(".ad_comment").append('<p class="postMore"><span class="goToAllComment">查看全部评论</span></p>');
 			}
@@ -529,18 +601,156 @@ function getMorecomment(){
 	$('body').data('pageNum',pageNum);
 	getcommentmessage(pageNum,pageSize);
 };
+//展开全部子评论
+$(".lookAllRep").live('click',function(){
+	$(this).siblings(".hidden").removeClass("hidden");
+	$(this).html("收起").removeClass("lookAllRep").addClass("stopRep");
+	$(this).css("padding-bottom","7px");
+});
+//收起评论
+$(".stopRep").live('click',function(){
+	$(this).parent().children(":gt(3)").addClass("hidden");
+	var i=$(this).parent().children().length-3;
+	$(this).show().removeClass("stopRep").addClass("lookAllRep");
+	$(this).html("共"+i+"条回复 >").css("padding-bottom","7px");
+});
+//点击评论按钮
+$(".ad_btn .toCom").live('click',function(){
+	$(".ad_flbot").hide();
+	$(".ad_flbtn").hide();
+	var del=$(this);
+	$(".form-tip").html("请输入评论内容");
+	$(".form-control").attr("placeholder","请输入评论内容");
+	$("#send_message").removeClass().addClass("send_message");
+	$(".de_bot").show();
+	$(".ad_btn").hide();
+	$(".form-control").focus();
+})
+//评论帖子
+$(".send_message").live('click',function(){
+	$('.page_emotion').hide();
+	$('.ping_icon').removeClass('open');
+	if($.trim($(".form-control").val()).length > 10){
+		if (/iphone|ipad|ipod/.test(ua)) {
+			_czc.push(['_trackEvent','nggirl_column_post_article_comment','phoneType=iOS','文章评论','postId',getParam('postId')]);	
+		} else if (/android/.test(ua)) {
+			_czc.push(['_trackEvent','nggirl_column_post_article_comment','phoneType=and','文章评论','postId',getParam('postId')]);
+		};
+		$(".form-control").blur();
+		commentinfo();
+		
+		//localStorage["a"]= "";
+	}else{
+		$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
+		$(".successtips").html("亲亲要写10个汉字以上哟~");
+		$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
+	};
+});
+//评论帖子
+function commentinfo(){
+	$.ajax({//采用异步
+	type: "post",
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/comment/2.5.3',
+	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:getParam('postType'),content:eraseStyleInCopyText($(".form-control").val())}),
+	timeout:15000,//10s
+	dataType:"json",
+	beforeSend:function(){
+		$(".send_message").off("click"); //解绑事件，用户在次点击在未返回数据时候，提交按钮不起作用
+		$(".send_message").removeClass("send_message");//在请求发送之后，清空input，即使当时看不到结果，再次输入提交时，也是属于第二次评论了
+	},
+	success: function (data) {
+		if(data.code == 0){
+			$("#send_message").addClass("send_message");
+			var floors="";
+			if($(".ad_comdet").children(".ad_floor").length == 0){
+			    floors=1;
+			}else{
+				floors=parseInt($(".ad_comdet").children(".ad_floor:eq(0)").attr("floor"))+1;
+				} 
+			var str2 = "";
+			str2 +='<div class="ad_floor" userId="'+data.data.userId+'" commentId="'+data.data.commentId+'" floor= "'+floors+'" >';
+			str2 +='<div class="adf_det clearfix">';
+			str2 +='<div class="adf_img " ><img src="'+data.data.profile+'"></div>';
+			str2 +='<div class="adf_name"><p class="adf_nickname">'+data.data.nickName+'</p><p class="ad_fnum"><span>'+floors+'楼</span>'+getLocalTime(data.data.commentTime)+'</p></div>';
+			str2 +='<div class="adf_btn">';
+			str2 +='<span class="comleftz" status="1" commentId="'+data.data.commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
+			str2 +='<b class="zq_count">0</b></span>';
+			str2 +='<span class="comleft"><img src="images/commentnum.png" class="ad_gtcom"></span>';
+			str2 +='</div></div>';
+			if(data.data.isIllegal=="0"){
+			str2 +='<div class="adf_comdetail ad_morea" replyType="1">'+getImgUrl(data.data.comment)+'</div>';
+			}else{
+				str2 +='<div class="adf_comdetail ad_morea">!@#$%^&*()</div>';
+				}
+			str2 +='<div class="adf_reply"></div>';
+			str2 +='</div>';
+			
+		$(".ad_comdet").prepend(str2);
+		$(".form-control").attr("placeholder","请输入评论内容");
+		$(".form-control").val("").css("height","19px");;
+		$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
+		$(".successtips").html("评论成功");
+		$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
+		$(".nonecom").remove();
+		//localStorage["a"] == "";
+		if(data.data.addScore != "0"){
+			alertNewScore("积分 +"+data.data.addScore);
+			//$(".send_message").bind("click",commentinfo);
+		}
+		$(".de_bot").hide();
+		$(".ad_btn").show();
+		}else{
+				alert(data.data.error);	
+		}
+	},
+	error: function (XMLHttpRequest, textStatus, errorThrown) {
+		//console.log( XMLHttpRequest )
+		//$(".main").html("尚未发布任何信息！");
+		//$(".send_message").bind("click",commentinfo);  //无论返回数据成功或者失败，都会给提交按钮添加绑定事件
+	}
+	});
+}
 //回复评论
 $(".adf_comdetail").live('click',function(){
 	var del=$(this);
-	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");
+	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");	
+	$(".oncom").attr("replyType",$(this).attr("replyType"));
+	
+});
+/*//发布人点击...
+$(".adf_btn .ad_morea").live('click',function(){
+	$(".ad_flbot").show();
+	$(".ad_flbtn").show();
+	$(".ad_flbtn .ad_report").hide();
+	$(".ad_flbtn .ad_delinner").hide();
+	$(this).parent().parent().parent().addClass("readydelthis").siblings().removeClass("readydelthis");
+})
+//非发布人点击...
+$(".adf_btn .ad_moreb").live('click',function(){
+	checkAccessTokenLogin(function () {
+		$(".ad_flbot").show();
+		$(".ad_flbtn").show();
+		$(".ad_flbtn .ad_aelbtn").hide();
+		$(".ad_flbtn .ad_delinner").hide();
+	},'videoDeatil.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
+	$(this).parent().parent().siblings().children().removeClass("reportthis");
+	$(this).parent().parent().parent().addClass("reportthis").siblings().removeClass("reportthis");
+	$(this).parent().parent().parent().siblings().children("adf_reply").children().removeClass("reportthis");
+	$(this).parent().parent().parent().attr("targetType","1");
+	$(this).parent().parent().parent().attr("targetId",$(this).parent().parent().parent().attr("commentid"));
+});*/
+$(".clickReplay").live('click',function(){
+	$(".ad_flbot").hide();
+	$(".ad_flbtn").hide();
+	var del=$(this);
 	$(".form-tip").html("回复层主");
 	$(".form-control").attr("placeholder","回复层主");
 	$("#send_message").removeClass().addClass("replymessage");
 	$(".de_bot").show();
 	$(".ad_btn").hide();
-	$(".oncom").attr("replyType",$(this).attr("replyType"));
 	$(".form-control").focus();
 });
+
 $(".ad_gtcom").live('click',function(){
 	var del=$(this);
 	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");
@@ -623,29 +833,35 @@ function replycommentinfo(){
 	dataType:"json",
 	success: function (data) {
 		if(data.code == 0){
+				$(".oncom").children(".adf_reply").children(".hidden").removeClass("hidden");
+				$(".oncom").children(".adf_reply").children(".lookAllRep").remove();
+				$(".oncom").children(".adf_reply").children(".stopRep").remove();
 				var str4="";
 				if($(".oncom .adf_reply").children().length == 0){
-					str4 +='<img src="images/Triangular.png" class="arr">';
-					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="'+data.data.sMyReply+'" replyType="'+ data.data.replyType+'" class="adf_dis">';
+					str4 +='<img src="images/Triangular.png" class="arr"><div class="first"></div>';
+					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="'+data.data.sMyReply+'" replyType="'+ data.data.replyType+'" class="adf_dis ">';
 				}else{
 					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="1" replyType="'+ data.data.replyType+'" class="adf_dis">';
 				}
-				str4 +='<span replyUserId="'+data.data.replyUserId+'" class="replyUser infloor">'+data.data.replyUserNickName+'</span>:';
+				str4 +='<span replyUserId="'+data.data.replyUserId+'" class="replyUser infloor">'+data.data.replyUserNickName+'</span>';
 				if(data.data.replyType=="1"){
 					if(data.data.isIllegal=="0"){
-						str4 +='<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
+						str4 +=':<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
 					}else{
-						str4 += '!@#$%^&*()';
+						str4 += ':!@#$%^&*()';
 					}
 				}else{
-					str4 += '回复<span replyToUserId="'+data.data.replyToUserId+'" class="replyToUser">'+data.data.replyToUserNickName+'</span>:';
+					str4 += '回复<span replyToUserId="'+data.data.replyToUserId+'" class="replyToUser">'+data.data.replyToUserNickName+':</span>';
 					if(data.data.isIllegal=="0"){
 						str4 += '<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
 					}else{
 						str4 += '!@#$%^&*()';
 					}
 				}
-				str4 += '<p class="adf_time">'+getLocalTime(data.data.replyTime)+'</p></div>';
+				str4 += '</div>';//<p class="adf_time">'+getLocalTime(data.data.replyTime)+'</p>
+				if($(".oncom .adf_reply").children().length>3){
+					str4 +='<div class="stopRep">收起</div>';
+				}
 				$(".oncom .adf_reply").append(str4);
 				$(".form-control").val("");
 				$(".form-control").blur();
@@ -654,9 +870,10 @@ function replycommentinfo(){
 				$(".successtips").html("评论成功");
 				$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
 				//localStorage["a"]= "";
-				if(data.data.addScore != "0"){
+				if(data.data.addScore != "0" && data.data.addScore != undefined){
 					alertNewScore("积分 +"+data.data.addScore);
 				}
+				$(".oncom .adf_reply div:last-child").css("padding-bottom","7px");
 			}else{
 				alert(data.data.error);	
 			}
@@ -694,7 +911,7 @@ $(".ad_btn .Praised").live('click',function(){
 						} else if (/android/.test(ua)) {
 							_czc.push(['_trackEvent','nggirl_column_post_article_praise','phoneType=and','文章点赞','postId',$(".ad_tops").attr('postId')]);
 						};
-						if(data.data.addScore != "0"){
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
 					}
@@ -730,7 +947,7 @@ $(".ad_btn .Collected").live('click',function(){
 					} else if (/android/.test(ua)) {
 						_czc.push(['_trackEvent','nggirl_column_post_article_collect','phoneType=and','文章收藏','postId',$(".ad_tops").attr('postId')]);
 					};
-					if(data.data.addScore != "0"){
+					if(data.data.addScore != "0" && data.data.addScore != undefined){
 						alertNewScore("积分 +"+data.data.addScore);
 					}
 				}
@@ -766,15 +983,15 @@ $(".adf_btn .comleftz").live('click',function(){
 				if(data.code == 0){
 					if(del.attr("status") == "0"){
 						del.attr("status","1");
-						del.children("img").attr('src','images/cdianzan.png');
+						del.children("img").attr('src','images/zanqian.png');
 						del.children("b").text(parseInt(del.children("b").text())-1);
 						del.children("b").css('color','#9a9a9a');
 					}else{
 						del.attr("status","0");
-						del.children("img").attr('src','images/cdianzanhou.png');
+						del.children("img").attr('src','images/zanhou.png');
 						del.children("b").text(parseInt(del.children("b").text())+1);
-						del.children("b").css('color','#50c8b4');
-						if(data.data.addScore != "0"){
+						del.children("b").css('color','#ee750c');
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
 					}
@@ -787,31 +1004,37 @@ $(".adf_btn .comleftz").live('click',function(){
 	
 });
 //发布人点击...
-$(".adf_btn .ad_morea").live('click',function(){
+$(".ad_floor .ad_morea").live('click',function(){
 	$(".ad_flbot").show();
 	$(".ad_flbtn").show();
+	$(".ad_flbtn .clickReplay").show();
 	$(".ad_flbtn .ad_report").hide();
 	$(".ad_flbtn .ad_delinner").hide();
-	$(this).parent().parent().parent().addClass("readydelthis").siblings().removeClass("readydelthis");
+	$(".ad_flbtn .ad_aelbtn").show();
+	
+	$(this).parent().addClass("readydelthis").siblings().removeClass("readydelthis");
 });
 //非发布人点击...
-$(".adf_btn .ad_moreb").live('click',function(){
+$(".ad_floor .ad_moreb").live('click',function(){
 	checkAccessTokenLogin(function () {
 		$(".ad_flbot").show();
 		$(".ad_flbtn").show();
+		$(".ad_flbtn .clickReplay").show();
+		$(".ad_flbtn .ad_report").show();
 		$(".ad_flbtn .ad_aelbtn").hide();
 		$(".ad_flbtn .ad_delinner").hide();
 	},'articledetail.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
-	$(this).parent().parent().siblings().children().removeClass("reportthis");
-	$(this).parent().parent().parent().addClass("reportthis").siblings().removeClass("reportthis");
-	$(this).parent().parent().parent().siblings().children("adf_reply").children().removeClass("reportthis");
-	$(this).parent().parent().parent().attr("targetType","1");
-	$(this).parent().parent().parent().attr("targetId",$(this).parent().parent().parent().attr("commentid"))
+	$(".reportthis").removeClass("reportthis");
+	//$(this).parent().siblings().children().removeClass("reportthis");
+	$(this).parent().addClass("reportthis")//.siblings().removeClass("reportthis");
+	//$(this).parent().siblings().children("adf_reply").children().removeClass("reportthis");
+	$(this).parent().attr("targetType","1");
+	$(this).parent().attr("targetId",$(this).parent().attr("commentid"))
 });
 //点击取消按钮
 $(".ad_flbot,.ad_clobtn").live('click',function(){
 	$(".ad_flbot").hide();
-	$(".ad_flbtn,.ad_flbtn1").hide();
+	$(".ad_flbtn,.ad_flbtn1,.ad_flbtn2").hide();
 	$(".ad_flbtn .ad_report").show();
 	$(".ad_flbtn .ad_aelbtn").show();
 	$(".ad_flbtn .ad_delinner").show();
@@ -825,8 +1048,11 @@ $(".ad_flbot,.ad_clobtn").live('click',function(){
 $(".adf_dis").live('click',function(){
 	$(".ad_flbot").show();
 	$(".ad_flbtn").show();
+	$(".ad_flbtn .ad_delinner").show();
+	$(".ad_flbtn .clickReplay").hide();
 	$(".ad_flbtn .ad_report").hide();
 	$(".ad_flbtn .ad_aelbtn").hide();
+	
 	$(".adf_dis").removeClass("delthis");
 	$(this).addClass("delthis");
 });
@@ -899,7 +1125,7 @@ $(".adin_suredel").live('click',function(){
 			$(".ad_flbtn .ad_aelbtn").show();
 			$(".ad_flbtn .ad_delinner").show();
 			$(".ad_sure").hide();
-			if($(".delthis").parent().children().length == 2){
+			if($(".delthis").parent().children().length == 3){
 				$(".delthis").parent().empty();
 			}else{
 				$(".delthis").remove();
@@ -981,8 +1207,6 @@ $(".zhongcao").live('click',function(){
 				success: function (data) {
 					if(data.code == 0){
 						del.addClass("zhongcao1").removeClass("zhongcao2");
-						var delnum=del;
-						delnum.text(parseInt(delnum.text())-1);
 					}else{
 						alert(data.data.error);
 					}	
@@ -1002,14 +1226,12 @@ $(".zhongcao").live('click',function(){
 				success: function (data) {
 					if(data.code == 0){
 						if (/iphone|ipad|ipod/.test(ua)) {
-							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=iOS','商品收藏','seedProductId',$(this).attr("seedProductId")]);	
+							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=iOS','商品收藏','seedProductId',del.attr("seedProductId")]);	
 						} else if (/android/.test(ua)) {
-							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=and','商品收藏','seedProductId',$(this).attr("seedProductId")]);
+							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=and','商品收藏','seedProductId',del.attr("seedProductId")]);
 						};
 						del.addClass("zhongcao2").removeClass("zhongcao1");
-						var delnum=del;
-						delnum.text(parseInt(delnum.text())+1);
-						if(data.data.addScore != "0"){
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
 					}else{
@@ -1059,7 +1281,7 @@ $('.z-kinds').live('click', function (e) {
 						del.addClass("zhongcao2").removeClass("zhongcao1");
 						del.html("已收藏");
 						delnum.html(parseInt(delnum.html())+1);
-						if(data.data.addScore != "0"){
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
 					}else{
@@ -1071,6 +1293,59 @@ $('.z-kinds').live('click', function (e) {
 	}, 'articledetail.html' + window.location.search);
 	return false;
 });
+//关注按钮点击
+$(".head_attention").live('click',function(){
+	 checkAccessTokenLogin(function () {
+         var data = getFinalRequestObject({
+             accessToken: getAccessToken()
+         });
+		
+		if($(".head_attention").hasClass("atten1")){
+				cancelFollowUser();
+				
+			}else{
+				FollowUser();
+				
+				}
+	}, 'myHomePage.html' + window.location.search);
+});
+//关注
+function FollowUser(del){
+	$.ajax({//采用异步
+		type: "post",
+		url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/personal/addFollowUser/2.2.0',
+		data:getFinalRequestObject({accessToken:getAccessToken(),followedUserId:$(".dressname").attr("createUserId")}),
+		dataType:"json",
+		success: function (data) {
+			if(data.code == 0){
+				$(".head_attention").html("已关注");
+				$(".head_attention").removeClass("atten2").addClass("atten1");
+				
+			}else{
+				alert(data.data.error)
+			}
+		},
+	
+	});
+}
+//取消关注
+function cancelFollowUser(){
+	$.ajax({//采用异步
+		type: "post",
+		url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/personal/cancelFollowUser/2.2.0',
+		data:getFinalRequestObject({accessToken:getAccessToken(),followedUserId:$(".dressname").attr("createUserId")}),
+		dataType:"json",
+		success: function (data) {
+			if(data.code == 0){
+				$(".head_attention").html("关注");
+				$(".head_attention").removeClass("atten1").addClass("atten2");
+			}else{
+				alert(data.data.error)
+			}
+		},
+	
+	});
+}
 //留言时间格式化
 function getLocalTime(publishTime) {
     var d_minutes, d_hours, d_days;
@@ -1174,7 +1449,7 @@ function weixinConfig(title,desc,link,imgUrl){
 function isNoTalk(){
 	$.ajax({//采用异步
 	type: "get",
-	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/3.0.0',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/4.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:1,isCountViewNum:0}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -1354,7 +1629,69 @@ window.addEventListener('load',function(){
 			} else if (/android/.test(ua)) {
 				_czc.push(['_trackEvent','nggirl_column_post_article_relevant_product','phoneType=and','点击往期商品按钮','true','']);
 			};
-			window.location.href="goodsList.html?postId=" +getParam("postId") +'&postType='+1 +'&v=<%= VERSION %>';	
+			window.location.href="goodsList.html?postId=" +getParam("postId") +'&postType='+1 +'&v=<%= VERSION %>';			
 		}			
 	 })
 })
+var APPCommon = {
+    iphoneSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>',
+    iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
+    androidSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>',
+    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    openApp: function(){
+        var this_  =  this;
+        //微信
+		
+       /* if(this_.isWeixin()){
+            $(".isWei").css("height",$(window).height());
+            $(".isWei").show();
+            $('.isWei').on('touchstart', function () {
+                $(".isWei").hide();
+            });
+ 
+        }else{//非微信浏览器*/
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+				if(this_.isWeixin()){
+					 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+		 
+				}else{
+                var loadDateTime = new Date();
+                window.setTimeout(function() {
+                    var timeOutDateTime = new Date();
+                    if (timeOutDateTime - loadDateTime < 5000) {
+                        window.location = this_.iphoneDownUrl;//ios下载地址
+						console.log(1)
+                    } else {
+                        window.close();
+                    }
+                },1500);
+				window.location = this.iphoneSchema;
+				}
+                
+            }else if (navigator.userAgent.match(/android/i)) {
+				if(this_.isWeixin()){
+					$(".isWei").css("height",$(window).height());
+					$(".isWei").show();
+					
+				}else{
+					try {
+						window.location = this_.androidSchema;
+						setTimeout(function(){
+							window.location=this_.androidDownUrl; //android下载地址
+	 
+						},1500);
+					} catch(e) {}
+				}
+            }
+       /* }*/
+    },
+    isWeixin: function(){ //判断是否是微信
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+ 
+};

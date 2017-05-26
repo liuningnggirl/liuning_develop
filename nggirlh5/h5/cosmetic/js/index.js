@@ -1,5 +1,6 @@
 var page = 0;
 var sUserAgent=navigator.userAgent.toLowerCase();
+var ua = navigator.userAgent.toLowerCase();	
 $(function(){
 	//获取轮播图
 	$.get('<%= UGC_HOST_API_URL %>/nggirl/app/cli/works/listHeadScroll/2.5.6',getFinalRequestObject({accessToken:getAccessToken()}),function(data){

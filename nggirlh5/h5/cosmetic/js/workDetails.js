@@ -343,7 +343,7 @@ $(function () {
 						} else if (/android/.test(ua)) {
 							 _czc.push(['_trackEvent','nggirl_ThumbUp','phoneType=and','点赞','true','']);
 						};
-						if(data.data.addScore != "0"){
+						if(data.data.addScore != "0" && data.data.addScore != undefined){
 							  alertNewScore("积分 +"+data.data.addScore);
 						  }
                     }
@@ -395,7 +395,7 @@ $(function () {
 					} else if (/android/.test(ua)) {
 						_czc.push(['_trackEvent','nggril_clickCollection','phoneType=and','点击收藏','true','']);
 					};
-					if(data.data.addScore != "0"){
+					if(data.data.addScore != "0" && data.data.addScore != undefined){
 						alertNewScore("积分 +"+data.data.addScore);
 					}
                 }

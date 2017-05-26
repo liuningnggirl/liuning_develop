@@ -102,7 +102,7 @@ $.ajax({//采用异步
         	str +='<p class="d-left ">从业'+data.data.serviceYear+'年</p>';
 			}
         str +='<p class="d-right">接单量：'+data.data.orderNum+'</p></div>';
-        str +='<ul class="h_bot clearfix"><li class="aboutme"><img src="images/self.png"><p>关于我</p></li><li class="userprise"><img src="images/prize.png"><p>用户评价</p></li><li class="servicecircle"><img src="images/adress.png"><p>服务商圈</p></li></ul></div>';
+        str +='<ul class="h_bot clearfix"><li class="aboutme"><img src="images/self_orange.png"><p>关于我</p></li><li class="userprise"><img src="images/prize_orange.png"><p>用户评价</p></li><li class="servicecircle"><img src="images/adress_orange.png"><p>服务商圈</p></li></ul></div>';
 		$(".upheader").append(str);
 		$(".head img").attr("src",data.data.cover+'@80Q');
 		
@@ -179,7 +179,7 @@ $.ajax({//采用异步
 		$(".s_main"+pageNum1+" img.lazy").lazyload({effect : "fadeIn",threshold : 200});
 		
 		if(spacework.length==0 && pageNum1 == 0){
-			$(".center").append('<div class="nonebeauty"><img src="images/Page 1 Copy 2副本.png" class="lazy"><p>暂时没有上门美妆</p></div>');
+			$(".center").append('<div class="nonebeauty"><img src="images/orange_meizhuang.png" class="lazy"><p>暂时没有上门美妆</p></div>');
 			}
 		if( data.data.length >= pageSize1){
 			$('.center').append('<div class="s_btn" id="s_btn1" >查看更多</div>');
@@ -215,9 +215,9 @@ $.ajax({//采用异步
 			str5 += '<p class="s_detail">'+getLocalTime(postwork[i].publishTime)+'';
 			str5 += '<span><b>'+postwork[i].likeNum+'</b>人喜欢';
 			if(postwork[i].isLiked== 1){
-				str5 +='<img src="images/after.png" alt="" postId="'+ postwork[i].postId +'" isLike="'+0+'"/></span></p>';
+				str5 +='<img src="images/lnum.png" alt="" postId="'+ postwork[i].postId +'" isLike="'+0+'"/></span></p>';
 			}else{
-				str5 +='<img src="images/before.png" alt="" postId="'+ postwork[i].postId +'" isLike="'+1+'"/></span></p>';
+				str5 +='<img src="images/unlike.png" alt="" postId="'+ postwork[i].postId +'" isLike="'+1+'"/></span></p>';
 			}
 			str5 += '</a></li>';
 			$(".center1").append(str5);
@@ -225,7 +225,7 @@ $.ajax({//采用异步
 		
 		$(".page"+pageNum2+" img.lazy").lazyload({effect : "fadeIn",threshold : 200});
 		if(postwork.length==0 && pageNum2 == 0){
-			$(".center1").append('<div class="nonebeauty"><img src="images/Page 1 Copy.png"><p>暂时没有服务实拍</p></div>');
+			$(".center1").append('<div class="nonebeauty"><img src="images/orange_shipai.png"><p>暂时没有服务实拍</p></div>');
 			}
 		if( data.data.length >= pageSize2){
 				$('.center1').append('<div class="s_btn" >查看更多</div>');
@@ -255,7 +255,7 @@ function loadDressers(pageNum,pageSize){
 			}
 			$(".s_main2"+pageNum+" img.lazy").lazyload({effect : "fadeIn",threshold : 200});
 			if(salonwork.length == 0 && pageNum == 0){
-				$(".center2").append('<div class="nonebeauty"><img src="images/Page 1 Copy 3.png"><p>暂时没有美妆沙龙</p></div>');
+				$(".center2").append('<div class="nonebeauty"><img src="images/salon_orange.png"><p>暂时没有美妆沙龙</p></div>');
 				}
 			if( data.data.length >= pageSize){
 				$('.center2').append('<div class="s_btn">查看更多</div>');
@@ -358,11 +358,11 @@ $(".s_detail img").live('click',function(){
 		dataType:"json",
 		success: function (data) {
 			if(del.attr("isLike")== "0"){
-				del.attr("src","images/before.png");
+				del.attr("src","images/unlike.png");
 				del.attr("isLike","1");
 				del.siblings("b").html(parseInt(del.siblings("b").html())-1);
 			}else{
-				del.attr("src","images/after.png");
+				del.attr("src","images/lnum.png");
 				del.attr("isLike","0");
 				del.siblings("b").html(parseInt(del.siblings("b").html())+1);
 				if(data.data.addScore != "0"){

@@ -28,18 +28,18 @@ $(function(){
 
 	//跳转到用户页
 	$(".adf_img").live('click',function(){
-		window.location.href="myHomePage.html?userId="+ $(this).parent().parent().attr("userId")+'&v=3.0.2.1488356107880';
+		window.location.href="myHomePage.html?userId="+ $(this).parent().parent().attr("userId")+'&v=<%= VERSION %>';
 	});
 	$(".adf_nickname").live('click',function(){
-		window.location.href="myHomePage.html?userId="+ $(this).parent().parent().parent().attr("userId")+'&v=3.0.2.1488356107880';
+		window.location.href="myHomePage.html?userId="+ $(this).parent().parent().parent().attr("userId")+'&v=<%= VERSION %>';
 	});
 	//评论人名字点击
 	$(".replyUser").live('click',function(){
-		window.location.href="myHomePage.html?userId="+ $(this).attr("replyuserid")+'&v=3.0.2.1488356107880';
+		window.location.href="myHomePage.html?userId="+ $(this).attr("replyuserid")+'&v=<%= VERSION %>';
 		return false;
 	});
 	$(".replyToUser").live('click',function(){
-		window.location.href="myHomePage.html?userId="+ $(this).attr("replyToUserId")+'&v=3.0.2.1488356107880';
+		window.location.href="myHomePage.html?userId="+ $(this).attr("replyToUserId")+'&v=<%= VERSION %>';
 		return false;
 	});
 	$(".de_box .form-control").click(function(){
@@ -63,7 +63,7 @@ $(function(){
 	$('.goToTop').click(function(){
 		$('html,body,.forinput').animate({scrollTop: '0px'}, 100);return false;
 	});
-	$(".forinput").height($(window).height()-56);
+	$(".forinput").height($(window).height()-51);
 	$(".de_box .form-control").blur(function(){
 		//$('#.page_emotion').hide();
 		//$('.ping_icon').removeClass('open');
@@ -76,16 +76,16 @@ $(function(){
 		//localStorage["a"]= $(this).val();	
 	});
 	$(".de_box .form-control").focus(function(){
-		 //if(localStorage["a"] != "" && typeof(localStorage["a"]) != "undefined"){
-		 	// $(".form-control").val(localStorage["a"]);
-		// };
+		 if(localStorage["a"] != "" && typeof(localStorage["a"]) != "undefined"){
+		 	 $(".form-control").val(localStorage["a"]);
+		 };
 		 $(".form-control").attr("placeholder", $(".form-tip").html());
 		 checkAccessTokenLogin(function () {
 		   var data = getFinalRequestObject({
 			   accessToken: getAccessToken()
 		   });
 		   isNoTalk();
-		},'allCommentNew.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=3.0.2.1488356107880');
+		},'allCommentNew.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
 	});
 	$("#send_message,.ad_gtcom,.form-control").live('click',function(){
 		$('.form-control').focus();
@@ -96,7 +96,7 @@ $(function(){
 			   accessToken: getAccessToken()
 		   });
 		   
-		},'allCommentNew.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=3.0.2.1488356107880');
+		},'allCommentNew.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
 	});
 
 });	
@@ -104,7 +104,7 @@ $(function(){
 function getcommentmessage(pageNum,pageSize){
 $.ajax({//采用异步
 	type: "get",
-	url:'/nggirl/app/cli/post/getComments/2.4.2',
+	url:'<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getComments/2.4.2',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:getParam('postType'),page:pageNum,num:pageSize,queryTime:$(".ad_comdet").attr("queryTime")}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -121,42 +121,51 @@ $.ajax({//采用异步
 			str1 +='<div class="adf_btn">';
 			/*添加评乱点赞*/
 			if(data.data.comments[i].isPraised=="0"){
-				str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/cdianzan.png" class="co_dianzan">';
+				str1 +='<span class="comleftz" status="1" commentId="'+data.data.comments[i].commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
 				if(data.data.comments[i].praiseCount>999){
 					str1 +='<b class="zq_count">999+</b></span>';
 				}else{
 					str1 +='<b class="zq_count">'+data.data.comments[i].praiseCount+'</b></span>';
 				}
 			}else{
-				str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/cdianzanhou.png" class="qx_dianzan">';
+				str1 +='<span class="comleftz" status="0"  commentId="'+data.data.comments[i].commentId+'"><img src="images/zanhou.png" class="qx_dianzan">';
 				if(data.data.comments[i].praiseCount>999){
 					str1 +='<b class="zh_count">999+</b></span>';
 				}else{
 					str1 +='<b class="zh_count">'+data.data.comments[i].praiseCount+'</b></span>';
 				}
 			};
-			str1 +='<span class="comleft"><img src="images/commentgreen.png" class="ad_gtcom"></span>';
+			str1 +='<span class="comleft"><img src="images/commentnum.png" class="ad_gtcom"></span>';
+			str1 +='</div></div>';
 			if(data.data.comments[i].isMyComment=="1"){
-			str1 +='<span class="comright ad_morea"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
+				str1 +='<div class="adf_comdetail ad_morea" replyType="1">';
 			}else{
-				str1 +='<span class="comright ad_moreb"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
-				}
+				str1 +='<div class="adf_comdetail ad_moreb" replyType="1">';
+			}
 			if(data.data.comments[i].isIllegal=="0"){
-			str1 +='<div class="adf_comdetail" replyType="1">'+getImgUrl(data.data.comments[i].comment)+'</div>';
+			str1 +=getImgUrl(data.data.comments[i].comment)+'</div>';
 			}else{
-				str1 +='<div class="adf_comdetail" replyType="1">!@#$%^&*()</div>';
+				str1 +='!@#$%^&*()</div>';
 				}
 			str1 +='<div class="adf_reply">';
 			if(data.data.comments[i].replies.length>0){
 				for(var j = 0;j < data.data.comments[i].replies.length;j++){
 					if(j == 0){
-						str1 +='<img src="images/Triangular.png" class="arr">';
+						str1 +='<img src="images/Triangular.png" class="arr"><div class="first"></div>';
+					}
+					if(j<2){
+						if(data.data.comments[i].replies[j].isMyReply==1){
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis">';
+						}else{
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys">';
 						}
-					if(data.data.comments[i].replies[j].isMyReply==1){
-						str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis">';
 					}else{
-						str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys">';
+						if(data.data.comments[i].replies[j].isMyReply==1){
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_dis hidden">';
+						}else{
+							str1 +='<div replyId="'+ data.data.comments[i].replies[j].replyId+'" isMyReply="'+data.data.comments[i].replies[j].isMyReply+'" replyType="2" class="adf_replys hidden">';
 						}
+					}
 					
 					str1 +='<span replyUserId="'+data.data.comments[i].replies[j].replyUserId+'" class="replyUser infloor">'+data.data.comments[i].replies[j].replyUserNickName+'</span>:';
 					if(data.data.comments[i].replies[j].replyType=="1"){
@@ -173,14 +182,18 @@ $.ajax({//采用异步
 							str1 += '!@#$%^&*()';
 						}
 					}
-					str1 += '<p class="adf_time">'+getLocalTime(data.data.comments[i].replies[j].replyTime)+'</p></div>';
+					str1 += '</div>';//<p class="adf_time">'+getLocalTime(data.data.comments[i].replies[j].replyTime)+'</p>
+				}
+			
+				if(data.data.comments[i].replies.length>2){
+					str1 += '<div class="lookAllRep">共'+data.data.comments[i].replies.length+'条回复 ></div>';
 				}
 			}
 			str1 +='</div>';
 			str1 +='</div>';
 		}
 		if(data.data.comments.length== "0"  && pageNum == 0){
-			str1 +='<div class="nonecom"><img src="images/noappraise.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
+			str1 +='<div class="nonecom"><img src="images/pingjia.png" /><p>暂无评论<br>等你来抢沙发~</p></div>';
 		}
 		$(".ad_comdet").append(str1);
 		if( data.data.comments.length >= pageSize ){
@@ -221,7 +234,19 @@ function getMorecomment(){
 		getcommentmessage(pageNum,pageSize);
 	}
 	
-	
+//展开全部子评论
+$(".lookAllRep").live('click',function(){
+	$(this).siblings(".hidden").removeClass("hidden");
+	$(this).html("收起").removeClass("lookAllRep").addClass("stopRep");
+	$(this).css("padding-bottom","7px");
+});	
+//收起评论
+$(".stopRep").live('click',function(){
+	$(this).parent().children(":gt(3)").addClass("hidden");
+	var i=$(this).parent().children().length-3;
+	$(this).show().removeClass("stopRep").addClass("lookAllRep");
+	$(this).html("共"+i+"条回复 >").css("padding-bottom","7px");
+});
 //评论帖子
 $(".send_message").live('click',function(){
 	$('.page_emotion').hide();
@@ -253,16 +278,17 @@ $(".send_message").live('click',function(){
 function commentinfo(){
 	$.ajax({//采用异步
 	type: "post",
-	url: '/nggirl/app/cli/post/comment/2.5.3',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/comment/2.5.3',
 	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:getParam('postType'),content:eraseStyleInCopyText($(".form-control").val())}),
 	timeout:15000,//10s
 	dataType:"json",
 	beforeSend:function(){
 		$(".send_message").off("click"); //解绑事件，用户在次点击在未返回数据时候，提交按钮不起作用
-		$(".send_message").html("");//在请求发送之后，清空input，即使当时看不到结果，再次输入提交时，也是属于第二次评论了
+		$(".send_message").removeClass("send_message");//在请求发送之后，清空input，即使当时看不到结果，再次输入提交时，也是属于第二次评论了
 	},
 	success: function (data) {
 		if(data.code == 0){
+			$("#send_message").addClass("send_message");
 			var floors="";
 			if($(".ad_comdet").children(".ad_floor").length == 0){
 			    floors=1;
@@ -275,10 +301,10 @@ function commentinfo(){
 			str2 +='<div class="adf_img " ><img src="'+data.data.profile+'"></div>';
 			str2 +='<div class="adf_name"><p class="adf_nickname">'+data.data.nickName+'</p><p class="ad_fnum"><span>'+floors+'楼</span>'+getLocalTime(data.data.commentTime)+'</p></div>';
 			str2 +='<div class="adf_btn">';
-			str2 +='<span class="comleftz" status="1" commentId="'+data.data.commentId+'"><img src="images/cdianzan.png" class="co_dianzan">';
+			str2 +='<span class="comleftz" status="1" commentId="'+data.data.commentId+'"><img src="images/zanqian.png" class="co_dianzan">';
 			str2 +='<b class="zq_count">0</b></span>';
-			str2 +='<span class="comleft"><img src="images/commentgreen.png" class="ad_gtcom"></span>';
-			str2 +='<span class="comright ad_morea"><img src="images/moregreen.png" class="ad_more "></span></div></div>';
+			str2 +='<span class="comleft"><img src="images/commentnum.png" class="ad_gtcom"></span>';
+			str2 +='</div></div>';
 			if(data.data.isIllegal=="0"){
 			str2 +='<div class="adf_comdetail" replyType="1">'+getImgUrl(data.data.comment)+'</div>';
 			}else{
@@ -297,7 +323,7 @@ function commentinfo(){
 		//localStorage["a"] == "";
 		if(data.data.addScore != "0"){
 			alertNewScore("积分 +"+data.data.addScore);
-			$(".send_message").bind("click",commentinfo);
+			//$(".send_message").bind("click",commentinfo);
 		}
 		}else{
 				alert(data.data.error);	
@@ -306,20 +332,27 @@ function commentinfo(){
 	error: function (XMLHttpRequest, textStatus, errorThrown) {
 		//console.log( XMLHttpRequest )
 		//$(".main").html("尚未发布任何信息！");
-		$(".send_message").bind("click",commentinfo);  //无论返回数据成功或者失败，都会给提交按钮添加绑定事件
+		//$(".send_message").bind("click",commentinfo);  //无论返回数据成功或者失败，都会给提交按钮添加绑定事件
 	}
 	});
 }
 //点击楼层评论内容
 $(".adf_comdetail").live('click',function(){
 	var del=$(this);
-	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");
+	$(this).parents(".ad_floor").addClass("oncom").siblings().removeClass("oncom");	
+	$(".oncom").attr("replyType",$(this).attr("replyType"));
+});
+$(".clickReplay").live('click',function(){
+	$(".ad_flbot").hide();
+	$(".ad_flbtn").hide();
+	var del=$(this);
 	$(".form-tip").html("回复层主");
 	$(".form-control").attr("placeholder","回复层主");
 	$("#send_message").removeClass().addClass("replymessage");
-	$(".oncom").attr("replyType",$(this).attr("replyType"));
+	$(".de_bot").show();
+	$(".ad_btn").hide();
 	$(".form-control").focus();
-	});
+});
 //点击按钮
 $(".ad_gtcom").live('click',function(){
 	var del=$(this);
@@ -407,78 +440,91 @@ $(".replyinmessage").live('click',function(){
 function replycommentinfo(){
 	$.ajax({//采用异步
 	type: "post",
-	url: '/nggirl/app/cli/post/reply/2.5.3',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/reply/2.5.3',
 	data:getFinalRequestObject({accessToken:getAccessToken(),replyType:$(".oncom").attr("replyType"),commentId:$(".oncom").attr("commentid"),replyId:$(".incom").attr("replyId"),content:eraseStyleInCopyText($(".form-control").val())}),
 	timeout:15000,//10s
 	dataType:"json",
 	success: function (data) {
 		if(data.code == 0){
-			var str4="";
-			if($(".oncom .adf_reply").children().length == 0){
-				str4 +='<img src="images/Triangular.png" class="arr">';
-				str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="'+data.data.sMyReply+'" replyType="'+ data.data.replyType+'" class="adf_dis">';
-				
-			}else{
-				str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="1" replyType="'+ data.data.replyType+'" class="adf_dis">';
-				}
-			str4 +='<span replyUserId="'+data.data.replyUserId+'" class="replyUser infloor">'+data.data.replyUserNickName+'</span>:';
-			if(data.data.replyType=="1"){
-				if(data.data.isIllegal=="0"){
-				str4 +='<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
+				$(".oncom").children(".adf_reply").children(".hidden").removeClass("hidden");
+				$(".oncom").children(".adf_reply").children(".lookAllRep").remove();
+				$(".oncom").children(".adf_reply").children(".stopRep").remove();
+				var str4="";
+				if($(".oncom .adf_reply").children().length == 0){
+					str4 +='<img src="images/Triangular.png" class="arr"><div class="first"></div>';
+					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="'+data.data.sMyReply+'" replyType="'+ data.data.replyType+'" class="adf_dis ">';
 				}else{
-					str4 += '!@#$%^&*()';
+					str4 +='<div replyId="'+ data.data.replyId+'" isMyReply="1" replyType="'+ data.data.replyType+'" class="adf_dis">';
 				}
-			}else{
-				str4 += '回复<span replyToUserId="'+data.data.replyToUserId+'" class="replyToUser">'+data.data.replyToUserNickName+'</span>:';
-				if(data.data.isIllegal=="0"){
-					str4 += '<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
+				str4 +='<span replyUserId="'+data.data.replyUserId+'" class="replyUser infloor">'+data.data.replyUserNickName+'</span>';
+				if(data.data.replyType=="1"){
+					if(data.data.isIllegal=="0"){
+						str4 +=':<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
+					}else{
+						str4 += ':!@#$%^&*()';
+					}
 				}else{
-					str4 += '!@#$%^&*()';
+					str4 += '回复<span replyToUserId="'+data.data.replyToUserId+'" class="replyToUser">'+data.data.replyToUserNickName+':</span>';
+					if(data.data.isIllegal=="0"){
+						str4 += '<span class="replyDetail">'+getImgUrl(data.data.reply) +'</span>';
+					}else{
+						str4 += '!@#$%^&*()';
+					}
 				}
+				str4 += '</div>';//<p class="adf_time">'+getLocalTime(data.data.replyTime)+'</p>
+				if($(".oncom .adf_reply").children().length>3){
+					str4 +='<div class="stopRep">收起</div>';
+				}
+				$(".oncom .adf_reply").append(str4);
+				$(".form-control").val("");
+				$(".form-control").blur();
+				$(".form-control").attr("placeholder","请输入评论内容");
+				$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
+				$(".successtips").html("评论成功");
+				$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
+				//localStorage["a"]= "";
+				if(data.data.addScore != "0"){
+					alertNewScore("积分 +"+data.data.addScore);
+				}
+				$(".oncom .adf_reply div:last-child").css("padding-bottom","7px");
+			}else{
+				alert(data.data.error);	
 			}
-			str4 += '<p class="adf_time">'+getLocalTime(data.data.replyTime)+'</p></div>';
-			$(".oncom .adf_reply").append(str4);
-			$(".form-control").attr("placeholder","请输入评论内容");
-			$(".ad_flbot").delay(500).fadeIn(100).fadeOut(1900);
-			$(".successtips").html("评论成功");
-			$(".form-control").val("").css("height","19px");
-			//localStorage["a"] == "";
-			if(data.data.addScore != "0"){
-				alertNewScore("积分 +"+data.data.addScore);
-			}
-			$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
-		}else{
-			alert(data.data.error);	
-		}
 	},
 	error: function (XMLHttpRequest, textStatus, errorThrown) {
 		//console.log( XMLHttpRequest )
 		//$(".main").html("尚未发布任何信息！");
 	}
 	});
-}
+};
 //发布人点击...
-$(".adf_btn .ad_morea").live('click',function(){
+$(".ad_floor .ad_morea").live('click',function(){
 	$(".ad_flbot").show();
 	$(".ad_flbtn").show();
+	$(".ad_flbtn .clickReplay").show();
 	$(".ad_flbtn .ad_report").hide();
 	$(".ad_flbtn .ad_delinner").hide();
-	$(this).parent().parent().parent().addClass("readydelthis").siblings().removeClass("readydelthis");
-})
+	$(".ad_flbtn .ad_aelbtn").show();
+	$(this).parent().addClass("readydelthis").siblings().removeClass("readydelthis");
+});
 //非发布人点击...
-$(".adf_btn .ad_moreb").live('click',function(){
+$(".ad_floor .ad_moreb").live('click',function(){
 	checkAccessTokenLogin(function () {
 		$(".ad_flbot").show();
 		$(".ad_flbtn").show();
+		$(".ad_flbtn .clickReplay").show();
+		$(".ad_flbtn .ad_report").show();
 		$(".ad_flbtn .ad_aelbtn").hide();
 		$(".ad_flbtn .ad_delinner").hide();
-	},'videoDeatil.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=3.0.2.1488356107880');
-	$(this).parent().parent().siblings().children().removeClass("reportthis");
-	$(this).parent().parent().parent().addClass("reportthis").siblings().removeClass("reportthis");
-	$(this).parent().parent().parent().siblings().children("adf_reply").children().removeClass("reportthis");
-	$(this).parent().parent().parent().attr("targetType","1");
-	$(this).parent().parent().parent().attr("targetId",$(this).parent().parent().parent().attr("commentid"))
-})
+	},'articledetail.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
+	$(".reportthis").removeClass("reportthis");
+	//$(this).parent().siblings().children().removeClass("reportthis");
+	$(this).parent().addClass("reportthis")//.siblings().removeClass("reportthis");
+	//$(this).parent().siblings().children("adf_reply").children().removeClass("reportthis");
+	$(this).parent().attr("targetType","1");
+	$(this).parent().attr("targetId",$(this).parent().attr("commentid"))
+});
+
 //点击取消按钮
 $(".ad_flbot,.ad_clobtn").live('click',function(){
 	$(".ad_flbot").hide();
@@ -497,6 +543,8 @@ $(".ad_flbot,.ad_clobtn").live('click',function(){
 $(".adf_dis").live('click',function(){
 	$(".ad_flbot").show();
 	$(".ad_flbtn").show();
+	$(".ad_flbtn .ad_delinner").show();
+	$(".ad_flbtn .clickReplay").hide();
 	$(".ad_flbtn .ad_report").hide();
 	$(".ad_flbtn .ad_aelbtn").hide();
 	$(".adf_dis").removeClass("delthis");
@@ -514,7 +562,7 @@ $(".ad_aelbtn").live('click',function(){
 $(".ad_suredel").live('click',function(){
 	$.ajax({//采用异步
 	type: "post",
-	url: '/nggirl/app/cli/post/deleteComment/2.0.0',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/deleteComment/2.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),commentId:$(".readydelthis").attr("commentId")}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -561,7 +609,7 @@ $(".ad_delinner").live('click',function(){
 $(".adin_suredel").live('click',function(){
 	$.ajax({//采用异步
 	type: "post",
-	url: '/nggirl/app/cli/post/deleteReply/2.0.0',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/deleteReply/2.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),replyId:$(".delthis").attr("replyId")}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -572,7 +620,7 @@ $(".adin_suredel").live('click',function(){
 			$(".ad_flbtn .ad_aelbtn").show();
 			$(".ad_flbtn .ad_delinner").show();
 			$(".ad_sure").hide();
-			if($(".delthis").parent().children().length == 2){
+			if($(".delthis").parent().children().length == 3){
 				$(".delthis").parent().empty();
 			}else{
 				$(".delthis").remove();
@@ -599,7 +647,7 @@ $(".ad_report,.ad_report1").live('click',function(){
 $(".ad_surereport").live('click',function(){
 	$.ajax({//采用异步
 	type: "post",
-	url: '/nggirl/app/cli/post/report/2.0.0',
+	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/report/2.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),targetType:$(".reportthis").attr("targetType"),targetId:$(".reportthis").attr("targetId")}),
 	timeout:15000,//10s
 	dataType:"json",
@@ -681,21 +729,21 @@ $(".adf_btn .comleftz").live('click',function(){
          });
 		$.ajax({//采用异步
 			type: "post",
-			url: '/nggirl/app/cli/post/praiseComment/2.5.3',
+			url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/praiseComment/2.5.3',
 			data:getFinalRequestObject({accessToken:getAccessToken(),commentId:del.attr("commentid"),status:del.attr("status")}),
 			dataType:"json",
 			success: function (data) {
 				if(data.code == 0){
 					if(del.attr("status") == "0"){
 						del.attr("status","1");
-						del.children("img").attr('src','images/cdianzan.png');
+						del.children("img").attr('src','images/zanqian.png');
 						del.children("b").text(parseInt(del.children("b").text())-1);
 						del.children("b").css('color','#9a9a9a');
 					}else{
 						del.attr("status","0");
-						del.children("img").attr('src','images/cdianzanhou.png');
+						del.children("img").attr('src','images/zanhou.png');
 						del.children("b").text(parseInt(del.children("b").text())+1);
-						del.children("b").css('color','#50c8b4');
+						del.children("b").css('color','#ee750c');
 						if(data.data.addScore != "0"){
 							alertNewScore("积分 +"+data.data.addScore);
 						}
@@ -713,7 +761,7 @@ function isNoTalk(){
 	if(getParam('postType') == 1){
 		$.ajax({//采用异步
 			type: "get",
-			url: '/nggirl/app/cli/post/getArticlePostDetail/2.2.0',
+			url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getArticlePostDetail/2.2.0',
 			data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:1}),
 			timeout:15000,//10s
 			dataType:"json",
@@ -736,7 +784,7 @@ function isNoTalk(){
 	}else{
 		$.ajax({//采用异步
 			type: "get",
-			url: '/nggirl/app/cli/post/getVideoPostDetail/2.2.0',
+			url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/2.2.0',
 			data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:2}),
 			timeout:15000,//10s
 			dataType:"json",

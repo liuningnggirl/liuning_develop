@@ -12,8 +12,8 @@
 .delist .de-right img{ width:56px; height:56px; margin:1px ; border-radius:50%; }
 .listbot{ border-top:#e7eded solid 1px; margin:0 7px;}
 .listbot p{ color:#9a9a9a; font-size:13px; } 
-.listbot .timebg{ background:url(../images/xwc-lock_03.jpg) no-repeat; background-size:15px 15px; padding-left:20px; line-height:15px; margin-top:12px;}
-.listbot .adressbg{ background:url(../images/xwc-local_03.jpg) no-repeat; background-size:15px 17.5px; padding-left:20px; line-height:18px; margin-top:9px;}
+.listbot .timebg{ background:url(../images/orange_time.png) no-repeat; background-size:15px 15px; padding-left:20px; line-height:15px; margin-top:12px;}
+.listbot .adressbg{ background:url(../images/orange_address.png) no-repeat; background-size:15px 17.5px; padding-left:20px; line-height:18px; margin-top:9px;}
 .botright{ text-align:right; font-size:12px !important; color:#fa6e64 !important; margin:12px 0 15px 0;}
 .botright b{ font-weight:normal; font-size:18px;}
 .s_btn {width: 100%;height: 40px;line-height: 40px;text-align: center;border-top: solid 1px #dee2e2;border-bottom: solid 1px #dee2e2; margin-top:-10px;color: #8c96a0;background: #fff;font-size: 12px;}

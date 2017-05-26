@@ -1,9 +1,11 @@
 // JavaScript Document
 $(function(){
 	getCustomMessage();
-	var size=10;
-	getUserPosts(0,10);
-	$('.box ul li').live('click',function(e) {
+	var size=20;
+	getUserPosts(0,size);
+	getZanPosts(0,size);
+	getCaoPosts(0,size);
+	$('ul li').live('click',function(e) {
 		//判断帖子类型
 		if($(this).attr('postType') == 1){//文章
 			window.location.href="articledetail.html?postType=" + $(this).attr('postType') +'&postId=' +$(this).attr('postId')+'&v=<%= VERSION %>';	
@@ -12,42 +14,138 @@ $(function(){
 			window.location.href="videoDetail.html?postType=" + $(this).attr('postType') +'&postId=' +$(this).attr('postId')+'&v=<%= VERSION %>';	
 		}	
     });
-	$(window).scroll(function(){
-		var distenttop=$(".myartical").offset().top-$("body").scrollTop();
-		  if(distenttop <=0){
-		      $(".myartical h3").css({'position':'fixed','top':'0','z-index':"100"})
-		  }else{
-			  $(".myartical h3").css({'position':'relative'})
-			 }; 
+	
+	//打开详情
+	$('.con .tab_tie_cao').delegate("li .box_cao .seeProduct","click",function(){
+		if($(this).attr('isAllowBuy') == 0){
+			window.location.href = "goodsShareCatenate.html?itemId="+ $(this).attr('seedProductId')+'&targetType='+$(this).attr('targetType')+'&v=<%= VERSION %>';
+		}else{
+			window.location.href = "productDetails.html?seedProductId="+ $(this).attr('seedProductId')+'&targetType='+$(this).attr('targetType')+'&targetId='+$(this).attr('targetId')+'&v=<%= VERSION %>';	
+		}
 	});
-	var ua = navigator.userAgent.toLowerCase();	
-	if (/iphone|ipad|ipod/.test(ua)) {
-			$(".level").addClass("level1");		
-	} else if (/android/.test(ua)) {
-		    $(".level").addClass("level2");			
-	}
+	
+//点击长草按钮
+$(".zhongcao").live('click',function(){
+	var del=$(this);
+	var seedProductId=$(this).parent().parent().attr("seedProductId");
+	checkAccessTokenLogin(function () {
+		 var data = getFinalRequestObject({
+			 accessToken: getAccessToken()
+		 });
+		if(del.hasClass("zhongcao2")){
+			$.ajax({//采用异步取消长草
+				type: "post",
+				url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/seedproduct/deleteCollectProduct/2.3.0',
+				data:getFinalRequestObject({accessToken:getAccessToken(),seedProductIds:seedProductId}),
+				timeout:15000,//10s
+				dataType:"json",
+				success: function (data) {
+					if(data.code == 0){
+						del.addClass("zhongcao1").removeClass("zhongcao2");
+						var delnum=del;
+						delnum.text(parseInt(delnum.text())-1);
+					}else{
+						alert(data.data.error);
+					}	
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					//console.log( XMLHttpRequest )
+					//$(".main").html("尚未发布任何信息！");
+				}
+			});
+		}else{
+			$.ajax({//采用异步长草
+				type: "post",
+				url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/seedproduct/collectProduct/2.5.3',
+				data:getFinalRequestObject({accessToken:getAccessToken(),seedProductId:seedProductId,targetType:del.parent().parent().attr("targetType"),targetId:del.parent().parent().attr("targetId")}),
+				timeout:15000,//10s
+				dataType:"json",
+				success: function (data) {
+					if(data.code == 0){
+						if (/iphone|ipad|ipod/.test(ua)) {
+							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=iOS','商品收藏','seedProductId',$(this).parent().attr("seedProductId")]);	
+						} else if (/android/.test(ua)) {
+							_czc.push(['_trackEvent','nggirl_column_post_seedProduct_collect','phoneType=and','商品收藏','seedProductId',$(this).parent().attr("seedProductId")]);
+						};
+						del.addClass("zhongcao2").removeClass("zhongcao1");
+						var delnum=del;
+						delnum.text(parseInt(delnum.text())+1);
+						if(data.data.addScore != "0"){
+							alertNewScore("积分 +"+data.data.addScore);
+						}
+					}else{
+						alert(data.data.error);
+					}	
+				},
+				error: function (XMLHttpRequest, textStatus, errorThrown) {
+					//console.log( XMLHttpRequest )
+					//$(".main").html("尚未发布任何信息！");
+				}
+			});
+		};
+	}, 'myHomePage.html' + window.location.search);
+		return false;
+	});	
+	
+	//点击购买
+	$('.goToBuy2').die('click');
+	$('.goToBuy2').live('click',function(e) {
+		var del = $(this);
+		var delId = $(this).parent().parent().attr("seedproductId");
+		checkAccessTokenLogin(function () {
+			if (/iphone|ipad|ipod/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_relevant_product_gobuy','phoneType=iOS','去买按钮','seedProductId',delId]);	
+			} else if (/android/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_relevant_product_gobuy','phoneType=and','去买按钮','seedProductId',delId]);
+			};
+			//alert(delId);
+			//判断如果是在微信打开
+			/*if(isInWeixin()){
+				$('.isWei').show();	
+			}else{
+				$('.isWei').hide();	*/
+				window.location.href = "goodsShareCatenate.html?itemId="+delId+'&v=<%= VERSION %>';
+			/*}*/
+		}, 'myHomePage.html' + window.location.search);
+    });
+	//点击购买
+	$('.goToBuy1').die('click');
+	$('.goToBuy1').live('click',function(e) {
+		var del = $(this).parent().parent();
+		checkAccessTokenLogin(function () {
+			if (/iphone|ipad|ipod/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_relevant_product_gobuy','phoneType=iOS','去买按钮','seedProductId',del.attr('seedProductId')]);	
+			} else if (/android/.test(ua)) {
+				_czc.push(['_trackEvent','nggirl_relevant_product_gobuy','phoneType=and','去买按钮','seedProductId',del.attr('seedProductId')]);
+			};
+			//alert(delId);
+			//判断如果是在微信打开
+			window.location.href = "productDetails.html?seedProductId="+del.attr('seedProductId')+"&targetType="+del.attr('targetType')+"&targetId="+del.attr('targetId')+'&v=<%= VERSION %>';
+			
+		}, 'myHomePage.html' + window.location.search);
+    });	
 })
 //用户个人信息
 function getCustomMessage(){
 $.ajax({//采用异步
 	type: "get",
-	url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/user/getUserInfo/3.0.0',
+	url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/user/getUserInfo/4.0.0',
 	data:getFinalRequestObject({accessToken:getAccessToken(),userId:getParam("userId")}),
 	timeout:15000,//10s
 	dataType:"json",
-	success: function (data) {//<img src="'+data.data.profile+'">
+	success: function (data) {
 		if(data.code == 0){
 			$("title").html(data.data.nickName+"的主页");
 			if(data.data.isMyHome == "1"){
 				$("title").html("我的主页");
-				$(".head_attention").hide();
+				$(".attention_btn").hide();
 				$(".nonetit span").html("您");
 			}else if(data.data.isFollowed == "1"){
-				$(".head_attention").html("已关注");
-				$(".head_attention").addClass("atten1");	
+				$(".attention_btn").html("已关注");
+				$(".attention_btn").addClass("atten1");	
 			}else if(data.data.isFollowed == "0"){
-				$(".head_attention").html("关注");
-				$(".head_attention").addClass("atten2");	
+				$(".attention_btn").html("关注");
+				$(".attention_btn").addClass("atten2");	
 			}
 			$(".head_img img").attr('src',data.data.profile);
 			$(".username").html(data.data.nickName);
@@ -63,6 +161,13 @@ $.ajax({//采用异步
 				$(".usersex").attr('src','images/girl.png');
 			};
 			$(".usermessage .level").html('LV'+data.data.userLevel);
+			if(data.data.summary == ''){
+				$('.desc_message').html('一句话描述自己');
+			}else{
+				$('.desc_message').html(data.data.summary);
+			}
+			$('.another_message .fen_num').html(data.data.fansNum+' 粉丝');
+			$('.another_message .atten_num').html(data.data.followedNum+' 关注');
 			
 		//微信分享
             if(isInWeixin()){
@@ -88,15 +193,12 @@ $.ajax({//采用异步
 				window.ngjsInterface.conFigShareInfo('【南瓜姑娘】'+data.data.nickName+'的个人主页','从来到南瓜姑娘学化妆，追TA的男生越来越多了！不信就来看看TA的主页吧~',data.data.profile,window.location.href);
 			};
 		}else{
-				alert(data.data.error);
-			}		
-	},
-	error: function (XMLHttpRequest, textStatus, errorThrown) {
-		//console.log( XMLHttpRequest )
-		//$(".main").html("尚未发布任何信息！");
+			alert(data.data.error);
+		}		
 	}
 });
 }
+
 //获取帖子列表
 function getUserPosts(page,size){
 	//通过带过来的专栏编号来加载对应的专题数据
@@ -104,50 +206,142 @@ function getUserPosts(page,size){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			if(data.data.length > 0){
-				$(".nonelist").hide();
-				$(".conlumn_list").show();
-				$("body").css("background","#e6eeec");
+				$('.con .tab_tie_ok').height($(window).height()*0.6);
+				$(".tab_shou_ok").hide();
+				$(".tab_tie_ok").show();
+			}
+			for(var x = 0; x < data.data.length; x ++){
+				$('.tab_tie_ok').append('<li postType="'+data.data[x].postType+'" postId="'+data.data[x].postId+'" class="page'+page+'"><img src="'+data.data[x].picture+'" class="tie_img" alt=""></li>');	
+				$('.tab_tie_ok li').height($('.tab_tie_ok li').width());
 			}
 			if( data.data.length == size ){
 				var tur = true;	
-				
 				$(window).scroll(function(){
-					imgaa();
 					var winH = $(window).height(); //浏览器当前窗口可视区域高度  
 					var pageH = $(document.body).height(); //浏览器当前窗口文档body的高度 
 					var scrollT = $(window).scrollTop(); //滚动条top  
 					var lastPersentH = (pageH - winH - scrollT) / winH;  
 					if(tur && lastPersentH < 0.001){ 
 					setTimeout(function(){
-					PageNumPP();
+					PageNumTie();
 					
 					},500);
 					tur = false;
 				   } 
 			   });
 			}
-			for(var x = 0; x < data.data.length; x ++){
-				//判断帖子类型
-				if(data.data[x].postType == 1){//文章
-					$('.box ul').append('<li postType="'+data.data[x].postType+'" postId="'+data.data[x].postId+'" class="page'+page+'"><img data-original="'+data.data[x].picture+'" alt="" class="posts lazy" /></li>');	
-				}
-				if(data.data[x].postType == 2){//视频
-					$('.box ul').append('<li postType="'+data.data[x].postType+'" postId="'+data.data[x].postId+'" class="page'+page+'"><img data-original="'+data.data[x].picture+'" alt="" class="posts lazy" /><img data-original="images/pause.png" alt="" class="pause lazy" /></li>');	
-				}
-			}
-			$('.box  ul li').height($('.box ul li').width()*5/3);
-			$(".page"+page+" img.lazy").lazyload({effect : "fadeIn",threshold : 200});
-			$(".page"+page+" img.lazy").on("load",function(){
-				setTimeout(imgaa(), 200 )
-				
-			});
 		}else{
 			alert(data.data.error);	
 		}
 	});	
 }
+
+
+//获取点赞帖子列表
+function getZanPosts(page,size){
+	//通过带过来的专栏编号来加载对应的专题数据
+	$.get('<%= CLI_HOST_API_URL %>/nggirl/app/cli/user/PraisePost/4.0.0',getFinalRequestObject({accessToken:getAccessToken(),userId:getParam('userId'),pageNum:page,pageSize:size}),function(data){
+		var data = $.parseJSON(data);
+		if(data.code == 0){
+			if(data.data.length > 0){
+				$('.con .tab_tie_zan').height($(window).height()*0.6);
+				$(".tab_zan_no").hide();
+				$(".tab_tie_zan").show();
+			}
+			for(var x = 0; x < data.data.length; x ++){
+				$('.con .tab_tie_zan').append('<li postType="'+data.data[x].postType+'" postId="'+data.data[x].postId+'" class="page'+page+'"><img class="detailImg" src="'+data.data[x].detailImg+'" alt=""></li>');
+				$('.detailImg').height($('.detailImg').width());	
+			}
+			if( data.data.length == size ){
+				var tur = true;	
+				$(window).scroll(function(){
+					var winH = $(window).height(); //浏览器当前窗口可视区域高度  
+					var pageH = $(document.body).height(); //浏览器当前窗口文档body的高度 
+					var scrollT = $(window).scrollTop(); //滚动条top  
+					var lastPersentH = (pageH - winH - scrollT) / winH;  
+					if(tur && lastPersentH < 0.001){ 
+					setTimeout(function(){
+					PageNumZan();
+					
+					},500);
+					tur = false;
+				   } 
+			   });
+			}
+		}else{
+			alert(data.data.error);	
+		}
+	});	
+}
+
+
+//获取长草帖子列表
+function getCaoPosts(page,size){
+	//通过带过来的专栏编号来加载对应的专题数据
+	$.get('<%= CLI_HOST_API_URL %>/nggirl/app/cli/user/ListCollectProduct/4.0.0',getFinalRequestObject({accessToken:getAccessToken(),userId:getParam('userId'),pageNum:page,pageSize:size}),function(data){
+		var data = $.parseJSON(data);
+		if(data.code == 0){
+			if(data.data.length > 0){
+				$('.con .tab_tie_cao').height($(window).height()*0.6);
+				$('.tab_cao_no').hide();
+				$('.tab_tie_cao').show();	
+			}
+			for(var x = 0; x < data.data.length; x ++){
+				//判断是否可购买
+				if(data.data[x].isAllowBuy == 0){//未开售
+					//是否已长草
+					if(data.data[x].isSeed == 0){//未长草
+						$('.tab_tie_cao').append('<li><div class="box_cao"><img seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+' class="seeProduct" src="'+data.data[x].picture+'"><p class="box_cao_title">'+data.data[x].name+'</p><p class="box_cao_price">参考价：<span>¥ '+data.data[x].price+'</span></p><p class="zhongcao zhongcao1">'+data.data[x].seedNum+'</p><p class="goToBuy goToBuy1">去买</p></div></li>');	
+					}else{
+						$('.tab_tie_cao').append('<li seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+'><div class="box_cao"><img seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+' class="seeProduct" src="'+data.data[x].picture+'"><p class="box_cao_title">'+data.data[x].name+'</p><p class="box_cao_price">参考价：<span>¥ '+data.data[x].price+'</span></p><p class="zhongcao zhongcao2">'+data.data[x].seedNum+'</p><p class="goToBuy goToBuy1">去买</p></div></li>');	
+					}
+				}else{
+					//是否已长草
+					if(data.data[x].isSeed == 0){//未长草
+						$('.tab_tie_cao').append('<li seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+'><div class="box_cao"><img seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+' class="seeProduct" src="'+data.data[x].picture+'"><p class="box_cao_title">'+data.data[x].name+'</p><p class="box_cao_price">参考价：<span>¥ '+data.data[x].price+'</span></p><p class="zhongcao zhongcao1">'+data.data[x].seedNum+'</p><p class="goToBuy goToBuy2">去买</p></div></li>');	
+					}else{
+						$('.tab_tie_cao').append('<li seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+'><div class="box_cao"><img seedProductId='+data.data[x].seedProductId+' targetId='+data.data[x].targetId+' targetType='+data.data[x].targetType+' isAllowBuy='+data.data[x].isAllowBuy+' class="seeProduct" src="'+data.data[x].picture+'"><p class="box_cao_title">'+data.data[x].name+'</p><p class="box_cao_price">参考价：<span>¥ '+data.data[x].price+'</span></p><p class="zhongcao zhongcao2">'+data.data[x].seedNum+'</p><p class="goToBuy goToBuy2">去买</p></div></li>');	
+					}
+				}
+				$('.seeProduct').height($('.seeProduct').width());
+			}
+			if( data.data.length == size ){
+				var tur = true;	
+				$(window).scroll(function(){
+					var winH = $(window).height(); //浏览器当前窗口可视区域高度  
+					var pageH = $(document.body).height(); //浏览器当前窗口文档body的高度 
+					var scrollT = $(window).scrollTop(); //滚动条top  
+					var lastPersentH = (pageH - winH - scrollT) / winH;  
+					if(tur && lastPersentH < 0.001){ 
+					setTimeout(function(){
+					PageNumCao();
+					
+					},500);
+					tur = false;
+				   } 
+			   });
+			}
+		}else{
+			alert(data.data.error);	
+		}
+	});	
+}
+
+
+
 //页数++
-function PageNumPP(){
+function PageNumTie(){
+	var size=10;
+	var page_tie = $('body').data('page_tie');//在body里面存储page
+	if(page_tie == undefined || parseInt(page_tie) == NaN){
+		page_tie = 0;
+	}
+	page_tie = page_tie + 1;
+	$('body').data('page_tie',page_tie);
+	getUserPosts(page_tie,size);
+}	
+//页数++
+function PageNumZan(){
 	var size=10;
 	var page = $('body').data('page');//在body里面存储page
 	if(page == undefined || parseInt(page) == NaN){
@@ -155,48 +349,36 @@ function PageNumPP(){
 	}
 	page = page + 1;
 	$('body').data('page',page);
-	getUserPosts(page,size);
-	imgaa();
+	getZanPosts(page,size);
 }	
-function imgaa(){
-	$(".box ul li img.posts").each(function() {
-		var del=$(this);
-		var img_url =$(this).attr("data-original");
-		// 创建对象
-		var img = new Image();
-		var imgwidth=img.width;
-		var imgheight=img.height;
-		// 改变图片的src
-		img.src = img_url;
-		var width1=$(".box ul li").width();
-		var height1=$(".box ul li").height();
-		if(img.width*5/3 > img.height ){
-			del.css({"height":"100%","width":"auto"});
-			var ht=(width1-height1*img.width/img.height)/2;
-			del.css("margin-left",ht+"px");
-			}else{
-				del.css({"width":"100%","height":"auto"});
-				var wl=(height1-width1*img.height/img.width)/2;
-				del.css("margin-top",wl+"px");
-				}
-	 });
-};
+//页数++
+function PageNumCao(){
+	var size=10;
+	var page = $('body').data('page');//在body里面存储page
+	if(page == undefined || parseInt(page) == NaN){
+		page = 0;
+	}
+	page = page + 1;
+	$('body').data('page',page);
+	getCaoPosts(page,size);
+}	
+
 //关注按钮点击
-$(".head_attention").live('click',function(){
+$(".attention_btn").live('click',function(){
 	 checkAccessTokenLogin(function () {
          var data = getFinalRequestObject({
              accessToken: getAccessToken()
          });
 		
-		if($(".head_attention").hasClass("atten1")){
+		if($(".attention_btn").hasClass("atten1")){
 				cancelFollowUser();
-				$(".head_attention").html("关注");
-				$(".head_attention").removeClass("atten1").addClass("atten2");
+				$(".attention_btn").html("关注");
+				$(".attention_btn").removeClass("atten1").addClass("atten2");
 			}else{
 				FollowUser();
-				$(".head_attention").html("已关注");
-				$(".head_attention").removeClass("atten2").addClass("atten1");
-				}
+				$(".attention_btn").html("已关注");
+				$(".attention_btn").removeClass("atten2").addClass("atten1");
+			}
 	}, 'myHomePage.html' + window.location.search);
 });
 //关注
@@ -207,7 +389,7 @@ function FollowUser(){
 		data:getFinalRequestObject({accessToken:getAccessToken(),followedUserId:getParam("userId")}),
 		dataType:"json",
 		success: function (data) {
-			
+			getCustomMessage();
 		},
 	
 	});
@@ -220,7 +402,7 @@ function cancelFollowUser(){
 		data:getFinalRequestObject({accessToken:getAccessToken(),followedUserId:getParam("userId")}),
 		dataType:"json",
 		success: function (data) {
-			
+			getCustomMessage();
 		},
 	
 	});

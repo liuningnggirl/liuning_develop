@@ -72,7 +72,7 @@ body {line-height:1;color:#555;font-size:12px; font-family:"微软雅黑"; word-
 .semain_left{width:50%;float:left; overflow:hidden;}
 .semain_left ul{width:105%; background:#e7eded;  overflow-y:scroll;}
 .semain_left ul li{ height:40px; line-height:40px; padding-left:20px; font-size:14px; color:#4c4c4c; box-sizing:border-box; cursor:pointer; outline:none;-webkit-tap-highlight-color: transparent;}
-.semain_left ul li.selected{ color:#50c8b4; background:#fff; border-left:#50c8b4 solid 2px; padding-left:18px !important;}
+.semain_left ul li.selected{ color:#ee750c; background:#fff; border-left:#ee750c solid 2px; padding-left:18px !important;}
 .semain_rightbox{ width:50%; float:right;overflow:hidden;}
 .semain_right{ width:105%;  overflow-y:scroll; }
 .semain_right ul {display:none; }

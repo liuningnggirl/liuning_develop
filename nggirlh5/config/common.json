@@ -9,6 +9,8 @@
   "CNZZ_STAT_CODE_ID": "1259610547",
   "CNZZ_STAT_CODE_WEB_ID": "1259610547",
   "WEIXIN_BOUND_DOMAIN_URL":"https://testcli.nggirl.com.cn",
+  "WEIXIN_GUIDE_BROWER_IMG":"https://photosd.nggirl.com.cn/work/ec8d465e92224dd6a1015de6f4a5737d.jpg",
+  "PAGE_TOP_DAOHANG_IMG":"https://photosd.nggirl.com.cn/work/66b48e70b24c41d68aa330e71f715ad5.png",
   "source": {
     "rootDir": "h5/",
     "jsFiles": [

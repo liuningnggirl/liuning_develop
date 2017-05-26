@@ -14,6 +14,12 @@ a[title*="站长统计"]{ display:none;}
 <script type="text/javascript" src="../cosmetic/js/md5.js"></script>
 <script type="text/javascript" src="../cosmetic/js/params.js"></script>
 <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
 <script>
 	$(function(){
 		var code = getParam('code');

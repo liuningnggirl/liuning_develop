@@ -1,5 +1,16 @@
 // JavaScript Document
 $(function(){
+	if(!isInApp()){
+		$(".downLoad").show();
+	}
+	$(".downLoad .closeTip").click(function(){
+		$(".downLoad").hide();
+		$(".header").css("margin-top","0");
+	})
+	$(".downLoad .gtload").click(function(){
+		APPCommon.openApp();
+		return false;
+	})
 	//加载数据
 	//checkAccessTokenLogin(loadBasicInfo,window.location.href);
 	loadBasicInfo();
@@ -610,3 +621,64 @@ function weixinConfig(title,desc,link,imgUrl) {
 		}
 	});
 }
+var APPCommon = {
+    iphoneSchema: 'nggirl://nggirl/webview?url='+window.location.protocol+"//"+window.location.host+'/nggirl/h5/cosmetic/drawLottery.html?activityId='+getParam('cosmeticId')+'&v=<%= VERSION %>',
+    iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
+    androidSchema: 'nggirl://nggirl/webview?url='+window.location.protocol+"//"+window.location.host+'/nggirl/h5/cosmetic/drawLottery.html?activityId='+getParam('cosmeticId')+'&v=<%= VERSION %>',
+    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    openApp: function(){
+        var this_  =  this;
+        //微信
+		
+       /* if(this_.isWeixin()){
+            $(".isWei").css("height",$(window).height());
+            $(".isWei").show();
+            $('.isWei').on('touchstart', function () {
+                $(".isWei").hide();
+            });
+ 
+        }else{//非微信浏览器*/
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+				if(this_.isWeixin()){
+					 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+		 
+				}else{
+                var loadDateTime = new Date();
+                window.setTimeout(function() {
+                    var timeOutDateTime = new Date();
+                    if (timeOutDateTime - loadDateTime < 5000) {
+                        window.location = this_.iphoneDownUrl;//ios下载地址
+                    } else {
+                        window.close();
+                    }
+                },1500);
+				window.location = this.iphoneSchema;
+				}
+                
+            }else if (navigator.userAgent.match(/android/i)) {
+				if(this_.isWeixin()){
+					$(".isWei").css("height",$(window).height());
+					$(".isWei").show();
+					$('body').css('overflow','hidden').addClass('fixed');
+				}else{
+					try {
+						window.location = this_.androidSchema;
+						setTimeout(function(){
+							window.location=this_.androidDownUrl; //android下载地址
+	 
+						},1500);
+					} catch(e) {}
+				}
+            }
+       /* }*/
+    },
+    isWeixin: function(){ //判断是否是微信
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+ 
+};

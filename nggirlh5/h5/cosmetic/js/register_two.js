@@ -56,7 +56,11 @@ $(function(){
 	$('#file0').fileupload({
 			dataType: 'json',
 			done: function (e, data) {
-				$('.user_img').attr('src',data.result.data.url);
+				if(data.result.code == 0){
+					$('.user_img').attr('src',data.result.data.url);
+				}else{
+					alert(data.result.data.error);
+				}
 			}
 		});
 	
@@ -67,7 +71,7 @@ $(function(){
 	//完成注册
 	$('.yz_btn').click(function(e) {
 		var profile = '';
-		if($('.user_img').attr('src') == 'images/new_login_register.png'){
+		if($('.user_img').attr('src') == 'images/login_new_2.4.0_lno_useImg.png'){
 			profile ='';
 		}else{
 			profile =$('.user_img').attr('src');	

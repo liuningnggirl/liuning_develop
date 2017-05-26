@@ -28,6 +28,12 @@
 	.btn-ok{ width:100%; background:#50c8b4; position:absolute; bottom:0px; padding:.7rem 0 .7rem 0; font-size:.86rem; color:#fff; text-align:center; border-radius:0 0 .7rem .7rem; -webkit-tap-highlight-color:rgba(0,0,0,0);}
 </style>
 <script type="text/javascript" src="../cosmteach/js/jquery-1.7.2.min.js"></script>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
 <script type="text/javascript">
 	$(function(){
 		var bheight= $(window).height();

@@ -82,8 +82,63 @@ $(function(){
 		window.history.go(-1)
 	});
 	$('.openApp').click(function(){
-		opennApp();
+		//opennApp();
+		APPCommon.openApp();
+		return false;
 	});
+var APPCommon = {
+    iphoneSchema: 'nggirl://nggirl/itemDetail?'+'type=1'+'&itemId='+getParam('itemId')+'&v=<%= VERSION %>',
+    iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
+    androidSchema: 'nggirl://nggirl/itemDetail?'+'type=1'+'&itemId='+getParam('itemId')+'&v=<%= VERSION %>',
+    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    openApp: function(){
+        var this_  =  this;
+		if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+			if(this_.isWeixin()){
+				 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+	 
+			}else{
+			var loadDateTime = new Date();
+			window.setTimeout(function() {
+				var timeOutDateTime = new Date();
+				if (timeOutDateTime - loadDateTime < 5000) {
+					window.location = this_.iphoneDownUrl;//ios下载地址
+				} else {
+					window.close();
+				}
+			},1500);
+			window.location = this.iphoneSchema;
+			}
+			
+		}else if (navigator.userAgent.match(/android/i)) {
+			if(this_.isWeixin()){
+				$(".isWei").css("height",$(window).height());
+				$(".isWei").show();
+				$('.isWei').on('touchstart', function () {
+					$(".isWei").hide();
+				});
+	 
+			}else{
+				try {
+					window.location = this_.androidSchema;
+					setTimeout(function(){
+						window.location=this_.androidDownUrl; //android下载地址
+ 
+					},1500);
+				} catch(e) {}
+			}
+		}
+    },
+    isWeixin: function(){ //判断是否是微信
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+ 
+};	
 });
 
 
@@ -142,33 +197,40 @@ function weixinConfig(title,desc,link,imgUrl) {
     });
 }
 
-function opennApp(){  
+/*function opennApp(){  
     var ua = window.navigator.userAgent.toLowerCase();  
     //微信 
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){  
-        $('body').html('<div class="guide"><img src="images/guide.jpg" ></div>');
+        $('body').html('<div class="guide"><img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" ></div>');
     }else{//非微信浏览器
-        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {  
-            var loadDateTime = new Date();  
-            window.setTimeout(function() {  
-                var timeOutDateTime = new Date();  
-                if (timeOutDateTime - loadDateTime < 5) { 
-					alert(1);
-                    window.location.href = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";//ios下载地址  
-                }else{
-					console.log(2);
-					window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=<%= VERSION %>';	
-				}
-            },25);  
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) { 
+			if(this_.isWeixin()){
+				 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+	 
+			}else{ 
+				var loadDateTime = new Date();  
+				window.setTimeout(function() {  
+					var timeOutDateTime = new Date();  
+					if (timeOutDateTime - loadDateTime < 5000) { 
+						window.location.href = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";//ios下载地址  
+					}else{
+						window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=<%= VERSION %>';	
+					}
+				},25); 
+			}
           }else if (navigator.userAgent.match(/android/i)) {  
-            var state = null;  
-            try {  
-				window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=<%= VERSION %>';	
-                setTimeout(function(){ 
-                   // window.location.href= "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser"; //android下载地址  
-  
-                },500);  
-            } catch(e) {}  
+		   if(ua.match(/MicroMessenger/i) == 'micromessenger'){  
+				$('body').html('<div class="guide"><img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" ></div>');
+			}else{
+				var state = null;  
+				try {  
+					window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=<%= VERSION %>';	
+					setTimeout(function(){ 
+					   // window.location.href= "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser"; //android下载地址  
+	  
+					},500);  
+				} catch(e) {} 
+			} 
         }  
     }  
-}  
+}  */

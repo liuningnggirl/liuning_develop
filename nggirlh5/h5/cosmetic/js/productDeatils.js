@@ -259,7 +259,7 @@ function opennApp(){
     var ua = window.navigator.userAgent.toLowerCase();  
     //微信  
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){  
-        $('body').html('<div class="guide"><img src="images/guide.jpg" ></div>');
+        $('body').html('<div class="guide"><img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" ></div>');
     }else{//非微信浏览器  
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {  
             var loadDateTime = new Date();  
