@@ -12,7 +12,7 @@ $(function(){
 		$(".articleedit .labelEditBox .thisBefore").before(str);
 	});	
 	/*wz删除标签*/
-	$(".labelEditBox .labelBox2 .delLabelType").live('click',function(){
+	$(".labelEditBox .labelBox2 .delLabelType,.hotTopicBox2 .delLabelType").live('click',function(){
 		$(this).parent().remove();
 	});	
 	/*sp添加标签*/
@@ -21,7 +21,20 @@ $(function(){
 		str='<div class="labelBox2"> <input type="text" placeholder="输入标签" class="vaoe vaoe_Label"> <img src="images/ele-del.png" class="delLabelType" alt="" /></div>';
 		$(".video_add_or_edit .labelEditBox .thisBefore").before(str);
 	});	
-	
+	/*文章新增话题标签*/
+	$(".articleedit .topicLabel .addNewTopicLabel").live('click',function(){
+		var str='';
+		str='<div class="hotTopicBox2"> '+getAllHotTopicDetail()+' <img src="images/ele-del.png" class="delLabelType" alt="" /></div>';
+		$(this).before(str);
+		$(".hotTopicBox2 .label_name").removeAttr("disabled");
+	});	
+	/*视频新增话题标签*/
+	$(".video_add_or_edit .topicLabel .addNewTopicLabel").live('click',function(){
+		var str='';
+		str='<div class="hotTopicBox2"> '+getAllHotTopicDetail()+' <img src="images/ele-del.png" class="delLabelType" alt="" /></div>';
+		$(this).before(str);
+		$(".hotTopicBox2 .label_name").removeAttr("disabled");
+	});	
 	/*新增的标题和用户列表*/
 	$(".label_list_btn").live('click',function(){
 		$(".label_cn_list").show();	
@@ -513,6 +526,7 @@ $(function(){
 	function saveArticleDetails(e) {
 		$('.articleBtn .articalsavebtn').unbind('click');
 		var labels="";
+		var topicId=new Array();
 		 if($(".articleedit .chooseColumn option:selected").val() == ""){
 		   alert("所属专栏不能为空！");
 		   return false;
@@ -528,16 +542,19 @@ $(function(){
 		   return false;
 		}else{
 			for( i = 0; i<$(".userLabel").length; i++ ){
-			  if($(".userLabel:eq("+i+")").val().length>8){
-				alert("每个标签的字符数不能超过8个！");
+			  if($(".userLabel:eq("+i+")").val().length>10){
+				alert("每个标签的字符数不能超过10个！");
 				return false;
 			  }
 			  if($(".userLabel:eq("+i+")").val() !=''){
 				   labels += $(".userLabel:eq("+i+")").val()+',';
 			  }  
 			}
+			for( i = 0; i<$(".hotTopicBox2").length; i++ ){
+				   topicId[i]= $(".hotTopicBox2:eq("+i+")").children(".label_name").children("option:selected").val();
+			}
+			var topicIds= topicId.join(",");
 		}
-		console.log(labels);
 		var data = $('.articleedit .editor_content').getArticleEditorData();
 		if($.type(data) != 'array'){
 			alert(data);
@@ -562,7 +579,7 @@ $(function(){
 					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/addOrUpdateArticlePost/2.5.3',
 					type : 'post',
 					dataType : 'json',
-					data: {columnId:$(".articleedit .chooseColumn option:selected").val(),postId:$(".articleedit").attr("pid"),postType:1,title:$(".articleedit .arttit").val(),shareContent:shareContent,createUserId:$(".articleedit .promulgator").val(),picture:$(".articleedit #cover-img").attr("src"),detailImg:$(".articleedit #detailtop-img").attr("src"),recommendImg:$(".articleedit #atuijianimg").attr("src"),labels:labels,articles:articles},
+					data: {columnId:$(".articleedit .chooseColumn option:selected").val(),postId:$(".articleedit").attr("pid"),postType:1,title:$(".articleedit .arttit").val(),shareContent:shareContent,createUserId:$(".articleedit .promulgator").val(),picture:$(".articleedit #cover-img").attr("src"),detailImg:$(".articleedit #detailtop-img").attr("src"),recommendImg:$(".articleedit #atuijianimg").attr("src"),labels:labels,articles:articles,topicIds:topicIds},
 					success : function(data){
 						if(data.code == 0){
 							var previousPage = ldq.pop();
@@ -595,7 +612,7 @@ $(function(){
 	//点击添加视频里面的保存按钮，添加或编辑视频
 	$('.vaoe_btn_save').click(function(e) {
 		var videolabels="";
-	   
+	   var topicId=new Array();
 	   if($(".video_add_or_edit .chooseColumn option:selected").val() == ""){
 		   alert("所属专栏不能为空！");
 		   return false;
@@ -614,12 +631,16 @@ $(function(){
 			return false;
 		}else{
 			for( i = 0; i<$(".vaoe_Label").length ; i++ ){
-			  if($(".vaoe_Label:eq("+i+")").val().length>8){
-				alert("每个标签的字符数不能超过8个！");
+			  if($(".vaoe_Label:eq("+i+")").val().length>10){
+				alert("每个标签的字符数不能超过10个！");
 				return false;
 			  }
 			    videolabels += $(".vaoe_Label:eq("+i+")").val()+',';
 			}
+			for( i = 0; i<$(".hotTopicBox2").length; i++ ){
+				   topicId[i]= $(".video_add_or_edit .hotTopicBox2:eq("+i+")").children(".label_name").children("option:selected").val();
+			}
+			var topicIds= topicId.join(",");
 			var data = $('.video_add_or_edit .goods_box').getArticleEditorData();
 			if($.type(data) != 'array'){
 				alert(data);
@@ -647,6 +668,7 @@ $(function(){
 				picture:$('.video_add_or_edit #vaoe_img_cover').attr('src'),
 				detailImg:$('.video_add_or_edit #vaoe_img_zhen').attr('src'),
 				recommendImg:$('.video_add_or_edit #tuijianimg').attr('src'),
+				topicIds:topicIds,
 				articles:articles/*JSON.stringify(goods)*/,
 				//userRole:$('.video_add_or_edit .vaoe_role').val()
 				labels:videolabels};
@@ -1201,9 +1223,17 @@ function getTieDetailsFn(btn){
 						$(".articleedit .labelEditBox .thisBefore").before(str);
 					}
 				}
+				
 				for(var i=0;i<data.data.labels.length;i++){
 					$(".articleedit .labelEditBox .userLabel:eq("+i+")").val(data.data.labels[i]);
 				};
+				var det='';
+				for(var j=0;j<data.data.topicIds.length;j++){
+					console.log(data.data.topicIds[j]);
+					det +='<div class="hotTopicBox2"> '+getAllHotTopicDetail(data.data.topicIds[j])+' <img src="images/ele-del.png" class="delLabelType" alt="" /></div>';
+				}
+				$(".articleedit .topicLabel .addNewTopicLabel").before(det);
+				$(".hotTopicBox2 .label_name").removeAttr("disabled");
 				$(".articleedit #cover-img").attr("src",data.data.picture);
 				$(".articleedit #detailtop-img").attr("src",data.data.detailImg);
 				$(".articleedit #atuijianimg").attr("src",data.data.recommendImg);
@@ -1259,6 +1289,13 @@ function getTieDetailsFn(btn){
 				for(var j=0;j<data.data.labels.length;j++){
 					$(".vaoe_Label:eq("+j+")").val(data.data.labels[j]);
 				};
+				var det='';
+				for(var j=0;j<data.data.topicIds.length;j++){
+					console.log(data.data.topicIds[j]);
+					det +='<div class="hotTopicBox2"> '+getAllHotTopicDetail(data.data.topicIds[j])+' <img src="images/ele-del.png" class="delLabelType" alt="" /></div>';
+				}
+				$(".video_add_or_edit .topicLabel .addNewTopicLabel").before(det);
+				$(".hotTopicBox2 .label_name").removeAttr("disabled");
 				$(".goodsEditBox ul").children().remove();
 
 				//初始化
@@ -1285,7 +1322,7 @@ function cleararticalDeatil(){
 	$(".articleedit #atuijianimg").removeAttr("src");
 	$('.articleedit .editor_content').createArticleEditor();
 	$('.articleedit .labelEditBox .labelBox2:gt('+2+')').remove();
-	
+	$('.articleedit .topicLabel .hotTopicBox2').remove();
 }
 function juBaoFun(btn){
 	var ok = btn;
@@ -1337,6 +1374,7 @@ function clearVideoMessageFn(){
 	$(".selectednum b").text("0");
 	$(".video_add_or_edit").removeAttr("postid");
 	$('.video_add_or_edit .labelEditBox .labelBox2:gt('+2+')').remove();
+	$('.video_add_or_edit .topicLabel .hotTopicBox2').remove();
 }
 //获取热搜词
 function getPopularSearch(){

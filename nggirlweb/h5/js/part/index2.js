@@ -246,6 +246,17 @@ $(function(){
 			$(this).removeAttr('check');
 		}
     });
+	
+    //帖子热度匹配点击展开子菜单
+	$('.tie_hot_manage .tie_hot_manage_control').click(function(e) {
+		if(typeof($(this).attr('check')) == "undefined"){
+			$(this).parent().children('a').slideDown();
+			$(this).attr('check','check');
+		}else{
+			$(this).parent().children('a').slideUp();
+			$(this).removeAttr('check');
+		}
+    });
 	//判断是否为超级管理员
 	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/personal/getPersonalInfo',function(data){
 		var data = $.parseJSON(data);
@@ -516,6 +527,12 @@ $(function(){
 		$('.index_nav_lan').children('div').remove();
 		getKindsListFn();
     });
+	//首页控制-导航栏标签控制
+	$('.content-left ul>li.h5_index_manages a[tag=index_nav_label]').click(function(e) {
+		location.hash='index_nav_label';
+		
+		getNavLabelListFn();
+    });
 	//首页控制-列表控制
 	$('.content-left ul>li.h5_index_manages a[tag=index_list_manage]').click(function(e) {
 		location.hash='index_list_manage';
@@ -622,6 +639,9 @@ $(function(){
 	$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_order_manage]').click(function(e) {
 		location.hash='shope_order_manage';
 		$('#shope_order_manage').show();
+		$('#shope_order_manage .shope_order_manage_table thead .revice_time').addClass('hidden');
+		$('#shope_order_manage .shope_order_manage_table thead .apply_time').addClass('hidden');			
+		$('#shope_order_manage .shope_order_manage_order_status span').eq(0).addClass("on").css('color','#000').siblings().removeClass("on").css('color','#ccc');
 		loadShopeGetOrderPage();
     });
 	
@@ -648,6 +668,30 @@ $(function(){
 		$('#goods_parameter_management').show();
 		wefhwihfeu()
     });
+	
+	//帖子热度匹配【管理员】
+	$('.content-left ul>li.tie_hot_manage a[tag=tie_hot_admin_manage]').click(function(e) {
+		location.hash='tie_hot_admin_manage';
+		$('#tie_hot_admin_manage').show();
+		//获取权重值配置V4.0.0
+		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/getWeightConfig/4.0.0',function(data){
+			var data = $.parseJSON(data);
+			if(data.code == 0){
+				$('#tie_hot_admin_manage .tie_hot_admin_manage_content .common_setting tbody').html('<tr><td><input type="text" disabled value='+data.data.viewWeight+' style="padding:7px; text-align:center; background:none; border:none;" /></td><td><input type="text" disabled value='+data.data.praiseWeight+' style="padding:7px; text-align:center; background:none; border:none;" /></td><td><input type="text" disabled value='+data.data.commentWeight+' style="padding:7px; text-align:center; background:none; border:none;" /></td><td><input type="text" disabled value='+data.data.updateSpeed+' style="padding:7px; text-align:center; background:none; border:none;" /></td><td><input type="button" value="编辑" class="edit_btn green" /></td></tr>');
+			}else{
+				alert(data.data.error);	
+			}
+		});
+    });
+
+	//帖子热度匹配【运营人员】
+	$('.content-left ul>li.tie_hot_manage a[tag=tie_hot_operators_manage]').click(function(e) {	
+		location.hash='tie_hot_operators_manage';
+		$('#tie_hot_operators_manage').show();
+		loadAllPostHeatPage();
+		getPostHeatSetRecordFn();
+    });
+
 	$('.content-left ul>li').not(".guest_column_manage").children("a").click(function(e) {
 		$('.order-magement,.total-message').show();
 		$('.wb>#'+$(this).attr('tag')).show().siblings().hide();
@@ -1558,120 +1602,128 @@ function loadPersonManagementPage(){
 $(window).load(function() { 
 	var href=window.location.href;
 	if(href.indexOf("user_management")!=-1){				//用户管理
-		$('.content-left ul>li:eq(1) a').click() 
+		$('.content-left ul>li:eq(1) a').click(); 
 	}else if(href.indexOf("dresser_management")!=-1){		//化妆师管理
-		$('.content-left ul>li:eq(2) a').click() 
+		$('.content-left ul>li:eq(2) a').click(); 
 	}else if(href.indexOf("work_management")!=-1){			//作品管理
-		$('.content-left ul>li:eq(3) a').click() 
+		$('.content-left ul>li:eq(3) a').click(); 
 	}else if(href.indexOf("banner_management")!=-1){		//banner管理
-		$('.content-left ul>li:eq(4) a').click() 
+		$('.content-left ul>li:eq(4) a').click(); 
 	}else if(href.indexOf("push_management")!=-1){			//官方其他推送管理
 		$('.message_manages a').show();
-		$('.content-left ul>li a[tag=sysmessage_manage]').click() 
+		$('.content-left ul>li a[tag=sysmessage_manage]').click(); 
 	}else if(href.indexOf("single_message_manage")!=-1){    //官方个推推送管理
 		$('.message_manages a').show();
-		$('.content-left ul>li a[tag=single_message_manage]').click() 
+		$('.content-left ul>li a[tag=single_message_manage]').click(); 
 	}else if(href.indexOf("cash_management")!=-1){			//提现管理
-		$('.content-left ul>li:eq(6) a').click() 
+		$('.content-left ul>li:eq(6) a').click();
 	}else if(href.indexOf("complaints_management")!=-1){	//订单投诉管理
-		$('.content-left ul>li:eq(7) a').click() 
+		$('.content-left ul>li:eq(7) a').click(); 
 	}else if(href.indexOf("feedback_management")!=-1){		//反馈意见管理
-		$('.content-left ul>li:eq(8) a').click() 
+		$('.content-left ul>li:eq(8) a').click(); 
 	}else if(href.indexOf("normal_management")!=-1){		//普通邀请码管理
 		$('.invitecode a').show();
-		$('.content-left ul>li a[tag=normal_invite_manage]').click() 
+		$('.content-left ul>li a[tag=normal_invite_manage]').click(); 
 	}else if(href.indexOf("superInvite_management")!=-1){	//超级邀请码管理
 		$('.invitecode a').show();
-		$('.content-left ul>li a[tag=super_invite_manage]').click() 
+		$('.content-left ul>li a[tag=super_invite_manage]').click(); 
 	}else if(href.indexOf("randomInvite_management")!=-1){	//随机邀请码管理
 		$('.invitecode a').show();
-		$('.content-left ul>li a[tag=random_invite_manage]').click() 
+		$('.content-left ul>li a[tag=random_invite_manage]').click(); 
 	}else if(href.indexOf("ziXun_management")!=-1){			//资讯管理
-		$('.content-left ul>li:eq(10) a').click() 
+		$('.content-left ul>li:eq(10) a').click();
 	}else if(href.indexOf("xwc_management")!=-1){			//美妆下午茶管理
-		$('.content-left ul>li:eq(11) a').click() 
+		$('.content-left ul>li:eq(11) a').click(); 
 	}else if(href.indexOf("xwcOrder_management")!=-1){		//美妆下午茶订单管理
-		$('.content-left ul>li:eq(12) a').click() 
+		$('.content-left ul>li:eq(12) a').click(); 
 	}else if(href.indexOf("complaintZixun_management")!=-1){//投诉/咨询管理
-		$('.content-left ul>li:eq(13) a').click() 
+		$('.content-left ul>li:eq(13) a').click(); 
 	}else if(href.indexOf("smmzTopics_management")!=-1){	//上门美妆推荐专题管理
-		$('.content-left ul>li:eq(14) a').click() 
+		$('.content-left ul>li:eq(14) a').click();
 	}else if(href.indexOf("ad_management")!=-1){			//广告管理
-		$('.content-left ul>li:eq(15) a').click() 
+		$('.content-left ul>li:eq(15) a').click();
 	}else if(href.indexOf("allCommends_management")!=-1){	//全部评论管理
-		$('.content-left ul>li:eq(16) a').click() 
+		$('.content-left ul>li:eq(16) a').click();
 	}else if(href.indexOf("tie_management")!=-1){			//帖子管理
-		$('.content-left ul>li.column_manage a').click()
+		$('.content-left ul>li.column_manage a').click();
 	}else if(href.indexOf("goods_management")!=-1){			//商品管理
-		$('.content-left ul>li.goods_manage a').click()
+		$('.content-left ul>li.goods_manage a').click();
 	}else if(href.indexOf("riqian_management")!=-1){	    //日签管理
-		$('.content-left ul>li.riqian_manage a').click()    
+		$('.content-left ul>li.riqian_manage a').click();   
 	}else if(href.indexOf("free_trial_manage")!=-1){	    //妆品试用活动管理
-		$('.content-left ul>li.free_trial_manage a').click()  
+		$('.content-left ul>li.free_trial_manage a').click(); 
 	}else if(href.indexOf("points_mall_management")!=-1){	//积分商城管理
-		$('.content-left ul>li.points_mall_manage a').click()  
+		$('.content-left ul>li.points_mall_manage a').click(); 
 	}else if(href.indexOf("lottery_activity_manage")!=-1){	//抽奖活动管理
-		$('.content-left ul>li.lottery_activity_manage a').click() 
+		$('.content-left ul>li.lottery_activity_manage a').click();
 	}else if(href.indexOf("goods_column_manage")!=-1){	//商品专栏管理
-		$('.content-left ul>li.goods_column_manage a').click()  
+		$('.content-left ul>li.goods_column_manage a').click(); 
 	}else if(href.indexOf("guest_column_manage")!=-1){	//客座小编
 		$('.content-left ul>li.guest_column_manage a').click(); 
 	}else if(href.indexOf("index_nav_manage")!=-1){		//导航控制管理
 		$('.h5_index_manages a').show();
-		$('.content-left ul>li a[tag=index_nav_manage]').click() 
+		$('.content-left ul>li a[tag=index_nav_manage]').click();
+	}else if(href.indexOf("index_nav_label")!=-1){		//导航控制管理
+		$('.h5_index_manages a').show();
+		$('.content-left ul>li a[tag=index_nav_label]').click();
 	}else if(href.indexOf("index_list_manage")!=-1){	//列表控制管理
 		$('.h5_index_manages a').show();
-		$('.content-left ul>li a[tag=index_list_manage]').click() 
+		$('.content-left ul>li a[tag=index_list_manage]').click();
 	}else if(href.indexOf("community_freetrail_manage_a")!=-1){		//免费试用管理
 		$('.pumpkin_community_manage a').show();
-		$('.content-left ul>li a[tag=community_freetrail_manage_a]').click() 
+		$('.content-left ul>li a[tag=community_freetrail_manage_a]').click();
 	}else if(href.indexOf("community_activity_manage_a")!=-1){	//社团活动管理
 		$('.pumpkin_community_manage a').show();
-		$('.content-left ul>li a[tag=community_activity_manage_a]').click() 
+		$('.content-left ul>li a[tag=community_activity_manage_a]').click();
 	}else if(href.indexOf("community_hottopic_manage")!=-1){		//热门话题管理
 		$('.pumpkin_community_manage a').show();
-		$('.content-left ul>li a[tag=community_hottopic_manage]').click() 
+		$('.content-left ul>li a[tag=community_hottopic_manage]').click();
 	}else if(href.indexOf("community_label_manage")!=-1){		//帖子标签管理
 		$('.pumpkin_community_manage a').show();
-		$('.content-left ul>li a[tag=community_label_manage]').click() 
+		$('.content-left ul>li a[tag=community_label_manage]').click();
 	}else if(href.indexOf("post_manage")!=-1){	//新帖子管理
-		$('.content-left ul>li.post_manage a').click() 
+		$('.content-left ul>li.post_manage a').click();
 	}else if(href.indexOf("heat_weight_manage")!=-1){	//热度权重比配置
-		$('.content-left ul>li.heat_weight_manage a').click() 
+		$('.content-left ul>li.heat_weight_manage a').click();
 	}else if(href.indexOf("pumpkin_person_approve_manage")!=-1){//南瓜达人认证管理
-		$('.content-left ul>li.pumpkin_person_approve_manage a').click() 
+		$('.content-left ul>li.pumpkin_person_approve_manage a').click();
 	}else if(href.indexOf("beauty_line_service_company_manage")!=-1){//美妆线下服务管理——企业上门美妆服务
 		$('.beauty_line_service_manages a').show();
-		$('.content-left ul>li.beauty_line_service_manages a[tag=beauty_line_service_company_manage]').click() 
+		$('.content-left ul>li.beauty_line_service_manages a[tag=beauty_line_service_company_manage]').click();
 	}else if(href.indexOf("beauty_line_service_school_manage")!=-1){//美妆线下服务管理——校园美妆课堂
 		$('.beauty_line_service_manages a').show();
-		$('.content-left ul>li.beauty_line_service_manages a[tag=beauty_line_service_school_manage]').click() 
+		$('.content-left ul>li.beauty_line_service_manages a[tag=beauty_line_service_school_manage]').click();
 	}else if(href.indexOf("electricity_supplier_goods_manage")!=-1){//电商管理——商品管理
 		$('.electricity_supplier_mall_manages a').show();
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_supplier_goods_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_supplier_goods_manage]').click();
 	}else if(href.indexOf("electricity_supplier_branch_manage")!=-1){//电商管理—-品牌管理
 		$('.electricity_supplier_mall_manages a').show();
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_supplier_branch_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_supplier_branch_manage]').click();
 	}else if(href.indexOf("electricity_goods_delivery_manage")!=-1){//电商管理——商品物流
 		$('.electricity_supplier_mall_manages a').show();
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_goods_delivery_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_goods_delivery_manage]').click();
 	}else if(href.indexOf("electricity_buy_know_manage")!=-1){//电商管理—-购买须知
 		$('.electricity_supplier_mall_manages a').show();
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_buy_know_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=electricity_buy_know_manage]').click();
 	}else if(href.indexOf("shope_order_manage")!=-1){		//商品订单管理
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_order_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_order_manage]').click();
 		$('.electricity_supplier_mall_manages a').show();
 	}else if(href.indexOf("shope_evaluate_manage")!=-1){		//商品评价管理
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_evaluate_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_evaluate_manage]').click();
 		$('.electricity_supplier_mall_manages a').show();
 	}else if(href.indexOf("shope_after_sale_manage")!=-1){		//商品售后管理
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_after_sale_manage]').click() 
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=shope_after_sale_manage]').click();
 		$('.electricity_supplier_mall_manages a').show();
-	}else if(href.indexOf("goods_parameter_management")!=-1){
-		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=goods_parameter_management]').click() 
+	}else if(href.indexOf("goods_parameter_management")!=-1){	//商品参数管理
+		$('.content-left ul>li.electricity_supplier_mall_manages a[tag=goods_parameter_management]').click();
 		$('.electricity_supplier_mall_manages a').show();
-	}
-	else{
+	}else if(href.indexOf("tie_hot_admin_manage")!=-1){//帖子热度匹配【管理员】
+		$('.content-left ul>li.tie_hot_manage a[tag=tie_hot_admin_manage]').click();
+		$('.tie_hot_manage a').show();
+	}else if(href.indexOf("tie_hot_operators_manage")!=-1){//帖子热度匹配【运营人员】
+		$('.content-left ul>li.tie_hot_manage a[tag=tie_hot_operators_manage]').click();
+		$('.tie_hot_manage a').show();
+	}else{
 		$('.content-left ul>li:eq(0) a').click();			//订单管理
    }
 }); 

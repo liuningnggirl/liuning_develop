@@ -431,7 +431,7 @@ function getwaitTieNum(){
 	});
 }
 //审核通过的帖子定义数据
-function  getOnlinePostData(columnId,startTime,endTime,postType,isEssential,postId,title,nickName,label,num,page){
+function  getOnlinePostData(columnId,startTime,endTime,postType,isEssential,postId,title,nickName,label,num,page,publishTimeStartTime,publishTimeEndTime,lastEditStartTime,lastEditEndTime){
 	var data = new Object();
 	data.columnId = columnId;
 	data.startTime = startTime;
@@ -444,6 +444,10 @@ function  getOnlinePostData(columnId,startTime,endTime,postType,isEssential,post
 	data.label = label;
 	data.num = num;
 	data.page = page;
+	data.publishTimeStartTime=publishTimeStartTime;
+	data.publishTimeEndTime=publishTimeEndTime;
+	data.lastEditStartTime=lastEditStartTime;
+	data.lastEditEndTime=lastEditEndTime;
 	return data;	
 }
 //搜索的数据
@@ -458,7 +462,11 @@ function onlinePostData(){
 		$(".post_manage_box .post_search .advanced_filter .postTitle").val(),
 		$(".post_manage_box .post_search .advanced_filter .postPublisher").val(),
 		$(".post_manage_box .post_search .advanced_filter .postLabel").val(),
-		20,1
+		20,1,
+		$(".post_manage_box .post_search .advanced_filter .publishStartTime").val(),
+		$(".post_manage_box .post_search .advanced_filter .publishEndTime").val(),
+		$(".post_manage_box .post_search .advanced_filter .changeStartTime").val(),
+		$(".post_manage_box .post_search .advanced_filter .changeEndTime").val()
 		)
 }
 //渲染数据

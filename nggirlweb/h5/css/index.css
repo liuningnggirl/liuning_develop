@@ -692,7 +692,8 @@ input[type="button"]{ cursor:pointer;}
 .labelBox2{    width: 122px; position:relative; display:inline-block;     margin: 5px 10px 5px 0;}
 .labelBox2 input{width: 100px; }
 .labelBox2 img{ width:15px; height:15px; position:absolute; top:-8px; right:-11px; }
-.labelEditBox .addNewLabel{ margin-left:80%;}
+/*.labelEditBox .addNewLabel{ margin-left:80%;}*/
+.topicLabel .addNewTopicLabel{ margin-bottom:20px;}
 /*商品管理新增*/
 .tab_goods div{ display:inline-block; width:115px; height:35px; line-height:35px; background:#a6aaa9; color:#fff; text-align:center; margin:10px; cursor:pointer;}
 .tab_goods div.on,.points_mall_manage .on,#guest_column_manage .on{ background:#2d9540;}
@@ -793,12 +794,14 @@ input.newinput{width: 300px; padding: 7px;}
 .virtual_user_add_box .virtual_user_double_btn{ text-align:center;}
 .virtual_user_add_box .virtual_user_double_btn input{ padding:10px;}
 /*首页控制*/
-.h5_index_control,.pumpkin_community_control,.beauty_line_service_manages_control,.electricity_supplier_manages_control{border-bottom: 1px solid #1f262d; border-top: 1px solid #37414b;padding: 15px 0 15px 30px;color: #8C9298;}
+.h5_index_control,.pumpkin_community_control,.beauty_line_service_manages_control,.electricity_supplier_manages_control,.tie_hot_manage_control{border-bottom: 1px solid #1f262d; border-top: 1px solid #37414b;padding: 15px 0 15px 30px;color: #8C9298;}
 /*  导航控制 */
-.index_nav_manage_box{ width:100%; display:block; padding:20px; overflow:hidden;}
-.index_nav_lan .index_nav_lan_li{width: 350px;text-align: center;display: inline-block;margin: 20px 7% 0 0; float:left;border-radius: 5px; overflow: hidden;}
-.index_nav_lan .index_nav_lan_li .inl_lan_name{ width:75%; padding:10px 0; background:#2d9540; color:#fff;cursor:pointer; border-radius: 5px;display: inline-block; float: left;}
-.index_nav_lan .index_nav_lan_li .inl_lan_index{ border:1px solid #ccc;padding: 10px 0;width: 40px;border-radius: 5px;display: inline-block;float: left;margin: 0 0 0 5px;text-align:center;}
+.index_nav_label_box{ min-height:700px;}
+.index_nav_manage_box,.index_nav_label_box{ width:100%; display:block; padding:20px; overflow:hidden;}
+.index_nav_lan .index_nav_lan_li,.index_nav_list .index_nav_list_li{width: 350px;text-align: center;display: inline-block;margin: 20px 7% 0 0; /*float:left;*/border-radius: 5px; overflow: hidden;}
+.index_nav_list .index_nav_list_li{width: 480px !important;}
+.index_nav_lan .index_nav_lan_li .inl_lan_name,.index_nav_list .index_nav_list_li .inl_list_name{ width:262px; padding:10px 0; background:#2d9540; color:#fff;cursor:pointer; border-radius: 5px;display: inline-block; float: left;}
+.index_nav_lan .index_nav_lan_li .inl_lan_index,.index_nav_list .index_nav_list_li .inl_lan_seq{ border:1px solid #ccc;padding: 10px 0;width: 40px;border-radius: 5px;display: inline-block;float: left;margin: 0 0 0 5px;text-align:center;}
 .index_nav_lan .index_nav_lan_li .inl_lan_toggle{ width:100%; background:#fff; display:none; cursor:pointer; color:#fff;}
 .index_nav_lan .index_nav_lan_li .inl_lan_href,.index_nav_lan .index_nav_lan_li .inl_lan_modify_name{ width:100%; padding:10px 0; display:none;}
 .index_nav_lan .index_nav_lan_li .inl_lan_modify_name{ width:100%; padding:10px 0; display:none; border-top:1px solid #eee;}
@@ -827,9 +830,9 @@ input.newinput{width: 300px; padding: 7px;}
 .ach_hot_sort .ach_hot_sort_li .ach_hot_sort_li_title{width: 79%;background: #ccc;display: inline-block;padding: 10px 0;border-radius: 5px;}
 .ach_hot_sort .ach_hot_sort_li .ach_hot_sort_li_id{display: inline-block;background: #ccc;padding: 10px 10px;border-radius: 5px;margin-left: 5px;}
 .ach_hot_sort .ach_hot_sort_li .ach_hot_sort_li_del{width: 15px;margin: 0px 0 0 10px;}
-.community_hottopic_manage_fensi_box,.community_hottopic_manage_tiezi_box{position: absolute;top: 100px;padding: 30px 10px;background: #fff; border: 1px solid #ccc;text-align: center;border-radius: 5px;left: 45%; display:none;}
+.community_hottopic_manage_fensi_box,.community_hottopic_manage_tiezi_box,.column_weight_manage_content_box,.community_hottopic_manage_pinglun_box{position: absolute;top: 100px;padding: 30px 10px;background: #fff; border: 1px solid #ccc;text-align: center;border-radius: 5px;left: 45%; display:none;}
 .community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_moni,.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_moni{padding: 7px 0;margin: 10px 0;border-radius: 5px;text-align: center;}
-.community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_close,.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_close{width: 20px;position: absolute;top: 10px;right: 10px;}
+.community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_close,.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_close,.community_hottopic_manage_pinglun_box .community_hottopic_manage_pinglun_box_close{width: 20px;position: absolute;top: 10px;right: 10px;}
 .index_nav_manage_redirect_page{ padding:20px; background:#fff; display:none;}
 .index_nav_manage_redirect_page .index_nav_manage_redirect_page_href{padding: 8px 0;width: 100%;margin: 10px 0;border-radius: 5px;}
 .index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds{ width: 100%;border: 1px solid #ccc;padding: 10px;border-radius: 5px; margin: 10px 0;}
@@ -856,7 +859,8 @@ input.newinput{width: 300px; padding: 7px;}
 
 /*帖子管理*/
 .waitPassTabel,.postListTabel,.hottopicTabel{ margin:10px 0 0 !important;}
-.post_manage_box,.wait_pass_box,.label_manage_box { background:#fff; padding:20px;}
+.post_manage_box,.wait_pass_box{ background:#fff; padding:20px;}
+.label_manage_box { background:#fff; }
 .post_manage_box{ overflow:scroll;}
 .post_manage_box .post_search span,.post_manage_box .post_search b{ font-weight:normal; cursor:pointer; display:inline-block; margin:5px; text-align:center;  width: 94px; height: 30px; line-height:30px; font-size:13px;  border:#dcdcdc solid 1px; border-radius:6px;}
 .post_manage_box .post_search input{ height:30px; line-height:30px; border-radius:5px;}
@@ -886,6 +890,7 @@ input.newinput{width: 300px; padding: 7px;}
 .post_manage_box .postListTabel img.goToCommentPage{width:15px; position:absolute; right:3px; top:50%; margin-top:-7px;}
 .bluebtn1,.redbtn1 { margin:5px 10px !important; }
 .tongguoshenhe input{margin: 20px 0 20px 85%; width:100px;  height:35px; color:#fff;background:#51a351; border-radius:5px;}
+.margin5{ margin:5px 0;}
 /*帖子不通过原因弹窗*/
 .allreasonBox { display:none; position:fixed; top:50%; left:50%; margin:-170px 0 0 -125px;z-index:1001; width:250px;  padding:20px; background:#ccc;}
 .allreasonBox .closeReasonBox{ position:absolute; top:2px; right:2px; width:15px; height:15px;}
@@ -911,17 +916,23 @@ input.newinput{width: 300px; padding: 7px;}
 .paddingbot77{padding-bottom: 77px;}
 
 /*帖子标签管理*/
-.label_manage_box .label_manage_btn{ width:320px; margin:0 auto;}
+.label_manage_box .label_manage_btn{ width:216px; margin:0 auto ; padding:20px 0;}
 .label_manage_box .label_manage_btn span{cursor: pointer;display: inline-block; margin: 5px;text-align: center; background: #ccc;  border: #dcdcdc solid 1px; width: 94px; height: 30px; line-height: 30px;font-size: 13px;}
 .labelTypeBox  input[type="text"]{ height:35px; text-align:center; border-radius:5px;}
+.label_manage_box .label_list{ border-top:#dcdcdc solid 1px; padding: 20px;}
+.label_manage_box .label_name{ width:150px; border:#dcdcdc solid 1px; border-radius:5px; text-align:center; height:35px; line-height:35px; margin-bottom:20px;}
 .labelTypeBox .labelBox1 ,.labelTypeBox .labelBox1 .labelType{ width:130px;}
 .labelTypeBox .labelBox1 { margin:24px 0;}
 .labelBox{ position:relative; display:inline-block; margin-right:20px; }
 .labelBox img{ width:15px; height:15px; position:absolute; top:-8px; right:-7px; }
-.labelTypeDetail input{ width:80px; height:35px; text-align:center; border-radius:5px; margin-bottom:20px;}
+.labelTypeDetail input{ min-width:80px; height:35px; text-align:center; border-radius:5px; margin-bottom:20px;}
+.labelTypeDetail input[type="text"]:disabled{ background:#FFF;}
 .labelTypeDetail{ width:100%; border-bottom:#dcdcdc solid 1px; padding-bottom:4px;}
 .postListTabel .lookMore{ border:none; background:#fff;padding: 5px 3px 2px !important;min-width: 20px !important;}
 .postListTabel{ min-width:100%;width:auto;}
+.hotTopicBox2{ display:inline-block; margin:10px;position:relative; }
+.hotTopicBox2 .label_name{ width:150px; border:#dcdcdc solid 1px; border-radius:5px; text-align:center; height:35px; line-height:35px;}
+.hotTopicBox2 img{  width:15px; height:15px; position:absolute; top:-8px; right:-7px;}
 
 /* 新增热门话题 */
 .add_hottopic{padding: 20px; background: #fff; display:none;}

@@ -58,6 +58,7 @@
                         <th>标题</th>
                         <th>粉丝数</th>
                         <th>帖子数</th>
+                        <th>在线讨论人数</th>
                         <th>操作</th>
                     </tr>
                 </table>
@@ -129,12 +130,23 @@
         <input type="button" value="修改" style="border-radius:5px;" class="community_hottopic_manage_tiezi_box_modify" />
     </div>
     
+    <!-- 模拟评论弹框 -->
+    <div class="community_hottopic_manage_pinglun_box">
+        <img src="images/ele-del.png" class="community_hottopic_manage_pinglun_box_close" style="width: 20px;position: absolute;top: 10px;right: 10px;" />
+    	<p>真实评论数</p>
+        <p style="margin:10px 0;" class="community_hottopic_manage_pinglun_box_true"></p>
+        <p>模拟评论数</p>
+        <input type="text" class="community_hottopic_manage_pinglun_box_moni"  style="padding: 7px 0;margin: 10px 0;border-radius: 5px;text-align: center;" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" /><br />
+        <input type="button" value="恢复" style="border-radius:5px;" class="community_hottopic_manage_pinglun_box_huifu" />
+        <input type="button" value="修改" style="border-radius:5px;" class="community_hottopic_manage_pinglun_box_modify" />
+    </div>
+    
     <!--  新增热门话题 -->
     <div class="add_hottopic">
     	<label for="" style="vertical-align:top;">话题背景图：</label>
         <img src="" style="width:200px; height:200px; border-radius:5px;" alt="" class="add_hottopic_cover" /><br /><br />
         <input type="file" class="add_hottopic_input" multiple id="add_hottopic_input" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" style="float:left; display:none;" />
-        <input type="text" placeholder="添加标题" class="add_hottopic_add_title" /><br /><br />
+        <input type="text" placeholder="添加标题" class="add_hottopic_add_title" maxlength="20" /><br /><br />
         <textarea name="" id="" cols="30" rows="10" placeholder="添加正文" style="width: 100%;border: 1px solid #ccc;resize: none; box-sizing:border-box; border-radius:5px; padding:10px;" class="add_hottopic_para"></textarea><br /><br />
         <input type="button" value="完成" class="add_hottopic_success" />
         <input type="button" value="取消" class="add_hottopic_cancle" />

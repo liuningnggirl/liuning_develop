@@ -906,7 +906,7 @@ $(".zengjia_pointer").live('click',function(){
 			//var width_new=$(".choice_goods_picture_more_last_choicePic").width()/data.data.headImgs.length
 			
 			for(var i=0;i<data.data.headImgs.length;i++){
-				$(".choice_goods_picture_more_last_choicePic").append('<div class="div_three_common_oh"><input type="button" value="选取文件" class="now_goChoice_picture editImg" /><img src="images/u702.png" class="remove_img_click"><img itemId="'+data.data.headImgs[i].itemId+'" src="'+data.data.headImgs[i].url+'" id="'+data.data.headImgs[i].id+'" width="'+data.data.headImgs[i].itemId+'" height="'+data.data.headImgs[i].itemId+'" style="width: 100%;height: 84%" class="needEditImg"></div>')
+				$(".choice_goods_picture_more_last_choicePic").append('<div class="div_three_common_oh"><input type="button" value="选取文件" class="now_goChoice_picture editImg" /><img src="images/u702.png" class="remove_img_click"><img itemId="'+data.data.headImgs[i].itemId+'" src="'+data.data.headImgs[i].url+'" id="'+data.data.headImgs[i].id+'" width="'+data.data.headImgs[i].width+'" height="'+data.data.headImgs[i].height+'" style="width: 100%;height: 84%" class="needEditImg"></div>')
 			}
 			/*规格*/
 			if(parseInt(data.data.standard)==1){
