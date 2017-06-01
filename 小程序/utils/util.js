@@ -35,8 +35,8 @@ function getFinalRequestObject(appParams) {
   finalParams.app_id = 'h5gzh';
   finalParams.nonce = Math.ceil(Math.random() * 1000000);
   finalParams.timestamp = Date.parse(new Date());
-  //finalParams.version = '<%= PARAM_VERSION %>';
-  //finalParams.build = '<%= PARAM_BUILD %>';
+  finalParams.version = '3.0';
+  finalParams.build = '2';
   finalParams.udid = 'h5';
   finalParams.devicemodel = getDeviceModel();
   finalParams.sysname = getSysName();

@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "上门美妆",
   "navigationBarBackgroundColor": "#3a3a3a",
-  "navigationBarTextStyle": "white"
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

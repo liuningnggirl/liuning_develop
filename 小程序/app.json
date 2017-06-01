@@ -6,7 +6,9 @@
     "pages/beautysalon/beautysalon",
     "pages/mine/mine",
     "pages/test/test",
-    "pages/beautysalon/beautysalon_details"
+    "pages/beautysalon/beautysalon_details",
+    "pages/beautysalon/beauty_salon_location",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

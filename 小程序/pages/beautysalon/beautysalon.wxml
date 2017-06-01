@@ -1,6 +1,6 @@
-<!--beautysalon.wxml-->
-<view class="beauty_list" wx:for="{{dataContent}}" wx:for-item="value">
-  <navigator url="beautysalon_details?title={{value.title}}">
+<!--beautysalon.wxml--> 
+<view class="beauty_list" wx:key="*this" wx:for="{{dataContent}}" wx:for-item="value" bindtap="getSalonMessage">
+  <navigator url="beautysalon_details?unionProductId={{value.unionProductId}}&productType={{value.productType}}">
     <view class="beauty_list_li" >
       <image src="{{value.cover}}"></image>
       <view class="delist">

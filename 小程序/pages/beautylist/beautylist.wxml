@@ -1,1 +1,69 @@
-<text>上门美妆</text>
+<view class="">
+  <view class="s_nav">南瓜姑娘<a href="#" class="click_follow">关注</a>
+    <view class="select_city">
+        <image src="../images/xwc-local_03.png" alt=""></image>
+        <span class="city_name">北京</span>
+      </view>
+  </view>
+
+  <!-- 搜索框  -->
+  <view class="sw_search">
+    <view class="s_search">
+      <form action="#" method="get" class="form1">
+        <icon type="search" class="search_icon" size="15"/>
+        <input class="sy_search" type="search" name="key" placeholder="搜索妆束或化妆师" /> 
+      </form>
+    </view>
+  </view>
+
+  <!-- 装束类型  -->
+  <view class="zhuang_type">
+    <view class="zhuang_li">
+      <view class="zhuang_bar">
+        <view class="zhuang_left">晚装</view>
+        <view class="zhuang_right_more">更多》</view>
+      </view>
+      <view class="zhuang_content">
+        <view class="zhuang_img">
+          <image src="https://photosd.nggirl.com.cn/work/aae89e20af104282b1d186734ba443b8.jpg"></image>
+          <view class="zhuang_para">
+            <view class="z_name">作品名称作品名称作品名称作品名称作品名称</view>
+            <view class="z_price">¥<text>15</text></view>
+          </view>
+        </view>
+        <view class="zhuang_img">
+          <image src="https://photosd.nggirl.com.cn/work/aae89e20af104282b1d186734ba443b8.jpg"></image>
+          <view class="zhuang_para">
+            <view class="z_name">作品名称作品名称作品名称作品名称作品名称</view>
+            <view class="z_price">¥<text>15</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="zhuang_li">
+      <view class="zhuang_bar">
+        <view class="zhuang_left">Part装</view>
+        <view class="zhuang_right_more">更多》</view>
+      </view>
+      <view class="zhuang_content">
+        <view class="zhuang_img">
+          <image src="https://photosd.nggirl.com.cn/work/aae89e20af104282b1d186734ba443b8.jpg"></image>
+          <view class="zhuang_para">
+            <view class="z_name">作品名称作品名称作品名称作品名称作品名称</view>
+            <view class="z_price">¥<text>15</text></view>
+          </view>
+        </view>
+        <view class="zhuang_img">
+          <image src="https://photosd.nggirl.com.cn/work/aae89e20af104282b1d186734ba443b8.jpg"></image>
+          <view class="zhuang_para">
+            <view class="z_name">作品名称作品名称作品名称作品名称作品名称</view>
+            <view class="z_price">¥<text>15</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+</view>

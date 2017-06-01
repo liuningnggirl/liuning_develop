@@ -1,5 +1,5 @@
 <!--beautysalon_details.wxml-->
-<view class="box">
+<view class="box"  bindscrolltoupper="pullDownRefresh">
   <view class="box_top_content">
     <swiper class="swiper_content" indicator-dots="{{indicatorDots}}"
     autoplay="true" interval="5000" duration="1000" indicator-color="#666" indicator-active-color="#fff">
@@ -10,22 +10,29 @@
       </block>
     </swiper>
     <view class="padding">
-        <view class="xwc-content-title">问问</view>
-        <view class="xwc-des">水水水水水水水水水水水水</view>
+        <view class="xwc-content-title">{{genData.title}}</view>
+        <view class="xwc-des">{{genData.descr}}</view>
         <view class="xwc-time">
             <image src="../images/xwc-lock_03.jpg" class="xwc-area-local" alt=""></image><view class="xwc-lock-txt">活动时间</view>
-            <view class="xwc-time-txt">2017.05.14 17:30 17:30</view>
-            <view class="xwc-end-time">报名截止时间：<span class="xwc-end-time-txt">2017.05.18 17:30</span></view>
-            <view class="xwc-area">
-                <image src="../images/xwc-local_03.jpg" alt="" class="xwc-area-local"></image>
-                <view class="xwc-area-txt">水水水水水水水水水水水水水水水水</view>
-            </view>
+            <view class="xwc-time-txt">{{genData.holdTime}}</view>
+            <view class="xwc-end-time">报名截止时间：<span class="xwc-end-time-txt">{{genData.registEndTime}}</span></view>
+            <navigator url="beauty_salon_location?holdPlace={{genData.holdPlace}}">
+              <view class="xwc-area">
+                  <image src="../images/xwc-local_03.jpg" alt="" class="xwc-area-local"></image>
+                  <view class="xwc-area-txt">{{genData.holdPlace}}</view>
+                  <image src="../images/black_right.png" alt="" class="xt-arr"></image>
+              </view>
+            </navigator>
             <!--  参团人的头像 -->
             <view class="tuan-photo">
-                <ul><li style="width:2.5rem; height:2.5rem;"><image style="width:100%; height:100%;" src="https://testphotosd.nggirl.com.cn/work/b7f9fb9791624c95a900cacf02994fda.jpg"></image></li></ul>
+                <ul>
+                  <li style="width:2.5rem; height:2.5rem;" wx:for="{{genData.resUsers}}" wx:for-item="value">
+                    <image style="width:100%; height:100%;" src='{{value.resProfile}}'></image>
+                  </li>
+                </ul>
                 <view class="xwc-tuan">
-                    <span class="xwc-peopleLow">2</span>～<span class="xwc-peopleHigh">11</span>人成团
-                    <view class="margin_top">已报名<span class="xwc-resUserCount">1</span>人</view>
+                    <span class="xwc-peopleLow">{{genData.peopleLow}}</span>～<span class="xwc-peopleHigh">{{genData.peopleHigh}}</span>人成团
+                    <view class="margin_top">已报名<span class="xwc-resUserCount">{{genData.resUserCount}}</span>人</view>
                 </view>
             </view>
         </view>
@@ -37,11 +44,11 @@
     <image src="../images/bs-line_03.png" class="line"></image>
     <view class="xwc-title">活动介绍</view>
     <ul class="xwc-activity-txt">
-      <li>
-        <view class="xwc-header">ddd</view>
-        <view class="xwc-content-header">dddd</view>
-        <view class="xwc-img">
-          <image src="https://photosd.nggirl.com.cn/work/6d842769dcd24bf8a1c4cf607ce8dfd3.png"></image>
+      <li wx:for="{{genData.atDescription}}" wx:for-item="value">
+        <view class="xwc-header">{{value.title}}</view>
+        <view class="xwc-content-header">{{value.paragraph}}</view>
+        <view class="xwc-img" wx:if="{{value.picture!=''}}">
+          <image src='{{value.picture}}'></image>
         </view>
       </li>
     </ul>
@@ -51,56 +58,49 @@
   <view class="xwc-hzs-content">
     <image src="../images/bs-line_03.png" class="line"></image>
     <view class="xwc-title">化妆师介绍</view>
-    <image src="https://photosd.nggirl.com.cn/work/6731161484d049d4909de64ce870819f.jpg" class="xwc-dresser-img"></image>
+    <image src="{{genData.portrait}}" class="xwc-dresser-img"></image>
     <view class="xwc-dresser">
       <view class="xd-left">
-          <image src="https://photosd.nggirl.com.cn/work/086e922016d04960908b5a93fbb53dcb.jpg" class="xl-dresser-img" alt=""></image>
-          <image src="../images/v.png" class="v" alt="" style="display: inline;"></image>
+          <image src="{{genData.dresserProfile}}" class="xl-dresser-img" alt=""></image>
+          <view wx:if="{{genData.isVDresser == 1}}">
+            <image src="../images/v.png" class="v" alt="" style="display: inline;"></image>
+          </view>
+          
       </view>
       <view class="xd-right">
             <view class="xr-top">
                 <span class="xt-name">南瓜姑娘</span>
-                <image src="../images/boy.png" class="xt-sex" alt=""></image>
+                <view wx:if="genData.sex == 0" style="display:inline-block;">
+                  <image src="../images/boy.png" class="xt-sex" alt=""></image>
+                </view>
+                <view wx:else  style="display:inline-block;">
+                  <image src="../images/girl.png" class="xt-sex" alt=""></image>
+                </view>
                 <image src="../images/black_right.png" class="xt-arr" alt=""></image>
             </view>
             <!--  星级个数 -->
             <view class="xr-bottom">
-              <image src="../images/small-start.png" alt=""></image>
-              <image src="../images/small-start.png" alt=""></image>
-              <image src="../images/small-start.png" alt=""></image>
+              <image src="../images/small-start.png" alt="" wx:for="{{genData.starLevel}}" wx:for-item="value"></image>
             </view>
         </view>
     </view>
     
   <!--  化妆师简介   -->
-  <view class="xwc-content-txt">
-    主演高希希执导的军旅剧《幸福像花儿一样》开始转型，剧中饰演玩世不恭的高干子弟白杨一角，该剧也是邓超被媒体称为“高干子弟专业户”的开端。
-  </view>
+  <view class="xwc-content-txt">{{genData.dresserDesc}}</view>
   <view class="xwc-content-experience">
     <view class="xce-top">
       <image src="../images/experience.png" class="log" alt=""></image>
       <span>从业经历</span>
     </view>
     <view class="xce-bottom">
-      <view class="gra-p">
-        1998年考上中央戏剧学院表演系98级本科班。每天清晨在中戏的校园跑步和练台词，训练标准的台词发音。大学二年级起，邓超喜欢上演话剧，不但在学校的表演作业里训练演出大量的角色，传统正剧能演，创新喜剧也能演，此外他还是班上人缘很好的“开心果”。
-      </view>
-      <view class="gra-p">
-        2001年，大三的邓超与同学合作演出贺岁的话剧《翠花上酸菜》成为他学生时代的成名作。上大学时，他还被中戏的同学称为“戏疯子”
-      </view>
-      <view class="gra-p">
-        2003年，邓超再次出演了同类型剧集《少年康熙》，剧集被广电局指定安排在两会期间播出
-      </view>
-      <view class="gra-p">
-        2004年，在《天下第一》、《明末风云》中出演皇帝类型的角色。
-      </view>
+      <view class="gra-p" wx:for="{{genData.experience}}" wx:for-item="value">{{value}}</view>
     </view>
   </view>
   <view class="xwc-content-cooperation">
     <view class="xce-top">
       <image src="../images/cooperation.png" class="log" alt=""></image><span>合作艺人</span>
     </view>
-    <view class="xce-bottom">邓超,孙俪,鹿晗</view>
+    <view class="xce-bottom">{{genData.coartist}}</view>
    </view>
 
    <view class="xwc-content-ping">
@@ -113,12 +113,12 @@
   
   <!--喜欢人的头像-->
   <view class="pro-kinds">
-    <view class="like-num">喜欢 <span class="num">0</span></view>
+    <view class="like-num">喜欢 <span class="num">{{genData.loverCount}}</span></view>
     <view class="like-photo">
       <ul>
           <li class="add-circle" style="display: none;">. . .</li>
-          <li>
-            <image style="width:100%; height:100%;" src="https://photosd.nggirl.com.cn/work/304cb445ebbf4b7aa1664e77c930dead.png"></image>
+          <li wx:for="{{genData.lovers}}" wx:for-item="value">
+            <image style="width:100%; height:100%;" src="{{value.loverProfile}}"></image>
           </li>
       </ul>
     </view>
@@ -126,10 +126,10 @@
     <view class="reservation-policy">
       <image src="../images/bs-line_03.png" class="line"></image>
       <view class="xwc-title">预约须知</view>
-      <view class="rp-content">2222222222222222222222</view>
+      <view class="rp-content"  wx:for="{{genData.resRules}}" wx:for-item="value">{{value}}</view>
     </view>
 
-`</view>
+</view>
 </view>
 <!--我要预约按钮-->
 <view class="btn">

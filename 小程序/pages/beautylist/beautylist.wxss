@@ -1,1 +1,20 @@
 /* beautylist.wxss */
+.s_nav {width: 100%;height: 50px;background: #3a3a3a;-webkit-box-flex: 1;line-height: 50px;color: #fff;font-size: 18px;text-align: center;position: relative;}
+.s_nav a {line-height: 50px;color: #fff;font-size: 1em;text-align: right;display: inline-block;position: absolute;right: 10px;}
+.select_city {position: absolute;top: 0px;left: 15px;}
+.select_city image {width: 15px;margin-bottom: 5px;height:19px;vertical-align: middle;}
+.select_city span {color: #50c8b4;font-size: 18px;}
+.s_search{ margin: 0 auto; width: 96%;}
+.s_search form input{ border:1px solid #ccc;height: 30px;line-height: 30px;font-size: 13px;border-radius: 5px;padding:0 0 0 25px;box-sizing:border-box;}
+.sw_search{ margin: 8px 0;position:relative;}
+.search_icon{ position: absolute; top: 8px; left: 15px;}
+.zhuang_bar .zhuang_left{ float:left;}
+.zhuang_bar .zhuang_right_more{ float:right;}
+.zhuang_bar{ color: #8c96a0; font-size: 18px;padding:10px;box-sizing:border-box;overflow:hidden;}
+.zhuang_img{ width: 50%; float: left; padding: 5px; box-sizing:border-box;}
+.zhuang_img image{ width: 100%;border:1px solid #dee2e2;border-bottom:none;border-radius:5px 5px 0 0; height:32vh;}
+.zhuang_content{padding:0 5px;box-sizing:border-box;overflow:hidden;}
+.zhuang_para .z_name{ border: none;font-size: 13px;line-height: 40px;color: #3a3a3a;margin: 0 60px 0 7px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.zhuang_para .z_price{ float: right;font-size: 12px;position: absolute;top: 8px;right: 7px;color: #ff6e64;}
+.zhuang_para{ position:relative; width: 100%;border:1px solid #dee2e2;border-top:none;margin-top:-5px;border-radius:0 0 5px 5px;}
+.z_price text{ font-size: 18px; font-weight: bold;}

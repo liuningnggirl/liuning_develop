@@ -1,2 +1,85 @@
 <!--mine.wxml-->
-<text>mine.wxml</text>
+<view class="mine">
+  <view class="mine_title">
+      <view class="mine_icon">
+          <image src="" alt="" ></image>
+        </view>
+        <view class="mine_message">
+          <view class="mm_top">
+              <span class="mt_name"></span>
+                <image src="../images/girl.png" class="mt_sex" alt="" ></image>
+                <span class="mt_lv">LV1</span>
+            </view>
+            <view class="mm_bottom">
+                <span class="mb_jyz_num"></span>
+                <span class="mb_jyz_score"></span>
+            </view>
+        </view>
+        <image src="../images/black_right.png" class="mt_arr_right" alt="" ></image>
+    </view>
+    <view class="mine_content">
+        <view class="mine_kinds">
+            <dl class="mk_attention">
+                <dt>
+                    <image src="../images/attention_new.png" class="attention_icon" alt=""></image>
+                </dt>
+                <dd>关注</dd>
+            </dl>
+            <dl class="mk_collect">
+                <dt>
+                    <image src="../images/mine_collect.png" class="collect_icon" alt=""></image>
+                </dt>
+                <dd>收藏</dd>
+            </dl>
+            <dl class="mk_voucher">
+                <dt>
+                    <image src="../images/mine_new_voucher.png" class="voucher_icon" alt="" ></image>
+                </dt>
+                <dd>南瓜券</dd>
+            </dl>
+        </view>
+    </view>
+    <view class="mine_order">
+      <view class="mo_order">
+          <image src="../images/mine-me-order_03.png" class="mo_order_icon" alt=""></image>
+            <span>我的订单</span>
+        </view>
+        <view class="mo_kinds">
+            <dl class="mk_zhuang">
+                <dt>
+                    <image src="../images/mine_new_zhuang.png" class="mk_zhuang_icon" alt=""></image>
+                </dt>
+                <dd class="zhuang">上门美妆 <span class="zhuang_num"></span></dd>
+            </dl>
+            <dl class="mk_salon">
+                <dt>
+                    <image src="../images/mine_new_salon.png" class="mk_salon_icon" alt="" ></image>
+                </dt>
+                <dd>美妆沙龙 <span class="salon_num"></span></dd>
+            </dl>
+        </view>
+    </view>
+    <view class="mine_menu">
+      <view class="mm_li mm_li_shope">
+          <image src="../images/integral_mall.png" class="mm_li_icon" alt=""></image>
+            <span>积分商城</span>
+            <image src="../images/black_right.png" class="mm_li_arr" alt="" ></image>
+      </view>
+      <view class="mm_li mm_li_cao">
+          <image src="../images/mine-me-cao_03.png" class="mm_li_icon" alt=""></image>
+            <span>长草清单</span>
+            <image src="../images/black_right.png" class="mm_li_arr" alt=""></image>
+      </view>
+      <view class="mm_li mm_li_kefu">
+        <image src="../images/mine_kefu.png" class="mm_li_icon" alt="" ></image>
+        <span>联系客服</span>
+        <image src="../images/black_right.png" class="mm_li_arr" alt=""></image>
+      </view>
+      <view class="mm_li mm_li_setting">
+        <image src="../images/mine-me-setting_03.png" class="mm_li_icon" alt=""></image>
+        <span>设置</span>
+        <image src="../images/black_right.png" class="mm_li_arr" alt=""></image>
+      </view>
+    </view>
+    <p class="tel-txt">南瓜姑娘客服电话<a href="tel:400-062-6336" class="tel">400-062-6336</a></p>
+</view>
