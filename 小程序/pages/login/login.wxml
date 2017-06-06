@@ -1,24 +1,26 @@
 <!--login.wxml-->
 <view class="box">
-  <p class="box_p">南瓜姑娘</p>
-  <image src="images/login_new_close_2.4.0.png" class="box_close" alt="" ></image>
-    <image src="images/login_new_2.4.0_logo.png" class="box_nggirl" alt="" ></image>
+  <view class="box_p">南瓜姑娘</view>
+  <image src="../images/login_new_close_2.4.0.png" class="box_close" alt="" bindtap="back_page" ></image>
+    <image src="../images/login_new_2.4.0_logo.png" class="box_nggirl" alt="" ></image>
     <view class="box_input">
-      <input type="tel" placeholder="请输入手机号" class="tel" maxlength="11" />
-        <image src="images/new_login_del.png" alt="" class="tel_del" ></image>
-        <input type="password" placeholder="请输入密码" class="pwd" id="pwd" />
-        <image src="images/new_login_del.png" alt="" class="pwd_del" ></image>
-        <image src="images/new_login_pwd_eyes.png" alt="" class="eyes" pwd="no" ></image>
-    </view>
+        <image src="../images/new_login_username.png" class="image_user"></image>
+        <input type="tel" placeholder="请输入手机号" class="tel" maxlength="11" bindinput="userNameInput" />
+        <image src="../images/new_login_del.png" alt="" class="tel_del" ></image>
+        <image src="../images/new_login_block.png" class="image_pwd"></image>
+        <input type="{{pwd}}" placeholder="请输入密码" class="pwd" id="pwd" bindinput="passWdInput" />
+        <image src="../images/new_login_del.png" alt="" class="pwd_del" ></image>
+        <image src="{{image}}" bindtap="checkout_eyes_fn" alt="" class="eyes" pwd="no" ></image>
+    </view> 
     <view class="login_btn">
-      <view class="btn_ok">登录</view>
+      <view class="btn_ok" bindtap="logon_fn">登录</view>
         <view class="btn">
             <p class="lb_register">注册</p>
             <p class="lb_login">忘记密码</p>
         </view>
         <p class="another_login">———　使用其它方式快速登录　———</p>
         <a href="wxauthvisiblelogin.html?v=<%= VERSION %>" class="weixin">
-          <image src="images/new_login_weixin.png" class="lb_weixin" alt="" ></image>
+          <image src="../images/new_login_weixin.png" class="lb_weixin" alt="" ></image>
         </a>
     </view>
 </view>

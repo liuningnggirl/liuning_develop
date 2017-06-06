@@ -17,14 +17,17 @@ function formatNumber(n) {
 }
 
 module.exports = {
-  formatTime: formatTime
-}
-module.exports = {
   getFinalRequestObject: getFinalRequestObject
 }
+module.exports.getAccessToken = getAccessToken();
 
-
-
+module.exports.json2Form = function(json) {
+  var str = [];
+  for (var p in json) {
+    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(json[p]));
+  }
+  return str.join("&");
+}
 
 
 
@@ -156,7 +159,7 @@ function getParamHack(name) {
 
 // 判断字符串是否为空
 function strIsEmpty(str) {
-  if (str == undefined || str == null || $.trim(str).length == 0) {
+  if (str == undefined || str == null || str.length == 0) {
     return true;
   }
   return false;
@@ -235,7 +238,10 @@ function checkAccessToken(successfun, errorfun) {
       errorfun();
     }
     else {
-      location.href = 'login_new.html?v=<%= VERSION %>';
+      //location.href = 'login_new.html?v=<%= VERSION %>';
+      wx.navigateTo({
+        url: '../login/login'
+      })
     }
   };
 
@@ -243,7 +249,7 @@ function checkAccessToken(successfun, errorfun) {
     accessToken: getAccessToken()
   });
 
-  $.ajax({
+  /*$.ajax({
     type: 'GET',
     url: 'https://testugc.nggirl.com.cn/nggirl/app/cli/checkAccessToken',
     data: data,
@@ -267,7 +273,34 @@ function checkAccessToken(successfun, errorfun) {
         }
       }
     }
-  });
+  });*/
+  wx.request({
+    url: 'https://testugc.nggirl.com.cn/nggirl/app/cli/checkAccessToken', //仅为示例，并非真实的接口地址
+    data: data,
+    method: 'GET',
+    success: function (result) {
+      //授权令牌无效
+      if (result.code != 0) {
+        if (typeof (errorfun) == 'function') {
+          errorfun();
+        }
+        else {
+          //location.href = 'login_new.html';
+          wx.navigateTo({
+            url: '../login/login'
+          })
+        }
+      }
+      //授权令牌有效
+      else {
+        if (typeof (successfun) == 'function') {
+          successfun();
+        } else {
+          //goBack();
+        }
+      }
+    }
+  })
 }
 
 
@@ -283,14 +316,17 @@ function checkAccessTokenLogin(successfun, redirectUrlAfterLogin) {
     } else {
       setRedirectUrlAfterLogin('');
     }
-    location.href = 'login_new.html?v=<%= VERSION %>';
+    //location.href = 'login_new.html?v=<%= VERSION %>';
+    wx.navigateTo({
+      url: '../login/login'
+    })
   };
 
   var data = getFinalRequestObject({
     accessToken: getAccessToken()
   });
 
-  $.ajax({
+  /*$.ajax({
     type: 'GET',
     url: 'https://testugc.nggirl.com.cn/nggirl/app/cli/checkAccessToken',
     data: data,
@@ -314,7 +350,36 @@ function checkAccessTokenLogin(successfun, redirectUrlAfterLogin) {
         }
       }
     }
-  });
+  });*/
+
+  wx.request({
+    url: 'https://testugc.nggirl.com.cn/nggirl/app/cli/checkAccessToken',
+    data: data,
+    method: 'GET',
+    success: function (result) {
+      //授权令牌无效,就登录
+      if (result.code != 0) {
+        if (!strIsEmpty(redirectUrlAfterLogin)) {
+          setRedirectUrlAfterLogin(redirectUrlAfterLogin);
+        } else {
+          setRedirectUrlAfterLogin('');
+        }
+        //location.href = 'login_new.html';
+        wx.navigateTo({
+          url: '../login/login'
+        })
+      }
+      //授权令牌有效
+      else {
+        if (typeof (successfun) == 'function') {
+          successfun();
+        } else {
+          //goBack();
+        }
+      }
+    }
+  })
+
 }
 
 //获取登录后的重定向地址

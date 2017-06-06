@@ -1,11 +1,16 @@
 // login.js
+var util = require('../../utils/util.js')
+var checkout_pwd = true
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    image:'../images/new_login_pwd_eyes.png',
+    pwd:'password',
+    phoneNum:'',
+    password:''
   },
 
   /**
@@ -62,5 +67,57 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  checkout_eyes_fn:function(e){
+    //切换眼睛
+    if(checkout_pwd){
+      checkout_pwd = false
+      this.setData({
+        image: '../images/new_login_eyes.png',
+        pwd:'tel'
+      })
+    }else{
+      checkout_pwd = true
+      this.setData({
+        image: '../images/new_login_pwd_eyes.png',
+        pwd:'password'
+      })
+    }
+  },
+  back_page:function(){
+    //返回上一个页面
+    wx.navigateBack();
+  },
+  //用户名和密码输入框事件
+  userNameInput: function (e) {
+    this.setData({
+      phoneNum: e.detail.value
+    })
+  },
+  passWdInput: function (e) {
+    this.setData({
+      password: e.detail.value
+    })
+  },
+  logon_fn:function(e){
+    wx.request({
+      url: 'https://testcli.nggirl.com.cn/nggirl/app/cli/register/weixin/logon/1.5.0',
+      data: util.getFinalRequestObject({ phoneNum: this.data.phoneNum, password: this.data.password }),
+      dataType:'json',
+      method: 'POST',
+      success: function (result) {
+        if (result.data.code == 0) {
+            wx.navigateBack();
+        } else {
+          wx.showToast({
+            title: '登陆失败',
+            icon: 'warn',
+            duration: 2000
+          })
+        }
+      }
+    })
   }
+
+
 })

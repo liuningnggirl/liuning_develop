@@ -601,7 +601,9 @@ markers:标记点
 
 
 
-
+<navigator url="../login/login">
+  <button size="default">登陆</button>
+</navigator>
 <!--首页-->
 <view class="search_box">
   <input placeholder="搜索贴子、用户、商品" auto-focus class="search"/>
