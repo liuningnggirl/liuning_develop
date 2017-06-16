@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<!--  demo1
+    <div id="app">{{message}}</div>
+    <script type="text/javascript">
+    	var app = new Vue({
+			el:'#app',
+			data:{
+				message:'hello vue!'	
+			}	
+		})
+    </script> -->
+    
+    <!--  demo2 -->
+    <!-- 
+    这里我们遇到点新东西。你看到的 v-bind 属性被称为指令。指令带有前缀 v-，以表示它们是 Vue.js 提供的特殊属性。
+    可能你已经猜到了，它们会在渲染过的 DOM 上应用特殊的响应式行为。这个指令的简单含义是说：将这个元素节点的 title 属性和 Vue 实例的 message 属性绑定到一起
+    <div id="app-2">
+      <span v-bind:title="message">
+        Hover your mouse over me for a few seconds
+        to see my dynamically bound title!
+      </span>
+    </div>    
+    <script type="text/javascript">
+		var app2 = new Vue({
+		  el: '#app-2',
+		  data: {
+			message: 'You loaded this page on ' + new Date()
+		  }
+		})    
+	</script> -->
+    
+    <!-- demo3 -->
+    <!-- <div id="app-3">
+      <p v-if="seen">Now you see me</p>
+    </div> 
+    <script type="text/javascript">
+		var app3 = new Vue({
+		  el: '#app-3',
+		  data: {
+			seen: true
+		  }
+		})
+    </script> -->
+    
+    <!--  demo4 -->
+    <!-- <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>   
+    <script type="text/javascript">
+		var app4 = new Vue({
+		  el: '#app-4',
+		  data: {
+			todos: [
+			  { text: 'Learn JavaScript' },
+			  { text: 'Learn Vue' },
+			  { text: 'Build something awesome' }
+			]
+		  }
+		})
+    </script>  -->
+    
+    <!-- demo5  -->
+    <!-- <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div> 
+    <script type="text/javascript">
+		var app5 = new Vue({
+		  el: '#app-5',
+		  data: {
+			message: 'Hello Vue.js!'
+		  },
+		  methods: {
+			reverseMessage: function () {
+			  this.message = this.message.split('').reverse().join('')
+			}
+		  }
+		})    
+	</script> -->
+    
+    <!--  demo6  
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>    
+    <script type="text/javascript">
+		var app6 = new Vue({
+		  el: '#app-6',
+		  data: {
+			message: 'Hello Vue!'
+		  }
+		})		
+    </script>-->
+    
+    <!--  用组建构建应用 -->
+    <!-- demo7 -->
+    <!-- <div id="app-7">
+      <ol>
+        <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+      </ol>
+    </div>  
+    <script type="text/javascript">
+		Vue.component('todo-item', {
+		  props: ['todo'],
+		  template: '<li>{{ todo.text }}</li>'
+		})
+		var app7 = new Vue({
+		  el: '#app-7',
+		  data: {
+			groceryList: [
+			  { text: 'Vegetables' },
+			  { text: 'Cheese' },
+			  { text: 'Whatever else humans are supposed to eat' }
+			]
+		  }
+		})
+    </script> -->  
+   
+    <!-- var data = { a: 1 }
+    var vm = new Vue({
+      data: data
+    })
+    vm.a === data.a // -> true
+    // 设置属性也会影响到原始数据
+    vm.a = 2
+    data.a // -> 2
+    // ... 反之亦然
+    data.a = 3
+    vm.a // -> 3    -->
+    <!-- <script type="text/javascript">
+    	var data = {a:1};
+		var vm = new Vue({
+			data:data	
+		})
+		
+    </script> -->
+ 	
+   	<!-- <div id="example"></div>
+    <script type="text/javascript">
+		var data = { a: 1 }
+		var vm = new Vue({
+		  el: '#example',
+		  data: data
+		})
+		vm.$data === data // -> true
+		vm.$el === document.getElementById('example') // -> true
+		// $watch 是一个实例方法
+		vm.$watch('a', function (newVal, oldVal) {
+		  // 这个回调将在 `vm.a`  改变后调用
+		  console.log('vm.a发生了变化');
+		})    
+    </script> -->
+    
+    <!-- <script type="text/javascript">
+		var vm = new Vue({
+		  data: {
+			a: 1
+		  },
+		  created: function () {
+			// `this` 指向 vm 实例
+			console.log('a is: ' + this.a)
+		  }
+		})    
+    </script> -->
+    
+    <!-- <div id="example">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>   
+    <script type="text/javascript">
+		var vm = new Vue({
+		  el: '#example',
+		  data: {
+			message: 'Hello'
+		  },
+		  computed: {
+			// a computed getter
+			reversedMessage: function () {
+			  // `this` points to the vm instance
+			  return this.message.split('').reverse().join('')
+			}
+		  }
+		})		
+    </script> -->
+    
+	<!-- <div id="app">
+    	<p>{{message}}</p>
+        <p>{{reverseMessage}}</p>
+        <p>{{now}}</p>
+    </div>
+    <script type="text/javascript">
+    	var vm = new Vue({
+			el:'#app',
+			data:{
+				message:'hello world!'	
+			},
+			computed:{
+				reverseMessage:function(){
+					return this.message = this.message.split('').reverse().join('')	
+				},
+				now: function () {
+					return Date.now()
+			  	}
+			}
+		})
+    </script> -->
+    
+    <!-- <div id="demo">{{ fullName }}</div>
+    <script type="text/javascript">
+		var vm = new Vue({
+		  el: '#demo',
+		  data: {
+			firstName: 'Foo',
+			lastName: 'Bar',
+			fullName: 'Foo Bar'
+		  },
+		  watch: {
+			firstName: function (val) {
+			  this.fullName = val + ' ' + this.lastName
+			},
+			lastName: function (val) {
+			  this.fullName = this.firstName + ' ' + val
+			}
+		  }
+		})    
+    </script> -->
+    
+    <!-- <div id="demo">{{fullName}}</div>
+    <script type="text/javascript">
+    	var vm = new Vue({
+			el:'#demo',
+			data:{
+				firstName:'foo',
+				lastName:'bar'
+			},
+			computed:{
+				fullName: {
+				// getter
+				get: function () {
+				  return this.firstName + ' ' + this.lastName
+				},
+				// setter
+				set: function (newValue) {
+				  var names = newValue.split(' ')
+				  this.firstName = names[0]
+				  this.lastName = names[names.length - 1]
+				}
+			  }
+			}
+		})
+    </script> -->
+    
+    <!-- <div id="app" v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">dddddd</div>
+    <script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data: {
+			  activeColor: 'red',
+			  fontSize: 30
+			}
+		})
+    </script> -->
+    <!-- <div id="app" v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">ssssss</div>
+    <script type="text/javascript">
+    	var app = new Vue({
+			el:'#app',
+			data:{
+				activeColor:'red',
+				fontSize:30	
+			}
+		})
+    </script> -->
+    
+    <!-- <div v-if="Math.random() > 0.5">
+      Sorry
+    </div>
+    <div v-else>
+      Not sorry
+    </div> -->
+    
+    <!-- <div id="example-1">
+      <button v-on:click="counter += 1">增加 1</button>
+      <p>这个按钮被点击了 {{ counter }} 次。</p>
+    </div> 
+    <script type="text/javascript">
+		var example1 = new Vue({
+		  el: '#example-1',
+		  data: {
+			counter: 0
+		  }
+		})		
+    </script> -->
+    
+    <!-- <div id="app">
+    	<button v-on:click="counter+=1">+1</button>
+        <p>这个按钮被点击了{{counter}}</p>
+    </div>
+    <script type="text/javascript">
+    	var app = new Vue({
+			el:'#app',
+			data:{
+				counter:0	
+			}	
+		})
+    </script> -->
+    
+    <!-- <div id="example-2">
+      `greet` 是在下面定义的方法名
+      <button v-on:click="greet">Greet</button>
+    </div>    
+    <script type="text/javascript">
+	var example2 = new Vue({
+	  el: '#example-2',
+	  data: {
+		name: 'Vue.js'
+	  },
+	  // 在 `methods` 对象中定义方法
+	  methods: {
+		greet: function (event) {
+		  // `this` 在方法里指当前 Vue 实例
+		  alert('Hello ' + this.name + '!')
+		  // `event` 是原生 DOM 事件
+		  if (event) {
+			alert(event.target.tagName)
+		  }
+		}
+	  }
+	})		
+    </script> -->
+    
+    <!-- <div id="example">
+    	<button @click="greet">greet</button>
+    </div>
+    <script type="text/javascript">
+    	var example = new Vue({
+			el:'#example',
+			data:{
+				name:'vue.js'	
+			},
+			methods:{
+				greet:function(event){
+					alert('hello' + this.name);
+					if(event){
+						alert(event.target.tagName);	
+					}
+				}	
+			}
+		})
+    </script> -->
+    
+    <!-- <div id="app">
+    	<button @click.once="say('hi')">say hi</button>
+    	<button @click="say('what')">say what</button>
+        <button v-on:keyup.enter="say('submit')">say</button>
+        <button @keyup.enter="say('submit')">say</button>
+    </div>
+    <script type="text/javascript">
+    	var vm = new Vue({
+			el:'#app',
+			methods:{
+				say:function(message){
+					alert(message);	
+				}	
+			}	
+		})
+    </script> -->
+   
+   	<!--  多个勾选，绑定到同一个数组 -->
+   	<!-- <div id="app">
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <input type="checkbox" id="zhangsan" value="zhangsan" v-model="checkedNames" />
+        <label for="zhangsan">zhangsan</label>
+        <br>
+        <span>Checked names: {{ checkedNames }}</span>    
+    </div>
+    <script type="text/javascript">
+    	var app = new Vue({
+			el:'#app',
+			data:{
+				checkedNames: []	
+			}	
+		})
+	
+    </script> -->
+    
+    <!--  单选按钮 -->
+    <!-- <div id="app">
+    	<input type="radio" id="one" value="One" name="group" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" name="group" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <script type="text/javascript">
+    	var app = new Vue({
+			el:'#app',
+			data:{
+				picked:''	
+			}	
+		})
+    </script> -->
+    
+    <!--  选择列表 -->
+    <!-- <div id="app">
+        <select v-model="selected">
+          <option disabled value="">Please select one</option>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <script type="text/javascript">
+    	var app = new Vue({
+			el:'#app',
+			data:{
+				selected:''	
+			}	
+		})
+    </script> -->
+    
+    <!-- <div id="app">
+      <input v-model="parentMsg">
+      <br>
+      <child v-bind:my-message="parentMsg"></child>
+    </div>    
+    <script type="text/javascript">
+		Vue.component('child', {
+		  // camelCase in JavaScript
+		  props: ['myMessage'],
+		  template: '<span>{{ myMessage }}</span>'
+		})	
+    	new Vue({
+			el:'#app',
+			data:{
+				parentMsg:'this is message content'	
+			}
+		})
+    </script> -->
+    
+    <!-- <div id="counter-event-example">
+        <p>{{ total }}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+    <script type="text/javascript">
+		Vue.component('button-counter', {
+		  template: '<button v-on:click="increment">{{ counter }}</button>',
+		  data: function () {
+			return {
+			  counter: 0
+			}
+		  },
+		  methods: {
+			increment: function () {
+			  this.counter += 1
+			  this.$emit('increment')
+			}
+		  },
+		})
+		new Vue({
+		  el: '#counter-event-example',
+		  data: {
+			total: 0
+		  },
+		  methods: {
+			incrementTotal: function () {
+			  this.total += 1
+			}
+		  }
+		})		
+    </script> -->
+    
+    
+    <div id="counter-event-example">
+    	<p>{{total}}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+    <script type="text/javascript">
+    	Vue.component('button-counter',{
+			template:'<button v-on:click="increment">{{counter}}</button>',
+			data:function(){
+				return {
+					counter:0	
+				}	
+			},
+			methods:{
+				increment:function(){
+					this.counter +=1;
+					this.$emit('increment')	//$emit 用于触发事件
+				}	
+			}
+		})
+		
+		new Vue({
+			el:'#counter-event-example',
+			data:{
+				total:0	
+			},
+			methods:{
+				incrementTotal:function(){
+					this.total +=1;	
+				}	
+			}
+		})
+    </script>
+              
+</body>
+</html>
