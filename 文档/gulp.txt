@@ -1,0 +1,8 @@
+1、安装node
+  (1)node-v  查看nodejs版本号
+  (2)npm -v  查看npm版本号
+2、手动新建一个配置文件  npm init
+3、安装需要的包--自动生成node_modules文件--所有安装的包都在该目录下
+  npm install gulp --save-dev  //安装依赖关系
+  npm install gulp-less --save-dev
+4、为了能正常是使用，还需在本地安装gulp:npm install gulp --save-dev  --生成gulp、gulp.cmd文件
