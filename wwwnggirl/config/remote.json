@@ -1,0 +1,17 @@
+{
+  "description": "正式服务器配置,部署到cli服务器上",
+  "configName": "remote",
+  "isDebug": false,
+  "UGC_HOST_API_URL": "https://ugc.nggirl.com.cn",
+  "CLI_HOST_API_URL": "https://cli.nggirl.com.cn",
+  "PHOTOS_HOST_API_URL": "https://photos.nggirl.com.cn",
+  "WEIXIN_BOUND_DOMAIN_URL":"https://cli.nggirl.com.cn",
+  "CNZZ_STAT_CODE_ID": "1262286603",
+  "CNZZ_STAT_CODE_WEB_ID": "1262286603",
+  "TENCENT_ANALYTICS_WEBSITE_CODE":"62604581",
+  "GOOGLE_ANALYTICS_WEBSITE_CODE":"UA-99967471-4",
+  "STATISTICS_SCRIPT":"CONFIG_FILES:online/cnzz.stat.script.js.conf,online/tencent.analytics.script.js.conf,online/google.analytics.scritp.js.conf",
+  "dest": {
+    "packageDir": "target/h5/"
+  }
+}
