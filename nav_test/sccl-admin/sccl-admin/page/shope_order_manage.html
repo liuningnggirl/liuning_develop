@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>shope_order_manage</title>
+</head>
+<body>
+    <div class="weight-box shope_order_manage" id="shope_order_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>商品订单详情</h5>
+        </div>
+        <!--  search订单编号 -->
+        <div class="order-num">
+            <div class="shope_order_manage_content" style="padding:10px;">
+            	<label for="">订单编号：</label><input type="text" style="padding:7px; " class="order_num"/>
+                <label for="" style="margin:0 0 0 20px;">下单时间：</label><input style=" height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="">支付方式：</label>
+                <select name="" id="" class="pay_way" style="padding:7px; border:1px solid #ccc;">
+                	<option value="">请选择支付方式</option>
+                	<option value="1">微信</option>
+                	<option value="2">支付宝</option>
+                </select>
+                <label for="">退款申请状态：</label>
+                <select name="" class="apply_tuikuan_status" id="" style="padding:7px; border:1px solid #ccc;">
+                	<option value="">请选择退款申请状态</option>
+                	<option value="0">未处理</option>
+                	<option value="1">已处理</option>
+                </select><br /><br />
+                <label for="">用户姓名：</label>
+                <input type="text" placeholder="请输入用户姓名" style="padding:7px;" class="user_name" />
+                <label for="">用户电话：</label>
+                <input type="text" placeholder="请输入用户电话" style="padding:7px;" class="user_tel" />
+                <input type="button" value="查询" class="search_btn" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 5px;" />
+                <input type="button" value="全部取消" class="cancle_all_btn" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+            </div>
+            <div class="shope_order_manage_order_status" style="padding:10px; color:#ccc;cursor:pointer;">
+                <span class="all_order on" style="color:#000; margin-right:15px;" chooseStatus=''>全部订单：<b class="font_color_red">0</b></span>
+                <span class="wait_fahuo" chooseStatus='2' style="margin-right:15px;">等待发货：<b class="font_color_red">0</b></span>
+                <span class="allready_fahuo" chooseStatus='5' style="margin-right:15px;">已发货：<b class="font_color_red">0</b></span>
+                <span class="allready_shouhuo" chooseStatus='6' style="margin-right:15px;">买家已收货：<b class="font_color_red">0</b></span>
+                <span class="apply_tuikuan" chooseStatus='4' style="margin-right:15px;">退款申请：<b class="font_color_red">0</b></span>
+                <span class="allready_del" chooseStatus='7' style="margin-right:15px;">已删除：<b class="font_color_red">0</b></span>
+                <span class="lock_order" chooseStatus='8' style="margin-right:15px;">锁定订单：<b class="font_color_red">0</b></span>
+                <span class="allready_close_order" chooseStatus='3' style="margin-right:15px;">已关闭订单：<b class="font_color_red">0</b></span>
+                <span class="wait_fukuan" chooseStatus='1' style="margin-right:15px;">待付款：<b class="font_color_red">0</b></span>
+            </div>
+        </div>
+        
+        <!-- 订单列表  -->
+        <div class="shope_order_manage_content_li" style="padding:10px;">
+        	<input type="checkbox" id="select_all_01" /><label for="select_all_01">全选</label>
+            <input type="button" value="发货" class="shope_order_manage_content_li_fahuo" />
+            <input type="button" value="锁定订单" class="shope_order_manage_content_li_suoding" />
+            <input type="button" value="释放订单" class="shope_order_manage_content_li_shifang" style="display:none;" />
+            <input type="button" value="导出" class="shope_order_manage_content_li_daochu" />
+            <input type="button" value="删除" class="shope_order_manage_content_li_del" />
+        </div>
+        
+        <table class="table-message shope_order_manage_table" cellpadding="0" cellspacing="0">
+        	<thead>
+                <th style="width:10%;">订单编号</th>
+                <th style="width:10%;">商品信息</th>
+                <th>数量</th>
+                <th style="width:9%;">
+                    <label for="" style=" vertical-align:top;">下单时间</label>
+                    <img src="images/ele-down.png" alt="" style="width:20px;" class="down_arr_btn" value='1' />
+                    <img src="images/ele-up.png" alt="" style="width:20px;" class="up_arr_btn" value='0' />
+                </th>
+                <th style="width:3%;">金额</th>
+                <th style="width:3%;">南瓜币抵现金额</th>
+                <th>当前状态</th>
+                <th style="width:5%;" class="hidden revice_time">收货时间</th>
+                <th style="width:5%;" class="hidden apply_time">申请退款时间</th>
+                <th style="width:3%;">物流商</th>
+                <th style="width:10%;">买家备注</th>
+                <th style="width:5%;">商家备注</th>
+                <th style="width:7%;">退款申请状态</th>
+                <th style="width:10%;">操作</th>
+                <th style="width:4%;">修改者</th>
+                <th style="width:4%;">用户姓名</th>
+                <th style="width:4%;">用户电话</th>
+                <th style="width:10%;">用户地址</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+<!--  页码 -->
+        <div class="tcdPageCode" style="float:right;"></div>
+        <div class="goto_page_box" style="float:left; padding: 15px 20px;">
+        	共<span class="totNum"></span>条
+            跳转到 <input type="text" class="goto_redirect_page_num" style=" text-align:center;padding:4px 0; width:25px; border:1px solid #ccc;" /> 页
+            <input type="button" value="确定" style="padding:5px;" class="goto_page_ok" />
+        </div>
+        
+    </div>
+    
+    <!--  查看订单详情 -->
+    <div class="shope_order_manage_look_order_message" style=" display:none;margin-left: -250px;position:absolute; top:100px; left:50%; border:1px solid #ccc; padding:20px; width:500px; height:auto; background:#fff;">
+        <label for="">订单商品：</label><span class="font_color_red shope_name">商品名称</span><br /><br />
+        <label for="">订单编号：</label><span class="font_color_red order_id">订单编号</span><br /><br />
+        <label for="">物流编号：</label><span class="font_color_red wuliu_id">物流编号</span><br /><br />
+        <label for="">下单时间：</label><span class="font_color_red xiadan_time">下单时间</span><br /><br />
+        <label for="">用户姓名：</label><input type="text" style="padding:7px;" class="user_name" /><br /><br />
+        <label for="">用户电话：</label><input type="text" style="padding:7px;" class="user_tel" /><br /><br />
+        <label for="">用户地址：</label><input type="text" style="padding:7px;" class="user_address" /><br /><br />
+        <label for="">订单金额：</label><input type="text" style="padding:7px;" class="order_money" /><br /><br />
+        <label for="">运费金额：</label><input type="text" style="padding:7px;" class="yunfei_money" /><br /><br />
+        <input type="button" value="保存"  style="padding:7px;" class="shope_order_manage_look_order_message_save_btn green" />
+        <input type="button" value="取消" style="padding:7px;" class="shope_order_manage_look_order_message_cancle_btn red" />
+    </div>
+    
+    <!--  发货 -->
+    <div class="shope_order_manage_fahuo" style=" display:none; background:#fff; background:#fff; width:100%; box-sizing:border-box; border:1px solid #ccc; padding:10px 0;">
+        <input type="checkbox" id="check" style="margin-left:10px;" /><label for="check">全选</label>
+        <input type="button" value="导出订单" class="import_order_message" />
+        <input type="button" value="导入物流号" class="import_into_danhao" />
+        <input type="file" name="import_into_danhao" id="import_into_danhao" style="display:none;" multiple data-url="<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/order/importOrderExpress/3.1.0"/>
+        <input type="button" value="发货" class="fahuo_btn" />
+        <input type="button" value="返回" class="shope_order_manage_fahuo_return" />
+        <table class="table-message shope_order_manage_fahuo_table" cellpadding="0" cellspacing="0">
+        	<thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th style="width:30%;">商品信息</th>
+                    <th>数量</th>
+                    <th>用户姓名</th>
+                    <th>用户电话</th>
+                    <th>用户地址</th>
+                    <th>订单金额</th>
+                    <th>运费金额</th>
+                    <th>支付金额</th>
+                    <th>物流商</th>
+                    <th>物流编号</th>
+                    <th>操作</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+       </table>
+    </div>
+  
+  
+    <!--  商品订单管理---退款管理 -->
+    <div class="shope_order_manage_tuikuan_content" style=" display:none;">
+        <table class="table-message shope_order_manage_tuikuan_content_table" cellpadding="0" cellspacing="0">
+        	<thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>物流编号</th>
+                    <th>下单时间</th>
+                    <th>用户姓名</th>
+                    <th>用户电话</th>
+                    <th>下单地址</th>
+                    <th>用户支付来源渠道</th>
+                    <th>订单金额</th>
+                    <th>运费金额</th>
+                    <th>支付金额</th>
+                    <th>退款金额</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+       </table>
+       <div class="shope_order_manage_tuikuan_content_reason" style="padding:10px; box-sizing:border-box; position:relative;">
+           <label for="">申请退款理由：</label><br /><br />
+           <textarea disabled name="" id="" cols="30" rows="10" placeholder="请输入退款理由" style=" resize:none; width:100%;border:1px solid #ccc; padding:10px; box-sizing:border-box;"></textarea><br /><br />
+           <label for="check_open">给予处理/通过：</label><input type="checkbox" id="check_open" style="vertical-align: middle;" /><br /><br />
+           <label for="check_close">不给予处理/不通过：</label><input type="checkbox" disabled  id="check_close" style="vertical-align: middle;" /><br /><br />
+           <input type="button" value="返回" class="red cancle_btn" style="padding:10px 50px;" />
+       </div>
+       
+       <!--  不通过的理由弹框 -->
+       <div class="un_pass" style=" display:none;width:300px; border:1px solid #ccc; position:absolute; top:0px; margin-left:-150px; left:50%; background:#fff; padding:10px; box-sizing:border-box; ">
+		  <label for="">不通过的理由：</label><br /><br />
+          <textarea name="" id="" cols="30" rows="5" placeholder="请输入不通过的理由" style="resize:none; width:100%; border:1px solid #ccc; padding:10px; box-sizing:border-box;"></textarea><br /><br />
+          <input type="button" value="发送" class="send_btn green" />
+          <input type="button" value="取消" class="cancle_btn red"  />
+       </div>
+       
+       <!--  通过退款理由弹框 -->
+       <div class="pass" style=" display:none;width:300px; border:1px solid #ccc; position:absolute; top:0px; margin-left:-150px; left:50%; background:#fff; padding:10px; box-sizing:border-box; ">
+		  <label for="">订单金额：</label><span class="order_money">xxxx元</span><br /><br />
+		  <label for="">运费金额：</label><span class="yunfei_money">xxxx元</span><br /><br />
+		  <label for="">支付金额：</label><span class="pay_money">xxxx元</span><br /><br />
+		  <label for="">退款金额：</label><input type="text" style="padding:7px;" class="tuikuan_money" />元<br /><br />
+          <span style=" color:red; font-size:12px;">（注：输入退款金额小于等于支付金额）</span><br /><br />
+          <input type="button" value="确认" class="green sure_btn" />
+          <input type="button" value="取消" class="red cancle_btn" />
+       </div>
+    </div>
+        
+    <!--  商家备注 -->
+    <div class="shope_order_manage_business_note" style=" display:none; width:500px; padding:20px; border:1px solid #ccc; background:#fff; position:absolute; left:50%; margin-left:-250px; top:0px;">
+        <h3>添加备注</h3><br />
+        <textarea name="" id="" cols="30" rows="10" style="resize:none; padding:10px; box-sizing:border-box; border:1px solid #ccc; width:100%;"></textarea><br/><br />
+        <input type="button" value="保存" class="green save_btn" />
+        <input type="button" value="取消" class="red cancle_btn" />
+    </div>
+</body>
+</html>

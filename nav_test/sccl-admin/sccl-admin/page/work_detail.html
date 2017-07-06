@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Work Detail</title>
+</head>
+<body>
+    <div class="weight-box zpxqq" id="work_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>作品详情</h5>
+        </div>
+<!--  search订单编号 -->
+        <div class="order-num">
+            <input type="text" class="search" placeholder="化妆师姓名" />
+            <input type="text" class="search-workid" placeholder="作品编号" />
+            <label for="" style="margin:0 0 0 20px;">作品发布时间：</label><input style="height:29px; width:100px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+            <label for="">至 </label><input style="height:29px; width:100px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+            <label for="">原价：</label><input class="on-yuan-price-one" /> 至 <input class="on-yuan-price-two" />
+            <label for="">折后价：</label><input class="on-sale-price-one" /> 至 <input class="on-sale-price-two" />
+            <label for="">妆束类型：</label>
+            <select name="" id="" class="on-type">
+            	<option value="">请选择妆束类型</option>
+            </select><br /><br />
+            <label for="" style="margin:0 0 0 10px;">审核状态：</label>
+            <select name="" id="" class="on-check">
+            	<option value="0">审核中</option>
+            	<option value="1">已上线</option>
+            </select>
+            <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+            <input type="button" class="cancle-btn" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+        </div>
+<!--  订单表格信息 -->
+        <table class="table-message zpxq" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>作品编号</th>
+                <th>发布时间</th>
+                <th>化妆师姓名</th>
+                <th>联系电话</th>
+                <th>作品图片</th>
+                <th>妆束名称</th>
+                <th>妆束类型</th>
+                <th>作品描述</th>
+                <th>原价</th>
+                <th>折扣信息</th>
+                <th>折后价格</th>
+                <th>审核状态</th>
+                <th>操作</th>
+            </tr>
+       </table>
+       <!--  页码 -->
+       <div class="tcdPageCode"></div>
+    </div>
+    
+<script type="text/javascript">
+$(function(){
+	var bigImg='';
+	var _index=0;
+	$(".popup").click(function(){
+		$(".show").hide();
+		$(this).hide();
+	});
+	$(".center img").click(function(){
+		$(".popup").show();
+		$(".show").show();
+		bigImg=$(this).attr("src");//获取点击图片的地址
+		$(".show img.big").attr("src",bigImg); //更换大图的图片地址
+		_index=$(this).index();//保存图片的序列号
+	});
+	$(".right").click(function(){
+		_index++; //序列号加1 _index+1
+		if(_index>8){_index=0};
+		bigImg=$(".center img").eq(_index).attr("src");
+		$(".show img.big").attr("src",bigImg);
+	});
+	$(".left").click(function(){
+		_index--; //序列号加1 _index+1
+		if(_index<-1){_index=8};
+		bigImg=$(".center img").eq(_index).attr("src");
+		$(".show img.big").attr("src",bigImg);
+	});
+})
+</script>
+</body>
+</html>

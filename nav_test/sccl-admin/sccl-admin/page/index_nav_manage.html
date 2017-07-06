@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index_nav_manage</title>
+<link rel="stylesheet" href="../common/css/index.css" />
+<script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../common/js/part/index_nav_manage.js"></script>
+</head>
+<body>
+    <div class="weight-box index_nav_manage" id="index_nav_manage">
+        <div class="index_nav_manage_box">
+            <div class="index_nav_btn">
+                <input type="button" value="新增" class="index_nav_btn_add" style="padding:10px 50px; border-radius:5px;" />
+                <input type="button" value="编辑" class="index_nav_btn_edit" style="padding:10px 50px; border-radius:5px;" />
+                <input type="button" value="保存" class="index_nav_btn_save" style="padding:10px 50px; border-radius:5px;" />
+            </div>
+            <div class="index_nav_lan"></div>
+        </div>
+    </div>
+    
+    <!-- 配置跳转页面  -->
+    <div class="index_nav_manage_redirect_page">
+    	<img src="" alt="" style="width:200px; height:200px;" class="index_nav_manage_redirect_page_img" />
+        <input type="file" name="file0" id="index_nav_manage_redirect_page_img_input" multiple style=" display:none;" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"/>
+        <hr style=" border: 1px solid #ccc; margin-top: 20px;">
+        <div style="width: 130px;text-align: center;margin: -10px auto 0;background: #fff;">跳转地址</div>
+        <input type="text" class="index_nav_manage_redirect_page_href" />
+        <hr style=" border: 1px solid #ccc; margin-top: 20px;">
+        <div style="width: 130px;text-align: center;margin: -10px auto 0;background: #fff;">选择类型</div>
+        <select name="" id="" class="index_nav_manage_redirect_page_kinds">
+        	<option value="" forwardtype="" isforwardkeyrequired="" forwardkeydesc="" selected="selected">请选择类型</option>
+        </select>
+        <span class="index_nav_manage_redirect_page_get_url_forwardkey">
+            <label for="">forwardkey：*</label>
+            <input type="text" class="index_nav_manage_redirect_page_get_url" />
+            <input type="button" value="获取地址" class="index_nav_manage_redirect_page_get_url_btn" />
+        </span>
+        <hr style=" border: 1px solid #ccc; margin-top: 20px;">
+        <div style="width: 130px;text-align: center;margin: -10px auto 0;background: #fff;">参数说明</div>
+        <p style="margin:20px 0;" class="index_nav_manage_redirect_page_get_forwardkey_desc"><label for="">forwardkey描述：</label><br /><span class="index_nav_manage_redirect_page_get_forwardkey_desc_desc"></span></p>
+        <hr style=" border: 1px solid #ccc; margin-top: 20px;"><br /><br />
+    	<label for="" style="vertical-align: top;">分享小图：*</label><img src="" alt="" style="width:200px; height:200px;" class="index_nav_manage_shareimg" />
+        <input type="file" name="file0" id="index_nav_manage_shareimg_input" multiple style=" display:none;" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"/><br /><br />
+        <label for="">分享内容：*</label><input type="text" placeholder="请输入分享内容" class="index_nav_manage_sharecontent" style="padding:10px 0; width:50%; border-radius:5px;" /><br /><br />
+        <input type="button" value="取消" class="index_nav_manage_redirect_page_cancle_btn" />
+        <input type="button" value="完成" class="index_nav_manage_redirect_page_success_btn" />
+        <hr style=" border: 1px solid #ccc; margin-top: 20px;">
+    </div>
+    
+</body>
+</html>

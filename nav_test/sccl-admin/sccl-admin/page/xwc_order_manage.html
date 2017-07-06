@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>xwc_order_manage</title>
+</head>
+<body>
+	<!--  美妆下午茶退款输入框 -->
+	<div class="xwc-order-refund">
+    	<p class="xwc-or-txt">输入退款金额（金额小于等于支付金额）</p><br /><br />
+        <div>
+        	<input type="text" class="xwc-order-refund-money" /> 元
+        </div>
+        <div class="xwc-or-btn-cancle">取消</div>
+        <div class="xwc-or-btn-ok">确定</div>
+    </div>
+    <div class="xwc-order-refund-gray"></div>
+    <div class="weight-box xwc-manage" id="xwc_order_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>美妆下午茶订单详情</h5>
+        </div>
+        <div class="xwc-list">
+<!--  search订单编号 -->
+            <div class="order-num">
+                <input type="text" class="search userid" style="display:none;"/>
+                <input type="text" class="search bianhao" placeholder="订单编号" />
+                <input type="text" class="search nicheng" placeholder="用户昵称" />
+                <input type="text" class="search tel" placeholder="用户手机号" />
+                <input type="text" class="search name" placeholder="化妆师姓名" />
+                <label for="" style="margin:0 0 0 20px;">下单时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                <select name="" id="" class="order-status">
+                    <option value="">请选择订单状态</option>
+                    <option value="1">谢小主的赏金，请等待活动成团</option>
+                    <option value="2">活动已成团，请小主准时参加活动</option>
+                    <option value="3">活动中，小主要记得拍照留念</option>
+                    <option value="4">活动结束，请小主确认完成</option>
+                    <option value="5">请美丽的小主为本次活动点评</option>
+                    <option value="6">谢小主评价，期待与小主再次相遇</option>
+                    <option value="7">本次活动未成团，正在为小主退款</option>
+                    <option value="8">退款成功，南瓜姑娘会不断努力</option>
+                </select>
+                <input class="search-btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 5px;" />
+                <input type="button" class="all-cancle" value="全部取消" style=" height:30px; background:#cccccc; float:right; margin:0 10px 0 0 ;" />
+            </div>
+<!--  订单表格信息 -->
+            <table class="table-message xwc-table" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>订单编号</th>
+                    <th>下单时间</th>
+                    <th>用户姓名</th>
+                    <th>用户预约电话</th>
+                    <th>化妆师</th>
+                    <th>预约地址</th>
+                    <th>预约时间</th>
+                    <th>金 额</th>
+                    <th>订单状态</th>
+                    <th>支付金额</th>
+                    <th>退款处理</th>
+                    <th>退款金额</th>
+                </tr>
+         </table>
+            <!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+    </div>
+</body>
+</html>

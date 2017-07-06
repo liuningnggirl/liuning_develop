@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户登录</title>
+<meta charset="utf-8">
+<style type="text/css">
+*{ margin:0px; padding:0px; border:none; text-decoration:none;}
+img{ display:block;}
+body{ background:#2E363F;}
+.login-box{ width:32%; overflow:hidden; margin:160px auto 0; border-top: 1px solid #3f4954 ;}
+.login-box img{ margin:0 auto;padding: 35px 10px;}
+.control-text{ overflow:hidden; padding:0 20px;border-bottom: 1px solid #3f4954;}
+.login-user,.login-pwd{ padding:15px; background:#28b779 url(../common/images/login-user_03.png) no-repeat 9px 19px;}
+.login-txt,.pwd-txt{ height:30px; width:75%; padding:0 0 0 10px;}
+.login-pwd{ background:#ffb848 url(../common/images/login-pwd_03.png) no-repeat 9px 19px;}
+.main_input_box{ overflow:hidden; text-align:center;}
+.form-actions{padding: 14px 20px 15px;}
+.pull-left,.pull-right{ display:block; background:#2f96b4; float:left; padding: 4px 12px; font-size:14px; color:#fff;}
+.pull-right{ float:right; background:#5bb75b;}
+</style>
+<script type="text/javascript" src="../common/js/jquery-1.7.2.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="../common/js/login.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<div class="login-box">
+    	<form action="" class="form-vertical">
+        	<div class="control-group">
+            	<img src="../common/images/logo2.png" alt="" />
+            </div>
+            <div class="control-text">
+            	<div class="main_input_box">
+                    <span class="login-user"></span>
+                    <input type="text" class="login-txt" placeholder="用户名" value="forest" />
+                </div>
+                <br /><br />
+            	<div class="main_input_box">
+                    <span class="login-pwd"></span>
+                    <input type="password" class="pwd-txt" placeholder="密码" value="forest" />
+                </div>
+                <br /><br />
+            </div>
+            <div class="form-actions">
+                <a href="javascript:;" class="pull-left">忘记密码</a>
+                <a href="javascript:;" class="pull-right">登录</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

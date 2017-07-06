@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>goods_mangement</title>
+</head>
+<body>
+    <div class="weight-box goods_manages" id="goods_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>商品管理</h5>
+        </div>
+        <div class="backBranchList">返回</div>
+        <!--  商品列表 -->
+        <div class="goods_list">
+            <div class="tab_goods">
+                <div class="goods_list_tab on">商品列表</div>
+                <div class="branch_list_tab">品牌列表</div>
+            </div>
+<!--  search -->
+            <div class="goods_search">
+            	<input type="text" class="search comodityClass" placeholder="类别" />
+                <input type="text" class="search comodityBrand" placeholder="品牌名" />
+                <input type="text" class="search comodityCountry" placeholder="所属国家" />
+                <input type="text" class="search comodityName" placeholder="商品名称" />
+                <input type="text" class="search createUserId" placeholder="创建者id账号" />
+                <input class="searchgoods_btn data0" type="button" value="查询"  style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                <input class="allgoods_btn" type="button" value="取消" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                <input class="creategoods_btn" type="button" value="新增商品" style=" color:#000; width:75px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                <br/><br/>
+                <label>排序:</label>
+                <select class="sortType">
+                	<option value="0">默认排序</option>
+                    <option value="1">长草数量</option> 
+                </select>
+            </div>
+<!--  商品信息 -->
+            <table class="table-message goodsListDetail" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>商品编号</th>
+                        <th>创建者id账号</th>
+                        <th>创建时间</th>
+                        <th>最后修改者id账号</th>
+                        <th>最后修改时间</th>
+                        <th>商品图</th>
+                        <th>所属国家</th>
+                        <th>品牌名</th>
+                        <th>类别</th>
+                        <th>商品名</th>
+                        <th>参考价格</th>
+                        <th>长草数量</th>
+                        <th>淘宝链接地址</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+<!--  品牌列表 -->
+        <div class="branch_list">
+        	<div class="tab_goods">
+                <div class="goods_list_tab ">商品列表</div>
+                <div class="branch_list_tab on">品牌列表</div>
+            </div>
+<!--  search -->
+            <div class="branch_search">
+                <input type="text" class="search BrandName" placeholder="品牌名" />
+                <input type="text" class="search BrandCountry" placeholder="所属国家" />
+                <input class="search_branch_btn data0" type="button" value="查询"  style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                <input class="qx_branch_btn" type="button" value="取消" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+                <input class="create_branch_btn" type="button" value="新增品牌" style=" color:#000; width:75px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 10px;" />
+               
+            </div>
+<!--  商品信息 -->
+            <table class="table-message branchListDetail" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>品牌编号</th>
+                        <th>创建者id账号</th>
+                        <th>最后修改者id账号</th>
+                        <th>最后修改时间</th>
+                        <th>品牌名</th>
+                        <th>国家</th>
+                        <th>品牌图</th>
+                        <th>商品数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+        <!-- 新建商品 -->
+        <div class="goods_create">
+           <form action="">
+            <img src="images/tip.png" alt="" /><label>选择品牌：</label>
+            <input type="text" placeholder="请输入品牌名" maxlength="100" class="chooseBranch"/><br/><br/>
+            <div class="searchResult clearfix"></div>
+            <!--<select class="searchResult clearfix" contenteditable="true"></select>-->
+            <img src="images/tip.png" alt="" /><label for="">商品头图：</label><input type="file" class="goods_head_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+            <label for="" style="vertical-align:top;">(360*240):</label><img style="width:360px; height:240px;" src="" alt="" id="goods_head_img" /> <br /><br />
+            <label>推荐度：</label><input type="text" placeholder="请输入推荐度"  class="tuiJianDu"/><br/><br/>
+            <img src="images/tip.png" alt="" /><label>类别：</label><input type="text" placeholder="请输入商品类别" maxlength="50" class="goodsType"/><br/><br/>
+            
+            <img src="images/tip.png" alt="" /><label for="">商品图：</label><input type="file" class="goods_little_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+            <label for="" style="vertical-align:top;">(76*76):</label><img style="width:76px; height:76px;" src="" alt="" class="goodsupflie" /> <br /><br />
+            
+            <img src="images/tip.png" alt="" /><label>商品名称：</label> <input type="text" placeholder="请输入商品名称"  maxlength="45" class="goodsname"/><br /><br />
+            <div class="rj_box"><input type="text" placeholder="请输入容量" maxlength="45" class="rl_input"/>  <img src="images/tip.png" alt="" /><input type="text" placeholder="请输入参考价格" maxlength="10" class="goodsprize"/> </div> <span class="add_new_rj">新增容量价格</span><br />
+           
+            <label>商品介绍/说明：</label><br/><br/>
+            <textarea  placeholder="请输入商品介绍或说明" maxlength="1000" class="productDesc"></textarea><br/><br/>
+         	<label>商品淘宝链接地址：</label> <input type="text" placeholder="请输入链接地址"  maxlength="500" class="tb_detail_url"/><br /><br />
+         	<label>商品淘宝编号(id)：</label> <input type="text" placeholder="请输入淘宝商品id"  maxlength="45" class="tb_item_id"/><br /><br />
+           </form>
+           <div class="goodsbotbtn">
+               <span class="goodssave">保存</span><span class="goodsbacklist">返回</span>
+           </div>
+      </div>
+      <div class="branch_create">
+          <form action="">
+              <img src="images/tip.png" alt="" /><label>所属国家：</label><input type="text"  placeholder="请输入国家名" maxlength="20" class="branch_country"/><br/><br/>
+              <img src="images/tip.png" alt="" /><label>品牌名：</label><input type="text" placeholder="请输入品牌名" maxlength="100" class="branch_name"/><br/><br/>
+              <label>品牌介绍：</label><textarea  placeholder="请输入品牌介绍" maxlength="1000" class="brand_intro"></textarea><br/><br/>
+              <label for="">品牌图：</label><input type="file" class="branch_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+              <label for="" style="vertical-align:top;">(76*76)：</label><img style="width:76px; height:76px;" src="" alt="" class="brandImg" /> <br /><br />
+           </form>
+           <div class="goodsbotbtn">
+               <span class="branchSave">保存</span><span class="branchBack">返回</span>
+           </div>
+      </div>
+<!--  种草详情  -->
+		<div class="zhangCaoDetail">
+        	<div class="backGoodsList">返回</div>
+            <div class="articleCaoDetailList">
+            	<H3 >帖子</H3>
+    <!--  帖子种草详情 -->
+                <table class="table-message articleCaoDetail" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>所属帖子id</th>
+                            <th>专栏名称</th>
+                            <th>类型</th>
+                            <th>帖子题目</th>
+                            <th>长草数量</th>
+                            <th>长草用户</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+    <!--  页码 -->
+                <!--<div class="tcdPageCode"></div>-->
+            </div>
+            <div class="qianDetailList">
+            	<H3 >日签</H3>
+    <!--  日签种草详情 -->
+                <table class="table-message qianDetail" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>所属日签id</th>
+                            <th>日签图</th>
+                            <th>日签分享内容</th>
+                            <th>长草数量</th>
+                            <th>长草用户</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+    <!--  页码 -->
+                <!--<div class="tcdPageCode"></div>-->
+            </div>
+        </div>
+  <!--种草用户名单-->
+  		<div class="goodsCollectUserList">
+            <div class="backGoodsList">返回</div>
+            <table class="table-message collectUserListDetail" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>用户编号</th>
+                        <th>用户昵称</th>
+                        <th>长草时间</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <!--<div class="tcdPageCode"></div>-->
+        </div>
+         <!--删除弹窗-->
+        <div class="allbox"></div>
+        <div class="delgoodsbox">
+        	<h3>提示</h3>
+        	<p>确认删除此产品？</p>
+            <span class="suredel">确认</span>
+            <span class="notdel">取消</span>
+        </div>
+
+
+    </div>  
+</body>
+
+</html>

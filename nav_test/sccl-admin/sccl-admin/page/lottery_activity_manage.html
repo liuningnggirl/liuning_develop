@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="js/editor/jquery.pumpkin.article.editor.css" />
+<title>lottery_activity_manage</title>
+</head>
+<body>
+    <div class="weight-box lottery_activity_manage" id="lottery_activity_manage">
+        <div class="weight-title">
+            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <h5>抽奖活动管理</h5>
+        </div>
+        <!--  抽奖活动列表 -->
+        <div class="lottery_activity">
+		<!--  抽奖活动信息 -->
+            <div class="lam_lottery_table">
+                <!--  search -->
+                <div class="order_num_btn">
+                    <input type="button" value="抽奖活动管理" class="search lam_bianhao_manage green" />
+                    <input type="button" value="订单管理" class="search lam_order_manage" /><br />
+                </div>
+             	<div class="order_search">
+                    <label for="" style="margin-left:10px;">抽奖活动编号：</label><input type="text" class="lottery_num" style="border: 1px solid #ccc; padding: 0 5px;width: 100px; height:30px; margin:0 0 0 5px;" />
+                    <label for="">活动题目：</label><input type="text" class="lottery_title" style="width: 100px; height:30px; margin:0 0 0 5px;border: 1px solid #ccc; margin:0 0 0 5px;" />
+                    <input class="lam_search_btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 5px;" />
+                    <input type="button" class="lam_cancle_btn" value="全部取消" style=" height:30px; padding: 0 10px; background:#cccccc; float:right; margin:0 10px 0 0 ;" /><br /><br />
+                    <input type="button" value="新增活动" class="lam_add_activity_btn" style="padding:8px; background:#51a351; color:#fff; margin-left: 10px;" /><br />
+                </div>
+                <table class="table-message lottery_activity_list" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <th>抽奖活动编号</th>
+                            <th>抽奖活动头图</th>
+                            <th>活动题目</th>
+                            <th>活动时间</th>
+                            <th>参与人数</th>
+                            <th>抽奖次数</th>
+                            <th>操作</th>
+                            <th>奖品</th>
+                        </tr>
+                    </tbody>
+                </table>
+<!--  页码 -->
+                <div class="tcdPageCode"></div>
+            </div>
+            
+<!--  订单管理 -->
+            <div class="lam_order_table" style="display:none;">
+            	<!--  search -->
+                <div class="order_num_btn">
+                    <input type="button" value="抽奖活动管理" class="search lam_bianhao_manage" />
+                    <input type="button" value="订单管理" class="search lam_order_manage  green" /><br />
+                </div>
+                <div class="order_search">
+                    <input type="text" class="search bianhao" placeholder="订单编号" />
+                    <input type="text" class="search tel" placeholder="用户电话" />
+                    <input type="text" class="search nicheng" placeholder="用户昵称" />
+                    <input type="text" class="search name" placeholder="收货人姓名" />
+                    <label for="" style="margin:0 0 0 20px;">下单时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                    <input class="search_btn" type="button" value="搜索" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 5px;" />
+                    <input class="cancle_btn" type="button" value="取消" style=" width:50px; height:30px; text-align:center; background:#cccccc; margin:0 0 0 5px;" />
+                    <input class="import_btn" type="button" value="导出抽奖活动订单" style=" width:125px; color:#fff; height:30px; text-align:center; background:#51a351; margin:0 0 0 5px;" />
+                </div>
+                <table class="table-message order_manage_list" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <th>订单编号</th>
+                            <th>用户昵称</th>
+                            <th>下单时间</th>
+                            <th>兑换的礼品</th>
+                            <th>收货人姓名</th>
+                            <th>收货电话</th>
+                            <th>收货地址</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </tbody>
+                </table>
+    <!--  页码 -->
+                <div class="tcdPageCode"></div>
+            </div>
+        </div>
+        <!--  新增抽奖活动 -->
+        <div class="add_lottery_activity" style="width: 100%;background: #fff;padding: 10px; display:none;">
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">活 动 题 目：</label>
+            <input type="text" placeholder="请输入活动题目" class="ala_title" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">活动分享内容：</label>
+            <input type="text" placeholder="请输入活动分享内容" class="ala_content" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br /><br />
+            <label for="">抽奖活动分享小图：</label>
+            <input type="file" class="lottery_activity_file_small_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">（70*70）：</label><img src="" id="lottery_activity_file_cover" alt="" style="width:70px; height:70px; vertical-align: text-top;" /><br /><br />
+            <label for="">抽奖活动头图：</label>
+            <input type="file" class="lottery_activity_file_toutu_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">（640*320）：</label><img src="" id="lottery_activity_file_small_cover" alt="" style="width:180px; height:120px; vertical-align: text-top;" /><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">转盘图片：</label>
+            <input type="file" class="lottery_zhuanpan_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
+            <img src="" id="lottery_zhuanpan_cover" alt="" style="width:100px; height:100px; vertical-align: text-top; margin-left: 88px;" /><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">转盘指针图片：</label>
+            <input type="file" class="lottery_hand_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
+            <img src="" id="lottery_hand_cover" alt="" style="width:100px; height:100px; vertical-align: text-top; margin-left: 88px;" /><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">抽奖活动时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><label for=""> 至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">在前</label>
+            <input type="text" placeholder="请输入抽奖次数" class="lottery_choujiang_num" style="padding:7px 0; border:1px  solid #ccc;" /> <label for="">次将所有奖品抽完</label><br /><br  />
+            <label for="">每人每天免费抽奖次数：</label>
+            <input type="text" placeholder="请输入免费抽奖次数" class="lottery_everday_num" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br  /><br  />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="">每人抽奖一次所需积分：</label>
+            <input type="text" placeholder="请输入抽奖所需积分" class="lottery_once_cost" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br  /><br  />
+			<input type="button" value="保存" class="lottery_activity_save" style="padding:10px;" />
+            <input type="button" value="取消" class="lottery_activity_cancle" style="padding:10px;" />
+        </div>
+        
+        <!-- 奖品管理  -->
+        <div class="gift_manage" style="display:none;">
+        	<img src="images/tip.png" alt="" class="tip"><label for="">奖品：</label>
+            <input type="button" value="商品" class="btn gm_shope" />
+            <input type="button" value="南瓜券" class="btn gm_vouchers" />
+            <input type="button" value="第三方优惠券" class="btn gm_three_vouchers" />
+            <input type="button" value="谢谢参与" class="btn gm_tanks" />
+            <input type="button" class="gift_manage_back" value="返回" style=" height:30px; padding: 0 10px;  float:right; margin:0 10px 0 0 ;"><br  /><br />
+            <table class="table-message gift_table_manage" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>奖品类型</th>
+                        <th>奖品名称</th>
+                        <th>奖品头图</th>
+                        <th>奖品图</th>
+                        <th>奖品数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+<!--  页码 -->
+            <div class="tcdPageCode"></div>
+        </div>
+        
+        <!--  添加商品 -->
+        <div class="lottery_add_commodity hidden">
+        	<img src="images/tip.png" alt="" class="tip">
+            <label for="" class="la_name">商品名称：</label><input type="text" placeholder="奖品名称" class="laac_txt laac_name" /><br /><br />
+            <div class="la_num_box">
+                <img src="images/tip.png" alt="" class="tip">
+                <label for="" class="la_num">商品数量：</label><input type="text" placeholder="数量" class="laac_txt laac_num" /><br /><br />
+            </div>
+            <div class="la_quan_box">
+                <img src="images/tip.png" alt="" class="tip">
+                <label for="" class="la_quan">优惠券：</label><input type="text" placeholder="输入兑换码，以“，”号作为兑换码间的间隔符" class="laac_txt laac_quan" /><br /><br />
+            </div>
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="" class="la_img">商品图：</label>
+            <input type="file" class="la_commodity_img" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
+            <label for="">（70*70）：</label><img src="" id="la_commodity_img" alt="" style="width:70px; height:70px; vertical-align: text-top;" /><br /><br />
+            <img src="images/tip.png" alt="" class="tip">
+            <label for="" class="la_handimg">商品头图：</label>
+            <input type="file" class="la_commodity_head_img" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
+            <label for="">（360*240）：</label><img src="" id="la_commodity_head_img" alt="" style="width:180px; height:120px; vertical-align: text-top;" /><br /><br />
+            <label for="" class="la_detail">商品详细说明：</label>
+            <div class="editor_content"></div><br /><br />
+            <input type="button" value="保存" class="la_save" style=" padding:7px; background:#ccc;" />
+            <input type="button" value="取消" class="la_cancle" style=" padding:7px; background:#ccc;" />
+        </div>
+    </div>
+    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+</body>
+
+</html>
