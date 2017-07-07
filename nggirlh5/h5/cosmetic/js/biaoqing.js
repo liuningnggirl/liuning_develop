@@ -11,10 +11,10 @@
         if ("/:del" == evt.value) {
           thi = evt.srcElement;
 		  var arrStart = getImg(thi.value).split(',');
-		  console.log(getImg(thi.value).split(','));
-		  console.log(arr);
+		  //console.log(getImg(thi.value).split(','));
+		  //console.log(arr);
 		  var strLast = arrStart[arrStart.length-1];
-		  console.log('strLast'+arrStart[arrStart.length-1]);
+		  //console.log('strLast'+arrStart[arrStart.length-1]);
 		  if(arr.indexOf(strLast) >= 0){
 			  arrStart.pop();
 			  var endStr = '';
@@ -119,7 +119,7 @@
               /*imgUrl: 'images/listImg/' + val[0] + ".png"*/
             });
             this.focus();
-			$('.form-control').focus();
+			$('.form-control').focus();	
           }
         })
       }

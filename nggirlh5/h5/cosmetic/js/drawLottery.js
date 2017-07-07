@@ -1,11 +1,17 @@
 // JavaScript Document
 $(function(){
+	var timer = null;
 	if(!isInApp()){
 		$(".downLoad").show();
+		$("#userRecordImg").css('top',$(window).width()/2+71);
+	}else{
+		$(".header").css("margin-top","0");
+		$("#userRecordImg").css('top',$(window).width()/2+8);
 	}
 	$(".downLoad .closeTip").click(function(){
 		$(".downLoad").hide();
 		$(".header").css("margin-top","0");
+		$("#userRecordImg").css('top',$(window).width()/2+8);
 	})
 	$(".downLoad .gtload").click(function(){
 		APPCommon.openApp();
@@ -33,7 +39,7 @@ $(function(){
 		};
 	});
 	//活动规则
-	$(".rulerBtn").css('top',$(window).width()/2+8);
+
 	$(".rulerBtn").die('click');
 	$(".rulerBtn").live('click',function(){
 		$("body").addClass("tcstyle");
@@ -180,7 +186,7 @@ function loadBasicInfo(){
 				}else{
 					$("#headerCounter").show().html("活动已结束").addClass('bgb3');;
 				};
-				$("#headerCounter").css('background','#50c8b4');
+				$("#headerCounter").css('background','#FFB27D');
 			}
 			
 			//判断指针颜色
@@ -477,16 +483,21 @@ function moveTop(){
 	if(prizeLoaded == false){
 		return;
 	}
-	
-	var prizeListDom = $('.listZone .right');
+	/*var prizeListDom = $('.listZone .right');
 	if($(prizeListDom).height()*($('.listZone .right ul').children().length-1) <= $(prizeListDom).scrollTop()){ 
 		scrollTopVal = 0;
-		$(prizeListDom).scrollTop(0);
+		$(prizeListDom).scrollTop(0,'normal');
 	}else{ 
 		scrollTopVal += 54; 
 		$(prizeListDom).animate({scrollTop:scrollTopVal + 'px'},'normal');
-	} 
-} 
+	} */
+	 $(".listZone .right").find("ul").animate({  
+		  marginTop : "-54px"  
+	  },'700',function(){  
+		  $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);  
+	  })
+			
+}   
 function updateLeftTime(){
 	curBasicData.currentTime += 60000;
 	//显示时间
@@ -625,7 +636,7 @@ var APPCommon = {
     iphoneSchema: 'nggirl://nggirl/webview?url='+window.location.protocol+"//"+window.location.host+'/nggirl/h5/cosmetic/drawLottery.html?activityId='+getParam('cosmeticId')+'&v=<%= VERSION %>',
     iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
     androidSchema: 'nggirl://nggirl/webview?url='+window.location.protocol+"//"+window.location.host+'/nggirl/h5/cosmetic/drawLottery.html?activityId='+getParam('cosmeticId')+'&v=<%= VERSION %>',
-    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    androidDownUrl: "<%= CLI_HOST_API_URL %>/nggirl/app/getapp/downloadAndroidApk/byChannel?channel=yingyongbao",
     openApp: function(){
         var this_  =  this;
         //微信
@@ -651,7 +662,7 @@ var APPCommon = {
                     } else {
                         window.close();
                     }
-                },1500);
+                },500);
 				window.location = this.iphoneSchema;
 				}
                 
@@ -663,10 +674,11 @@ var APPCommon = {
 				}else{
 					try {
 						window.location = this_.androidSchema;
-						setTimeout(function(){
+					    timer=setTimeout(function(){
 							window.location=this_.androidDownUrl; //android下载地址
-	 
+	 						return false;
 						},1500);
+						
 					} catch(e) {}
 				}
             }
@@ -682,3 +694,17 @@ var APPCommon = {
     }
  
 };
+function myFunction(){
+		clearTimeout(t);
+		 return false;
+	}
+$(document).on('visibilitychange webkitvisibilitychange', function() {
+    var tag = document.hidden || document.webkitHidden;
+    if (tag) {
+        clearTimeout(timer);
+    }
+})
+
+$(window).on('pagehide', function() {
+    clearTimeout(timer);
+})

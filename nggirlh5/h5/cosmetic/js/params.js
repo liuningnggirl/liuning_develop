@@ -341,11 +341,11 @@ function isInApp(){
 */
 //提示弹框
 function alertFn(title){
-	var gray_box = document.createElement('div');
-	gray_box.setAttribute('class','gray_box');
+	var gray_boxes = document.createElement('div');
+	gray_boxes.setAttribute('class','gray_boxes');
 	var alert_box = document.createElement('div');
 	alert_box.setAttribute('class','alert_box');
-	gray_box.appendChild(alert_box);
+	gray_boxes.appendChild(alert_box);
 	var ab_title = document.createElement('p');
 	ab_title.appendChild(document.createTextNode('提示'));
 	ab_title.setAttribute('class','ab_title');
@@ -353,14 +353,14 @@ function alertFn(title){
 	ab_title_p.appendChild(document.createTextNode(title))
 	alert_box.appendChild(ab_title);
 	alert_box.appendChild(ab_title_p);
-	document.body.appendChild(gray_box);
+	document.body.appendChild(gray_boxes);
 	
 	//弹框样式
-	gray_box.style.zIndex=10000;
-	gray_box.style.width = '100%';
-	gray_box.style.background ='rgba(0,0,0,.5)';
-	gray_box.style.position = 'fixed';
-	gray_box.style.top = '0px';
+	gray_boxes.style.zIndex=10000;
+	gray_boxes.style.width = '100%';
+	gray_boxes.style.background ='rgba(0,0,0,.5)';
+	gray_boxes.style.position = 'fixed';
+	gray_boxes.style.top = '0px';
 	alert_box.style.width = '80%';
 	alert_box.style.padding = '20px 0';
 	alert_box.style.background = '#fff';
@@ -369,9 +369,9 @@ function alertFn(title){
 	alert_box.style.position = 'relative';
 	alert_box.style.borderRadius = '5px';
 	ab_title.style.padding = '10px 0';
-	gray_box.style.height = window.screen.height+'px';
+	gray_boxes.style.height = window.screen.height+'px';
 	alert_box.style.marginTop = (window.screen.height - alert_box.clientHeight)/2+'px';
-	setTimeout("$('.gray_box').remove()",1000);
+	setTimeout("$('.gray_boxes').remove()",1000);
 }
 
 //增长积分的弹窗
@@ -413,6 +413,37 @@ function alertNewScore(score){
 	ab_title.style.backgroundPosition="center 5px";
 	setTimeout("$('.gray_boxs').remove()",1000);
 }
+
+//灰色的弹窗
+function alertGrayWindow(score){
+	var gray_boxs_window = document.createElement('div');
+	gray_boxs_window.setAttribute('class','gray_boxs_window');
+	var alert_box = document.createElement('div');
+	alert_box.setAttribute('class','alert_box');
+	gray_boxs_window.appendChild(alert_box);
+	var ab_title_p = document.createElement('p');
+	ab_title_p.appendChild(document.createTextNode(score))
+	alert_box.appendChild(ab_title_p);
+	document.body.appendChild(gray_boxs_window);
+	
+	//弹框样式
+	gray_boxs_window.style.zIndex=10000;
+	gray_boxs_window.style.width = '140px';
+	gray_boxs_window.style.background ='rgba(0,0,0,.5)';
+	gray_boxs_window.style.position = 'fixed';
+	gray_boxs_window.style.top = '50%';
+	gray_boxs_window.style.left = '50%';
+	gray_boxs_window.style.margin = '-55px 0 0 -70px';
+	gray_boxs_window.style.borderRadius = '5px';
+	alert_box.style.width = '100%';
+	alert_box.style.padding = '20px 0';
+	alert_box.style.color = '#fff';
+	alert_box.style.margin = '0 auto';
+	alert_box.style.textAlign = 'center';
+	alert_box.style.position = 'relative';
+	alert_box.style.borderRadius = '5px';
+	setTimeout("$('.gray_boxs_window').remove()",1000);
+}
 //html标签过滤方法,过滤用户所有曾经输入的字段
 function htmlEscape(str) {
     return String(str)
@@ -433,7 +464,7 @@ function eraseStyleInCopyText(str){
 function getImgUrl(s){
     var res = s.replace(/\[/g,",[").replace(/\]/g,"],").replace(/\],,\[/,"],[");
 	var arr = res.split(',');
-	console.log(arr);
+	//console.log(arr);
 	var str = '';
 	for(var x = 0; x < arr.length; x++){
 		str += getImgFile(arr[x]);	

@@ -13,7 +13,7 @@ body,html{background:#eef3f4;color:#3a3a3a;font-size:16px;}
 .lottery .name-fee .fee{float:right;margin-right: 15px;color: #9a9a9a;font-size: 12px;margin-bottom: 20px;}
 .lottery .invitecode{position: relative;background: url(../images/lottery_third_part_coupon.png) no-repeat;width:256px;background-size:256px 56px;margin-left: -128px;margin-top:15px;margin-bottom:15px;left:50%;padding: 19px 0px 19px 130px;font-size:18px;color:#fdfeff;}
 .lottery .period{clear:both;padding:12px 15px;font-size:12px;color:#9a9a9a;border-top:1px solid #f6f7f7;}
-.lottery .period.inactivity{color:#84d9cb;}
+.lottery .period.inactivity{color:#FFB27D;}
 .lottery .period .time{display: inline;}
 
 /*商品详情*/
@@ -29,10 +29,10 @@ body,html{background:#eef3f4;color:#3a3a3a;font-size:16px;}
 .lottery .status{position:fixed;bottom:0;left:0;width:100%;height:55px;font-size:18px;text-align:center;}
 .lottery .status .hint{width:100%;height:100%;padding-top:18px;}
 .lottery .status .hint.finished{background:#b3b3b3;color:#ebebeb}
-.lottery .status .hint.filladdress{background:#50c8b4;color:#d9f3ee}
+.lottery .status .hint.filladdress{background:#FFB27D;color:#fff}
 
 /*填写商品地址*/
-.mesbtn{ position:fixed; bottom:0; left:0; width:100%; height:55px; line-height:55px; text-align:center; background:#50c8b4; font-size:16px; color:#fff;}
+.mesbtn{ position:fixed; bottom:0; left:0; width:100%; height:55px; line-height:55px; text-align:center; background:#FFB27D; font-size:16px; color:#fff;}
 .greyBtn{ background:#b3b3b3 !important;}
 
 .part2{position:fixed;top:0px;left:0px;width:100%;height:100%;background:#ffffff;}

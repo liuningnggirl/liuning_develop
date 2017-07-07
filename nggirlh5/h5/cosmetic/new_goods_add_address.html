@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<link rel="stylesheet" href="../cosmetic/css/new_goods_add_address.css" />
+<title>添加收货地址</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/new_goods_add_address.js"></script>
+<style>
+	*{ padding:0; margin:0; cursor:pointer; -webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+	a[title*="站长统计"]{ display:none;}
+	body{ background:#eff4f5;}
+	.message p{ position:relative; height:50px; font-size:13px;background:#fff; margin-bottom:1px; padding:0 20px; line-height:50px;}
+	.message p label{ position:absolute; left:20px; top:0; width:70px; display:inline-block; color:#9a9a9a; }
+	.message p input{ background:transparent;height:50px;  border:none; color:#4c4c4c; outline:none; width:100%; padding:0 22px 0 70px;  box-sizing:border-box;}
+	::-webkit-input-placeholder{ color:#B3B3B3;}
+	.message p.address ::-webkit-input-placeholder{ text-align:right;}
+	.main .address input{ background:url(images/back_right.png) right center no-repeat; background-size:7px 12px;}
+	.btn{ position:fixed; bottom:0; left:0; z-index:80; width:100%; height:50px; line-height:50px; background:#fff; text-align:center; font-size:16px; color:#9a9a9a;}
+	.main .defult{  height:50px;line-height:50px; margin-top:7px; padding-left:47px; background:url(images/unselect.png) 20px center no-repeat; background-size:22px;  background-color:#fff;font-size:13px; color:#3a3a3a;} 
+	.main  p.on{ background:url(images/select.png) 20px center no-repeat; background-size:22px;  background-color:#fff;}
+	.shadow{ display:none; position:fixed; top:0; left:0; z-index:99; width:100%; height:100%; background:#000; opacity:.5;}
+	.box{display:none; position:fixed; bottom:0;left:0; z-index:900; width:100%;height:270px; background:#fff; font-size:14px; color:#9a9a9a; overflow:hidden; }
+	.box .cityTit { text-align:center; line-height:1; padding:25px 20px;}
+	.box .cityTit .close{ float:left;color:#FFB27D;}
+	.box .cityTit .sure{ float:right;color:#EE750C;}
+	.box .selectBox{ width:105%; height:177px;overflow-y: scroll;}
+	.box .selectBox p{ padding:0 20px; height:40px; line-height:40px; font-size:13px;color:#B3B3B3;}
+	.selector p{ border-bottom:#d7dcdc solid 1px; padding:0 0 0 15px; margin-bottom:-1px;}
+	.selector p span{ font-size:13px; color:#4c4c4c; display:inline-block; padding:5px;  margin-right:41px; }
+	.area{ margin-right:0 !important;}
+	.selector p span.wait{ color:#EE750C;}
+	.selector p span.wait1{border-bottom:#EE750C solid 1px;  margin-bottom:-1px;}
+	.hidden{ display:none !important;}
+	.selt{ color:#4c4c4c !important;}
+	.tipBox{ position:fixed; display:none; padding:30px 42px; box-sizing:border-box; background:#3a3a3a; opacity:.6; color:#fff; border-radius:5px;   }
+</style>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+	<div class="main">
+    	<div class="message">
+        	<p class="consignee"><label>姓名：</label><input type="text" value="" maxlength="10" placeholder=""/></p>
+            <p class="contact"><label>手机号码：</label><input type="text" value="" placeholder=""/></p>
+            <p class="address"><label>所在区域：</label><input type="text" class="dis" value="" placeholder="选择区域" readonly/></p>
+            <p class="detAdd"><label>详细地址：</label><input type="text" value="" placeholder="详细地址不能少于5个字"/></p>
+        </div>
+        <p class="defult">设为默认地址</p>
+        <p class="btn">保存地址</p>
+        <div class="shadow"></div>
+        <div class="box">
+        	<p class="cityTit">
+            	<span class="close">取消</span>
+                <span>所在区域</span>
+                <span class="sure">确定</span>
+            </p>
+            <div class="selector">
+            	<p><span class="pro wait">请选择</span><span class="city hidden">请选择</span><span class="area hidden">请选择</span></p>
+            </div>
+            <div class="selectBox">
+                <div class="province"> </div>
+                <div class="cityBox"> </div>
+                <div class="areaBox"> </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="tipBox">详细地址不能少于5个字</div>
+    <%= STATISTICS_SCRIPT %>
+</body>
+</html>

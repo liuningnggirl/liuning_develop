@@ -189,67 +189,42 @@
             language: (navigator.browserLanguage || navigator.language).toLowerCase()
         };
 
-        $(".header_content").live('click', function () {
-            openApp()
-        });
-        $(".down_btn").live('click', function () {
-            openApp()
-        });
+        $(".header_content").live('click', openApp);
+        $(".down_btn").live('click', openApp);
 
         function openApp() {
-            var ua = window.navigator.userAgent.toLowerCase();
-            //微信
-            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-                if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-                    _czc.push(['_trackEvent', '点击下载APP事件', '用户端应用下载_南瓜姑娘_ios_' + getParam("city") + '_' + getParam("dept") + '_' + getParam('person') + '_' + getParam('market')]);
-                    var loadDateTime = new Date();
-                    window.setTimeout(function () {
-                        var timeOutDateTime = new Date();
-                        if (timeOutDateTime - loadDateTime < 300) {
-                            window.location.href = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";//ios下载地址
-                            $(".main").hide();
-                            return false;
-                        } else {
-
-                            return false;
-                        }
-                    }, 25);
-
-                } else {
-                    _czc.push(['_trackEvent', '点击下载APP事件', '用户端应用下载_南瓜姑娘_and_' + getParam("city") + '_' + getParam("dept") + '_' + getParam('person') + '_' + getParam('market')]);
+            //IOS直接跳转到APP Store
+            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+                _czc.push(['_trackEvent', '点击下载APP事件', '用户端应用下载_南瓜姑娘_ios_' + getParam("from") + '_' + getParam("city") + '_' + getParam("dept") + '_' + getParam('person') + '_' + getParam('market')]);
+                window.setTimeout(function () {
+                    window.location.href = "<%= APPLE_APP_STORE_URL %>";//ios下载地址
+                    $(".main").hide();
+                    return false;
+                }, 500);//有时间延迟是为了发送点击事件
+            }
+            //安卓系统内部
+            else {
+                _czc.push(['_trackEvent', '点击下载APP事件', '用户端应用下载_南瓜姑娘_and_' + getParam("from") + '_' + getParam("city") + '_' + getParam("dept") + '_' + getParam('person') + '_' + getParam('market')]);
+                var ua = window.navigator.userAgent.toLowerCase();
+                //微信内
+                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
                     try {
                         setTimeout(function () {
                             $(".guide").show();
                             $(".main").hide();
                             return false;
-                        }, 200);
-                        /*window.location.href="/nggirl/h5/mobile/loadGoodsShareCatenate.html?itemId="+getParam('itemId')+'&v=3.1.2.1494486748067';*/
+                        }, 500);//有时间延迟是为了发送点击事件
                     } catch (e) {
                     }
                 }
-            } else {//非微信浏览器
-                if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-                    _czc.push(['_trackEvent', '点击下载APP事件', '用户端应用下载_南瓜姑娘_ios_' + getParam("city") + '_' + getParam("dept") + '_' + getParam('person') + '_' + getParam('market')]);
-                    var loadDateTime = new Date();
-                    window.setTimeout(function () {
-                        var timeOutDateTime = new Date();
-                        if (timeOutDateTime - loadDateTime < 2000) {
-                            window.location.href = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";//ios下载地址
-                        } else {
-
-                            $(".main").hide();
-                            return false;
-                        }
-                    }, 25);
-
-                } else {
-                    _czc.push(['_trackEvent', '点击下载APP事件', '用户端应用下载_南瓜姑娘_and_' + getParam("city") + '_' + getParam("dept") + '_' + getParam('person') + '_' + getParam('market')]);
+                //微信外
+                else {
                     try {
                         setTimeout(function () {
                             window.location.href = "<%= CLI_HOST_API_URL %>/nggirl/app/getapp/downloadAndroidApk/byChannel?channel=" + getParam('market');
                             $(".main").hide();
                             return false;
-                        }, 400);
+                        }, 500);//有时间延迟是为了发送点击事件
                     } catch (e) {
                     }
                 }
@@ -258,8 +233,7 @@
     });
 
 </script>
-<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>"
-        language="JavaScript"></script>
+<%= STATISTICS_SCRIPT %>
 </body>
 
 </html>

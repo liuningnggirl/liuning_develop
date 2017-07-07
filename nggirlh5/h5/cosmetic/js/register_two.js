@@ -93,7 +93,12 @@ $(function(){
 							_czc.push(['_trackEvent','nggirl_regist_success','phoneType=and','用户注册成功时','true','']);
 						};
 						setAccessToken(result.data.accessToken);
-						location.href = 'index.html?v=<%= VERSION %>';
+						if(localStorage.getItem('appid') != '' || localStorage.getItem('appid') != undefined ){
+							localStorage.removeItem('appid'); 
+							location.href = 'newGoodsList.html?v=<%= VERSION %>';
+						}else{
+							location.href = 'index.html?v=<%= VERSION %>';
+						}
 					}
 				}
 			});

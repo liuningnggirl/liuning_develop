@@ -1,5 +1,6 @@
 ﻿body{
 	overflow-x: hidden;
+	position:relative;
 }
 .page_emotion dd{
 	display: inline-block;

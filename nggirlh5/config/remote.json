@@ -9,6 +9,9 @@
   "WEIXIN_BOUND_DOMAIN_URL":"https://cli.nggirl.com.cn",
   "CNZZ_STAT_CODE_ID": "1259610672",
   "CNZZ_STAT_CODE_WEB_ID": "1259610672",
+  "TENCENT_ANALYTICS_WEBSITE_CODE":"62395954",
+  "GOOGLE_ANALYTICS_WEBSITE_CODE":"UA-99967471-2",
+  "STATISTICS_SCRIPT":"CONFIG_FILES:online/cnzz.stat.script.js.conf,online/tencent.analytics.script.js.conf,online/google.analytics.scritp.js.conf",
   "dest": {
     "packageDir": "target/h5/"
   }

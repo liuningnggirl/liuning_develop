@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="../cosmetic/css/newGoodsShopping.css">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/newGoodsShopping.js"></script>
+<script>
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+
+</head>
+<body class="edit">
+	<div class="content">
+        <div class="title-btn">
+        	<img src="images/back_orage.png" alt="" />购物车
+        	<p class="edit_btn">编辑</p>    
+        </div>
+        <ul class="list-ul"></ul>
+        
+        <!--  购物车没有商品 -->
+        <div class="shop_car hidden">
+        	<div class="shop_car_top">
+                <img src="images/shop_car.png" class="img" alt="" />
+                <p class="para_h">购物车是空的~</p>
+                <p class="para_h">快去挑选心爱的宝贝吧！</p>
+            </div>
+            <p class="para_title">为你推荐</p>
+            <div class="shop_car_bottom">
+            	<ul class="recommend_ul"></ul>
+                <span class="pullUpIcon"></span>
+            </div>
+        </div>
+    </div>
+    <div class="bottom_btn">
+    	<div class="bn_left">
+        	<img src="images/white_circle.png" class="bl_circle" alt="" />
+            <p>全选</p>
+        </div>
+    	<div class="bn_center">
+        	<div class="bc_num">
+            	合计：<span class="num_left">¥0</span><span class="num_right">.00</span>
+            </div>
+            <p>不含运费</p>
+        </div>
+    	<div class="bn_right">
+        	结算(0)
+        </div>
+    </div>
+    <!--  灰色背景 -->
+    <div class="gray_box hidden"></div>
+    <!--  选择参数 -->
+    <div class="gray_box_param hidden">
+        <div class="gray_content">
+            <div class="norm_content">
+                <div class="nc_top">
+                    <img src="" alt="" class="cover" />
+                    <div class="nt_right">
+                        <p class="price"></p>
+                        <p class="title"></p>
+                        <div class="select">已选: </div>
+                    </div>
+                    <img src="images/b_close.png" class="close" alt="" />
+                </div>
+            </div>
+            <div class="scroll_box">
+                <!--  规格 -->
+                <div class="norm_box"></div>
+                <!--  购买数量 -->
+                <div class="nc_bottom">
+                    <p class="title">购买数量</p>
+                    <div class="count">
+                        <div class="subtract">-</div>
+                        <div class="num">1</div>
+                        <div class="plus">+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  按钮 -->
+        <div class="btn">
+            <div class="sure_btn">确定</div>
+            <div class="kucun_btn hidden">该商品没有库存</div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+</script>
+    <%= STATISTICS_SCRIPT %>
+</body>
+</html>

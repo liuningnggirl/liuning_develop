@@ -51,7 +51,10 @@
      
     <!-- 打开APP购买 -->
     <div id="loadAppButton" class="openApp" style="position: fixed;left: 0px;bottom: 0px;">打开APP购买</div>
-    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+    <div class="isWei hidden">
+        <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
+    </div>
+    <%= STATISTICS_SCRIPT %>
 </body>
 <script>
     var swiper = new Swiper('.swiper-container', {

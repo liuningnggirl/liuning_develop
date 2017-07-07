@@ -7,7 +7,7 @@
 <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
 <link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
 
-<link href="../cosmetic/css/themes/base/jquery.ui.all.css">
+<!-- <link href="../cosmetic/css/themes/base/jquery.ui.all.css"> -->
 <link href="../cosmetic/css/mobiscroll.css" rel="stylesheet" />
 <link href="../cosmetic/css/mobiscroll_date.css" rel="stylesheet" />
 <title>我要下单</title>
@@ -184,6 +184,6 @@
         $("#resDate").mobiscroll($.extend(opt['date'], opt['default']));
     });
     </script>
-    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+    <%= STATISTICS_SCRIPT %>
 </body>
 </html>

@@ -50,7 +50,7 @@ function getMyLotteryAwards(page) {
                     });
                 }
                 for(var x = 0; x < data.data.awards.length; x ++){
-                    $('.awards').append('<li awardRecordId="'+data.data.awards[x].awardRecordId+'"  awardId="'+data.data.awards[x].awardId+'" awardType="'+data.data.awards[x].awardType+'"><img class="awardimg" src="'+data.data.awards[x].awardImg+'" alt="" /><div class="left"><p class="awardname">'+data.data.awards[x].awardName+'</p><div class="smallword"><img src="images/label.png"><p>抽奖</p></div></div></li>');
+                    $('.awards').append('<li awardRecordId="'+data.data.awards[x].awardRecordId+'"  awardId="'+data.data.awards[x].awardId+'" awardType="'+data.data.awards[x].awardType+'"><img class="awardimg" src="'+data.data.awards[x].awardImg+'" alt="" /><div class="left"><p class="awardname">'+data.data.awards[x].awardName+'</p><div class="smallword"><img src="images/label1.png"><p>抽奖</p></div></div></li>');
                 }
 
             }else if(data.data.awards.length == 0 && page!=0){

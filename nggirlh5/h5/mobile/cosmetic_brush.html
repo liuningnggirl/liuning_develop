@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>化妆刷</title>
+<script type="text/javascript" src="../mobile/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../mobile/js/md5.js"></script>
+<script type="text/javascript" src="../mobile/js/params.js"></script>
+<script type="text/javascript" charset="utf-8" src="../mobile/js/bcloud.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<style>
+*{margin:0; padding:0; cursor:pointer;-webkit-tap-highlight-color: transparent;}
+.main{ width:100%; position:relative;}
+.main img.normal{width:100%;}
+.buy{ position:absolute; bottom:0; padding-bottom:20.8%; left:0; width:100%;}
+.buy img{width:52%; text-align:center; margin:0 24%;}
+.leftbuy{ position:fixed; top:203px; right:0; width:27px; height:97px;}
+a[title*="站长统计"]{ display:none;}
+</style>
+</head>
+
+<body>
+	<div class="main">
+        <img src="images/cosmetic_brush/brush1.png" alt="" class="normal" />
+        <img src="images/cosmetic_brush/leftbuy.png" alt="" class="leftbuy" />
+        <div id="player" style="width:100%;">
+            <script>
+					var videoHeight=$('#player').width()/1.78;
+                    $('#player').height(videoHeight);
+					$('.dresser_message').css('margin-top',videoHeight);
+                    var player = new CloudVodPlayer();
+                    player.init({uu:"660fwidmfe",vu:"df856fe4a1"},'player');
+			</script>
+        </div>
+        <img src="images/cosmetic_brush/bot.jpg" alt="" class="normal"/>
+        <div class="buy">
+            <img src="images/cosmetic_brush/botbuy.png" alt="" class="botbuy" />
+        </div>
+    </div>
+    <script type="text/javascript">
+	$(function(){
+		$(".leftbuy,.botbuy").live("click",function(){
+			//APPCommon.openApp();
+			window.location.href='http://c.b1yt.com/h.QFvttt?cv=HFRSZyTldNb&sm=824c5a';
+			//window.location.href='/nggirl/h5/mobile/loadBrush.html?v=<%= VERSION %>&jskz_mallow=new';
+		})
+		
+	})
+	</script>
+    <%= STATISTICS_SCRIPT %>
+</body>
+</html>

@@ -169,3 +169,6 @@ body li{list-style: none;}
 .gray{ border-bottom:1px solid #eeeeee; color:#5C5C5C;}
 .guide{ position:absolute; top:0; left:0; z-index:99;}
 .guide img{ width:100%; display:block;}
+.hidden{ display:none;}
+.isWei img{ width:100%; position:fixed; top:0px;}
+.isWei{ position:fixed; top:0px; z-index:999999;background:#fff; width:100%; display:none;}

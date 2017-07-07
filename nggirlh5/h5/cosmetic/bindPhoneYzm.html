@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>手机绑定(1/2)</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+<style type="text/css">
+*{ margin:0px; padding:0px; border:none; text-decoration:none; list-style:none; -webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-appearance:none;font-size:14px; font-family:"微软雅黑";}
+body{ background:#fff;}
+.box{ text-align:center;}
+.box_title{ text-align:center; color:#3a3a3a; font-size:18px; margin:25px 0 40px 0;}
+.box .box_return{ position:absolute; top:29px; left:15px; width:20px; display:none;}
+.box .box_input{ width:100%; padding:0 25px; box-sizing:border-box; position:relative;}
+.tel,.yzm,.pwd{ display:block; width:100%; height:55px; border-radius:5px; padding:0 15px; box-sizing:border-box; font-size:15px; color:#4c4c4c; border:1px solid #50c8b4;}
+.yzm{ margin:10px 0 30px 0; color:#4c4c4c;}
+.get_yzm{ position:absolute; top:14px; right:40px; border:1px solid #50c8b4; padding:5px 0px; width:70px; color:#50c8b4; font-size:12px; border-radius:5px;}
+.del_tel{ position:absolute; right:120px; top:20px; width:16px; display:none;}
+.del_yzm{ position:absolute; right:40px; top:85px; width:16px; display:none;}
+.yz_btn{ width:100%; height:45px; line-height:45px; color:#fff; text-align:center; background:#b3b3b3; position:fixed; bottom:0px; font-size:18px; letter-spacing:5px;}
+.box_p{ text-align:center; color:#50c8b4; font-size:14px; letter-spacing:2px; width:100%;}
+.box_p a{ color:#50c8b4; font-size:14px; text-decoration:underline;}
+.white_box{ width:90px; height:55px; background:red; position:absolute; top:0px; right:25px;}
+.gray_box{ width:100%; background:rgba(0,0,0,.5); position:fixed; top:0px; display:none;}
+.alert_box{ width:80%; height:130px; background:#fff; margin:0 auto; text-align:center; position:relative; border-radius:5px;}
+.ab_title{ padding:10px 0;}
+.btn_forget_pwd{ float:right;  border:1px solid #ccc; border-radius:5px; width:48%; padding:5px 0;}
+.btn_cancle{ float:left; border:1px solid #ccc; border-radius:5px; width:48%; padding:5px 0;}
+.btn{ position:absolute; bottom:0px; width:100%;padding: 5px; box-sizing: border-box;}
+a[title*="站长统计"]{ display:none;}
+.hidden{ display:none;}
+.eyes {position: absolute;top: 115px;right: 35px;width: 15px;}
+.box_input .pwd_del {position: absolute;top: 110px;width: 15px;right: 60px;display: none;}
+.box_password .box_input{padding: 0 20px;box-sizing: border-box;}
+.blue{ background:#50c8b4; color:#fff;}
+</style>
+<script type="text/javascript">
+$(function(){
+	//获取弹窗高度
+	$('.gray_box').height($(window).height());
+	
+	//弹框位置
+	$('.alert_box').css('margin-top',($(window).height() -130)/2+'px');
+	
+	$('.tel').val(getParam('tel'));
+	$('.yzm').val(getParam('yzm'));
+	saveStatusFn();
+	$('.box_p').css('margin-top',$(window).height() - 340);
+	//清空电话号码
+	$('.del_tel').click(function(e) {
+        $('.tel').val('');
+		$(this).hide();
+		saveStatusFn();
+    });
+	
+	//清空验证码
+	$('.del_yzm').click(function(e) {
+        $('.yzm').val('');
+		$(this).hide();
+		saveStatusFn();
+    });
+	
+	//清空密码
+	$('.pwd_del').click(function(e) {
+        $('.pwd').val('');
+		$(this).hide();
+		saveStatusFn();
+    });
+	
+	//判断电话号码框是否有数据
+	$('.tel').keyup(function(){
+		saveStatusFn();
+		if($(this).val() != ''){
+			$('.del_tel').show();	
+		}else{
+			$('.del_tel').hide();	
+		}
+	});
+	
+	//判断验证码框是否有数据
+	$('.pwd').keyup(function(){
+		saveStatusFn();
+		if($(this).val() != ''){
+			$('.del_yzm').show();	
+		}else{
+			$('.del_yzm').hide();	
+		}
+	});
+	
+	//判断验证码框是否有数据
+	$('.yzm').keyup(function(){
+		saveStatusFn();
+		if($(this).val() != ''){
+			$('.del_yzm').show();	
+		}else{
+			$('.del_yzm').hide();	
+		}
+	});
+	
+	//点击返回箭头，返回到登录页面
+	$('.box_return').click(function(e) {
+        window.location.href="login_new.html?v=<%= VERSION %>";
+    });
+	
+	//查看用户服务条款
+	$('.box_p a').click(function(e) {
+        window.location.href = "<%= CLI_HOST_API_URL %>/nggirl/h5/mobile/terms_of_service.html?v=<%= VERSION %>";
+    });
+	
+	//获取验证码
+	$('.get_yzm').click(function(e) {
+		//验证手机号
+		if(isPhoneNum($('.tel')[0].value)){
+			getYzmFn();
+		}else{
+			alert('请输入正确的手机号！');
+		}
+    });
+	
+	//验证手机号
+	$('.box  .yz_btn').click(function(e) {
+        if($.trim($('.tel').val()) != '' && $.trim($('.yzm').val()) !=''){
+			var yzm = $('.yzm')[0].value;
+			var phoneNum = $('.tel')[0].value;
+			var data = getFinalRequestObject({phoneNum: phoneNum, code: yzm});
+			$.ajax({
+				type: 'POST',
+				url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/checkRegisterCode',
+				data: data,
+				success: function (result) {
+					result = $.parseJSON(result);
+					if (result.code == '1') {
+						alert(result.data);
+					} else {
+						$('.box').addClass('hidden');
+						$('.box_password').removeClass('hidden');
+					}
+				}
+			});
+		}
+    });
+	
+	//关闭弹框
+	$('.gray_box,.btn_cancle,.btn_forget_pwd').click(function(e) {
+        $('.gray_box').hide();
+    });
+	
+	
+	//密码显示明文
+	$('.eyes').click(function(e) {
+		//判断显示明文还是隐藏明文
+		if($(this).attr('pwd') == 'no'){//可见
+			$(this).attr('src','images/new_login_eyes.png');
+			document.getElementById("pwd").type="text";
+			$(this).attr('pwd','yes');
+		}else{
+			$(this).attr('src','images/new_login_pwd_eyes.png');
+			document.getElementById("pwd").type="password";
+			$(this).attr('pwd','no');		
+		}
+    });
+	
+	//判断密码框是否有数据
+	$('.pwd').keyup(function(){
+		saveStatusFn();
+		if($(this).val() != ''){
+			$('.pwd_del').show();	
+		}else{
+			$('.pwd_del').hide();	
+		}
+	});
+	
+	//完成绑定
+	$('.box_password .yz_btn').click(function(e) {
+        var btn = $(this);
+		var paraData = getFinalRequestObject({
+			accessToken:getAccessToken(),
+			bindUserType:1,
+			validateCode:$('body').attr('code'),
+			bindUserPassword:$.trim($('.pwd').val()),
+			bindUserRecId:$.trim($('.tel').val())
+		});
+		if(btn.hasClass('blue')){
+			$.post('<%= CLI_HOST_API_URL %>/nggirl/app/cli/personalInfo/bindAccount/2.4.0',paraData,function(data){
+				var data = $.parseJSON(data);
+				if(data.code == 0){
+					location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>";
+				}else{
+					alert(data.data.error);	
+				}
+			});
+		};
+    });
+});
+
+//判断按钮保存状态
+function saveStatusFn(){
+	if($('.tel').val() != ''){
+		$('.box .yz_btn').addClass('blue');
+	}else{
+		$('.box .yz_btn').removeClass('blue');
+		return;
+	}
+	if($('.yzm').val() != ''){
+		$('.box .yz_btn').addClass('blue');
+	}else{
+		$('.box .yz_btn').removeClass('blue');
+		return;
+	}
+	if($('.pwd').val() != ''){
+		$('.box_password .yz_btn').addClass('blue');
+	}else{
+		$('.box_password .yz_btn').removeClass('blue');
+		return;
+	}
+}
+
+//获取验证码
+function getYzmFn(){
+	$('.get_yzm').unbind();
+	var phoneNum = $.trim($('.tel')[0].value);
+	var data = getFinalRequestObject({phoneNum: phoneNum});
+	$.ajax({
+		type: 'GET',
+		url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/phoneUser/getPhoneCode/2.3.0',
+		data: data,
+		success: function (result) {
+			result = $.parseJSON(result);
+			$('body').attr('code',result.data.code);
+			if (result.code == '1') {
+				$('.gray_box').show();
+				$(".get_yzm").html('获取验证码');
+				$('.get_yzm').css({'color':'#50c8b4','border':'1px solid #50c8b4'});
+				$('.get_yzm').bind('click',getYzmFn);
+			}else{
+				var SysSecond;
+				var InterValObj;
+				$(document).ready(function () {
+					SysSecond = parseInt(60); //这里获取倒计时的起始时间
+					InterValObj = window.setInterval(SetRemainTime, 1000); //间隔函数，1秒执行
+				});
+				$('.get_yzm').css({'color':'#9a9a9a','border':'1px solid #9a9a9a'});
+				//将时间减去1秒，计算天、时、分、秒
+				function SetRemainTime() {
+					if (SysSecond > 0) {
+						SysSecond = SysSecond - 1;
+						var second = Math.floor(SysSecond % 60);             // 计算秒
+						var minite = Math.floor((SysSecond / 60) % 60);      //计算分
+						var hour = Math.floor((SysSecond / 3600) % 24);      //计算小时
+						var day = Math.floor((SysSecond / 3600) / 24);        //计算天
+						if (day > 0) {
+							$(".get_yzm").html(second + '秒');
+						} else {
+							$(".get_yzm").html(second + '秒');
+						}
+					} else {//剩余时间小于或等于0的时候，就停止间隔函数
+						window.clearInterval(InterValObj);
+						//这里可以添加倒计时时间为0后需要执行的事件
+						$(".get_yzm").html('请重新获取');
+						$('.get_yzm').bind('click',getYzmFn);
+						$('.get_yzm').css({'color':'#50c8b4','border':'1px solid #50c8b4'});
+					}
+				}
+			}
+		}
+	});
+}
+
+//验证手机号
+function isPhoneNum(phoneNum){
+	var reg = /^1[3|8|7|5|4]\d{9}$/;
+	return reg.test(phoneNum);		
+}
+
+
+</script>
+</head>
+<body>
+	<div class="box ">
+		<p class="box_title">手机绑定（1/2）</p>
+        <img src="images/login_new_return_2.4.0.png" alt="" class="box_return" />
+        <div class="box_input">
+        	<input type="tel" class="tel" placeholder="请输入手机号" maxlength="11" />
+            <img src="images/new_login_del.png" alt="" class="del_tel" />
+        	<input type="tel" class="yzm" placeholder="请输入验证码" />
+            <img src="images/new_login_del.png" alt="" class="del_yzm" />
+            <div class="get_yzm">获取验证码</div>
+        </div>
+        <div class="yz_btn">验证</div>
+    </div>
+    <!--  忘记密码提示框 -->
+	<div class="gray_box">
+    	<div class="alert_box">
+        	<p class="ab_title">提示</p>
+            <p>该手机号已注册，是否忘记密码？</p>
+            <div class="btn">
+            	<div class="btn_cancle">取消</div>
+            	<div class="btn_forget_pwd">忘记密码</div>
+            </div>
+        </div>
+    </div>
+    
+    <!--  输入密码框 -->
+    <div class="box_password hidden">
+		<p class="box_title">手机绑定（2/2）</p>
+        <div class="box_input">
+        	<input type="password" placeholder="请输入密码" class="pwd" maxlength="15" id="pwd" />
+            <img src="images/new_login_del.png" alt="" class="pwd_del" />
+            <img src="images/new_login_pwd_eyes.png" alt="" class="eyes" pwd="no" />
+        </div>
+        <div class="yz_btn">完成绑定</div>
+    </div>
+    <%= STATISTICS_SCRIPT %>
+</body>
+</html>

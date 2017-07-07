@@ -90,13 +90,17 @@ var APPCommon = {
     iphoneSchema: 'nggirl://nggirl/itemDetail?'+'type=1'+'&itemId='+getParam('itemId')+'&v=<%= VERSION %>',
     iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
     androidSchema: 'nggirl://nggirl/itemDetail?'+'type=1'+'&itemId='+getParam('itemId')+'&v=<%= VERSION %>',
-    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    androidDownUrl: '<%= CLI_HOST_API_URL %>/nggirl/app/getapp/downloadAndroidApk/byChannel?channel=yingyongbao',
     openApp: function(){
         var this_  =  this;
 		if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
 			if(this_.isWeixin()){
-				 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
-	 
+				 //window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+				$(".isWei").css("height",$(window).height());
+				$(".isWei").show();
+				$('.isWei').on('click', function () {
+					$(".isWei").hide();
+				});
 			}else{
 			var loadDateTime = new Date();
 			window.setTimeout(function() {
@@ -114,7 +118,7 @@ var APPCommon = {
 			if(this_.isWeixin()){
 				$(".isWei").css("height",$(window).height());
 				$(".isWei").show();
-				$('.isWei').on('touchstart', function () {
+				$('.isWei').on('click', function () {
 					$(".isWei").hide();
 				});
 	 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
+<title>付款成功</title>
+<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+<script type="text/javascript" src="../cosmetic/js/params.js"></script>
+<script type="text/javascript" src="../cosmetic/js/jquery.lazyload.js"></script>
+<style>
+	*{ padding:0; margin:0; cursor:pointer; -webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-appearance:none;}
+	a[title*="站长统计"]{ display:none;}
+	body{ background:#eff4f5;}
+	.top{ text-align:center; background:#fff; }
+	.top img{ width:197px; margin:20px 0;}
+	.top p{ font-size:17px; color:#4c4c4c; line-height:1; padding-bottom:20px;}
+	.order{ background:#fff; padding:10px 20px 0; margin:7px 0;}
+	.order p{ line-height:1; padding-bottom:10px; font-size:14px; color:#9a9a9a;}
+	.order p i{ font-style:normal; font-size:12px;}
+	.btn_box{ padding:5px 15px; position:fixed; bottom:0px; left:0px; width:100%;box-sizing:border-box;}
+	.btn_box .btn{ height:44px; line-height:44px; text-align:center; background:#ffb27d; border-radius:5px; color:#fff; font-size:16px;}
+	.content{ padding:0 7px 50px; background:#fff;}
+	.content .tui_ul{ padding:3.5px; box-sizing:border-box; overflow:hidden;}
+	.content .tui_ul li{ list-style-type:none; width:33.3%; min-height:33%; overflow: hidden; display:inline-block; padding: 3.5px;box-sizing: border-box; position:relative;}
+	.content .tui_ul li img{ width:100%; }
+	.content .tui_ul li p{ color:#4c4c4c; font-size:13px; padding:7px 0; text-align:justify;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+	.content .tui_ul li span{  white-space:nowrap;color: #fff;font-size: 14px;position: absolute;bottom: 30%;right: 4px;display: inline-block;min-width: 50px;background:url(images/tag.png) no-repeat left; line-height: 20px;padding: 0 0 0 20px;display: inline-block;box-sizing: border-box;}
+	.content .tui_ul li span i{ font-style:normal; font-size:12px;}
+	.content .tui_ul li .tag{ width:45px; }
+	.orderAmount .mon{ font-size:14px;}
+	.orderAmount .dian{ font-size:12px;}
+</style>
+<script> 
+    //声明_czc对象: 
+    var _czc = _czc || []; 
+    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+	<div class="main">   
+        <div class="top">
+         	<img src="images/sucess.png" alt=" /">
+            <p>付款成功，可登录APP查看详情哦</p>
+        </div>
+        <div class="order">
+        	<p>订单编号: <span class="orderCode"></span></p>
+            <p>订单总额：<span class="orderAmount"><i>00</i></span></p>
+        </div>
+        <div class="content">
+        <div class="tui_ul"></div>
+        </div>
+    </div>
+    <div class="btn_box">
+    	<div class="btn">种草更多好物 尽在南瓜姑娘APP>></div>
+    </div>
+    <%= STATISTICS_SCRIPT %>
+    <script type="text/javascript">
+		$(function(){
+			$(".orderCode").html(getParam('orderCode'));
+			$(".orderAmount").html(splitNum(getParam('orderAmount')));
+			$(".content .tui_ul li").live("click",function(){
+				var del=$(this);
+				checkAccessTokenLogin(function () {
+					window.location.href="newGoodsDetails.html?itemId=" +del.attr("itemId")+'&v=<%= VERSION %>';
+				}, "newGoodsDetails.html?itemId=" +del.attr("itemId")+'&v=<%= VERSION %>');
+			})
+			$(".btn_box .btn").live("click",function(){
+				window.location.href="../mobile/loadAppHome.html?v=<%= VERSION %>";
+			})
+			recommendForYou(0);
+			function recommendForYou(page){
+				$.get('<%= CLI_HOST_API_URL %>/nggirl/app/cli/item/cart/recommendForYou/3.1.0',getFinalRequestObject({accessToken:getAccessToken(),pageNum:page,pageSize:9}),function(data){
+					var data = $.parseJSON(data);
+					if(data.code == 0){
+						for(var x = 0; x < data.data.length ;x ++){
+							$('.tui_ul').append('<li itemId="'+data.data[x].itemId+'"><img data-original="'+data.data[x].imgUrl+'" class="goodsImg lazy" /><p>'+data.data[x].mainTitle+'</p><div class="tag">'+splitNum(data.data[x].salePrice)+'</div></li>');	
+						}
+						$("img.lazy").lazyload({effect : "show"});
+						if( data.data.length >= 9 ){
+								var tur = true;	
+								var page1 = ++page;
+								$(window).scroll(function(){
+									var winH = $(window).height(); //页面可视区域高度  
+									var pageH = $(".main").height();  
+									var scrollT = $(window).scrollTop(); //滚动条top  
+									var aa = (pageH - winH - scrollT) / winH;  
+									if(tur && aa < 0.02){ 
+										setTimeout(function(){
+										  recommendForYou(page1);
+										},200);
+									    tur = false;
+									} 
+							   });
+							}
+						$(".content .tui_ul li img.goodsImg").height($(".content .tui_ul li").width());
+					}
+				});
+			}
+			//拆分小输掉
+			function splitNum(num){
+				var str = num.toString();
+				var arr = [];
+				var endStr = '';
+				if(str.indexOf('.')>=0){
+					arr=str.split('.');
+					endStr = '<span class="mon">¥ '+arr[0]+'<i class="dian">.'+arr[1]+'</i></span>'
+				}else{
+					endStr = '<span class="mon">¥ '+str+'<i class="dian">.00</i></span>'	
+				}
+				return endStr;
+			}
+		})
+    </script>
+</body>
+</html>

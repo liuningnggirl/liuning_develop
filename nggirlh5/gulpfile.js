@@ -13,6 +13,7 @@ var template = require('gulp-template');
 var watch = require('gulp-watch');
 var del = require('del');
 var path = require('path');
+var fs = require("fs");
 
 //公共配置文件
 var commonConfig = require('./config/common.json');
@@ -49,6 +50,13 @@ var isSimpleObject = function (obj) {
     }
 };
 
+function strIsEmpty(str) {
+    if (str == undefined || str == null || str.length == 0) {
+        return true;
+    }
+    return false;
+}
+
 var initConfig = function (configFile) {
     var jsonConfig = require('./config/' + configFile);
     config = extendObject(commonConfig, jsonConfig);
@@ -70,6 +78,38 @@ var initConfig = function (configFile) {
     } else {
         config.isDebug = false;
     }
+
+    //如果没有添加腾讯分析,则默认是测试站点的腾讯分析
+    if (strIsEmpty(config.TENCENT_ANALYTICS_WEBSITE_CODE)) {
+        //测试站点的腾讯分析
+        config.TENCENT_ANALYTICS_WEBSITE_CODE = '62395906';
+    }
+    //如果没有添加谷歌分析,则默认是测试站点的谷歌分析
+    if (strIsEmpty(config.GOOGLE_ANALYTICS_WEBSITE_CODE)) {
+        //测试站点的谷歌分析
+        config.GOOGLE_ANALYTICS_WEBSITE_CODE = 'UA-99967471-1';
+    }
+
+    var len = 'CONFIG_FILES:'.length;
+    for (var p in config) {
+        if (typeof config[p] == 'string'
+            && config[p].length > len
+            && config[p].substr(0, len) == 'CONFIG_FILES:') {
+            gutil.log(config[p]);
+            gutil.log(config[p].substr(len));
+            var strArray = config[p].substr(len).split(",");
+            var content = '';
+            for (var i = 0; i < strArray.length; i++) {
+                if (strArray[i].length > 0) {
+                    content += "\n";
+                    content += fs.readFileSync("config/files/" + strArray[i]).toString();
+                }
+            }
+            config[p] = content;
+        }
+    }
+
+
     return config;
 };
 
@@ -108,17 +148,6 @@ gulp.task('clean-imagerev', function () {
 });
 
 
-//打包
-function pack(done) {
-    console.info('正在打包,使用配置文件:' + config.configName);
-    return runSequence(
-        ['clean', 'clean-cssrev', 'clean-jsrev', 'clean-imagerev'],
-        ['pack-js', 'pack-css', 'pack-image'],
-        ['pack-rev'],
-        done);
-}
-
-
 //打包文件:js/css/image/html等
 gulp.task('pack-js', function () {
     return packJs(config.source.jsFiles, config.dest.packageDir);
@@ -145,8 +174,12 @@ gulp.task('pack-css', function () {
 function packCss(sourcePackFiles, destPackDir) {
     gutil.log('打包css文件:' + sourcePackFiles);
     gutil.log('输出路径:' + destPackDir);
-    return gulp.src(sourcePackFiles)
+    var outputdir = config.dest.rootDir + '/css/';
+    var sourceFiles = [config.dest.rootDir + '**/*.json'].concat(sourcePackFiles);
+    return gulp.src(sourceFiles)
         .pipe(template(config))
+        .pipe(revCollector())
+        .pipe(gulp.dest(outputdir))
         .pipe(config.isDebug ? gutil.noop() : minifyCss())
         .pipe(rev())
         .pipe(gulp.dest(destPackDir))
@@ -192,7 +225,8 @@ function pack(done) {
     gutil.log('正在打包,使用配置文件:' + config.configName);
     return runSequence(
         ['clean', 'clean-cssrev', 'clean-jsrev', 'clean-imagerev'],
-        ['pack-js', 'pack-css', 'pack-image'],
+        ['pack-js', 'pack-image'],
+        ['pack-css'],
         ['pack-html'],
         done);
 }

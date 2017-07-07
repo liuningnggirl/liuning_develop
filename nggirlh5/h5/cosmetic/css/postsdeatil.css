@@ -23,7 +23,7 @@ html, body, div, span,iframe,h1, h2, h3, h4, h5, h6, p, pre,a, em, img,small,str
 .de_bot .form-control{ width:100%; display:block;box-sizing:border-box; line-height:19px; max-height:95px; word-break:break-all; font-size:13px; color:#3a3a3a; outline:none; text-align:justify; overflow:auto; resize:none;}
 .de_bot .send_message,.de_bot .send_messages,.replymessage,.replyinmessage,#send_message{ text-align:center; width:50px; height:50px; line-height:50px; font-size:14px; color:#ee750c; cursor:pointer;  -webkit-tap-highlight-color: transparent; float:right; margin-top:-56px;}
 #send_message{ position:absolute; top:56px; right:0;}
-.ad_tops{ background:#fff; margin-top:71px; position:relative;}
+.ad_tops{ background:#fff;  margin-top:71px;  position:relative;}
 .ad_tops .ad_bg{ width:100%;}
 .ad_tops .ad_imgbox{ width:50px; height:50px; background:#d7dcdc; border:1px solid #e7eded;border-radius:50%; display:inline-block; overflow:hidden; margin:15px 15px 0 20px; float:left;}
 .ad_tops .ad_imgbox img{ width:100%; height:100%;}
@@ -113,7 +113,7 @@ html, body, div, span,iframe,h1, h2, h3, h4, h5, h6, p, pre,a, em, img,small,str
 .ad_sure .adfor{position:absolute; bottom:10px; width:100%;}
 .successtips{ display:none; text-align:center; color:#fff; line-height:40px; width:84%; height:40px; background: rgba(0,0,0,0.75); border-radius:5px; position:fixed; left:8%; top:50%; margin-top:-20px; z-index:109;}
 .form-tip{ display:none;}
-.forinput{ overflow:auto; cursor:pointer;-webkit-overflow-scrolling: touch; -webkit-transform: translateX(0px); background:#e7eded;}
+.forinput{margin-bottom: 50px; overflow:auto; cursor:pointer;-webkit-overflow-scrolling: touch; -webkit-transform: translateX(0px); background:#e7eded;}
 .forinputlength{  margin-bottom:7px;}
 a[title*="站长统计"]{ display:none;}
 .opbg{ display:none; width:100%; height:100%; background:#000; opacity:.5; position:fixed; top:0; left:0;   z-index:199;}

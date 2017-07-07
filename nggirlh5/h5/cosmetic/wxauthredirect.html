@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
-<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
-<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
-<link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico" />
-<title></title>
-<style type="text/css">
-a[title*="站长统计"]{ display:none;}
-</style>
-<script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="../cosmetic/js/md5.js"></script>
-<script type="text/javascript" src="../cosmetic/js/params.js"></script>
-<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script> 
-    //声明_czc对象: 
-    var _czc = _czc || []; 
-    //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
-     _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
-</script>
-<script>
-	$(function(){
-		var code = getParam('code');
-		var marketChannel=getParam('state');  //获取市场地推渠道
-		if (code != null && code != '' && code != localStorage.code) //若已请求过code,且和记录的code不同，防止回退页面时code过期
-		{
-			$.ajax({
-				type : 'GET',
-				dataType : 'json',
-				url : '<%= CLI_HOST_API_URL %>/nggirl/app/cli/register/weixin/getInfo/1.4.2',
-				data : {
-					code : code,
-					marketChannel:marketChannel
-
-				},
-				success : function(data) {
-					setAccessToken(data.data.accessToken);
-					localStorage.setItem("code", code);
-					localStorage.setItem("isThirdLogon", "1");
-					location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>";
-				}				
-			});
-		}else{
-			location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>";
-		}
-	});
-</script>
+    <meta charset="utf-8">
+    <meta name="Keywords" content="<%= PAGE_KEYWORDS %>"/>
+    <meta name="Description" content="<%= PAGE_DESCRIPTION %>"/>
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+    <link rel="shortcut icon" href="/nggirl/h5/mobile/images/favicon.ico"/>
+    <title></title>
+    <style type="text/css">
+        a[title*="站长统计"] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../cosmetic/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../cosmetic/js/md5.js"></script>
+    <script type="text/javascript" src="../cosmetic/js/params.js"></script>
+    <script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        $(function () {
+            var code = getParam('code');
+            var marketChannel = getParam('state');  //获取市场地推渠道
+            if (code != null && code != '' && code != localStorage.code) //若已请求过code,且和记录的code不同，防止回退页面时code过期
+            {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: '<%= CLI_HOST_API_URL %>/nggirl/app/cli/register/weixin/getInfo/4.0.2',
+                    data: getFinalRequestObject({
+                        code: code,
+                        marketChannel: marketChannel
+                    }),
+                    success: function (data) {
+                        setAccessToken(data.data.accessToken);
+                        localStorage.setItem("code", code);
+                        localStorage.setItem("isThirdLogon", "1");
+						if(localStorage.getItem('appid') != '' || localStorage.getItem('appid') != undefined ){
+							localStorage.removeItem('appid'); 
+							location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/newGoodsList.html?v=<%= VERSION %>&market=" + marketChannel;
+						}else{
+							location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>&market=" + marketChannel;
+						}
+                    }
+                });
+            } else {
+				if(localStorage.getItem('appid') != '' || localStorage.getItem('appid') != undefined ){
+					localStorage.removeItem('appid'); 
+					location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/newGoodsList.html?v=<%= VERSION %>&market=" + marketChannel;
+				}else{
+					location.href = "<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/index.html?v=<%= VERSION %>&market=" + marketChannel;
+				}
+            }
+        });
+    </script>
 </head>
 
 <body>
 
-<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+<%= STATISTICS_SCRIPT %>
 </body>
 </html>

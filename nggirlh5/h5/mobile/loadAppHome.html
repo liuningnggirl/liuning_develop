@@ -8,6 +8,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
 <title>南瓜姑娘</title>
+<style>
+a[title*="站长统计"]{ display:none;}
+</style>
 <script> 
 	//声明_czc对象: 
 	var _czc = _czc || []; 
@@ -59,6 +62,6 @@
 			openApp();
 		}
 	</script>
-	<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+	<%= STATISTICS_SCRIPT %>
 </body>
 </html>

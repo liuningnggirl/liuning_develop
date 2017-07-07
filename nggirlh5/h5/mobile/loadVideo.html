@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="Keywords" content="<%= PAGE_KEYWORDS %>" />
+<meta name="Description" content="<%= PAGE_DESCRIPTION %>" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<title>南瓜姑娘</title>
+<style>
+a[title*="站长统计"]{ display:none;}
+</style>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script> 
+	//声明_czc对象: 
+	var _czc = _czc || []; 
+	//绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
+	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
+</script>
+</head>
+<body>
+	<a href="#" id="loadAppButton" style="display: none">打开APK</a>
+
+	<script type="text/javascript">
+	$(function(){
+	var timer = null;	
+	// 从地址栏中获取参数(因为2.2之前的ios跳转到webview获取的url地址没有组装上=后的参数，所以导致页面获取不到参数，这里把reg中的=换成了%3d)
+		function getParam(name) {
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if (r != null)
+		        return decodeURI(r[2]);
+		    return '';
+		}
+		
+		function loadAppDownloadPage(){
+    		var wap_url = '';
+    		var ua = navigator.userAgent;
+        	var platform = /MicroMessenger/i.test(ua) ? "weixin" : /Android/i.test(ua) ? "android" : /iPhone|iPad|iPod/i.test(ua) ? "ios" : "other";
+
+        	if (platform == "android") {
+    	        wap_url = "<%= CLI_HOST_API_URL %>/nggirl/app/getapp/downloadAndroidApk/byChannel?channel=yingyongbao";
+    	    } else if (platform == "ios") {
+    	        wap_url = 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8';
+    	    } else if (platform == "weixin") {
+    	        wap_url = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
+    	    } else {
+    	        wap_url = "<%= CLI_HOST_API_URL %>/nggirl/app/getapp/costrial";
+    	    }
+    		window.location.href = wap_url;
+    	}
+		
+		var openApp = function(){
+    		//var toAppUrl = 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+getParam('postTitle')+'&v=<%= VERSION %>';
+    		var toUrl = getParam('toAppUrl');
+    		var toAppUrl = (toUrl == null || toUrl=='')? 'nggirl://nggirl/appHome':toUrl;
+			var loadAppButton = document.getElementById('loadAppButton');
+    		loadAppButton.href = toAppUrl;
+			loadAppButton.click();
+    		var loadDateTime = new Date();
+			if (navigator.userAgent.match(/android/i)) {
+				var t=2000
+				var t2=2200
+			}else{
+				var t=500
+				var t2=600
+			}
+			timer=window.setTimeout(function(){
+				var timeOutDateTime = new Date();
+				if (timeOutDateTime - loadDateTime < t2) {
+					loadAppDownloadPage();
+				} else {
+					window.close();
+				}
+			},t);
+			
+		}
+		window.onload=function(){
+			openApp();
+		}
+		$(document).on('visibilitychange webkitvisibilitychange', function() {
+			var tag = document.hidden || document.webkitHidden;
+			if (tag) {
+				clearTimeout(timer);
+			}
+		})
+		$(window).on('pagehide', function() {
+			clearTimeout(timer);
+		})
+	})
+	
+	</script>
+	<%= STATISTICS_SCRIPT %>
+</body>
+</html>

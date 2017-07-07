@@ -50,11 +50,11 @@
                 <p class="lb_login">忘记密码</p>
             </div>
             <p class="another_login">———　使用其它方式快速登录　———</p>
-            <a href="wxauthvisiblelogin.html?v=<%= VERSION %>" class="weixin">
+            <a href="<%= WEIXIN_BOUND_DOMAIN_URL %>/nggirl/h5/cosmetic/wxauthvisiblelogin.html?v=<%= VERSION %>" class="weixin">
             	<img src="images/new_login_weixin.png" class="lb_weixin" alt="" />
             </a>
         </div>
     </div>
-    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+    <%= STATISTICS_SCRIPT %>
 </body>
 </html>

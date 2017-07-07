@@ -27,7 +27,7 @@
 </script>
 </head>
 <body id="cube">
-	<div class="downLoad hidden"><img src="images/close.png" class="closeTip"><img src="images/downLoad.png" class="imgDes"><span class="gtload">打开</span></div>
+	<div class="downLoad hidden"><img src="images/close.png" class="closeTip"><img src="images/downLoad.png" class="imgDes"><span class="gtload" id="loadAppButton">打开</span></div>
     <div class="isWei hidden">
         <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
     </div>
@@ -44,7 +44,8 @@
 					var shopNum=0;
 					var videoHeight=$('#player').width()/1.78;
                     $('#player').height(videoHeight);
-					$('.dresser_message').css('margin-top',videoHeight);
+					$(".forinput").height($(window).height()-64-videoHeight-50);
+					//$('.dresser_message').css('margin-top',videoHeight);
                     var player = new CloudVodPlayer();
                     player.init({uu:"660fwidmfe",vu:data.data.videoId},'player');
 					/*$(".dm_top").attr('postid',data.data.postId);
@@ -95,11 +96,11 @@
 		
 					str +='<div class="ad_imgbox" createUserId="'+data.data.createUserId+'"><img class="dressimg" src="'+data.data.userProfile+'"/></div><div class="dressname" createUserId="'+data.data.createUserId+'">';
 					str +='<span class="ad_user_name" createUserId="'+data.data.createUserId+'">'+data.data.userName+'</span>';
-					if(data.data.userRole == ''){
+					/*if(data.data.userRole == ''){
 						str +='<span class="ad_userrole" style=" border:none;"></span>';
 					}else{
 						str +='<span class="ad_userrole">'+data.data.userRole+'</span>';
-					}
+					}*/
 					if(data.data.isAttention == 0 && data.data.isMyPost == 0){
 						str +='<div class="head_attention atten2">关注</div>';
 					}else if(data.data.isAttention == 1 && data.data.isMyPost == 0){
@@ -501,7 +502,7 @@
         </div>
     </div>
     <div class="goToTop"><img src="images/backtop.png"></div>
-    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+	<%= STATISTICS_SCRIPT %>
     <script> 
 	var autoTextarea = function (elem, extra, maxHeight) {
         extra = extra || 0;

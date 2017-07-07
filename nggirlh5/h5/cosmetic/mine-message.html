@@ -83,7 +83,7 @@ a[title*="站长统计"]{ display:none;}
 		<ul>
         	<li>
             	<div class="true-txt">头像</div>
-                <input type="file" name="file0" id="file0" multiple style="display:none;" data-url="<%= PHOTOS_HOST_API_URL %>/uploadserver/app/image/uploads/3.0.0"/><img src="images/new_login_mine_message_img.png" alt="" class="true-img" id="img0"  />
+                <input type="file" name="file0" id="file0" multiple style="display:none;" data-url="https://testphotos.nggirl.com.cn/uploadserver/app/image/uploads/3.0.0"/><img src="images/new_login_mine_message_img.png" alt="" class="true-img" id="img0"  />
             </li>
         	<li class="mine-message-name">
             	<div class="txt">昵称</div>
@@ -197,7 +197,7 @@ a[title*="站长统计"]{ display:none;}
         <div class="bic_num">
         	<span class="current_num">0</span> / 15
         </div>
-    </div> 
-    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+    </div>
+    <%= STATISTICS_SCRIPT %>
 </body>
 </html>

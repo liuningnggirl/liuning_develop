@@ -33,7 +33,6 @@
     		var ua = navigator.userAgent;
         	var platform = /MicroMessenger/i.test(ua) ? "weixin" : /Android/i.test(ua) ? "android" : /iPhone|iPad|iPod/i.test(ua) ? "ios" : "other";
         	if (platform == "android") {
-				//wap_url = "https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk";
     	        wap_url = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
     	    } else if (platform == "ios") {
     	        wap_url = "https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8";
@@ -59,6 +58,6 @@
 			openApp();
 		}
 	</script>
-	<script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_ID %>" language="JavaScript"></script>
+	<%= STATISTICS_SCRIPT %>
 </body>
 </html>

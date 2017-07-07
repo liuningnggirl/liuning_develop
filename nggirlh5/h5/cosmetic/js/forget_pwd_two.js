@@ -42,7 +42,12 @@ $(function(){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					setAccessToken(data.data.accessToken);
-					location.href = 'index.html?v=<%= VERSION %>';
+					if(localStorage.getItem('appid') != '' || localStorage.getItem('appid') != undefined ){
+						localStorage.removeItem('appid'); 
+						location.href = 'newGoodsList.html?v=<%= VERSION %>';
+					}else{
+						location.href = 'index.html?v=<%= VERSION %>';
+					}
 				}else{
 					alert(data.data.error);	
 				}

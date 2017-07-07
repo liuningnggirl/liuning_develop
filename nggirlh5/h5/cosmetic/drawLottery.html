@@ -20,13 +20,15 @@
 	 _czc.push(["_setAccount", "<%= CNZZ_STAT_CODE_ID %>"]);
 </script>
 </head>
-<body >
+<body onpagehide="myFunction()">
 	<div class="downLoad hidden"><img src="images/close.png" class="closeTip"><img src="images/downLoad.png" class="imgDes"><span class="gtload">打开</span></div>
     <div class="isWei hidden">
         <img src="<%=WEIXIN_GUIDE_BROWER_IMG%>" >
     </div>
     <div class="header">
-    	<img id="userRecordImg" src="images/drawLottery/userRecord.png">
+    	<div class="rulerBtn">
+            <p>活动规则</p>
+        </div>
         <img id="headerImg" src="images/drawLottery/banner.jpg">
         <p id="headerCounter" ></p>
     </div>
@@ -37,7 +39,7 @@
         		<img class="pointer" src="images/drawLottery/pointer-white.png"/>
         	
         </div>
-        <p class="userPoints">我的积分：<span></span></p>
+        <p class="userPoints">我的南瓜币：<span></span></p>
     </div>
     <div class="listZone">
         <div class="left">中奖名单</div>
@@ -65,16 +67,16 @@
  	<li class="prizeFlow-template hidden">
  		<img src="images/drawLottery/points1.png" id="0"><p>南瓜玩偶南瓜玩偶南瓜玩偶南瓜玩偶<span>7份</span></p>
  	</li>
- 	    <div class="rulerBtn">活动规则>></div>
+ 	<div class="" id="userRecordImg">我的奖品</div>
     <div class="innercontent">
         <p class="innertit">活动规则</p>
         <div class="rulerdetail">
         <div class="rulerdetail2">
             <p> 1.抽奖活动时间为：<span class="start">2016年9月14日</span>至<span class="end">2016年9月28日</span>，此活动为概率中奖，奖品数量有限，先到先得；<br/>
-                2.每位用户每天有<span class="times"></span>次免费抽奖机会，超出免费机会后若继续参与，需使用<span class="costScore"></span>积分兑换抽奖机会；<br/>
-                3.抽到实物类的奖品时需填写收货人的配送地址，奖品将在7个工作日内发货，请准确填写收货地址，如因无法联系收件人致使投递失败，奖品与积分将不做返还；<br/>
+                2.每位用户每天有<span class="times"></span>次免费抽奖机会，超出免费机会后若继续参与，需使用<span class="costScore"></span>南瓜币兑换抽奖机会；<br/>
+                3.抽到实物类的奖品时需填写收货人的配送地址，奖品将在7个工作日内发货，请准确填写收货地址，如因无法联系收件人致使投递失败，奖品与南瓜币将不做返还；<br/>
                 4.实物奖品由南瓜姑娘提供与发货；<br/>
-                5.本次抽奖活动，所有商品一经兑换，一律不退还积分，请用户兑换前仔细参照抽奖规则、兑换活动时间等重要信息，如有问题，可在南瓜姑娘APP“我的”-“联系客服”进行咨询（工作日08:00-21:00）；<br/>
+                5.本次抽奖活动，所有商品一经兑换，一律不退还南瓜币，请用户兑换前仔细参照抽奖规则、兑换活动时间等重要信息，如有问题，可在南瓜姑娘APP“我的”-“联系客服”进行咨询（工作日08:00-21:00）；<br/>
                 6.凡采用不正当手段，如：作弊、扰乱系统、实施网络攻击等进行抽奖，一经发现，南瓜姑娘有权取消该账户参与资格，并对账户做冻结处理；<br/>
                 7.本活动最终解释权归北京旭洋群美科技有限公司所有。
             </p> 
@@ -111,8 +113,8 @@
 			<img src="images/drawLottery/draw-result-01.png" class="bigimg">
 	  		<img src="images/points/pointsCloseBtn.png" class="close">
 	  		<div class="tips">
-	  			<p>您当前只有 <span>3</span> 积分</br>
-	  			不能抽奖，赶快赚取积分吧~</p>
+	  			<p>您当前只有 <span>3</span> 南瓜币</br>
+	  			不能抽奖，赶快赚取南瓜币吧~</p>
 	  			<div class="confirm-btn">知道了</div>
 	  		</div>
 		</div>
@@ -168,7 +170,6 @@
         </div>
         <div class="mesbtn greyBtn">确认地址</div>
     </div>
-    
-    <script src="//s4.cnzz.com/z_stat.php?id=<%= CNZZ_STAT_CODE_ID %>&web_id=<%= CNZZ_STAT_CODE_WEB_ID %>" language="JavaScript"></script>
+	<%= STATISTICS_SCRIPT %>
 </body>
 </html>

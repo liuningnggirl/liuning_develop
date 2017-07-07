@@ -1,16 +1,29 @@
 var ua = navigator.userAgent.toLowerCase();	
+var timer = null;
 $(function(){
 	if(!isInApp()){
 		$(".downLoad").show();
 	}
 	$(".downLoad .closeTip").click(function(){
 		$(".downLoad").hide();
-		$("#player").css("top","0");
+		$("#player").css("padding-top","0");
 		$(".ad_tops").css("margin-top","7px");
+		$('.forinput').height($('.forinput').height()+69);
 	})
 	$(".downLoad .gtload").click(function(){
-		APPCommon.openApp();
-		return false;
+		//APPCommon.openApp();
+		if (navigator.userAgent.match(/android/i)) {
+			if(isInWeixin()){
+				$(".isWei").css("height",$(window).height());
+				$(".isWei").show();
+			}else{
+				window.location.href='/nggirl/h5/mobile/loadVideo.html?postId='+getParam('postId')+'&postType=2&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>';
+				return false;
+			}
+		}else{
+				window.location.href='/nggirl/h5/mobile/loadVideo.html?postId='+getParam('postId')+'&postType=2&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>';
+				return false;
+			}
 	})
 	$('.forinput').scroll(function(e) {
         $("img.lazy").lazyload({effect : "show"});
@@ -50,10 +63,14 @@ $(function(){
 	
 	var pageSize = 20;
 	getcommentmessage(0,20);	
-	var h1=$("#video").height();
-	$(".dresser_message").css("margin-top",h1);
+	var h1=$("#video").height()+51;
+	//$(".dresser_message").css("margin-top",h1);
 	$(".forinput").height($(window).height()-51);
 	$("body").height($(window).height());
+	var h1=$("#video").height();
+	//$(".dresser_message").css("margin-top",h1);
+	$(".forinput").height($(window).height()-64-h1);
+	//$("body").height($(window).height());
 	/*评论规则*/
 	//localStorage.removeItem("showonce");
 	if(localStorage.showonce == "" || localStorage.showonce == "null" || localStorage.showonce == undefined ){
@@ -136,15 +153,7 @@ $(function(){
 	});
 	var mnum = 0;
 	//getLoverCount();
-	$(".de_box .form-control").click(function(){
-		$(".form-control").attr("contenteditable","true");
-		$(this).focus();
-	    checkAccessTokenLogin(function () {
-		   var data = getFinalRequestObject({
-			   accessToken: getAccessToken()
-		   });
-		},'videoDetail.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
-	});
+
 	//点击商品跳转到商品详情页
 	$(".productDetail").live('click',function(){
 		if (/iphone|ipad|ipod/.test(ua)) {
@@ -175,7 +184,7 @@ $(function(){
 		window.location.href="allCommentNew.html?postType=" +2 +'&postId=' +getParam("postId")+'&v=<%= VERSION %>';	
 	});
 	//跳转到全部评论页
-	$(".db_comment").live('click',function(){
+	/*$(".db_comment").live('click',function(){
 		 checkAccessTokenLogin(function () {
 		   var data = getFinalRequestObject({
 			   accessToken: getAccessToken()
@@ -183,7 +192,7 @@ $(function(){
 		   window.location.href="allCommentNew.html?postType=" +2 +'&postId=' +getParam("postId")+'&v=<%= VERSION %>';
 		},'allCommentNew.html?postType=' + 2 +'&postId=' +getParam("postId")+'&v=<%= VERSION %>');
 			
-	});
+	});*/
 	//跳转到用户页
 	$('.user_name,.dl_header_img').live('click',function(){
 		window.location.href="myHomePage.html?userId="+ $(this).attr("createUserId")+'&v=<%= VERSION %>';
@@ -246,7 +255,7 @@ $(function(){
 	});
 	$(".de_box .form-control").blur(function(){
 		//$(".de_bot").hide(100);
-		//$(".ad_btn").show(10);
+//		$(".ad_btn").show(10);
 		if($.trim($(this).val())== ""){
 			$('#page_emotion').hide();
 			$('.ping_icon').removeClass('open');
@@ -258,23 +267,29 @@ $(function(){
 		//localStorage["a"]= $(this).val();		
 	});
 	$(".de_box .form-control").focus(function(){
-		 //if(localStorage["a"] != "" && typeof(localStorage["a"]) != "undefined"){
-		 	 //$(".form-control").val(localStorage["a"]);
-		 //};
-		 checkAccessTokenLogin(function () {
-		   var data = getFinalRequestObject({
-			   accessToken: getAccessToken()
-		   });
-		   isNoTalk();
-		},'videoDetail.html?postType=' +2 +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
+		/* if(localStorage["a"] != "" && typeof(localStorage["a"]) != "undefined"){
+		 	 $(".form-control").val(localStorage["a"]);
+		 };*/
+		 if($(".de_bot").hasClass("isNoTalks")){
+			$(".de_box .form-control").blur();
+			$(".isNoTalk,.ad_flbot").show();
+			$("body").css("overflow-y","hidden");
+			$("body").bind("touchmove",function(event){
+				event.preventDefault();
+			});
+		}
 	});
-	$("#send_message,.ad_gtcom").live('click',function(){
-	    checkAccessTokenLogin(function () {
-		   var data = getFinalRequestObject({
-			   accessToken: getAccessToken()
-		   });
-		},'videoDetail.html?postType=' +2 +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
-	});
+
+  /*  $(".de_box .form-control").focus(function(){
+	    if($(".de_bot").hasClass("isNoTalks")){
+			$(".de_box .form-control").blur();
+			$(".isNoTalk,.ad_flbot").show();
+			$("body").css("overflow-y","hidden");
+			$("body").bind("touchmove",function(event){
+				event.preventDefault();
+			});
+		}
+	});*/
 	//收藏或取消收藏
 	$('.db_collect').click(function(e) {
 		//判断收藏状态
@@ -357,6 +372,7 @@ $(function(){
     });
 	//点击评论按钮
 $(".ad_btn .toCom").live('click',function(){
+	checkAccessTokenLogin(function () {
 	$(".ad_flbot").hide();
 	$(".ad_flbtn").hide();
 	var del=$(this);
@@ -366,6 +382,7 @@ $(".ad_btn .toCom").live('click',function(){
 	$(".de_bot").show();
 	$(".ad_btn").hide();
 	$(".form-control").focus();
+	}, 'videoDetail.html' + window.location.search);
 })
 
 //喜欢详情
@@ -705,7 +722,7 @@ function commentinfo(){
 		$(".successtips").html("评论成功");
 		$(".successtips").delay(500).fadeIn(100).fadeOut(1900);
 		$(".nonecom").remove();
-		//localStorage["a"] == "";
+		//localStorage["a"] = "";
 		if(data.data.addScore != "0"){
 			alertNewScore("积分 +"+data.data.addScore);
 			//$(".send_message").bind("click",commentinfo);
@@ -790,12 +807,14 @@ $(".adf_replys").live('click',function(){
 	})
 //非本人点击层中层的回复
 $(".ad_replay1").live('click',function(){
+	checkAccessTokenLogin(function () {
 	$(".ad_flbot,.ad_flbtn1").hide();
 	$(".form-control").attr('placeholder',$(".form-tip").html());
 	$(".de_bot").show();
 	$(".ad_btn").hide();
 	$(".form-control").focus();
 	$("#send_message").removeClass().addClass("replyinmessage");
+	}, 'videoDetail.html' + window.location.search);
 })
 $(".replyinmessage").live('click',function(){
 	$('.page_emotion').hide();
@@ -894,7 +913,7 @@ $(".ad_floor .ad_moreb").live('click',function(){
 		$(".ad_flbtn .ad_report").show();
 		$(".ad_flbtn .ad_aelbtn").hide();
 		$(".ad_flbtn .ad_delinner").hide();
-	},'articledetail.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
+	},'videoDetail.html?postType=' +getParam('postType') +'&postId='+getParam('postId')+'&v=<%= VERSION %>');
 	$(".reportthis").removeClass("reportthis");
 	//$(this).parent().siblings().children().removeClass("reportthis");
 	$(this).parent().addClass("reportthis")//.siblings().removeClass("reportthis");
@@ -1013,12 +1032,14 @@ $(".adin_suredel").live('click',function(){
 });
 //点击举报按钮
 $(".ad_report,.ad_report1").live('click',function(){
+	checkAccessTokenLogin(function () {
 	$(".form-tip").html("请输入评论内容");
 	$(".ad_flbot").show();
 	$(".ad_flbtn,.ad_flbtn1").hide();
 	$(".ad_flbtn .ad_report").show();
 	$(".ad_flbtn .ad_aelbtn").show();
 	$(".ad_tcbox2").show();
+	}, 'videoDetail.html' + window.location.search);
 });
 $(".ad_surereport").live('click',function(){
 	$.ajax({//采用异步
@@ -1120,7 +1141,7 @@ $(".head_attention").live('click',function(){
 				FollowUser();
 				
 				}
-	}, 'myHomePage.html' + window.location.search);
+	}, 'videoDetail.html' + window.location.search);
 });
 //关注
 function FollowUser(del){
@@ -1293,33 +1314,7 @@ $(".adf_btn .comleftz").live('click',function(){
 		}, 'videoDetail.html' + window.location.search);
 	
 });
-//判断是否禁言
-function isNoTalk(){
-	$.ajax({//采用异步
-	type: "get",
-	url: '<%= UGC_HOST_API_URL %>/nggirl/app/cli/post/getVideoPostDetail/4.0.0',
-	data:getFinalRequestObject({accessToken:getAccessToken(),postId:getParam('postId'),postType:2,isCountViewNum:0}),
-	timeout:15000,//10s
-	dataType:"json",
-	success: function (data) {
-		if(data.code == 0){
-			if(data.data.isNoTalk == 1){
-				$(".talkTime").html(data.data.noTalkTime);
-				$(".isNoTalk,.ad_flbot").show();
-				$(".de_box .form-control").blur();
-				$("body").css("overflow-y","hidden");
-				$("body").bind("touchmove",function(event){
-					event.preventDefault();
-				});
-			};
-		}
-	},
-	error: function (XMLHttpRequest, textStatus, errorThrown) {
-		//console.log( XMLHttpRequest )
-		//$(".main").html("尚未发布任何信息！");
-	}
-});
-};
+
 //文章添加链接
 function ParagraphTransHelper(s){
 	var reg = new RegExp("\\[[^\\[]*\\]\\([^\\(]*\\)");
@@ -1479,56 +1474,48 @@ window.addEventListener('load',function(){
 		}			
 	 })
 })
-var APPCommon = {
-    iphoneSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>',
+/*var APPCommon = {
+    iphoneSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$("title").text()+'&v=<%= VERSION %>',
     iphoneDownUrl: 'https://itunes.apple.com/cn/app/nan-gua-gu-niang-yi-jian-xia/id1014850829?l=en&mt=8',
     androidSchema: 'nggirl://nggirl/post?postId='+getParam('postId')+'&postType='+getParam('postType')+'&postTitle='+$(".ad_title").text()+'&v=<%= VERSION %>',
-    androidDownUrl: 'https://photosd.nggirl.com.cn/apks/3.1.0/nguser_v3.1.0_yingyongbao_release.apk',
+    androidDownUrl: '<%= CLI_HOST_API_URL %>/nggirl/app/getapp/downloadAndroidApk/byChannel?channel=yingyongbao',
     openApp: function(){
         var this_  =  this;
         //微信
-		
-       /* if(this_.isWeixin()){
-            $(".isWei").css("height",$(window).height());
-            $(".isWei").show();
-            $('.isWei').on('touchstart', function () {
-                $(".isWei").hide();
-            });
- 
-        }else{//非微信浏览器*/
             if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
 				if(this_.isWeixin()){
 					 window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=cn.com.nggirl.nguser";
-		 
 				}else{
-                var loadDateTime = new Date();
-                window.setTimeout(function() {
-                    var timeOutDateTime = new Date();
-                    if (timeOutDateTime - loadDateTime < 5000) {
-                        window.location = this_.iphoneDownUrl;//ios下载地址
-                    } else {
-                        window.close();
-                    }
-                },1500);
-				window.location = this.iphoneSchema;
-				}
-                
+					var loadDateTime = new Date();
+					window.setTimeout(function() {
+						var timeOutDateTime = new Date();
+						if (timeOutDateTime - loadDateTime < 5000) {
+							window.location = this_.iphoneDownUrl;//ios下载地址
+						} else {
+							window.close();
+						}
+					},1500);
+					window.location = this.iphoneSchema;
+				}     
             }else if (navigator.userAgent.match(/android/i)) {
 				if(this_.isWeixin()){
 					$(".isWei").css("height",$(window).height());
 					$(".isWei").show();
-		 
 				}else{
 					try {
 						window.location = this_.androidSchema;
-						setTimeout(function(){
-							window.location=this_.androidDownUrl; //android下载地址
-	 
+						var loadDateTime = new Date();
+						timer=setTimeout(function(){
+							var timeOutDateTime = new Date();
+                    		if (timeOutDateTime - loadDateTime < 2000) {
+								window.location=this_.androidDownUrl; //android下载地址
+	 						 } else {
+								window.close();
+							}
 						},1500);
 					} catch(e) {}
 				}
             }
-       /* }*/
     },
     isWeixin: function(){ //判断是否是微信
         var ua = navigator.userAgent.toLowerCase();
@@ -1538,5 +1525,16 @@ var APPCommon = {
             return false;
         }
     }
+	
  
 };
+$(document).on('visibilitychange webkitvisibilitychange', function() {
+    var tag = document.hidden || document.webkitHidden;
+    if (tag) {
+        clearTimeout(timer);
+    }
+})
+
+$(window).on('pagehide', function() {
+    clearTimeout(timer);
+})*/
