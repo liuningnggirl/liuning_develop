@@ -431,48 +431,48 @@ $(function(){
 					{"id":"kaiping_banner_manage","name":"开屏广告管理","parentId":"adv_manage","url":"ad_mangement.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 				]},
 				{"id":"index_control_manage","name":"首页控制管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-					{"id":"index_nav_manage","name":"导航控制","parentId":"index_control_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"nav_tag_manage","name":"导航标签管理","parentId":"index_control_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"index_list_manage","name":"首页列表控制","parentId":"index_control_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+					{"id":"index_nav_manage","name":"导航控制","parentId":"index_control_manage","url":"index_nav_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"nav_tag_manage","name":"导航标签管理","parentId":"index_control_manage","url":"index_nav_label.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"index_list_manage","name":"首页列表控制","parentId":"index_control_manage","url":"index_list_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 				]},
 				{"id":"community_manage","name":"社区管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-					{"id":"post_manage","name":"帖子管理","parentId":"community_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"community_commends_manage","name":"社区评论管理","parentId":"community_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"community_label_manage","name":"发布页面标签管理","parentId":"community_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"post_manage","name":"帖子管理","parentId":"community_manage","url":"post_manage_new.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"community_commends_manage","name":"社区评论管理","parentId":"community_manage","url":"allCommentsManagement.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"community_label_manage","name":"发布页面标签管理","parentId":"community_manage","url":"community_label_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"popular_searches","name":"热门搜索","parentId":"community_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"post_hot_match","name":"帖子热度匹配","parentId":"community_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-						{"id":"post_hot_match_operators_manage","name":"管理员","parentId":"post_hot_match","url":"test1.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"post_hot_match_admin_manage","name":"运营人员","parentId":"post_hot_match","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+						{"id":"post_hot_match_operators_manage","name":"管理员","parentId":"post_hot_match","url":"tie_hot_admin_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"post_hot_match_admin_manage","name":"运营人员","parentId":"post_hot_match","url":"tie_hot_operators_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 					]}
 				]},
 				{"id":"operation_manage","name":"运营活动管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-					{"id":"lottery_activity_manage","name":"大转盘抽奖活动","parentId":"operation_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"free_trial_manage","name":"免费试用活动","parentId":"operation_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"riqian_manage","name":"日签","parentId":"operation_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"community_hottopic_manage","name":"话题讨论","parentId":"operation_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"points_mall_manage","name":"积分商城","parentId":"operation_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"pumpkin_person_approve_manage","name":"南瓜达人认证","parentId":"operation_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"lottery_activity_manage","name":"大转盘抽奖活动","parentId":"operation_manage","url":"lottery_activity_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"free_trial_manage","name":"免费试用活动","parentId":"operation_manage","url":"free_trial_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"riqian_manage","name":"日签","parentId":"operation_manage","url":"riqian_management.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"community_hottopic_manage","name":"话题讨论","parentId":"operation_manage","url":"community_hottopic_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"points_mall_manage","name":"积分商城","parentId":"operation_manage","url":"points_mall_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"pumpkin_person_approve_manage","name":"南瓜达人认证","parentId":"operation_manage","url":"pumpkin_person_approve_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"community_activities_manage","name":"社团活动排版管理","parentId":"operation_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-						{"id":"community_freetrail_manage","name":"免费试用活动","parentId":"community_activities_manage","url":"test1.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"community_activity_manage","name":"有奖活动","parentId":"community_activities_manage","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+						{"id":"community_freetrail_manage","name":"免费试用活动","parentId":"community_activities_manage","url":"community_freetrail_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"community_activity_manage","name":"有奖活动","parentId":"community_activities_manage","url":"community_activity_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 					]}
 				]},
 				{"id":"electricity_supplier_manage","name":"电商商城管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 					{"id":"electricity_supplier_goods_manage","name":"商品管理","parentId":"electricity_supplier_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-						{"id":"electricity_supplier_goods_list_manage","name":"商品列表管理","parentId":"electricity_supplier_goods_manage","url":"test1.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"electricity_supplier_branch_manage","name":"商品品牌管理","parentId":"electricity_supplier_goods_manage","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"electricity_goods_delivery_manage","name":"商品物流管理","parentId":"electricity_supplier_goods_manage","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"electricity_buy_know_manage","name":"购买须知牌管理","parentId":"electricity_supplier_goods_manage","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"goods_parameter_manage","name":"商品参数管理","parentId":"electricity_supplier_goods_manage","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+						{"id":"electricity_supplier_goods_list_manage","name":"商品列表管理","parentId":"electricity_supplier_goods_manage","url":"electricity_supplier_goods_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"electricity_supplier_branch_manage","name":"商品品牌管理","parentId":"electricity_supplier_goods_manage","url":"electricity_supplier_branch_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"electricity_goods_delivery_manage","name":"商品物流管理","parentId":"electricity_supplier_goods_manage","url":"electricity_goods_delivery_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"electricity_buy_know_manage","name":"购买须知牌管理","parentId":"electricity_supplier_goods_manage","url":"electricity_buy_know_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"goods_parameter_manage","name":"商品参数管理","parentId":"electricity_supplier_goods_manage","url":"goods_parameter_management.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 					]},
-					{"id":"shope_order_manage","name":"商品订单管理","parentId":"electricity_supplier_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"shope_evaluate_manage","name":"商品评价管理","parentId":"electricity_supplier_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"shope_after_sale_manage","name":"商品售后管理","parentId":"electricity_supplier_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"goods_column_manage","name":"商品促销活动","parentId":"electricity_supplier_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+					{"id":"shope_order_manage","name":"商品订单管理","parentId":"electricity_supplier_manage","url":"shope_order_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"shope_evaluate_manage","name":"商品评价管理","parentId":"electricity_supplier_manage","url":"shope_evaluate_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"shope_after_sale_manage","name":"商品售后管理","parentId":"electricity_supplier_manage","url":"shope_after_sale_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"goods_column_manage","name":"商品促销活动","parentId":"electricity_supplier_manage","url":"goods_column_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 				]},
 				{"id":"official_push_manage","name":"官方推送管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-					{"id":"single_message_manage","name":"个推推送","parentId":"official_push_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"anyway_message_manage","name":"其他推送","parentId":"official_push_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+					{"id":"single_message_manage","name":"个推推送","parentId":"official_push_manage","url":"single_message_push.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"anyway_message_manage","name":"其他推送","parentId":"official_push_manage","url":"message_push.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 				]},
 				{"id":"beauty_business_manage","name":"美妆业务管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 					{"id":"xwcOrder_manage","name":"美妆下午茶订单","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
