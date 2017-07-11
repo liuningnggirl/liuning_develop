@@ -1,4 +1,9 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	All_cancel_Fn();
+	getItemStatInfo();
+	comming_write();
+	getOptionalLabelAndBuyerReading1();
 	//参数选择
 	$('.add_electricity_supplier_goods_manage .esg_box .canshubox .canshu,.add_electricity_supplier_goods_manage .esg_box .canshubox .down').live("click",function(){
 		$(this).parent().parent().css("z-index","11");
@@ -101,7 +106,7 @@ $(function(){
 	//添加商品头图图片框
 	$('.add_electricity_supplier_goods_manage .outImgBox .addImgBox').live("click",function(){
 		var str='';
-		str='<div class="innerImgBox bannerImg"><img src="" class="currentimg"><img src="images/ele-del.png" class="delImgBox"></div>';
+		str='<div class="innerImgBox bannerImg"><img src="" class="currentimg"><img src="../common/images/ele-del.png" class="delImgBox"></div>';
 		$(this).before(str);
 	});
 	//删除商品头图图片框
@@ -120,13 +125,13 @@ $(function(){
 	//新增单个编辑商品属性
 	$('.add_electricity_supplier_goods_manage .esg_box .shuxingBox .addShuxingBox').live("click",function(){
 		var str='';
-		str='<div class="shuxingEditBox"><input type="checkbox" class="check1"><input type="text" readonly="true" class="shuxing1"><img src="images/img_xiugai.png"></div>';
+		str='<div class="shuxingEditBox"><input type="checkbox" class="check1"><input type="text" readonly="true" class="shuxing1"><img src="../common/images/img_xiugai.png"></div>';
 		$(this).before(str);
 	});
 	//新增整个编辑商品属性
 	$('.add_electricity_supplier_goods_manage .esg_box .shuxingBox .addNewShuxing').live("click",function(){
 		var str='';
-		str='<div class="shuxingBox1"><input type="text" name=""  class="esg esg_title" placeholder="请输入商品属性"><p class="del_btn">批量删除商品属性</p><br/><div class="shuxingBox2"><div class="shuxingEditBox"><input type="checkbox"  class="check1"><input type="text" readonly="true" class="shuxing1"><img src="images/img_xiugai.png"></div><img src="images/u2188.png" class="addShuxingBox"></div></div>';
+		str='<div class="shuxingBox1"><input type="text" name=""  class="esg esg_title" placeholder="请输入商品属性"><p class="del_btn">批量删除商品属性</p><br/><div class="shuxingBox2"><div class="shuxingEditBox"><input type="checkbox"  class="check1"><input type="text" readonly="true" class="shuxing1"><img src="../common/images/img_xiugai.png"></div><img src="../common/images/u2188.png" class="addShuxingBox"></div></div>';
         $(this).before(str);
 	});
 	//批量删除商品属性
@@ -220,7 +225,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该条记录？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/deleteEnterpriseServer/3.0.3',{id:btn.attr('id')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/deleteEnterpriseServer/3.0.3',{id:btn.attr('id')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -234,7 +239,7 @@ $(function(){
 	//获取企业服务详情V3.0.3
 	$('.esg_table .btn_edit').live('click',function(){
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerDetail/3.0.3',{id:btn.attr('id')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerDetail/3.0.3',{id:btn.attr('id')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.electricity_supplier_goods_manage').hide();
@@ -299,7 +304,7 @@ $(function(){
 		};
 		
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/addOrUpdateEnterprise/3.0.3',genData,function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/addOrUpdateEnterprise/3.0.3',genData,function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.electricity_supplier_goods_manage').show();
@@ -328,7 +333,7 @@ function createesgPage(data){
 			params.page = p;
 			$('.electricity_supplier_goods_manage .esg_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -382,7 +387,7 @@ function getesgSearchParams(page){
 function esgPageDetail(page){
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
 		type : 'post',
 		dataType : 'json',
 		data: getesgSearchParams(page),
@@ -399,5 +404,70 @@ function clearesg(){
 function clearesgSearch(){
 	$(".electricity_supplier_goods_manage .order-num input[type='text']").val("");
 	$("#electricity_supplier_goods_manage .order-num .apply_status option:eq(0)").attr('selected','selected');
+};
+
+
+ /*清除搜索信息*/
+function All_cancel_Fn(){
+		$(".electricity_supplier_goods_manage .search_input_fillin input[type='text']").val('');
+		$(".electricity_supplier_goods_manage .search_input_second input[type='text']").val('');
+		$(".input_focus_click").removeAttr("categoryId");
+		$(".orderByStr").attr("value","-1");
+		$(".main_body_table_main").removeAttr("page");
+	}
+
+/*商品统计信息：就上面的数量填写*/
+	function getItemStatInfo(){
+		$.get(testUrl+'/nggirl-web/web/admin/item/getItemStatInfo/3.1.0',function(data){
+			var data=$.parseJSON(data);
+			var str='<span class="pointer_common" statusCode="0">'
+					+'<span class="Altogether_goods">总商品</span>:'
+					+'<span class="Altogether_goods_number color_common">'+data.data.totalNum+'</span>'
+				+'</span>'
+				+'<span class="pointer_common" statusCode="1">'
+					+'<span class="Conduct_showing_goods">在售中商品</span>:'
+					+'<span class="Conduct_showing_goods_number color_common">'+data.data.onSaleNum+'</span>'
+				+'</span>'
+				+'<span class="pointer_common" statusCode="2">'
+					+' <span class="wating_margincall_goods">待补仓商品</span>:'
+					+'<span class="wating_margincall_goods_number color_common">'+data.data.coverNum+'</span>'
+				+'</span>'
+				+'<span class="pointer_common" statusCode="3">'
+					+'<span class="Forsale_goods">待售商品</span>:'
+					+'<span class="Forsale_goods_number color_common">'+data.data.forSaleNum+'</span>'
+				+'</span>'
+				+'<span class="pointer_common" statusCode="4">'
+					+'<span class="Plantingrass_goods">种草商品</span>:'
+					+'<span class="Plantingrass_goods_number color_common">'+data.data.seedingNum+'</span>'
+				+'</span>'
+				+'<span class="pointer_common" statusCode="5">'
+					+'<span class="forbid_shop_goods">未上架不可购买商品</span>:'
+					+'<span class="forbid_shop_goods_number color_common">'+data.data.putOffNum+'</span>'
+				+'</span>'
+				+'<span class="pointer_common" statusCode="6">'
+					+'<span class="Expired_goods">保质期逾期商品</span>:'
+					+'<span class="Expired_goods_number color_common">'+data.data.pastDueNum+'</span>'
+				+'</span>'
+			$(".electricity_adopt_find").html("")
+			$(".electricity_adopt_find").html(str)
+		})
+	}
+//初始化购买须知
+function needKnowDetail(){
+		$('.editor_contents').createArticleEditor({
+			elements: ['paragraph'],
+			data:[{type:2,content:''}],//初始化内容
+			defaultData:[{type:2,content:''}]//编辑器为空时,默认的元素
+		});
+};
+function needKnowDetail1(del,buyerReading){
+	console.log(buyerReading);
+	for(var i=0;i<del;i++){
+		$('.editor_content'+i+'').createArticleEditor({
+			elements: ['paragraph'],
+			data:buyerReading[i].detail,//初始化内容
+			defaultData:[{type:2,content:''}]//编辑器为空时,默认的元素
+		});
+	}
 };
 

@@ -517,11 +517,11 @@
         for (var i = 0; i < 5; i++) {
             if (i < parseInt(recommendation / 2)) {
 
-                recommendations += '<img src="images/Star1.png" class="xingXing">'
+                recommendations += '<img src="../common/images/Star1.png" class="xingXing">'
             } else if (recommendation % 2 == 1 && parseInt(recommendation / 2) == i) {
-                recommendations += '<img src="images/Star3.png" class="xingXing">'
+                recommendations += '<img src="../common/images/Star3.png" class="xingXing">'
             } else {
-                recommendations += '<img src="images/Star2.png" class="xingXing">'
+                recommendations += '<img src="../common/images/Star2.png" class="xingXing">'
             }
         }
         ;

@@ -1,9 +1,10 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
-	
 	getRecomdTypeFn();
+	loadHistoryListPage();
 	//列表控制-新增列表
 	$('#index_list_manage .index_list_manage_box .index_list_btn_add').live('click',function(e) {
-        $('#index_list_manage .index_list_manage_box_top_table .top_table tbody').append('<tr class="cfmc_content"><td><select class="select_type" name="" id="" style="padding: 5px;border-radius: 5px;border: 1px solid #ccc;">'+getCommendType()+'</select></td><td><div class="select_tie" style=" display:none;"><input type="text" placeholder="id" value="" style=" text-align:center;width: 100%;padding: 7px;box-sizing: border-box;" /></div></div></td><td><div class="tie" style=" display:none;"><span class="title_content"></span><input type="button" value="获取标题" class="get_title" style="background: #51a351;color: #fff;border-radius: 5px;" /></div></div></td><td><input type="button" value="删除" class="del_recoder" style=" background:#bd362f; color:#fff; border-radius:5px; vertical-align: middle;" /><img src="images/img_arr_down.png" alt="" style="width:30px; vertical-align: middle;" class="arr_down" /><img src="images/img_arr_up.png" alt="" style="width:30px; vertical-align: middle;" class="arr_up" /></td></tr>');
+        $('#index_list_manage .index_list_manage_box_top_table .top_table tbody').append('<tr class="cfmc_content"><td><select class="select_type" name="" id="" style="padding: 5px;border-radius: 5px;border: 1px solid #ccc;">'+getCommendType()+'</select></td><td><div class="select_tie" style=" display:none;"><input type="text" placeholder="id" value="" style=" text-align:center;width: 100%;padding: 7px;box-sizing: border-box;" /></div></div></td><td><div class="tie" style=" display:none;"><span class="title_content"></span><input type="button" value="获取标题" class="get_title" style="background: #51a351;color: #fff;border-radius: 5px;" /></div></div></td><td><input type="button" value="删除" class="del_recoder" style=" background:#bd362f; color:#fff; border-radius:5px; vertical-align: middle;" /><img src="../common/images/img_arr_down.png" alt="" style="width:30px; vertical-align: middle;" class="arr_down" /><img src="../common/images/img_arr_up.png" alt="" style="width:30px; vertical-align: middle;" class="arr_up" /></td></tr>');
     });
 	
 	//更改id类型
@@ -41,7 +42,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该历史记录？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/deleteRecommendHistory/3.0.2',{historyId:btn.attr('historyId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/homepage/deleteRecommendHistory/3.0.2',{historyId:btn.attr('historyId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					loadHistoryListPage();
@@ -62,7 +63,7 @@ $(function(){
 		var btn = $(this);
 		//判断是帖子还是商品
 		if(btn.parent().parent().prev().prev().children('.select_type').children('option:selected').attr('recomdType') == 3){//文章
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getPostTitle/3.0.0',{postId:btn.parent().parent().prev().children('.select_tie').children('input').val(),postType:1},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/homepage/getPostTitle/3.0.0',{postId:btn.parent().parent().prev().children('.select_tie').children('input').val(),postType:1},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.prev().html(data.data.title);
@@ -71,7 +72,7 @@ $(function(){
 				}	
 			});		
 		}else if(btn.parent().parent().prev().prev().children('.select_type').children('option:selected').attr('recomdType') == 4){//视频
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getPostTitle/3.0.0',{postId:btn.parent().parent().prev().children('.select_tie').children('input').val(),postType:2},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/homepage/getPostTitle/3.0.0',{postId:btn.parent().parent().prev().children('.select_tie').children('input').val(),postType:2},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.prev().html(data.data.title);
@@ -80,7 +81,7 @@ $(function(){
 				}	
 			});		
 		}else if(btn.parent().parent().prev().prev().children('.select_type').children('option:selected').attr('recomdType') == 2){//商品
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getProductName/3.0.0',{goodsId:btn.parent().parent().prev().children('.select_tie').children('input').val()},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/homepage/getProductName/3.0.0',{goodsId:btn.parent().parent().prev().children('.select_tie').children('input').val()},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.prev().html(data.data.name);
@@ -95,7 +96,7 @@ $(function(){
 	$('.index_list_manage_box .index_list_btn .index_list_btn_fabu').click(function(e) {
 		var r = confirm('确认要发布今日推荐？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/publishTodayRecommends/3.0.2',function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/homepage/publishTodayRecommends/3.0.2',function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert('发布成功！！');
@@ -121,7 +122,7 @@ $(function(){
 		console.log(recommends);
 		var r = confirm('确认要保存推荐列表？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/saveTodayRecommends/3.0.2',{recommends:recommends},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/homepage/saveTodayRecommends/3.0.2',{recommends:recommends},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					getTodayRecommendsFn();
@@ -137,12 +138,12 @@ $(function(){
 
 //获取今日推荐列表V3.0.2
 function getTodayRecommendsFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getTodayRecommends/3.0.2',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/homepage/getTodayRecommends/3.0.2',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('.index_list_manage .index_list_manage_box_top_table .top_table tbody tr:gt(0)').remove();
 			for(var x = 0; x < data.data.length ; x ++){
-				$('.index_list_manage .index_list_manage_box_top_table .top_table tbody').append('<tr class="cfmc_content"><td><select class="select_type" name="" id="" style="padding: 5px;border-radius: 5px;border: 1px solid #ccc;">'+getOptions(data.data[x].recomdType)+'</select></td><td><div class="select_tie" ><input type="text" placeholder="id" value="'+data.data[x].targetId+'" style=" text-align:center;width: 100%;padding: 7px;box-sizing: border-box;" /></div></div></td><td><div class="tie"><span class="title_content">'+data.data[x].title+'</span><input type="button" value="获取标题" recomdType='+data.data[x].recomdType+' class="get_title" style="background: #51a351;color: #fff;border-radius: 5px;" /></div></div></td><td><input type="button" value="删除" class="del_recoder" style=" background:#bd362f; color:#fff; border-radius:5px; vertical-align: middle;" /><img src="images/img_arr_down.png" alt="" style="width:30px; vertical-align: middle;" class="arr_down" /><img src="images/img_arr_up.png" alt="" style="width:30px; vertical-align: middle;" class="arr_up" /></td></tr>');	
+				$('.index_list_manage .index_list_manage_box_top_table .top_table tbody').append('<tr class="cfmc_content"><td><select class="select_type" name="" id="" style="padding: 5px;border-radius: 5px;border: 1px solid #ccc;">'+getOptions(data.data[x].recomdType)+'</select></td><td><div class="select_tie" ><input type="text" placeholder="id" value="'+data.data[x].targetId+'" style=" text-align:center;width: 100%;padding: 7px;box-sizing: border-box;" /></div></div></td><td><div class="tie"><span class="title_content">'+data.data[x].title+'</span><input type="button" value="获取标题" recomdType='+data.data[x].recomdType+' class="get_title" style="background: #51a351;color: #fff;border-radius: 5px;" /></div></div></td><td><input type="button" value="删除" class="del_recoder" style=" background:#bd362f; color:#fff; border-radius:5px; vertical-align: middle;" /><img src="../common/images/img_arr_down.png" alt="" style="width:30px; vertical-align: middle;" class="arr_down" /><img src="../common/images/img_arr_up.png" alt="" style="width:30px; vertical-align: middle;" class="arr_up" /></td></tr>');	
 			}
 		}else{
 			alert(data.data.error);	
@@ -160,7 +161,7 @@ function createHistoryListPage(data){
 			params.page = p;
 			$('.index_list_manage .index_list_manage_box_bottom_table .bottom_table>tbody>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getRecommendHistoryList/3.0.2',
+				url : testUrl+'/nggirl-web/web/admin/homepage/getRecommendHistoryList/3.0.2',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -205,7 +206,7 @@ function getHistoryListSearchParams(page){
 function loadHistoryListPage(){
 	$('.index_list_manage .index_list_manage_box_bottom_table .bottom_table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getRecommendHistoryList/3.0.2',
+		url : testUrl+'/nggirl-web/web/admin/homepage/getRecommendHistoryList/3.0.2',
 		type : 'get',
 		dataType : 'json',
 		data: getHistoryListSearchParams(1),
@@ -230,7 +231,7 @@ function getTypeNameNum(data,rowIndex){//data，行下标
 
 //获取推荐类型
 function getRecomdTypeFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getAllRecommendTypes',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/common/getAllRecommendTypes',function(data){
 		var data = $.parseJSON(data);
 		var str = '';
 		if(data.code == 0){

@@ -1,12 +1,9 @@
-$(function(){	
-
+var testUrl = 'https://testcli.nggirl.com.cn';
+$(function(){
+	getNavLabelListFn();	
 	//新增专栏模块
 	$('.index_label_btn .index_label_btn_add').click(function(e) {
-		/*if($(".index_nav_list").children(".index_nav_list_li").length == 4){
-			alert("首页标签不能超过4个！");
-		}else{*/
-			$('.index_nav_label_box .index_nav_list').append('<div class="index_nav_list_li"><div class="index_nav_list_li_san" style="overflow:hidden;"><div class="inl_list_name" contenteditable="true">新增导航栏标签'+(parseInt($('.index_nav_list .index_nav_list_li').length)+1)+'</div><input type="text" class="inl_lan_seq" /><img src="images/img_delete.png" alt="" class="inl_label_del" style=" width:30px; padding:3px;" /><input type="button" value="保存" class="index_label_btn_edit" style="padding:10px 40px; border-radius:5px; vertical-align: top;" /></div></div>');
-		/*}*/
+			$('.index_nav_label_box .index_nav_list').append('<div class="index_nav_list_li"><div class="index_nav_list_li_san" style="overflow:hidden;"><div class="inl_list_name" contenteditable="true">新增导航栏标签'+(parseInt($('.index_nav_list .index_nav_list_li').length)+1)+'</div><input type="text" class="inl_lan_seq" /><img src="../common/images/img_delete.png" alt="" class="inl_label_del" style=" width:30px; padding:3px;" /><input type="button" value="保存" class="index_label_btn_edit" style="padding:10px 40px; border-radius:5px; vertical-align: top;" /></div></div>');
 	});
 	
 	//编辑专栏模块
@@ -31,7 +28,7 @@ $(function(){
 		}else{
 			var r = confirm('确定要删除？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/deleteLabelButton/4.0.0',{id:btn.attr('id')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/homepage/deleteLabelButton/4.0.0',{id:btn.attr('id')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						btn.parent().parent().remove();
@@ -48,15 +45,15 @@ $(function(){
 //获取分类按钮列表V3.0.0
 function getNavLabelListFn(){
 	$('.index_nav_list').children('div').remove();
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/labelButtonList/4.0.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/homepage/labelButtonList/4.0.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			if(data.data.length > 0){
 				for(var x = 0; x < data.data.length ; x ++){
 					if(data.data[x].seq == null){
-						$('.index_nav_label_box .index_nav_list').append('<div class="index_nav_list_li" id="'+data.data[x].id+'" seq=""><div class="index_nav_list_li_san" style="overflow:hidden;"><div class="inl_list_name" contenteditable="false">'+data.data[x].name+'</div><input type="text" class="inl_lan_seq" disabled="disabled" value="" /><img src="images/img_delete.png" alt="" class="inl_label_del" style=" display:none; width:30px; padding:3px;" id="'+data.data[x].id+'" /><input type="button" value="编辑" class="index_label_btn_edit" style="padding:10px 40px; border-radius:5px; vertical-align: top;" /></div></div>');
+						$('.index_nav_label_box .index_nav_list').append('<div class="index_nav_list_li" id="'+data.data[x].id+'" seq=""><div class="index_nav_list_li_san" style="overflow:hidden;"><div class="inl_list_name" contenteditable="false">'+data.data[x].name+'</div><input type="text" class="inl_lan_seq" disabled="disabled" value="" /><img src="../common/images/img_delete.png" alt="" class="inl_label_del" style=" display:none; width:30px; padding:3px;" id="'+data.data[x].id+'" /><input type="button" value="编辑" class="index_label_btn_edit" style="padding:10px 40px; border-radius:5px; vertical-align: top;" /></div></div>');
 					}else{
-						$('.index_nav_label_box .index_nav_list').append('<div class="index_nav_list_li" id="'+data.data[x].id+'" seq="'+data.data[x].seq+'"><div class="index_nav_list_li_san" style="overflow:hidden;"><div class="inl_list_name" contenteditable="false">'+data.data[x].name+'</div><input type="text" class="inl_lan_seq" disabled="disabled" value="'+data.data[x].seq+'" /><img src="images/img_delete.png" alt="" class="inl_label_del" style=" display:none; width:30px; padding:3px;" id="'+data.data[x].id+'" /><input type="button" value="编辑" class="index_label_btn_edit" style="padding:10px 40px; border-radius:5px;vertical-align: top;" /></div></div>');
+						$('.index_nav_label_box .index_nav_list').append('<div class="index_nav_list_li" id="'+data.data[x].id+'" seq="'+data.data[x].seq+'"><div class="index_nav_list_li_san" style="overflow:hidden;"><div class="inl_list_name" contenteditable="false">'+data.data[x].name+'</div><input type="text" class="inl_lan_seq" disabled="disabled" value="'+data.data[x].seq+'" /><img src="../common/images/img_delete.png" alt="" class="inl_label_del" style=" display:none; width:30px; padding:3px;" id="'+data.data[x].id+'" /><input type="button" value="编辑" class="index_label_btn_edit" style="padding:10px 40px; border-radius:5px;vertical-align: top;" /></div></div>');
 					}
 				};
 			};
@@ -75,7 +72,7 @@ function addOrUpdateLabelButton(del){
 		}
 		
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/addOrUpdateLabelButton/4.0.0',{id:del.parent().parent().attr('id'),name:del.siblings('.inl_list_name').text(),seq:del.siblings('.inl_lan_seq').attr('value')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/homepage/addOrUpdateLabelButton/4.0.0',{id:del.parent().parent().attr('id'),name:del.siblings('.inl_list_name').text(),seq:del.siblings('.inl_lan_seq').attr('value')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert("保存成功！！");

@@ -4,8 +4,16 @@
 <meta charset="utf-8">
 <title>无标题文档</title>
 <link rel="stylesheet" href="../common/css/index.css" />
+<link rel="stylesheet" href="../common/js/editor/jquery.pumpkin.article.editor.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/points_mall_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+
 </head>
 <body>
  <div class="weight-box points_mall_manage" id="points_mall_manage">       
@@ -47,7 +55,7 @@
         
         <!-- 新建商品 -->
         <div class="points_create hidden">
-        	<img src="images/tip.png" alt="" /><label>商品的类型：</label>
+        	<img src="../common/images/tip.png" alt="" /><label>商品的类型：</label>
             <select class="changeGQ" >
             	<option>请选择商品类型</option>
                 <option value="0" class="changeGoodsBtn">实物商品</option>
@@ -56,23 +64,23 @@
         	<div class="changeGoods">
                 <form action="">
                     <div class="topBoxForClear">
-                        <img src="images/tip.png" alt="" /><label for="" class="hdimglabel">商品头图：</label><input type="file" class="inputborder pointsgoods_head_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+                        <img src="../common/images/tip.png" alt="" /><label for="" class="hdimglabel">商品头图：</label><input type="file" class="inputborder pointsgoods_head_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
                         <label for="" style="vertical-align:top;">(360*240):</label><img style="width:360px; height:240px;" src="" alt="" class="upImg p_head_img" /> <br /><br />
-                        <img src="images/tip.png" alt="" /><label for="" class="gdimglabel">商品图：</label><input type="file" class="inputborder pointsgoods_little_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+                        <img src="../common/images/tip.png" alt="" /><label for="" class="gdimglabel">商品图：</label><input type="file" class="inputborder pointsgoods_little_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
                         <label for="" style="vertical-align:top;">(76*76):</label><img style="width:76px; height:76px;" src="" alt="" class="upImg pointsgoodsupflie" /> <br /><br />
-                        <img src="images/tip.png" alt="" /><label class="gdname">商品名称：</label> <input type="text" placeholder="请输入商品名称"  maxlength="45" class=" inputborder pointsgoodsname"/><br /><br />
+                        <img src="../common/images/tip.png" alt="" /><label class="gdname">商品名称：</label> <input type="text" placeholder="请输入商品名称"  maxlength="45" class=" inputborder pointsgoodsname"/><br /><br />
                         <div class="gdneedpoints">
-                        <img src="images/tip.png" alt="" /><label>优惠券兑换码：</label><input type="text" placeholder="输入兑换码，以“，”号作为兑换码间的间隔符"  class="inputborder codenum"/><br/><br/>
+                        <img src="../common/images/tip.png" alt="" /><label>优惠券兑换码：</label><input type="text" placeholder="输入兑换码，以“，”号作为兑换码间的间隔符"  class="inputborder codenum"/><br/><br/>
                         </div>
-                        <img src="images/tip.png" alt="" /><label>商品兑换所需积分：</label><input type="text" placeholder="所需积分"  class="inputborder costScore"/><br/><br/>
+                        <img src="../common/images/tip.png" alt="" /><label>商品兑换所需积分：</label><input type="text" placeholder="所需积分"  class="inputborder costScore"/><br/><br/>
                         <label>商品兑换折后积分：</label><input type="text" placeholder="请输入折后积分"  class="inputborder lastCostScore"/><br/><br/>
                         <div class="gdnum">
-                        <img src="images/tip.png" alt="" /><label>商品数量：</label> <input type="text" placeholder="请输入商品兑换数量"  class="inputborder storeNum"/><br /><br />
+                        <img src="../common/images/tip.png" alt="" /><label>商品数量：</label> <input type="text" placeholder="请输入商品兑换数量"  class="inputborder storeNum"/><br /><br />
                         </div>
-                        <img src="images/tip.png" alt="" /><label>兑换活动时间：</label> <input style="height:29px; border:1px solid #cdcdcd;" class="Wdate pmstartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><label for=""> 至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate pmendTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br /><br />
+                        <img src="../common/images/tip.png" alt="" /><label>兑换活动时间：</label> <input style="height:29px; border:1px solid #cdcdcd;" class="Wdate pmstartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><label for=""> 至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate pmendTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br /><br />
                     </div>
                     <div class="exchangebox clearfix">
-                        <img src="images/tip.png" alt="" />
+                        <img src="../common/images/tip.png" alt="" />
                         <label>兑换权限人群：</label>
                         <div class="followRole">
                             <p class="chooseRole">请选择用户身份角色</p>
@@ -125,7 +133,7 @@
             <span class="notdel">取消</span>
         </div>
  <!--  订单列表 -->
-        <div class="porder_list">
+        <div class="porder_list hidden">
         	<div class="pointsTopBtn">
                 <p class="greyBtn p_goods">积分商品管理</p>
                 <p class="greyBtn p_order on">订单管理</p>
@@ -170,10 +178,10 @@
             text-align:center;
         }
     </style>
-    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.work.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.work.selector.js"></script>
 </body>
 </html>

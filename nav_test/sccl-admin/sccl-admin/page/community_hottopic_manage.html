@@ -6,6 +6,13 @@
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/community_hottopic_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+
 </head>
 <body>
     <div class="weight-box community_hottopic_manage" id="community_hottopic_manage">
@@ -87,7 +94,7 @@
     </div>
     
     <!--  添加关联帖子 -->
-    <div class="add_community_hottopic_relation_tie" style="padding:10px;">
+    <div class="add_community_hottopic_relation_tie hidden" style="padding:10px;">
     	<label for="">标签：</label><input style="padding:7px 0;"  type="text" class="add_relation_tie_txt"/>
         <input type="button" value="搜索" class="add_relation_tie_search_btn" />
         <input type="button" value="添加当前所有" class="add_relation_tie_all_btn" />
@@ -110,7 +117,7 @@
     
     <!-- 模拟粉丝弹框 -->
     <div class="community_hottopic_manage_fensi_box">
-        <img src="images/ele-del.png" class="community_hottopic_manage_fensi_box_close" />
+        <img src="../common/images/ele-del.png" class="community_hottopic_manage_fensi_box_close" />
     	<p>真实粉丝数</p>
         <p style="margin:10px 0;" class="community_hottopic_manage_fensi_box_true"></p>
         <p>模拟粉丝数</p>
@@ -121,7 +128,7 @@
     
     <!-- 模拟帖子弹框 -->
     <div class="community_hottopic_manage_tiezi_box">
-        <img src="images/ele-del.png" class="community_hottopic_manage_tiezi_box_close" />
+        <img src="../common/images/ele-del.png" class="community_hottopic_manage_tiezi_box_close" />
     	<p>真实帖子数</p>
         <p style="margin:10px 0;" class="community_hottopic_manage_tiezi_box_true"></p>
         <p>模拟帖子数</p>
@@ -132,7 +139,7 @@
     
     <!-- 模拟评论弹框 -->
     <div class="community_hottopic_manage_pinglun_box">
-        <img src="images/ele-del.png" class="community_hottopic_manage_pinglun_box_close" style="width: 20px;position: absolute;top: 10px;right: 10px;" />
+        <img src="../common/images/ele-del.png" class="community_hottopic_manage_pinglun_box_close" style="width: 20px;position: absolute;top: 10px;right: 10px;" />
     	<p>真实评论数</p>
         <p style="margin:10px 0;" class="community_hottopic_manage_pinglun_box_true"></p>
         <p>模拟评论数</p>

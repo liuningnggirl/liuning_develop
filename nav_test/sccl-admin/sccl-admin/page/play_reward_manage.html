@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>play_reward_manage</title>
+<style type="text/css">
+.play_reward_manage_content{ padding:10px;}
+.play_reward_manage_ul{ overflow:hidden;}
+.play_reward_manage_ul .play_reward_manage_li .num{ padding:10px; text-align:center; border:1px solid #ccc; border-radius:5px;}
+.play_reward_manage_ul .play_reward_manage_li{ padding:10px 0; float:left; width: 33.3%;text-align: center;}
+.play_reward_manage_content .prm_ul_btn_save,.play_reward_manage_content .prm_ul_btn_edit{padding: 10px 50px; display:block;border-radius: 5px;background: #51a351;color: #fff; margin: 10px 0 0 100px;}
+</style>
+<link rel="stylesheet" href="../common/css/index.css" />
+<script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../common/js/part/play_reward_manage.js"></script>
+
+</head>
+<body>
+    <div class="weight-box play_reward_manage" id="play_reward_manage">
+        <div class="play_reward_manage_content">
+            <div class="play_reward_manage_ul">
+            	<div class="play_reward_manage_li">
+                	分值1：<input type="text" class="num firstScore" value="8" score="8" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+                </div>
+            	<div class="play_reward_manage_li">
+                	分值2：<input type="text" class="num secondScore" value="16" score="16" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                </div>
+            	<div class="play_reward_manage_li">
+                	分值3：<input type="text" class="num thirdScore" value="32" score="32" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                </div>
+            	<div class="play_reward_manage_li">
+                	分值4：<input type="text" class="num fourthScore" value="64" score="64" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                </div>
+            	<div class="play_reward_manage_li">
+                	分值5：<input type="text" class="num fifthScore" value="128" score="128" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                </div>
+            	<div class="play_reward_manage_li">
+                	分值6：<input type="text" class="num sixthScore" value="256" score="256" disabled="disabled" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+                </div>
+            </div>
+            <input type="button" value="编辑" class="prm_ul_btn_edit" />
+        </div>
+    </div>    
+</body>
+</html>

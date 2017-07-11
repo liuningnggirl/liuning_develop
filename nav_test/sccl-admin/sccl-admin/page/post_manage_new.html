@@ -6,12 +6,16 @@
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/post_manage_new.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script type="text/javascript" src="../common/js/LinkedQueue.js"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="../common/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
 	<div class="weight-box post_manage" id="post_manage">
         <!--  帖子列表 -->
         <div class="changeNumBox">
-        	<img src="images/u896.png" class="closeNumBox">
+        	<img src="../common/images/u896.png" class="closeNumBox">
         	<p class="true">真实浏览量</p>
             <p class="truenum">55</p>
             <p class="newadd">模拟浏览量</p>
@@ -19,11 +23,11 @@
             <div class="changeBtn">
            	 	<span class="getBackStatus">恢复</span><span class="changeStatus">修改</span>
             </div>
-            <div class="changeOk"><img src="images/u1306.png"></div>
+            <div class="changeOk"><img src="../common/images/u1306.png"></div>
         </div>
          <!--  不通过原因列表 -->
         <div class="allreasonBox reasonBox">
-        	<img src="images/u896.png" class="closeReasonBox">
+        	<img src="../common/images/u896.png" class="closeReasonBox">
             <p class="title">请选择不通过的原因</p>
         	<div class="reasonList">
             	<p>内容原创度低于90%</p>
@@ -38,7 +42,7 @@
         </div>
          <!--  删除原因列表 -->
         <div class="allreasonBox delReasonBox">
-        	<img src="images/u896.png" class="closeReasonBox">
+        	<img src="../common/images/u896.png" class="closeReasonBox">
             <p class="title">请选择删除的原因</p>
         	<div class="reasonList">
             	<p>举报被证实</p>
@@ -50,7 +54,7 @@
         </div>
          <!--  下线原因列表 -->
         <div class="allreasonBox outlineReasonBox">
-        	<img src="images/u896.png" class="closeReasonBox">
+        	<img src="../common/images/u896.png" class="closeReasonBox">
             <p class="title">请选择下线的原因</p>
         	<div class="reasonList">
             	<p>举报被证实</p>
@@ -62,7 +66,7 @@
         </div>
          <!--  取消加精原因列表 -->
         <div class="allreasonBox cancelDigest">
-        	<img src="images/u896.png" class="closeReasonBox">
+        	<img src="../common/images/u896.png" class="closeReasonBox">
             <p class="title">请选择取消加精的原因</p>
         	<div class="reasonList">
             	<p>举报被证实</p>
@@ -106,7 +110,7 @@
                         <th>点赞数</th>
                         <th>评论数</th>
                         <th>所属专栏</th>
-                        <th class="lookMore"><img src="images/left.png"></th>
+                        <th class="lookMore"><img src="../common/images/left.png"></th>
                         <th class="lookMoreHide">审核通过时间</th>
                         <th class="lookMoreHide">发布者昵称</th>
                         <th class="lookMoreHide">提交时间</th>
@@ -121,7 +125,7 @@
             <div class="tcdPageCode"></div>
         </div>
           <!-- 待审核列表 -->
-        <div class="wait_pass_box">
+        <div class="wait_pass_box hidden">
         	<input class="pass_back_btn" type="button" value="返回">
             <table class="table-message waitPassTabel" cellpadding="0" cellspacing="0">
                 <thead>

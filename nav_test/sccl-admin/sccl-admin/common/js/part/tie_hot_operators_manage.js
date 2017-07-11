@@ -1,7 +1,9 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadAllPostHeatPage();
 	//新增自定义设置记录
 	$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting .add_row_recoder').click(function(e) {
-        $('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td><select name="" id="" style="padding:7px; border:1px solid #ccc;"><option value="1">文章</option><option value="2">视频</option></select></td><td><input type="text" class="text_padding" style=" width:100%;text-align:center;border:none;background:none;" /></td><td></td><td><span style="float:left"></span><span class="heart_num"></span><img src="images/img_xiugai.png" style="width:15px; float:right;display:none;" alt="" class="free_setting_modify_hot" /></td></td><td><input type="button" value="完成" class="save_btn green" /></td></tr>');
+        $('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td><select name="" id="" style="padding:7px; border:1px solid #ccc;"><option value="1">文章</option><option value="2">视频</option></select></td><td><input type="text" class="text_padding" style=" width:100%;text-align:center;border:none;background:none;" /></td><td></td><td><span style="float:left"></span><span class="heart_num"></span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;display:none;" alt="" class="free_setting_modify_hot" /></td></td><td><input type="button" value="完成" class="save_btn green" /></td></tr>');
     });
 	
 	//点击通用设置的编辑按钮
@@ -15,7 +17,7 @@ $(function(){
 	$('#tie_hot_manage .tie_hot_manage_content .common_setting .save_btn').live("click",function(e) {
 		var btn = $(this);
 		var param = $('#tie_hot_manage .tie_hot_manage_content .common_setting tbody tr');
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/saveWeightConfig/4.0.0',{viewWeight:param.children('td:eq(0)').children('input').attr('value'),praiseWeight:param.children('td:eq(1)').children('input').attr('value'),commentWeight:param.children('td:eq(2)').children('input').attr('value'),updateSpeed:param.children('td:eq(3)').children('input').attr('value')},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/heat/saveWeightConfig/4.0.0',{viewWeight:param.children('td:eq(0)').children('input').attr('value'),praiseWeight:param.children('td:eq(1)').children('input').attr('value'),commentWeight:param.children('td:eq(2)').children('input').attr('value'),updateSpeed:param.children('td:eq(3)').children('input').attr('value')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.parent().parent().children('td').children("input[type='text']").attr('disabled','disabled');
@@ -49,7 +51,7 @@ $(function(){
         var btn = $(this);
 		if(btn.hasClass('green')){
 			btn.attr('disabled','disabled').removeClass('green');
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/initPostHeat/4.0.0',function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/heat/initPostHeat/4.0.0',function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.addClass('green').removeAttr('disabled');
@@ -65,7 +67,7 @@ $(function(){
 	$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting .save_btn').live('click',function(e) {
 		var btn = $(this).parent().parent();
 		var btnStr = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/getOnePostHeat/4.0.0',{postId:btn.children('td:eq(1)').children('input').val(),postType:btn.children('td:eq(0)').children('select').children('option:selected').attr('value')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/heat/getOnePostHeat/4.0.0',{postId:btn.children('td:eq(1)').children('input').val(),postType:btn.children('td:eq(0)').children('select').children('option:selected').attr('value')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.children('td:eq(1)').html(data.data.postId);
@@ -77,9 +79,9 @@ $(function(){
 				btn.children('td:eq(2)').html(data.data.title);
 				//判断是否有虚拟热度值
 				if(data.data.initHeatNum == 0){//没有虚拟热度值
-					btn.children('td:eq(3)').html('<span style="float:left"></span><span class="heart_num">'+data.data.realHeatNum+'</span><img src="images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data.postId+' postType='+data.data.postType+' initHeatNum='+data.data.initHeatNum+' realHeatNum='+data.data.realHeatNum+' />');
+					btn.children('td:eq(3)').html('<span style="float:left"></span><span class="heart_num">'+data.data.realHeatNum+'</span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data.postId+' postType='+data.data.postType+' initHeatNum='+data.data.initHeatNum+' realHeatNum='+data.data.realHeatNum+' />');
 				}else{
-					btn.children('td:eq(3)').html('<span style="float:left">模拟</span><span class="heart_num">'+(data.data.initHeatNum + data.data.realHeatNum)+'</span><img src="images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data.postId+' postType='+data.data.postType+' initHeatNum='+data.data.initHeatNum+' realHeatNum='+data.data.realHeatNum+' />');
+					btn.children('td:eq(3)').html('<span style="float:left">模拟</span><span class="heart_num">'+(data.data.initHeatNum + data.data.realHeatNum)+'</span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data.postId+' postType='+data.data.postType+' initHeatNum='+data.data.initHeatNum+' realHeatNum='+data.data.realHeatNum+' />');
 				}
 				btnStr.addClass('del_btn red').removeClass('green save_btn').attr('value','删除').attr('postId',data.data.postId).attr('postType',data.data.postType);
 			}else{
@@ -94,7 +96,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该条记录？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/deletePostHeatSetRecord/4.0.0',{postId:btn.attr('postId'),postType:btn.attr('postType')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/heat/deletePostHeatSetRecord/4.0.0',{postId:btn.attr('postId'),postType:btn.attr('postType')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -109,7 +111,7 @@ $(function(){
 	//点击帖子热度值的恢复按钮  
 	$('.column_weight_manage_content_box .column_weight_manage_content_box_modify').click(function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/updatePostHeat/4.0.0',{postId:btn.parent().attr('postId'),postType:btn.parent().attr('postType'),initHeatNum:$.trim(btn.parent().children('.column_weight_manage_content_box_moni').val())},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/heat/updatePostHeat/4.0.0',{postId:btn.parent().attr('postId'),postType:btn.parent().attr('postType'),initHeatNum:$.trim(btn.parent().children('.column_weight_manage_content_box_moni').val())},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				getPostHeatSetRecordFn();
@@ -122,7 +124,7 @@ $(function(){
     });
 	$('.column_weight_manage_content_box .column_weight_manage_content_box_huifu').click(function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/updatePostHeat/4.0.0',{postId:btn.parent().attr('postId'),postType:btn.parent().attr('postType'),initHeatNum:0},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/heat/updatePostHeat/4.0.0',{postId:btn.parent().attr('postId'),postType:btn.parent().attr('postType'),initHeatNum:0},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				getPostHeatSetRecordFn();
@@ -148,7 +150,7 @@ function createAllPostHeatPage(data){
 			params.page = p;
 			$('#tie_hot_operators_manage .tie_hot_operators_manage_content .moren_sort_table tbody>tr').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/getAllPostHeat/4.0.0',
+				url : testUrl+'/nggirl-web/web/admin/heat/getAllPostHeat/4.0.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -181,7 +183,7 @@ function getAllPostHeatSearchParams(page){
 function loadAllPostHeatPage(){
 	$('#tie_hot_operators_manage .tie_hot_operators_manage_content .moren_sort_table tbody>tr').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/getAllPostHeat/4.0.0',
+		url : testUrl+'/nggirl-web/web/admin/heat/getAllPostHeat/4.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: getAllPostHeatSearchParams(1),
@@ -192,7 +194,7 @@ function loadAllPostHeatPage(){
 
 //获取人工修改帖子热度记录V4.0.0\
 function getPostHeatSetRecordFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/heat/getPostHeatSetRecord/4.0.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/heat/getPostHeatSetRecord/4.0.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody>tr').remove();
@@ -200,16 +202,16 @@ function getPostHeatSetRecordFn(){
 				if(data.data[x].postType == 1){
 					//判断是否有虚拟热度值
 					if(data.data[x].initHeatNum == 0){//没有虚拟热度值
-						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>文章</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left"></span><span class="heart_num">'+ data.data[x].realHeatNum +'</span><img src="images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
+						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>文章</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left"></span><span class="heart_num">'+ data.data[x].realHeatNum +'</span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
 					}else{
-						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>文章</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left">模拟</span><span class="heart_num">'+(data.data[x].initHeatNum + data.data[x].realHeatNum)+'</span><img src="images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
+						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>文章</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left">模拟</span><span class="heart_num">'+(data.data[x].initHeatNum + data.data[x].realHeatNum)+'</span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
 					}
 				}else{
 					//判断是否有虚拟热度值
 					if(data.data[x].initHeatNum == 0){//没有虚拟热度值
-						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>视频</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left"></span><span class="heart_num">'+data.data[x].realHeatNum+'</span><img src="images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
+						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>视频</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left"></span><span class="heart_num">'+data.data[x].realHeatNum+'</span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
 					}else{
-						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>视频</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left">模拟</span><span class="heart_num">'+(data.data[x].initHeatNum + data.data[x].realHeatNum)+'</span><img src="images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
+						$('#tie_hot_operators_manage .tie_hot_operators_manage_content .free_setting tbody').append('<tr><td>视频</td><td>'+data.data[x].postId+'</td><td>'+data.data[x].title+'</td><td><span style="float:left">模拟</span><span class="heart_num">'+(data.data[x].initHeatNum + data.data[x].realHeatNum)+'</span><img src="../common/images/img_xiugai.png" style="width:15px; float:right;" alt="" class="free_setting_modify_hot" postId='+data.data[x].postId+' postType='+data.data[x].postType+' initHeatNum='+data.data[x].initHeatNum+' realHeatNum='+data.data[x].realHeatNum+' /></td><td><input type="button" value="删除" class="del_btn red" postId='+data.data[x].postId+' postType='+data.data[x].postType+' /></td></tr>');
 					}
 				}
 			}

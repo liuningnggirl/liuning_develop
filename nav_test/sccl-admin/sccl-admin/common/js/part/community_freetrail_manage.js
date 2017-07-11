@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	getRecommendListFn();
 	//点击免费试用里面的编辑按钮
 	$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_btn_edit').live('click',function(e) {
 		var btn = $(this);
@@ -24,7 +26,7 @@ $(function(){
 	//免费试妆-根据id获取单个免费试妆信息V3.0.0
 	$('.community_freetrail_manage_a .cfmc_content .cc_tools .cc_modify').live('click',function(e) {
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/cosmeticTrial/getRecommendInfo/3.0.0',{cosmeticId:btn.parent().prev().val()},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/community/cosmeticTrial/getRecommendInfo/3.0.0',{cosmeticId:btn.parent().prev().val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.parent().parent().children('.cc_txt').val(data.data.name);
@@ -63,7 +65,7 @@ $(function(){
 		str = str.substring(0,str.length -1);
 
 		//console.log(cosmeticIds);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/cosmeticTrial/saveRecommendList/3.0.0',{cosmeticIds:str},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/cosmeticTrial/saveRecommendList/3.0.0',{cosmeticIds:str},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				getRecommendListFn();
@@ -90,21 +92,21 @@ $(function(){
 function getRecommendListFn(){
 	$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_btn_success').removeClass('cfmc_btn_success').attr('value','编辑').addClass('cfmc_btn_edit');
 	$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').children('.cfmc_content').remove();
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/cosmeticTrial/getRecommendList/3.0.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/community/cosmeticTrial/getRecommendList/3.0.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			if(data.data.length < 3 && data.data.length != 0){
 				for(var x = 0; x < data.data.length; x ++){
-					$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="'+data.data[x].name+'" /><label for=""> ID: </label><input type="text" class="cc_id" value="'+data.data[x].cosmeticId+'" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="images/img_xiugai.png" class="cc_modify" cosmeticId='+data.data[x].cosmeticId+' alt="" /><img src="images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
+					$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="'+data.data[x].name+'" /><label for=""> ID: </label><input type="text" class="cc_id" value="'+data.data[x].cosmeticId+'" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="../common/images/img_xiugai.png" class="cc_modify" cosmeticId='+data.data[x].cosmeticId+' alt="" /><img src="../common/images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="../common/images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
 				}
 				for(var x = 0; x < (3-data.data.length); x ++){
-					$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="" /><label for=""> ID: </label><input type="text" class="cc_id" value="" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="images/img_xiugai.png" class="cc_modify" alt="" /><img src="images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
+					$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="" /><label for=""> ID: </label><input type="text" class="cc_id" value="" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="../common/images/img_xiugai.png" class="cc_modify" alt="" /><img src="../common/images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="../common/images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
 				}
 			}else if(data.data.length == 0){
-				$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="" /><label for=""> ID: </label><input type="text" class="cc_id" value="" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="images/img_xiugai.png" class="cc_modify" alt="" /><img src="images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
+				$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="" /><label for=""> ID: </label><input type="text" class="cc_id" value="" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="../common/images/img_xiugai.png" class="cc_modify" alt="" /><img src="../common/images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="../common/images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
 			}else{
 				for(var x = 0; x < 3; x ++){
-					$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="'+data.data[x].name+'" /><label for=""> ID: </label><input type="text" class="cc_id" value="'+data.data[x].cosmeticId+'" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="images/img_xiugai.png" class="cc_modify" cosmeticId='+data.data[x].cosmeticId+' alt="" /><img src="images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
+					$('.community_freetrail_manage_a .community_freetrail_manage_content .cfmc_box').append('<div class="cfmc_content"><input type="text" class="cc_txt" disabled="disabled" value="'+data.data[x].name+'" /><label for=""> ID: </label><input type="text" class="cc_id" value="'+data.data[x].cosmeticId+'" disabled="disabled" /><span class="cc_tools" style="display:none;"><img src="../common/images/img_xiugai.png" class="cc_modify" cosmeticId='+data.data[x].cosmeticId+' alt="" /><img src="../common/images/img_arr_down.png" class="cc_arr_down" alt="" /><img src="../common/images/img_arr_up.png" class="cc_arr_up" alt="" /></span></div>');
 				}
 			}
 		}else{

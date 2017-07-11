@@ -1,6 +1,8 @@
-// JavaScript Document
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
-	//postInfo();
+	postInfo();
+	getwaitTieNum();
+	//WaitPostInfo();
 	var backPost=new LocalStorageDeque('postPageRestore');
 	$(".post_search .choose_post span").live('click',function(){
 		$(this).addClass("on").siblings().removeClass("on");
@@ -292,7 +294,7 @@ $(function(){
 		
         //判断是视频还是文章
 		if(ok.parent().parent().attr('postType') == 1){//文章
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getArticleDetail/2.5.3',{postId:ok.parent().parent().attr('postId'),postType:1},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/column/getArticleDetail/2.5.3',{postId:ok.parent().parent().attr('postId'),postType:1},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$.each( data.data.articles,function(key,val){
@@ -330,7 +332,7 @@ $(function(){
 			});				
 		};
 		if(ok.parent().parent().attr('postType') == 2){//视频
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getVideoDetail/2.5.3',{postId:ok.parent().parent().attr('postId'),postType:2},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/column/getVideoDetail/2.5.3',{postId:ok.parent().parent().attr('postId'),postType:2},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$.each( data.data.articles,function(key,val){
@@ -400,7 +402,7 @@ $(function(){
 //获取专栏帖子个数
 function getColumnTieNum(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getColumnPostNum/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getColumnPostNum/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: {},
@@ -422,7 +424,7 @@ function getColumnTieNum(){
 //获取专栏帖子个数
 function getwaitTieNum(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getCheckingPostCount/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getCheckingPostCount/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: {},
@@ -486,7 +488,7 @@ function postlistdetail(data){
 			cream='<input type="button" value="取消加精" class="redbtn1 changeoriPostCream"  isEssential="1" />';
 		};
 		if(val.status == '1'){
-			status='<input type="button" value="上线" class="bluebtn1 changePostStatus"  postId="'+val.postId+'" postType="'+val.postType+'" online="1"/><img src="images/u2187.png" class="lookOutlineReason">';
+			status='<input type="button" value="上线" class="bluebtn1 changePostStatus"  postId="'+val.postId+'" postType="'+val.postType+'" online="1"/><img src="../common/images/u2187.png" class="lookOutlineReason">';
 		}else if(val.status == '2'){
 			status='<input type="button" value="下线" class="redbtn1 changePostStatus"  postId="'+val.postId+'" postType="'+val.postType+'" online="0"/>';
 		};
@@ -500,22 +502,22 @@ function postlistdetail(data){
 		//判断是否是模拟的浏览时
 		var viewNum='';
 		if(val.initViewNum == 0){
-			viewNum='<td class="changeViewNumtd" trueNum="'+val.trueViewNum+'" initNum="'+val.initViewNum+'"><p class="addThisBefore">'+val.trueViewNum+'</p><img src="images/u84.png" class="changeViewNum"></td>';
+			viewNum='<td class="changeViewNumtd" trueNum="'+val.trueViewNum+'" initNum="'+val.initViewNum+'"><p class="addThisBefore">'+val.trueViewNum+'</p><img src="../common/images/u84.png" class="changeViewNum"></td>';
 		}else{
 			var allViewNum='';
 			allViewNum = parseInt(val.trueViewNum)+parseInt(val.initViewNum);
-			viewNum='<td class="changeViewNumtd" trueNum="'+val.trueViewNum+'" initNum="'+val.initViewNum+'"><p class="moni">模拟</p><p class="addThisBefore">'+allViewNum+'</p><img src="images/u84.png" class="changeViewNum"></td>';
+			viewNum='<td class="changeViewNumtd" trueNum="'+val.trueViewNum+'" initNum="'+val.initViewNum+'"><p class="moni">模拟</p><p class="addThisBefore">'+allViewNum+'</p><img src="../common/images/u84.png" class="changeViewNum"></td>';
 		};
 		//判断是否是模拟的
 		var likeNum='';
 		if(val.initPraiseNum == 0){
-			likeNum='<td class="changeDianZanNumtd" trueNum="'+val.likeNum+'" initNum="'+val.initPraiseNum+'"><p class="addThisBefore">'+val.likeNum+'</p><img src="images/u84.png" class="changeDianZanNum"></td>';
+			likeNum='<td class="changeDianZanNumtd" trueNum="'+val.likeNum+'" initNum="'+val.initPraiseNum+'"><p class="addThisBefore">'+val.likeNum+'</p><img src="../common/images/u84.png" class="changeDianZanNum"></td>';
 		}else{
 			var allLikeNum='';
 			allLikeNum = parseInt(val.likeNum)+parseInt(val.initPraiseNum);
-			likeNum='<td class="changeDianZanNumtd" trueNum="'+val.likeNum+'" initNum="'+val.initPraiseNum+'"><p class="moni">模拟</p><p class="addThisBefore">'+allLikeNum+'</p><img src="images/u84.png" class="changeDianZanNum"></td>';
+			likeNum='<td class="changeDianZanNumtd" trueNum="'+val.likeNum+'" initNum="'+val.initPraiseNum+'"><p class="moni">模拟</p><p class="addThisBefore">'+allLikeNum+'</p><img src="../common/images/u84.png" class="changeDianZanNum"></td>';
 		};
-		$('.post_manage_box .postListTabel').append('<tr postType="'+val.postType+'" postId="'+val.postId+'" columnId="'+val.columnId+'" title="'+val.title+'"><td>'+val.postId+'</td><td>'+val.title+'</td>'+viewNum+likeNum+'<td>'+val.commentNum+'<img src="images/u220.png" class="goToCommentPage" utype="'+val.postType+'" cid="'+val.postId+'" ></td><td class="columntype">'+val.columnName+'</td><td class="lookMore"></td><td class="lookMoreHide">'+val.onlineTime+'</td><td class="lookMoreHide">'+val.nickName+'</td><td class="lookMoreHide">'+val.publishTime+'</td><td class="lookMoreHide">'+editSysUser+'</td><td class="lookMoreHide">'+val.editTime+'</td><td>'+cream + status+'</td><td><input type="button" value="查看" class="bluebtn1 lookArtical"  /><input type="button" value="编辑" class="bluebtn1 articaldeatiledit" postType="'+val.postType+'" postId="'+val.postId+'" /><input type="button" value="删除" class="redbtn1 postDel"/></td></tr>');
+		$('.post_manage_box .postListTabel').append('<tr postType="'+val.postType+'" postId="'+val.postId+'" columnId="'+val.columnId+'" title="'+val.title+'"><td>'+val.postId+'</td><td>'+val.title+'</td>'+viewNum+likeNum+'<td>'+val.commentNum+'<img src="../common/images/u220.png" class="goToCommentPage" utype="'+val.postType+'" cid="'+val.postId+'" ></td><td class="columntype">'+val.columnName+'</td><td class="lookMore"></td><td class="lookMoreHide">'+val.onlineTime+'</td><td class="lookMoreHide">'+val.nickName+'</td><td class="lookMoreHide">'+val.publishTime+'</td><td class="lookMoreHide">'+editSysUser+'</td><td class="lookMoreHide">'+val.editTime+'</td><td>'+cream + status+'</td><td><input type="button" value="查看" class="bluebtn1 lookArtical"  /><input type="button" value="编辑" class="bluebtn1 articaldeatiledit" postType="'+val.postType+'" postId="'+val.postId+'" /><input type="button" value="删除" class="redbtn1 postDel"/></td></tr>');
 		if($(".postListTabel tr .lookMoreHide").css("display") !="none"){
 			$(".postListTabel .lookMore").remove();
 			$(".postListTabel .lookMoreHide").show();
@@ -527,7 +529,7 @@ function onclickpostPageNum(p){
 	var data = onlinePostData();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getApprovedPost/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getApprovedPost/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: data,
@@ -541,7 +543,7 @@ function postInfo(){
 	//获取入参
 	var data = onlinePostData();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getApprovedPost/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getApprovedPost/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: data,
@@ -572,7 +574,7 @@ function waitPostListdetail(data){
 //根据不同的页码来渲染页面
 function waitPostPageNum(p){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getCheckingPost/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getCheckingPost/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: {num:20,page:p},
@@ -585,7 +587,7 @@ function waitPostPageNum(p){
 //获取入参，渲染页面
 function WaitPostInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getCheckingPost/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getCheckingPost/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data:  {num:20,page:0},
@@ -609,7 +611,7 @@ function WaitPostInfo(){
 function deletPostFn(reason){
 	console.log(reason);
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/deletePost/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/deletePost/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {postType:$(".delThis").parent().parent().attr("postType"),postId:$(".delThis").parent().parent().attr("postId"),reason:reason},
@@ -629,7 +631,7 @@ function deletPostFn(reason){
 function addOrCancelDigest(reason){
 	console.log($(".digestThis").parent().parent().attr("postType"));
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/addOrCancelDigest/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/addOrCancelDigest/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {postType:$(".digestThis").parent().parent().attr("postType"),postId:$(".digestThis").parent().parent().attr("postId"),isEssential:$(".digestThis").attr("isEssential"),reason:reason},
@@ -657,7 +659,7 @@ function addOrCancelDigest(reason){
 //帖子下线
 function changePostStatusFn(data){
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/offLinePost/3.0.0',
+			url : testUrl+'/nggirl-web/web/admin/column/offLinePost/3.0.0',
 			type : 'post',
 			dataType : 'json',
 			data: {postId:$(".post_manage_box .postListTabel .onorottline").attr("postId"),postType:$(".post_manage_box .postListTabel .onorottline").attr("postType"),reason:data},
@@ -677,7 +679,7 @@ function changePostStatusFn(data){
 //为审核通过的列表上线(审核通过)
 function onLinePostFn(params){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/onLinePost/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/onLinePost/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {params:params},
@@ -693,7 +695,7 @@ function onLinePostFn(params){
 //审核不通过
 function auditFailFn(reason){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/auditFail/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/auditFail/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {postId:$(".unPassThis").parent().parent().attr("postId"),postType:$(".unPassThis").parent().parent().attr("postType"),reason:reason},
@@ -713,7 +715,7 @@ function auditFailFn(reason){
 function setupInitViewNum(data){
 	var initViewNum=data
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/setupInitViewNum/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/setupInitViewNum/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {postType:$(".post_manage_box .postListTabel .changeThisNum").parent().parent().attr("postType"),postId:$(".post_manage_box .postListTabel .changeThisNum").parent().parent().attr("postId"),initViewNum:initViewNum},
@@ -742,7 +744,7 @@ function setupInitViewNum(data){
 function setupInitPraiseNum(data){
 	var initViewNum=data
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/setupInitPraiseNum/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/column/setupInitPraiseNum/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {postType:$(".post_manage_box .postListTabel .changeThisNum").parent().parent().attr("postType"),postId:$(".post_manage_box .postListTabel .changeThisNum").parent().parent().attr("postId"),initPraiseNum:data},

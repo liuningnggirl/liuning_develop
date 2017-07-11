@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadTestListPage();
 	//彩妆类——返回
 	$('.getTestQuestionDetail_caizhuang .checkpass_return').live('click',function(e) {
 		$('#pumpkin_person_approve_manage').show();
@@ -34,7 +36,7 @@ $(function(){
 		if(btn.hasClass('red')){
 			var r = confirm('确认要取消认证？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/pumpkinexpert/passOrCancel/3.0.2',{baseInfoId:btn.attr('baseInfoId'),isCheckPass:btn.attr('isCheckPass')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/pumpkinexpert/passOrCancel/3.0.2',{baseInfoId:btn.attr('baseInfoId'),isCheckPass:btn.attr('isCheckPass')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						btn.addClass('green').removeClass('red').attr('value','通过认证').attr('isCheckPass',0);
@@ -46,7 +48,7 @@ $(function(){
 		}else if(btn.hasClass('green')){
 			var r = confirm('确认要通过认证？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/pumpkinexpert/passOrCancel/3.0.2',{baseInfoId:btn.attr('baseInfoId'),isCheckPass:btn.attr('isCheckPass')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/pumpkinexpert/passOrCancel/3.0.2',{baseInfoId:btn.attr('baseInfoId'),isCheckPass:btn.attr('isCheckPass')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeClass('green').addClass('red').attr('value','取消认证').attr('isCheckPass',1);
@@ -61,7 +63,7 @@ $(function(){
 	//查看评测详情V3.0.2
 	$('.pumpkin_person_approve_manage .getTestListTable .loo_test_message').live('click',function(e) {
         var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/pumpkinexpert/getTestQuestionDetail/3.0.2',{baseInfoId:btn.attr('baseInfoId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/pumpkinexpert/getTestQuestionDetail/3.0.2',{baseInfoId:btn.attr('baseInfoId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				//判断是否通过验证
@@ -101,7 +103,7 @@ function createTestListPage(data){
 			params.page = p;
 			$('.pumpkin_person_approve_manage .getTestListTable>tbody>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/pumpkinexpert/getTestList/3.0.2',
+				url : testUrl+'/nggirl-web/web/admin/pumpkinexpert/getTestList/3.0.2',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -151,7 +153,7 @@ function getTestListSearchParams(page){
 function loadTestListPage(){
 	$('.pumpkin_person_approve_manage .getTestListTable>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/pumpkinexpert/getTestList/3.0.2',
+		url : testUrl+'/nggirl-web/web/admin/pumpkinexpert/getTestList/3.0.2',
 		type : 'post',
 		dataType : 'json',
 		data: getTestListSearchParams(1),

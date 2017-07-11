@@ -1,6 +1,7 @@
-
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
-//邀请管理
+	riqianInfo();
+	getRiQianAlert();
 	//签到满月用户列表
 	$(".checkAllMonthUserList").live('click',function(){
 		$(".check_user_search input[type='text']").val("");
@@ -68,7 +69,7 @@ $(function(){
 			alert("日签提醒不能为空！");
 		}else{
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/saveCheckinDesc/2.3.0',
+				url : testUrl+'/nggirl-web/web/admin/checkin/saveCheckinDesc/2.3.0',
 				type : 'post',
 				dataType : 'json',
 				data: {checkinDesc:$(".riqianalert_btn").val()},
@@ -146,7 +147,7 @@ function riqianListDetail(data){
 //根据不同的页码来渲染页面
 function onclickriqianPageNum(p){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/getCheckinList/2.3.0',
+		url : testUrl+'/nggirl-web/web/admin/checkin/getCheckinList/2.3.0',
 		type : 'get',
 		dataType : 'json',
 		data: {page:p,num:20},
@@ -161,7 +162,7 @@ function onclickriqianPageNum(p){
 function riqianInfo(){
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/getCheckinList/2.3.0',
+		url : testUrl+'/nggirl-web/web/admin/checkin/getCheckinList/2.3.0',
 		type : 'get',
 		dataType : 'json',
 		data: {page:0,num:20},
@@ -222,7 +223,7 @@ function saveRiqianDetail(){
 			if(r == true){
 				var params={id:$(".riqian_create").attr("id"),onlineTime:$(".riqian_date").val().replace(/\D/g,''),checkinPicture:$("#riqian_img_cover").attr('src'),shareContent:$(".riqian_share").val(),details:details};
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/updateCheckin/2.3.0',
+					url : testUrl+'/nggirl-web/web/admin/checkin/updateCheckin/2.3.0',
 					type : 'post',
 					dataType : 'json',
 					data: params,
@@ -244,7 +245,7 @@ function saveRiqianDetail(){
 			if(r == true){
 				var data={onlineTime:$(".riqian_date").val().replace(/\D/g,''),checkinPicture:$("#riqian_img_cover").attr('src'),shareContent:$(".riqian_share").val(),details:details};
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/addCheckin/2.3.0',
+					url : testUrl+'/nggirl-web/web/admin/checkin/addCheckin/2.3.0',
 					type : 'post',
 					dataType : 'json',
 					data: data,
@@ -266,7 +267,7 @@ function saveRiqianDetail(){
 //删除日签
 function deletedRiqianInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/deleteCheckin/2.3.0',
+		url : testUrl+'/nggirl-web/web/admin/checkin/deleteCheckin/2.3.0',
 		type : 'post',
 		dataType : 'json',
 		data: {id:$(".delThisRiqian").attr("id")},
@@ -283,7 +284,7 @@ function deletedRiqianInfo(){
 //获取单个日签信息进行编辑
 function getSingleRiqianInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/getCheckin/2.5.0',
+		url : testUrl+'/nggirl-web/web/admin/checkin/getCheckin/2.5.0',
 		type : 'get',
 		dataType : 'json',
 		data: {id:$(".editThisRiqian").attr("id")},
@@ -318,7 +319,7 @@ function getSingleRiqianInfo(){
 //获取日签
 function getRiQianAlert(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/getCheckinDesc/2.3.0',
+		url : testUrl+'/nggirl-web/web/admin/checkin/getCheckinDesc/2.3.0',
 		type : 'get',
 		dataType : 'json',
 		data: {},
@@ -349,7 +350,7 @@ function checkUserListDetail(data){
 //根据不同的页码来渲染页面
 function onclickCheckUserPageNum(p){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/getCheckinFullMonthUserList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/checkin/getCheckinFullMonthUserList/2.5.6',
 		type : 'get',
 		dataType : 'json',
 		data: {page:p,num:20,nickName:$(".check_all_month_user_list .check_user_name").val(),startTime:$('.check_all_month_user_list .rustartTime').val().replace(/\D/g,''),endTime:$('.check_all_month_user_list .ruendTime').val().replace(/\D/g,'')},
@@ -364,7 +365,7 @@ function onclickCheckUserPageNum(p){
 function checkUserInfo(){
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/getCheckinFullMonthUserList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/checkin/getCheckinFullMonthUserList/2.5.6',
 		type : 'get',
 		dataType : 'json',
 		data: {page:0,num:20,nickName:$(".check_all_month_user_list .check_user_name").val(),startTime:$('.check_all_month_user_list .rustartTime').val().replace(/\D/g,''),endTime:$('.check_all_month_user_list .ruendTime').val().replace(/\D/g,'')},
@@ -387,7 +388,7 @@ function checkUserInfo(){
 //奖品发货发货
 function deliverCheckAwardFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/checkin/deliverCheckinGift/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/checkin/deliverCheckinGift/2.5.6',
 		type : 'post',
 		dataType : 'json',
 		data: {id:$(".deliverThisCheckAward").attr("id")},

@@ -1,6 +1,8 @@
-$(function(){	
+var testUrl = 'https://testcli.nggirl.com.cn';
+$(function(){
+	getKindsListFn();	
 	//获取跳转类型V2.4.0
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getForwardTypes/2.4.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/banner/getForwardTypes/2.4.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			for(var x = 0; x < data.data.length; x ++){
@@ -54,7 +56,7 @@ $(function(){
 			$('.index_nav_manage_redirect_page').show();
 			$('.index_nav_manage_box').hide();
 		}else{
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/getSortButtonDetail/3.0.0',{sortButtonId:btn.attr('sortButtonId')},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/homepage/getSortButtonDetail/3.0.0',{sortButtonId:btn.attr('sortButtonId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_img').attr('src',data.data.photoUrl);
@@ -94,7 +96,7 @@ $(function(){
 	
 	//获取原生页面对应的H5跳转链接V2.4.0
 	$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url_btn').click(function(e) {
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getForwardH5Url/2.4.0',{forwardtype:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds option:selected').attr('forwardtype'),forwardkey:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url').val()},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/banner/getForwardH5Url/2.4.0',{forwardtype:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds option:selected').attr('forwardtype'),forwardkey:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_href').val(data.data.h5url);
@@ -131,7 +133,7 @@ $(function(){
 			}else if($.trim($('.index_nav_manage_redirect_page .index_nav_manage_sharecontent').val()) == ''){
 				alert('请填写分享内容');
 			}else{
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/addOrEditSortButton/3.0.0',{forwardType:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds option:selected').attr('forwardType'),forwardKey:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url').val(),name:$('.index_nav_manage_redirect_page').attr('name'),photoUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_img').attr('src'),webPageUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_href').val(),shareImg:$('.index_nav_manage_redirect_page .index_nav_manage_shareimg').attr('src'),shareContent:$.trim($('.index_nav_manage_redirect_page .index_nav_manage_sharecontent').val())},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/homepage/addOrEditSortButton/3.0.0',{forwardType:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds option:selected').attr('forwardType'),forwardKey:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url').val(),name:$('.index_nav_manage_redirect_page').attr('name'),photoUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_img').attr('src'),webPageUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_href').val(),shareImg:$('.index_nav_manage_redirect_page .index_nav_manage_shareimg').attr('src'),shareContent:$.trim($('.index_nav_manage_redirect_page .index_nav_manage_sharecontent').val())},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.index_nav_manage_redirect_page').hide();
@@ -154,7 +156,7 @@ $(function(){
 			}else if($.trim($('.index_nav_manage_redirect_page .index_nav_manage_sharecontent').val()) == ''){
 				alert('请填写分享内容');
 			}else{
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/addOrEditSortButton/3.0.0',{sortButtonId:$('.index_nav_manage_redirect_page').attr('sortButtonId'),forwardType:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds option:selected').attr('forwardType'),forwardKey:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url').val(),name:$('.index_nav_manage_redirect_page').attr('name'),photoUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_img').attr('src'),webPageUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_href').val(),shareImg:$('.index_nav_manage_redirect_page .index_nav_manage_shareimg').attr('src'),shareContent:$.trim($('.index_nav_manage_redirect_page .index_nav_manage_sharecontent').val())},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/homepage/addOrEditSortButton/3.0.0',{sortButtonId:$('.index_nav_manage_redirect_page').attr('sortButtonId'),forwardType:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_kinds option:selected').attr('forwardType'),forwardKey:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_get_url').val(),name:$('.index_nav_manage_redirect_page').attr('name'),photoUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_img').attr('src'),webPageUrl:$('.index_nav_manage_redirect_page .index_nav_manage_redirect_page_href').val(),shareImg:$('.index_nav_manage_redirect_page .index_nav_manage_shareimg').attr('src'),shareContent:$.trim($('.index_nav_manage_redirect_page .index_nav_manage_sharecontent').val())},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.index_nav_manage_redirect_page').hide();
@@ -224,7 +226,7 @@ $(function(){
 		}else{
 			var r = confirm('确定要保存？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/publishSortButton/3.0.0',{buttonIds:buttonIds},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/homepage/publishSortButton/3.0.0',{buttonIds:buttonIds},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.index_nav_lan').children('div').remove();
@@ -247,7 +249,7 @@ $(function(){
 		}else{
 			var r = confirm('确定要删除？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/deleteSortButton/3.0.0',{sortButtonId:btn.attr('sortButtonId')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/homepage/deleteSortButton/3.0.0',{sortButtonId:btn.attr('sortButtonId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						btn.parent().parent().remove();
@@ -262,7 +264,7 @@ $(function(){
 	//修改分类按钮名称V3.0.0
 	$('.index_nav_lan .index_nav_lan_li .inl_lan_modify_name').live("click",function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/updateSortButtonName/3.0.0',{sortButtonId:btn.attr('sortButtonId'),name:btn.prev().prev().children('div').html()},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/homepage/updateSortButtonName/3.0.0',{sortButtonId:btn.attr('sortButtonId'),name:btn.prev().prev().children('div').html()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.index_nav_lan').children('div').remove();
@@ -277,7 +279,7 @@ $(function(){
 
 //获取分类按钮列表V3.0.0
 function getKindsListFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/homepage/sortButtonList/3.0.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/homepage/sortButtonList/3.0.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			if(data.data.length > 0){

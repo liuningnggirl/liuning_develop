@@ -4,8 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>electricity_supplier_goods_manage</title>
 <link rel="stylesheet" href="../common/css/index.css" />
+<link rel="stylesheet" href="../common/js/editor/jquery.pumpkin.article.editor.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/electricity_supplier_goods_manage.js"></script>
+<script type="text/javascript" src="../common/js/part/shope_evaluate_manage.js"></script>
+<script type="text/javascript" src="../common/js/LinkedQueue.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script type="text/javascript" src="../common/My97DatePicker/WdatePicker.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+
 </head>
 <body>
     <div class="weight-box electricity_supplier_goods_manage" id="electricity_supplier_goods_manage">
@@ -54,11 +65,11 @@
                             <tr class="yao_hu_lve_de">
                                 <th style="padding: 0px 25px;min-width: 150px;">商品信息</th>
                                 <th>价格</th>
-                                <th class="orderByStr" name="a.total_stock_quantity" value="-1">总库存量<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
-                                <th class="orderByStr" name="f.stock_quantity" value="-1">剩余库存量<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
-                                <th class="orderByStr" name="a.puton_time" value="-1">上架时间<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
-                                <th class="orderByStr" name="a.putoff_time" value="-1">下架时间<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
-                                <th class="orderByStr" name="f.seed_num" value="-1">长草数量<img src="images/ele-down.png" class="orderByDown"><img src="images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="a.total_stock_quantity" value="-1">总库存量<img src="../common/images/ele-down.png" class="orderByDown"><img src="../common/images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="f.stock_quantity" value="-1">剩余库存量<img src="../common/images/ele-down.png" class="orderByDown"><img src="../common/images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="a.puton_time" value="-1">上架时间<img src="../common/images/ele-down.png" class="orderByDown"><img src="../common/images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="a.putoff_time" value="-1">下架时间<img src="../common/images/ele-down.png" class="orderByDown"><img src="../common/images/ele-up.png" class="orderByUp"></th>
+                                <th class="orderByStr" name="f.seed_num" value="-1">长草数量<img src="../common/images/ele-down.png" class="orderByDown"><img src="../common/images/ele-up.png" class="orderByUp"></th>
                                 <th><select><option>商品状态</option><option>自主上架</option><option>自主下架</option></select></th>
                                 <th>操作</th>
                                 <th>创建者</th>
@@ -108,7 +119,7 @@
               </div>
         </div>
         <!--  商品新增与编辑页面 -->
-        <div class="goods_newCrease_edit">
+        <div class="goods_newCrease_edit hidden">
             <span style=" padding: 10px;display: inline-block;">您当前位置</span>
             <span class="controller_color shopMang">&gt;商品管理</span>
             <span class="controller_color addOrEditShop">&gt;新增商品</span>
@@ -181,7 +192,7 @@
                             </div>
                         </div>
                         <div class="controller_increse_picture">
-                            <img src="images/u2188.png">
+                            <img src="../common/images/u2188.png">
                         </div>
                     </div><br/>
                     <!-- 规格的选择 -->
@@ -263,7 +274,7 @@
                                  </span>
                              </li> -->
                          </div>
-                         <span><img class="img_increase_informatiion" src="./images/add.jpg"></span>
+                         <span><img class="img_increase_informatiion" src="../common/images/add.jpg"></span>
                          <span class="store_goods_informatiion">保存当前商品参数
                          </span>
                     </div>
@@ -275,7 +286,7 @@
             <div class="goods_shaling_information_sku">
                 销售属性:<button class="goods_shaling_information_sku_button">新增商品属性
                         <span class="uonubbndf">注意:属性值的字数应控制在200字以内</span>
-                        <img src="./images/tian_jia.png">
+                        <img src="../common/images/tian_jia.png">
                         </button>
                         <div class="goods_shaling_information_sku_chilr">
 
@@ -374,6 +385,79 @@
             </div>
             </div>
   </div>
-    
+    <div class="singleShopComments hidden">
+        <input type="button" name="/" class="callback_prevs" value="返回">
+        <div class="find_something">
+           <!-- <select class="select_Comment select_commone">
+                <option value="">评价状态</option>
+                <option value="0">未评价</option>
+                <option value="1">已评价</option>
+            </select>-->
+            <select class="select_onlineStatus select_commone">
+                <option value="">上线状态</option>
+                <option value="0">待上线</option>
+                <option value="1">已上线</option>
+                <option value="2">已下线</option>
+            </select>
+            <input type="text" class="evaluateManagement_name evaluateManagement_input_one" placeholder="用户昵称">
+            <input type="text" class="evaluateManagement_shop evaluateManagement_input_one" placeholder="商品名称">
+            <span>发布时间</span>
+            <input type="text" class="evaluateManagement_start evaluateManagement_input_two" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+            <span>至</span>
+            <input type="text" class="evaluateManagement_end evaluateManagement_input_two" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+            <button class="my_search_first">搜索</button>
+            <button class="all_cancel">全部取消</button>
+        </div>
+        <div class="management_controller_sort">
+            <div class="notsort">
+                <input type="checkbox" class="management_controller_checkout">
+                <input type="button" value="上线" class="management_controller_shangxian allcomsta">
+                <input type="button" value="下线" class="management_controller_xiaxian allcomsta ">
+                <input type="button" class="management_paixu management_paixu_timer" value="评论排序">
+           </div>
+           <div class="sort hidden finish">
+                <input type="button" class="management_Qpaixu management_paixu_moren" value="完成排序">
+           </div>
+            <input type="button" name="/" value="虚拟用户评价内容池" class="management_controller_evaluatePond">
+        </div>
+      <!--  <div class="management_top_shuoming">
+            <li>编号</li>
+            <li>发布时间</li>
+            <li>评价商品名称</li>
+            <li>用户昵称</li>
+            <li>评价状态</li>
+            <li>评价内容</li>
+            <li>上线状态</li>
+            <li>操作</li>
+        </div>-->
+        <table class=" table-message management_Summary_comment"  cellspacing="0">
+            <thead>
+                <tr>
+                <th>编号</th>
+                <th>发布时间</th>
+                <th>评价商品名称</th>
+                <th>用户昵称</th>
+                <th>评价内容</th>
+                <th>上线状态</th>
+                <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="second_tbodys">
+                
+            </tbody>
+        </table>
+         <!--  页码 -->
+        <div class="tcdPageCode" style="float:right;"></div>
+        <div class="goto_page_box" style="float:left; padding: 15px 20px;">
+            共<span class="totNum">5</span>条
+            跳转到 <input type="text" class="goto_redirect_page_num" style=" text-align:center;padding:4px 0; width:25px; border:1px solid #ccc;" /> 页
+            <input type="button" value="确定" style="padding:5px;" class="goto_page_btn" />
+        </div>
+    </div>
+    <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.work.selector.js"></script>
 </body>
 </html>

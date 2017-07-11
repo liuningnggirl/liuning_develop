@@ -1,6 +1,8 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadBannerPage();
 	//获取跳转类型V2.4.0
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getForwardTypes/2.4.0',{id:$(this).attr('scrollHeadId')},function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/banner/getForwardTypes/2.4.0',{id:$(this).attr('scrollHeadId')},function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			for(var x = 0; x < data.data.length; x ++){
@@ -13,7 +15,7 @@ $(function(){
 	
 	//获取原生页面对应的H5跳转链接V2.4.0
 	$('.modal-body .mb_redirect_href').click(function(e) {
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getForwardH5Url/2.4.0',{forwardtype:$('#mb_select_kinds option:selected').attr('forwardtype'),forwardkey:$('.mb_forward_href').val()},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/banner/getForwardH5Url/2.4.0',{forwardtype:$('#mb_select_kinds option:selected').attr('forwardtype'),forwardkey:$('.mb_forward_href').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.modal-body .tz-address').val(data.data.h5url);
@@ -83,7 +85,7 @@ $(function(){
 			alert('请填写跳转参数!!');
 		}else{
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/addBanner/2.4.0',
+				url : testUrl+'/nggirl-web/web/admin/banner/addBanner/2.4.0',
 				type : 'post',
 				dataType : 'json',
 				data: {photoUrl:$("#img0").attr("src"),webPageUrl:$('.tz-address').val(),shareContent:$('.fx-content').val(),shareImage:$("#fx-img0").attr("src"),forwardtype:$('#mb_select_kinds option:selected').attr('forwardtype'),forwardkey:$('.mb_forward_href').val()},
@@ -123,7 +125,7 @@ $(function(){
 		$('.banner-gray-box').show();
 		$('.banner-submit-edit').show();
 		$('.banner-submit').hide();
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getDetails/2.4.0',{id:$(this).attr('scrollHeadId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/banner/getDetails/2.4.0',{id:$(this).attr('scrollHeadId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				console.log(data);
@@ -177,7 +179,7 @@ $(function(){
 			var r = confirm('确认要修改？？');
 			if(r == true){
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/updateBanner/2.4.0',
+					url : testUrl+'/nggirl-web/web/admin/banner/updateBanner/2.4.0',
 					type : 'post',
 					dataType : 'json',
 					data: {photoUrl:$("#img0").attr("src"),webPageUrl:$('.tz-address').val(),shareContent:$('.fx-content').val(),scrollHeadId:$('.add-box-hide').attr('scrollHeadId'),shareImage:$("#fx-img0").attr("src"),forwardtype:$('#mb_select_kinds option:selected').attr('forwardtype'),forwardkey:$('.mb_forward_href').val()},
@@ -206,7 +208,7 @@ $(function(){
 		if(r == true){
 			//<!--  删除banner图片 -->
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/deleteBanner/1.3.2',
+				url : testUrl+'/nggirl-web/web/admin/banner/deleteBanner/1.3.2',
 				type : 'post',
 				dataType : 'json',
 				data: {scrollHeadId:$(this).attr('scrollHeadId')},
@@ -240,7 +242,7 @@ $(function(){
 			});
 			len = str.substring(0,str.length-1);
 			
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/online/1.3.2',{scrollHeadIds:len},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/banner/online/1.3.2',{scrollHeadIds:len},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert('发布成功');
@@ -269,7 +271,7 @@ $(function(){
 			});
 			len = str.substring(0,str.length-1);
 			
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/scoreShopBannerOnline/2.5.2',{scrollHeadIds:len},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/banner/scoreShopBannerOnline/2.5.2',{scrollHeadIds:len},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert('发布成功');
@@ -295,7 +297,7 @@ function createBannerPage(data){
 			params.page = p;
 			$('.banner-table .add-banner-table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getBanners/1.3.2',
+				url : testUrl+'/nggirl-web/web/admin/banner/getBanners/1.3.2',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -327,7 +329,7 @@ function getBannerSearchParams(page){
 function loadBannerPage(){
 	$('.banner-table .add-banner-table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getBanners/1.3.2',
+		url : testUrl+'/nggirl-web/web/admin/banner/getBanners/1.3.2',
 		type : 'get',
 		dataType : 'json',
 		data: getBannerSearchParams(1),
@@ -342,7 +344,7 @@ function loadBannerPage(){
 	
 //获取首页上线中的banner
 function getOnlineBannerIndexFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getOnlineBanner/1.3.2',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/banner/getOnlineBanner/1.3.2',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('.banner_content_index .check-online .ct0').html('('+(data.data[0]||'')+')');
@@ -368,7 +370,7 @@ function getOnlineBannerIndexFn(){
 	
 //获取积分商城已发布BannerV2.5.2
 function getOnlineBannerIntegralMallFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/banner/getScoreShopOnlineBanner/2.5.2',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/banner/getScoreShopOnlineBanner/2.5.2',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('.banner_content_integralMall .check-online .ct0').html('('+(data.data[0]||'')+')');

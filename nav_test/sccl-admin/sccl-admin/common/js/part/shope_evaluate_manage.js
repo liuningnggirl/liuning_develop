@@ -1,3 +1,4 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
 	$(".choice_goods_picture_more .editImg").live("click",function(){
 		$(".editThisImgOn").removeClass("editThisImgOn");
@@ -14,7 +15,7 @@ $(function(){
 	 	
         if($(this).val() != ""){
         	$.ajax({
-                url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionBrandList/3.1.0',
+                url : testUrl+'/nggirl-web/web/admin/item/getOptionBrandList/3.1.0',
                 type : 'get',
                 dataType : 'json',
                 data: {brandName:this_value},
@@ -48,7 +49,7 @@ $(function(){
 	//虚拟用户列表
 	$('.increase_virtual_user .Fill_choice_virtual_user').live("click",function(e) {
 		$('.increase_virtual_user .increase_user_list').children('li').remove();
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/listAddWaterUser/3.0.2',{nickName:$('.add_new_ping_lun .add_ping_lun_user_xuni_name').val()},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/post/listAddWaterUser/3.0.2',{nickName:$('.add_new_ping_lun .add_ping_lun_user_xuni_name').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 			  $('.increase_virtual_user .increase_user_list').show();
@@ -61,7 +62,7 @@ $(function(){
 		});				
     });
 	$(".img_increase_informatiion").live('click',function(){
-			$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalProperties/3.1.0",function(data){
+			$.get(testUrl+"/nggirl-web/web/admin/item/getOptionalProperties/3.1.0",function(data){
 				var data=$.parseJSON(data)
 				var str='<li class="goods_canshu_information_zong_child_one"><select class="goods_canshu_information_seelect_one">'
 				for(var i=0;i<data.data.length;i++){
@@ -71,7 +72,7 @@ $(function(){
 				for(var j=0;j<data.data[0].values.length;j++){
 					str+='<option keyId="'+data.data[0].values[j].valueId+'">'+data.data[0].values[j].value+'</option>'
 				}
-				str+='</select><span><img class="goods_canshu_information_img" src="./images/ele-del.png"></span></li>'
+				str+='</select><span><img class="goods_canshu_information_img" src="../common/images/ele-del.png"></span></li>'
 				$(".goods_canshu_information_zong_child").append(str)
 				})
 			
@@ -153,7 +154,7 @@ $(function(){
 		}else if($("#judge_goods_shopping_six").attr("checked")){
 			isSupportPumpkinCoin=0
 		}		
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/addOrUpdateItem/3.1.0',{itemId:itmeid,categoryId:newcre_categoryid_new,brandId:brandId,mainTitle:mainTitle,salePrice:salePrice,reamTitle:reamTitle,imgUrl:imgUrl,headImgs:headImgs,standard:standard,unit:unit,recommendation:recommendation,isBuy:isBuy,isService:isService,serviceTerm:serviceTerm,itemDetail:itemDetail,isSupportPumpkinCoin:isSupportPumpkinCoin},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/item/addOrUpdateItem/3.1.0',{itemId:itmeid,categoryId:newcre_categoryid_new,brandId:brandId,mainTitle:mainTitle,salePrice:salePrice,reamTitle:reamTitle,imgUrl:imgUrl,headImgs:headImgs,standard:standard,unit:unit,recommendation:recommendation,isBuy:isBuy,isService:isService,serviceTerm:serviceTerm,itemDetail:itemDetail,isSupportPumpkinCoin:isSupportPumpkinCoin},function(data){
 			var data=$.parseJSON(data)
 			if(data.code==0){
 				alert("保存成功")
@@ -176,7 +177,7 @@ $(function(){
 		}
 		properties=properties.substring(0,properties.length-1)
 		properties+=']'
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveItemProperties/3.1.0",{itemId:itemId,properties:properties},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/saveItemProperties/3.1.0",{itemId:itemId,properties:properties},function(data){
 			var data=$.parseJSON(data)
 			console.log(data)
 			if(data.code==0){
@@ -243,7 +244,7 @@ $(function(){
 	});
 	
 	$('.input_focus_click').live("focus",function(){	
-		$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemCategories/3.1.0",function(data){
+		$.get(testUrl+"/nggirl-web/web/admin/item/getItemCategories/3.1.0",function(data){
 			var data=$.parseJSON(data)
 			var str='';
 			for(var i=0;i<data.data.length;i++){
@@ -327,7 +328,7 @@ $(function(){
         })
 		var commentIds=commentId.substring(0,commentId.length-1)
 		var onOrDownLine=1;
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/itemOnlineOrDownline/4.0.6",{commentIds:commentIds,onOrDownLine:onOrDownLine},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/comment/itemOnlineOrDownline/4.0.6",{commentIds:commentIds,onOrDownLine:onOrDownLine},function(data){
 			var data=$.parseJSON(data)
 			if(data.code !=0){
 				alert(data.data.error);
@@ -350,7 +351,7 @@ $(function(){
         })
 		var commentIds=commentId.substring(0,commentId.length-1)
 		var onOrDownLine=2;
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/itemOnlineOrDownline/4.0.6",{commentIds:commentIds,onOrDownLine:onOrDownLine},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/comment/itemOnlineOrDownline/4.0.6",{commentIds:commentIds,onOrDownLine:onOrDownLine},function(data){
 			var data=$.parseJSON(data)
 			if(data.code !=0){
 				alert(data.data.error);
@@ -370,7 +371,7 @@ $(function(){
 		var replyId=$(this).parent().attr("replyid");
 		var r=confirm("确定删除？");
 		if(r == true){
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/deleteReply/3.1.0",{replyId:replyId},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/comment/deleteReply/3.1.0",{replyId:replyId},function(data){
 				var data=$.parseJSON(data);
 				if(data.code !=0){
 						alert(data.data.error);
@@ -389,7 +390,7 @@ $(function(){
 			
 	})
 	$(".newCrease_goods").live('click',function(){
-		$(this).prev().append('<span class="shaling_sku_information_one_xia_dingwei" valueId="0"><input type="checkbox" disabled="true"><input type="text" class="clickt_change_diaabled"  style="width:60px;" value=""/><img class="shaling_sku_img_one" src="./images/remove_one.png" alt="" /></span>')
+		$(this).prev().append('<span class="shaling_sku_information_one_xia_dingwei" valueId="0"><input type="checkbox" disabled="true"><input type="text" class="clickt_change_diaabled"  style="width:60px;" value=""/><img class="shaling_sku_img_one" src="../common/images/remove_one.png" alt="" /></span>')
 	});
 	/*删除小的属性值*/
 	$(".shaling_sku_img_one").live('click',function(){
@@ -400,7 +401,7 @@ $(function(){
 		var specId=$(this).attr("specid");
 		var del=$(this);
 		if(specId !=null){
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteItemSpec/3.1.0",{itemId:itmeid,specId:specId},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/deleteItemSpec/3.1.0",{itemId:itmeid,specId:specId},function(data){
 			var data=$.parseJSON(data)
 			if(data.code == 0){
 				 del.parent().parent().remove();
@@ -444,7 +445,7 @@ $(function(){
 			}
 			spec.values=arr;
 			var specs=JSON.stringify(spec);
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveItemSpec/3.1.0",{itemId:itmeid,spec:specs},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/saveItemSpec/3.1.0",{itemId:itmeid,spec:specs},function(data){
 				var data=$.parseJSON(data)
 				if(data.code != 0){
 				  alert(data.data.error);
@@ -454,7 +455,7 @@ $(function(){
 					var str_sku_name='';
 					str_sku_name +='<div class="shaling_sku_information_one_shang"><input type="text" placeholder="请输入商品属性(例如:颜色)" name="" value="'+data.data.name+'"><button class="shaling_sku_information_button_one" name="'+data.data.name+'" specId="'+data.data.specId+'">编辑</button><button class="shaling_sku_information_button_two" specId="'+data.data.specId+'" name="'+data.data.name+'">删除商品属性</button></div><div class="shaling_sku_information_one_xia">';
 					for(var j=0;j<data.data.values.length;j++){
-						str_sku_name+='<span class="shaling_sku_information_one_xia_dingwei" valueId="'+data.data.values[j].valueId+'" value="'+data.data.values[j].value+'"><input type="checkbox"><input type="text" class="clickt_change_diaabled" disabled="disabled" style="width:60px;" value="'+data.data.values[j].value+'"/><img class="shaling_sku_img_one hidden" src="./images/remove_one.png" alt="" /><img style="display:none" class="shaling_sku_img_two" src="./images/img_xiugaihh.png" valueId="'+data.data.values[j].valueId+'" /></span>'
+						str_sku_name+='<span class="shaling_sku_information_one_xia_dingwei" valueId="'+data.data.values[j].valueId+'" value="'+data.data.values[j].value+'"><input type="checkbox"><input type="text" class="clickt_change_diaabled" disabled="disabled" style="width:60px;" value="'+data.data.values[j].value+'"/><img class="shaling_sku_img_one hidden" src="../common/images/remove_one.png" alt="" /><img style="display:none" class="shaling_sku_img_two" src="../common/images/img_xiugaihh.png" valueId="'+data.data.values[j].valueId+'" /></span>'
 					}
 					str_sku_name +='</div><span class="newCrease_goods">新增</span>';
 					del.parent().parent('.shaling_sku_information_one').attr("specId",data.data.specId).empty().append(str_sku_name);
@@ -489,14 +490,14 @@ $(function(){
 				tring_name=tring_name.substring(0,tring_name.length-1);
 				var datas = JSON.stringify(data);
 				console.log(datas);
-				$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/createItemSku/3.1.0",{itemId:itmeid,skuName:tring_name,skuSpecs:datas},function(data){
+				$.post(testUrl+"/nggirl-web/web/admin/item/createItemSku/3.1.0",{itemId:itmeid,skuName:tring_name,skuSpecs:datas},function(data){
 					var data=$.parseJSON(data)
 					console.log(data)
 					if(data.code !=0){
 					  alert(data.data.error);
 					}else{
 						var fun="WdatePicker({dateFmt:'yyyy-MM-dd'})";
-						 $(".shaling_table_sku_management_body").append('<tr class="input_goods_skuing"><td><input disabled="disabled" type="text" value="'+data.data.skuName+'" style="width: 128px;"></td><td><input type="text" style="width: 60px;" name="" value="'+data.data.salePrice+'"></td><td><input type="text" style="width: 134px;"  onclick="'+fun+'" style="background: url(./images/time_01.png) no-repeat;" value=""></td><td><input type="text" style="width: 60px;"  value="'+data.data.totalStockQuantity+'" name="">件</td><td><input type="text" style="width: 60px;"   value="'+data.data.itemBarcode+'" name=""></td><td><input type="text" style="width: 60px;" disabled="disabled" value="'+data.data.stockQuantity+'" name=""></td><td><span style="cursor: pointer;margin-right: 4px;" class="sku_bianji_store_cook bluebtn" skuId="'+data.data.skuId+'">保存</span><span class="delSku redbtn" style="cursor: pointer; " skuId="'+data.data.skuId+'">删除</span></td></tr>');
+						 $(".shaling_table_sku_management_body").append('<tr class="input_goods_skuing"><td><input disabled="disabled" type="text" value="'+data.data.skuName+'" style="width: 128px;"></td><td><input type="text" style="width: 60px;" name="" value="'+data.data.salePrice+'"></td><td><input type="text" style="width: 134px;"  onclick="'+fun+'" style="background: url(../common/images/time_01.png) no-repeat;" value=""></td><td><input type="text" style="width: 60px;"  value="'+data.data.totalStockQuantity+'" name="">件</td><td><input type="text" style="width: 60px;"   value="'+data.data.itemBarcode+'" name=""></td><td><input type="text" style="width: 60px;" disabled="disabled" value="'+data.data.stockQuantity+'" name=""></td><td><span style="cursor: pointer;margin-right: 4px;" class="sku_bianji_store_cook bluebtn" skuId="'+data.data.skuId+'">保存</span><span class="delSku redbtn" style="cursor: pointer; " skuId="'+data.data.skuId+'">删除</span></td></tr>');
 					}
 				})
 			
@@ -530,7 +531,7 @@ $(function(){
 						genData.savalidityDate = Date.parse(new Date(sku_savalidityDate));
 					}
 					//itemId:itemId_one,skuId:skuId,skuName:skuName,salePrice:sku_salePrice,savalidityDate:sku_savalidityDate1,totalStockQuantity:sku_totalStockQuantity,itemBarcode:sku_itemBarcode
-					$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/updateItemSkuInfo/3.1.0",genData,function(data){
+					$.post(testUrl+"/nggirl-web/web/admin/item/updateItemSkuInfo/3.1.0",genData,function(data){
 						var data=$.parseJSON(data)
 						console.log(data)
 						if(data.code == 0){
@@ -551,7 +552,7 @@ $(function(){
 		$(".shaling_table_sku_management_body .delSku").live("click",function(){
 			var itemId_one=itmeid;
 			var del=$(this);
-			  $.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteItemSku/3.1.0",{itemId:itemId_one,skuId:$(this).attr("skuid")},function(data){
+			  $.post(testUrl+"/nggirl-web/web/admin/item/deleteItemSku/3.1.0",{itemId:itemId_one,skuId:$(this).attr("skuid")},function(data){
 					var data=$.parseJSON(data)
 					if(data.code !=0){
 						 alert(data.data.error);
@@ -572,13 +573,13 @@ $(function(){
 /*获取商品详情(商品编辑)*/
 $(".zengjia_pointer").live('click',function(){
 		var datta=null;
-		$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalProperties/3.1.0",function(data){
+		$.get(testUrl+"/nggirl-web/web/admin/item/getOptionalProperties/3.1.0",function(data){
 			datta=$.parseJSON(data)
 			//$(".goods_newCrease_name").css("display","block")
 
 		})
 		//商品类别
-		$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemCategories/3.1.0",function(data){
+		$.get(testUrl+"/nggirl-web/web/admin/item/getItemCategories/3.1.0",function(data){
 			var data=$.parseJSON(data)
 			var str='';
 			for(var i=0;i<data.data.length;i++){
@@ -627,7 +628,7 @@ $(".zengjia_pointer").live('click',function(){
 		$(".electricity_father_zong").css("display","none");
 		$(".goods_newCrease_edit").css("display","block")
 
-		$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemDetail/3.1.0",{itemId:itmeid},function(data){
+		$.get(testUrl+"/nggirl-web/web/admin/item/getItemDetail/3.1.0",{itemId:itmeid},function(data){
 			var data=$.parseJSON(data)
 			$(".goods_newCrease_name_span").html(data.data.reamTitle)
 			$(".electricity_supplier_goods_manage .goods_newCrease_edit").attr("itemId",data.data.itemId);
@@ -646,7 +647,7 @@ $(".zengjia_pointer").live('click',function(){
 					
 					str+='<option keyId="'+datta.data[0].values[j].valueId+'">'+datta.data[0].values[j].value+'</option>'
 				}
-				str+='</select><span><img class="goods_canshu_information_img" src="./images/ele-del.png"></span></li>'
+				str+='</select><span><img class="goods_canshu_information_img" src="../common/images/ele-del.png"></span></li>'
 				$(".goods_canshu_information_zong_child").append(str)	
 			}
 			/*单位*/
@@ -684,7 +685,7 @@ $(".zengjia_pointer").live('click',function(){
 			}
 			for(var i=0;i<data.data.itemSkus.length;i++){
 				var fun="WdatePicker({dateFmt:'yyyy-MM-dd'})";
-				sku_input+='<tr class="input_goods_skuing"><td><input type="text" value="'+data.data.itemSkus[i].skuName+'" style="width: 128px;" disabled="disabled"></td><td><input type="text" style="width: 60px;" disabled="disabled" name="" value="'+data.data.itemSkus[i].salePrice+'"></td><td><input type="text" style="width: 134px;" disabled="disabled" onclick="'+fun+'" value="'+new Date(data.data.itemSkus[i].savalidityDate).format("yyyy-MM-dd")+'" style="background: url(./images/time_01.png) no-repeat;"></td><td><input type="text" style="width: 60px;" disabled="disabled" value="'+data.data.itemSkus[i].totalStockQuantity+'" name="">件</td><td><input type="text" style="width: 60px;"  disabled="disabled" value="'+data.data.itemSkus[i].itemBarcode+'" name=""></td><td><input type="text" style="width: 60px;" disabled="disabled" value="'+data.data.itemSkus[i].stockQuantity+'" name=""></td><td><span style="margin-right: 5px; " class="sku_bianji_store_cook bluebtn" skuId="'+data.data.itemSkus[i].skuId+'">编辑</span><span class="delSku redbtn"  skuId="'+data.data.itemSkus[i].skuId+'">删除</span></td></tr>';
+				sku_input+='<tr class="input_goods_skuing"><td><input type="text" value="'+data.data.itemSkus[i].skuName+'" style="width: 128px;" disabled="disabled"></td><td><input type="text" style="width: 60px;" disabled="disabled" name="" value="'+data.data.itemSkus[i].salePrice+'"></td><td><input type="text" style="width: 134px;" disabled="disabled" onclick="'+fun+'" value="'+new Date(data.data.itemSkus[i].savalidityDate).format("yyyy-MM-dd")+'" style="background: url(../common/images/time_01.png) no-repeat;"></td><td><input type="text" style="width: 60px;" disabled="disabled" value="'+data.data.itemSkus[i].totalStockQuantity+'" name="">件</td><td><input type="text" style="width: 60px;"  disabled="disabled" value="'+data.data.itemSkus[i].itemBarcode+'" name=""></td><td><input type="text" style="width: 60px;" disabled="disabled" value="'+data.data.itemSkus[i].stockQuantity+'" name=""></td><td><span style="margin-right: 5px; " class="sku_bianji_store_cook bluebtn" skuId="'+data.data.itemSkus[i].skuId+'">编辑</span><span class="delSku redbtn"  skuId="'+data.data.itemSkus[i].skuId+'">删除</span></td></tr>';
 				
 			}
 			
@@ -714,7 +715,7 @@ $(".zengjia_pointer").live('click',function(){
 			//var width_new=$(".choice_goods_picture_more_last_choicePic").width()/data.data.headImgs.length
 			
 			for(var i=0;i<data.data.headImgs.length;i++){
-				$(".choice_goods_picture_more_last_choicePic").append('<div class="div_three_common_oh"><input type="button" value="选取文件" class="now_goChoice_picture editImg" /><img src="images/u702.png" class="remove_img_click"><img itemId="'+data.data.headImgs[i].itemId+'" src="'+data.data.headImgs[i].url+'" id="'+data.data.headImgs[i].id+'" width="'+data.data.headImgs[i].width+'" height="'+data.data.headImgs[i].height+'" style="width: 100%;height: 84%" class="needEditImg"></div>')
+				$(".choice_goods_picture_more_last_choicePic").append('<div class="div_three_common_oh"><input type="button" value="选取文件" class="now_goChoice_picture editImg" /><img src="../common/images/u702.png" class="remove_img_click"><img itemId="'+data.data.headImgs[i].itemId+'" src="'+data.data.headImgs[i].url+'" id="'+data.data.headImgs[i].id+'" width="'+data.data.headImgs[i].width+'" height="'+data.data.headImgs[i].height+'" style="width: 100%;height: 84%" class="needEditImg"></div>')
 			}
 			/*规格*/
 			if(parseInt(data.data.standard)==1){
@@ -758,7 +759,7 @@ $(".zengjia_pointer").live('click',function(){
 			for(var i=0;i<data.data.itemSpecs.length;i++){
 				str_sku_name+='<div class="shaling_sku_information_one" specId="'+data.data.itemSpecs[i].specId+'"><div class="shaling_sku_information_one_shang"><input type="text" placeholder="请输入商品属性(例如:颜色)" name="" value="'+data.data.itemSpecs[i].name+'"><button class="shaling_sku_information_button_one" name="'+data.data.itemSpecs[i].name+'" specId="'+data.data.itemSpecs[i].specId+'">编辑</button><button class="shaling_sku_information_button_two" specId="'+data.data.itemSpecs[i].specId+'" name="'+data.data.itemSpecs[i].name+'">删除商品属性</button></div><div class="shaling_sku_information_one_xia">'
 				for(var j=0;j<data.data.itemSpecs[i].values.length;j++){
-					str_sku_name+='<span class="shaling_sku_information_one_xia_dingwei" valueId="'+data.data.itemSpecs[i].values[j].valueId+'" value="'+data.data.itemSpecs[i].values[j].value+'"><input type="checkbox"><input type="text" class="clickt_change_diaabled" disabled="disabled" style="width:60px;" value="'+data.data.itemSpecs[i].values[j].value+'"/><img class="shaling_sku_img_one hidden" src="./images/remove_one.png" alt="" /><img style="display:none" class="shaling_sku_img_two" src="./images/img_xiugaihh.png" valueId="'+data.data.itemSpecs[i].values[j].valueId+'" /></span>'
+					str_sku_name+='<span class="shaling_sku_information_one_xia_dingwei" valueId="'+data.data.itemSpecs[i].values[j].valueId+'" value="'+data.data.itemSpecs[i].values[j].value+'"><input type="checkbox"><input type="text" class="clickt_change_diaabled" disabled="disabled" style="width:60px;" value="'+data.data.itemSpecs[i].values[j].value+'"/><img class="shaling_sku_img_one hidden" src="../common/images/remove_one.png" alt="" /><img style="display:none" class="shaling_sku_img_two" src="../common/images/img_xiugaihh.png" valueId="'+data.data.itemSpecs[i].values[j].valueId+'" /></span>'
 				}
 				str_sku_name+='</div><span class="newCrease_goods">新增</span></div>'
 			}
@@ -773,7 +774,7 @@ $(".zengjia_pointer").live('click',function(){
 		var this_value=$(this).val()
 		var that=this
 		var str=null;
-		$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalProperties/3.1.0",function(data){
+		$.get(testUrl+"/nggirl-web/web/admin/item/getOptionalProperties/3.1.0",function(data){
 			var data=$.parseJSON(data)
 			console.log(data)
 			for(var i=0;i<data.data.length;i++){
@@ -800,7 +801,7 @@ $(".zengjia_pointer").live('click',function(){
 		var top=(e.pageY-80)+"px";
 		$('.management_Popups_first').css({'display':'block','left':left,'top':top})
 		var this_goodsID=$(this).children().eq(0).attr('classid')
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/getItemInfo/3.1.0',{orderSkuId:this_goodsID},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/comment/getItemInfo/3.1.0',{orderSkuId:this_goodsID},function(data){
 			var data=$.parseJSON(data);
 				var str_pinjie='<tr><th>商品名称</th><th>图片</th><th>数量</th><th>型号</th><th>金额</th></tr><tr><td class="management_Mask">'+data.data.iteName+'</td><td class="control_img"><img src="'+data.data.imgUrl+'"/></td><td style="margin-left: 18px;" class="management_number">'+data.data.quantity+'</td><td style="margin-left: 26px" class="management_Model">'+data.data.skuName+'</td><td style="margin-left: 16px;" class="management_money">'+data.data.amount+'</td></tr><tr><td></td><td></td><td class="make_sure" style="margin-left: 113px;">返回</td><td></td><td></td></tr>'
 		
@@ -825,7 +826,7 @@ $(".zengjia_pointer").live('click',function(){
 		if(r == true){
 			$.ajax({
 				type:'POST',
-				url:'<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/deleteComment/3.1.0',
+				url:testUrl+'/nggirl-web/web/admin/item/comment/deleteComment/3.1.0',
 				data:{
 					commentId:this_commentId
 				},
@@ -872,7 +873,7 @@ $(".zengjia_pointer").live('click',function(){
 			alert("请输入内容！");
 		}else{
 			if($(this).hasClass("saleEdit")){
-				$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/updateReply/3.1.0",{replyId:$(".editThisCom").parent().attr("replyid"),replyContent:huifu_value},function(data){
+				$.post(testUrl+"/nggirl-web/web/admin/item/comment/updateReply/3.1.0",{replyId:$(".editThisCom").parent().attr("replyid"),replyContent:huifu_value},function(data){
 					var data=$.parseJSON(data);
 					if(data.code !=0){
 						alert(data.data.error);
@@ -883,7 +884,7 @@ $(".zengjia_pointer").live('click',function(){
 					}
 				})
 			}else if($(this).hasClass("saleCom")){
-				$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/replyComment/3.1.0",{commentId:$(".comThisCom").parent().parent().attr("classid"),replyContent:huifu_value},function(data){
+				$.post(testUrl+"/nggirl-web/web/admin/item/comment/replyComment/3.1.0",{commentId:$(".comThisCom").parent().parent().attr("classid"),replyContent:huifu_value},function(data){
 					var data=$.parseJSON(data);
 					if(data.code !=0){
 						alert(data.data.error);
@@ -939,7 +940,7 @@ $(".zengjia_pointer").live('click',function(){
 				var r = confirm('确定要保存？？');
 			}
 			if(r == true){
-				$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/insertComment/3.1.0",genData,function(data){
+				$.post(testUrl+"/nggirl-web/web/admin/item/comment/insertComment/3.1.0",genData,function(data){
 					var data=$.parseJSON(data)
 					if(data.code !=0){
 						alert(data.data.error);
@@ -977,7 +978,7 @@ $(".zengjia_pointer").live('click',function(){
 		}
 		console.log(params.toExchangeCommentId);
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
+			url : testUrl+'/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
 			type : 'post',
 			dataType : 'json',
 			data: params,
@@ -989,7 +990,7 @@ $(".zengjia_pointer").live('click',function(){
 				backFn:function(p){
 					params.page = p;
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
+						url : testUrl+'/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
 						type : 'post',
 						dataType : 'json',
 						data: params,
@@ -1018,7 +1019,7 @@ $(".zengjia_pointer").live('click',function(){
 		
 		console.log(params.toExchangeCommentId);
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
+			url : testUrl+'/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
 			type : 'post',
 			dataType : 'json',
 			data: params,
@@ -1030,7 +1031,7 @@ $(".zengjia_pointer").live('click',function(){
 				backFn:function(p){
 					params.page = p;
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
+						url : testUrl+'/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
 						type : 'post',
 						dataType : 'json',
 						data: params,
@@ -1103,7 +1104,7 @@ $(".zengjia_pointer").live('click',function(){
 */
 
 /*商品管理--商品物流信息*/
-	$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalExpressTemplates/3.1.0",function(data){
+	$.get(testUrl+"/nggirl-web/web/admin/item/getOptionalExpressTemplates/3.1.0",function(data){
 		var data=$.parseJSON(data);
 		var str='<div class="wuliu_management_parent">';
 		for(var i=0;i<data.data.length;i++){
@@ -1123,7 +1124,7 @@ $(".zengjia_pointer").live('click',function(){
             templateid+=$(this).attr("templateid")+',';
         });
 		templateid=templateid.substring(0,templateid.length -1);
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveItemExpress/3.1.0",{itemId:itmeid,templateIds:templateid},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/saveItemExpress/3.1.0",{itemId:itmeid,templateIds:templateid},function(data){
 		var data=$.parseJSON(data)
 		if(data.code == 0){
 			alert("保存成功");	
@@ -1167,7 +1168,7 @@ $(".zengjia_pointer").live('click',function(){
 		var itemIds = itemIdArry.join(",");
 		var r=confirm("确定删除？");
 		if(r == true){
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteItem/3.1.0",{itemIds:itemIds},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/deleteItem/3.1.0",{itemIds:itemIds},function(data){
 				var data=$.parseJSON(data);
 				if(data.code !=0){
 				  alert(data.data.error);
@@ -1196,7 +1197,7 @@ $(".zengjia_pointer").live('click',function(){
 		});
 		var itemIds = itemIdArry.join(",");
 		console.log(itemIds);
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/putonItem/3.1.0",{itemIds:itemIds},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/putonItem/3.1.0",{itemIds:itemIds},function(data){
 			var data=$.parseJSON(data);
 			if(data.code ==0){
 			   $(".checkbox_first_now,.checkbox_botton").removeAttr("checked")
@@ -1217,7 +1218,7 @@ $(".zengjia_pointer").live('click',function(){
 		});
 		var itemIds = itemIdArry.join(",");
 		console.log(itemIds);
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/putoffItem/3.1.0",{itemIds:itemIds},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/putoffItem/3.1.0",{itemIds:itemIds},function(data){
 			var data=$.parseJSON(data);
 			if(data.code !=0){
 			  alert(data.data.error);
@@ -1232,17 +1233,17 @@ $(".zengjia_pointer").live('click',function(){
 	//下架商品是否在前端展示
 	$('#electricity_supplier_goods_manage .main_body_table_main .showInH5').live("click",function(){
 		var del=$(this);
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/updteItemShowStatus/3.1.0",{itemId:del.attr("itemId"),isShow:del.attr("isShow")},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/updteItemShowStatus/3.1.0",{itemId:del.attr("itemId"),isShow:del.attr("isShow")},function(data){
 			var data=$.parseJSON(data);
 			if(data.code ==0){
 				if(del.attr("isShow")=="0"){
 					$(del).attr("isShow","1");	
 					$(del).html("不在前端展示");
-					$(del).siblings("img").attr("src","./images/notshow.png");
+					$(del).siblings("img").attr("src","../common/images/notshow.png");
 				}else{
 					$(del).attr("isShow","0");
 					$(del).html("在前端展示");	
-					$(del).siblings("img").attr("src","./images/show.png");
+					$(del).siblings("img").attr("src","../common/images/show.png");
 				}
 			  
 			}else{
@@ -1321,7 +1322,7 @@ $(".zengjia_pointer").live('click',function(){
 		
 		var tipian='<div class="div_three_common_oh">'
                     +'<input type="button" value="选择文件" class="editImg"  />'
-                    +'<img src="images/u702.png" class="remove_img_click">'
+                    +'<img src="../common/images/u702.png" class="remove_img_click">'
                     +'<img src="" style="width: 100%;height: 84%" class="zeng_img_number needEditImg"> '
                     +'</div>'
         $('.choice_goods_picture_more_last_choicePic').append(tipian)
@@ -1387,7 +1388,7 @@ $(".zengjia_pointer").live('click',function(){
 		  }
 		  var buyerReadings = JSON.stringify(buyerReading);
 		  
-		  $.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveItemLabelAndBuyerReading/3.1.0",{itemId:itmeid,labelIds:labelIds,buyerReading:buyerReadings},function(data){
+		  $.post(testUrl+"/nggirl-web/web/admin/item/saveItemLabelAndBuyerReading/3.1.0",{itemId:itmeid,labelIds:labelIds,buyerReading:buyerReadings},function(data){
 		  var data=$.parseJSON(data)
 			  if(data.code==0){
 				  alert("保存成功！");
@@ -1400,14 +1401,14 @@ $(".zengjia_pointer").live('click',function(){
 	$('.title_six_button').on('click','.title_six_button_aboutPost',function(){
 		$('.abouting_goods_Posts').css('display','block').siblings().css('display','none')
 		var itemId=itmeid;
-		$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemDetail/3.1.0",{itemId:itemId},function(data){
+		$.get(testUrl+"/nggirl-web/web/admin/item/getItemDetail/3.1.0",{itemId:itemId},function(data){
 			var data=$.parseJSON(data)
 			console.log(data)
 			if(data.code==0){
 				var new_array=data.data.linkPosts;
 				var str='';
 				for(var i=0;i<new_array.length;i++){
-					str+='<span postType="'+new_array[i].postType+'" postId="'+new_array[i].postId+'">'+new_array[i].postId+'<span class="abouting_goods_input_Posts_remove"><img src="./images/remove_one.png"></span></span>'
+					str+='<span postType="'+new_array[i].postType+'" postId="'+new_array[i].postId+'">'+new_array[i].postId+'<span class="abouting_goods_input_Posts_remove"><img src="../common/images/remove_one.png"></span></span>'
 				}
 				
 				$(".abouting_goods_input_Posts").html(str)
@@ -1419,7 +1420,7 @@ $(".zengjia_pointer").live('click',function(){
 		var itemId=itmeid;
 		var postId=$(this).parent().attr("postid")
 	    var del=$(this);
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/cancelRelatePost/3.1.0",{itemId:itemId,postId:postId},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/cancelRelatePost/3.1.0",{itemId:itemId,postId:postId},function(data){
 			var data=$.parseJSON(data)
 			console.log(data)
 			if(data.code == 0){
@@ -1450,7 +1451,7 @@ $(".zengjia_pointer").live('click',function(){
 		$(".choice_cuowu_iknow").css("opacity","100")
 		var itemId=itmeid
 		var postId=$(this).parent().parent().children().eq(0).html();
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/addRelatePost/3.1.0",{itemId:itemId,postId:postId},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/addRelatePost/3.1.0",{itemId:itemId,postId:postId},function(data){
 			var data=$.parseJSON(data)
 			if(data.code == 0){
 			//创建分页
@@ -1466,7 +1467,7 @@ $(".zengjia_pointer").live('click',function(){
 		$(".choice_ture_iknow").css("opacity","100")
 		var itemId=itmeid
 		var postId=$(this).parent().parent().children().eq(0).html();
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/cancelRelatePost/3.1.0",{itemId:itemId,postId:postId},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/cancelRelatePost/3.1.0",{itemId:itemId,postId:postId},function(data){
 			var data=$.parseJSON(data)
 			if(data.code == 0){
 			//创建分页
@@ -1493,7 +1494,7 @@ $(".zengjia_pointer").live('click',function(){
 		$(".goods_canshu_information_zong_dusn").live('click',function(){
 			var keyId=$(this).parent().children().eq(0).html();
 			console.log(keyId)
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteProperty/3.1.0",{keyId:keyId},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/deleteProperty/3.1.0",{keyId:keyId},function(data){
 				var data=$.parseJSON(data);
 				if(data.code=0){
 					console.log(data)
@@ -1518,7 +1519,7 @@ $(".zengjia_pointer").live('click',function(){
 				var valuesrr=values_arr.slice(4)
 				$(that).parent().children().eq(3).val("")
 				$(that).parent().children().eq(3).css("display","none")
-				$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveProperty/3.1.0",{keyId:keyId,name:name,values:valuesrr},function(data){
+				$.post(testUrl+"/nggirl-web/web/admin/item/saveProperty/3.1.0",{keyId:keyId,name:name,values:valuesrr},function(data){
 						var data=$.parseJSON(data);
 						if(data.code==0){
 							console.log(data)
@@ -1541,7 +1542,7 @@ $(".zengjia_pointer").live('click',function(){
 			var values=$(this).parent().children().eq(2).val();
 			var properties='[{"keyName":"'+name+'","value":"'+values+'"}]'
 			console.log(itemId+"+"+name+"+"+values)
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveItemProperties/3.1.0",{itemId:itemId,properties:properties},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/saveItemProperties/3.1.0",{itemId:itemId,properties:properties},function(data){
 				var data=$.parseJSON(data);
 				console.log(data)
 			})
@@ -1554,7 +1555,7 @@ $(".zengjia_pointer").live('click',function(){
 			$(this).remove()
 		})
 		$(".goods_parameter_div_second_contrl_button").live('click',function(){
-			$(".goods_parameter_div_store_input").append('<input type="text" name=""><img src="./images/remove_one.png">')
+			$(".goods_parameter_div_store_input").append('<input type="text" name=""><img src="../common/images/remove_one.png">')
 		})
 	
 	
@@ -1574,7 +1575,7 @@ function comming_write(){
 			params.page = $(".main_body_table_main").attr("page");
 		}
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemList/3.1.0',
+			url : testUrl+'/nggirl-web/web/admin/item/getItemList/3.1.0',
 			type : 'post',
 			dataType : 'json',
 			data: params,
@@ -1586,7 +1587,7 @@ function comming_write(){
 				backFn:function(p){
 					params.page = p;
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemList/3.1.0',
+						url : testUrl+'/nggirl-web/web/admin/item/getItemList/3.1.0',
 						type : 'post',
 						dataType : 'json',
 						data: params,
@@ -1672,7 +1673,7 @@ function initShopPageInfo(data){
 						   str+= '<td>'
 						   +   '<span class="zhangcao_number">'+data.data.pageData[i].seedNum+'</span>'
 							+   '<div class="look_changchao_number" comodityid="'+data.data.pageData[i].itemId+'">'
-							+       '<img src="./images/img_show.png" style="width: 30px; vertical-align: middle;">'
+							+       '<img src="../common/images/img_show.png" style="width: 30px; vertical-align: middle;">'
 							+       '<span>查看</span>'
 							+   '</div>'
 						   +'</td>';
@@ -1688,25 +1689,25 @@ function initShopPageInfo(data){
 						    str+='<td style="width: 120px;" class="zengjia_position" classid="'+data.data.pageData[i].itemId+'">'
 						    if(data.data.pageData[i].isPuton =="2" && data.data.pageData[i].isShow =="0"){
 								str+='<div class="showInH5Box">'
-							+      '<img src="./images/show.png" class="controller_my_picture_size">'
+							+      '<img src="../common/images/show.png" class="controller_my_picture_size">'
 							+       '<span class="showInH5" itemId="'+data.data.pageData[i].itemId+'" isShow="0">在前端展示</span>'
 							+   '</div>';
 							}else if(data.data.pageData[i].isPuton =="2" && data.data.pageData[i].isShow =="1"){
 								str+='<div class="showInH5Box">'
-							+      '<img src="./images/notshow.png" class="controller_my_picture_size">'
+							+      '<img src="../common/images/notshow.png" class="controller_my_picture_size">'
 							+       '<span class="showInH5" itemId="'+data.data.pageData[i].itemId+'" isShow="1">不在前端展示</span>'
 							+   '</div>';
 							}
 							str+='<div class="caozuo_one">'
-							+      '<img src="./images/img_gai.png" class="controller_my_picture_size">'
+							+      '<img src="../common/images/img_gai.png" class="controller_my_picture_size">'
 							+       '<span class="zengjia_pointer">商品编辑</span>'
 							+   '</div>'
 							+   '<div class="caozuo_two">'
-							+       '<img src="./images/look_icon.jpg" class="controller_my_picture_size">'
+							+       '<img src="../common/images/look_icon.jpg" class="controller_my_picture_size">'
 							+       '<span class="look_pingjia" itemId="'+data.data.pageData[i].itemId+'">查看评论</span>'
 							+   '</div>'
 							+   '<div class="caozuo_three">'
-							+       '<img src="./images/look_icon.jpg" class="controller_my_picture_size">'
+							+       '<img src="../common/images/look_icon.jpg" class="controller_my_picture_size">'
 							+       '<span class="LookInH5" itemId="'+data.data.pageData[i].itemId+'">查看商品</span>'
 							+   '</div>'
 						   +'</td>'
@@ -1725,7 +1726,7 @@ function initShopPageInfo(data){
 }	
 /*商品统计信息：就上面的数量填写*/
 	function getItemStatInfo(){
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemStatInfo/3.1.0',function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/getItemStatInfo/3.1.0',function(data){
 			var data=$.parseJSON(data);
 			var str='<span class="pointer_common" statusCode="0">'
 					+'<span class="Altogether_goods">总商品</span>:'
@@ -1771,7 +1772,7 @@ function initShopPageInfo(data){
             '<option value="360_640">Galaxy S5(宽360px,高640px)</option>' +
             '</select><div class="exit-preview">点击退出预览</div>' +
             '<div class="preResult" ></div></div></div>');
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemDetail/3.1.0',{itemId:ok.attr('itemId')},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/item/getItemDetail/3.1.0',{itemId:ok.attr('itemId')},function(data){
 				var data = $.parseJSON(data);
 				console.log(data)
 				if(data.code == 0){
@@ -1861,7 +1862,7 @@ function getItemComments(){
 		params.page = $(".allShopComments").attr("page");
 	}
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/getItemComments/3.1.0',
+		url : testUrl+'/nggirl-web/web/admin/item/comment/getItemComments/3.1.0',
 		type : 'get',
 		dataType : 'json',
 		data: params,
@@ -1873,7 +1874,7 @@ function getItemComments(){
 			backFn:function(p){
 				params.page = p;
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/getItemComments/3.1.0',
+					url : testUrl+'/nggirl-web/web/admin/item/comment/getItemComments/3.1.0',
 					type : 'get',
 					dataType : 'json',
 					data: params,
@@ -1900,10 +1901,10 @@ function initItemComments(data){
 		var reply='';
 		var huifuBtn='';
 		if(data.data.pageData[i].isReply=="1"){
-			huifuBtn='<img class="management_tubiao_huifu" style="display:inline-block;" src="./images/huifu.png"><span class="management_Summary_comment_callback">回复</span>';
-			reply='<tr class="dianjia_huifu"><td></td><td><span class="huifu_time">'+data.data.pageData[i].replyTime+'</span></td><td></td><td><span class="maijia_guniang">卖家（南瓜姑娘）</span></td><td><span class="huifu_neirong">'+data.data.pageData[i].replyContent+'</span></td><td></td><td replyId="'+data.data.pageData[i].replyId+'"><span class="dislay_inlineblock danduqiming"><img src="./images/img_gai.png"></span><span class="dislay_inlineblock management_edit" replyId="'+data.data.pageData[i].replyId+'">编辑</span><span class="dislay_inlineblock"><img src="./images/remove.png"></span><span class="dislay_inlineblock management_remove">删除</span></td></tr>';
+			huifuBtn='<img class="management_tubiao_huifu" style="display:inline-block;" src="../common/images/huifu.png"><span class="management_Summary_comment_callback">回复</span>';
+			reply='<tr class="dianjia_huifu"><td></td><td><span class="huifu_time">'+data.data.pageData[i].replyTime+'</span></td><td></td><td><span class="maijia_guniang">卖家（南瓜姑娘）</span></td><td><span class="huifu_neirong">'+data.data.pageData[i].replyContent+'</span></td><td></td><td replyId="'+data.data.pageData[i].replyId+'"><span class="dislay_inlineblock danduqiming"><img src="../common/images/img_gai.png"></span><span class="dislay_inlineblock management_edit" replyId="'+data.data.pageData[i].replyId+'">编辑</span><span class="dislay_inlineblock"><img src="../common/images/remove.png"></span><span class="dislay_inlineblock management_remove">删除</span></td></tr>';
 		}else{
-			huifuBtn='<img class="management_tubiao_huifu click_callback" style="display:inline-block;" src="./images/huifu.png"><span class="management_Summary_comment_callback click_callback">回复</span>';
+			huifuBtn='<img class="management_tubiao_huifu click_callback" style="display:inline-block;" src="../common/images/huifu.png"><span class="management_Summary_comment_callback click_callback">回复</span>';
 		}
 		var images='';
 		if(data.data.pageData[i].imgsUrl[0]==null){
@@ -1911,7 +1912,7 @@ function initItemComments(data){
 		}else{
 			images ='<img class="tupianSizeTwo" src="'+data.data.pageData[i].imgsUrl[0]+'">';
 		}
-			Character_string_contact+='<tr classid="'+data.data.pageData[i].commentId+'"  ><td><input type="checkbox" class="management_Summary_comment_checkbox"><span class="management_Summary_comment_number">'+data.data.pageData[i].commentId+'</span></td><td class="management_Summary_comment_time">'+data.data.pageData[i].commentAuditTime+'</td><td class="management_Summary_comment_mianmo"><span class="management_miaomo">'+data.data.pageData[i].itemName+'(型号:'+data.data.pageData[i].skuName+')</span><br><span class="look_tanchuang"><img classid="'+data.data.pageData[i].orderSkuId+'" class="tupianSize" src="./images/Check.png"></span></td><td class="management_xingming">'+data.data.pageData[i].nickName+'</td><td class="management_Summary_comment_people"><span>'+data.data.pageData[i].content+'</span><br><span>'+images+'</span></td><td class="look_shangxiaxianstate">'+onlineStatus+'</td><td class="controller_huifu_shanchu_ohohoh" style="margin-top: 0px;text-align: left;">'+huifuBtn+'<br><img class="management_tubiao_huifu click_remove" style="display:inline-block;" src="./images/remove.png"><span class="management_Summary_comment_remove click_remove">删除</span><br><img class="management_tubiao_huifu click_lookAll" style="display:inline-block;" src="./images/Check.png"><span class="management_Summary_comment_allComment lookAll" itemId="'+data.data.pageData[i].itemId+'" commentId="'+data.data.pageData[i].commentId+'">查看全部评论</span></td></tr>'+reply;
+			Character_string_contact+='<tr classid="'+data.data.pageData[i].commentId+'"  ><td><input type="checkbox" class="management_Summary_comment_checkbox"><span class="management_Summary_comment_number">'+data.data.pageData[i].commentId+'</span></td><td class="management_Summary_comment_time">'+data.data.pageData[i].commentAuditTime+'</td><td class="management_Summary_comment_mianmo"><span class="management_miaomo">'+data.data.pageData[i].itemName+'(型号:'+data.data.pageData[i].skuName+')</span><br><span class="look_tanchuang"><img classid="'+data.data.pageData[i].orderSkuId+'" class="tupianSize" src="../common/images/Check.png"></span></td><td class="management_xingming">'+data.data.pageData[i].nickName+'</td><td class="management_Summary_comment_people"><span>'+data.data.pageData[i].content+'</span><br><span>'+images+'</span></td><td class="look_shangxiaxianstate">'+onlineStatus+'</td><td class="controller_huifu_shanchu_ohohoh" style="margin-top: 0px;text-align: left;">'+huifuBtn+'<br><img class="management_tubiao_huifu click_remove" style="display:inline-block;" src="../common/images/remove.png"><span class="management_Summary_comment_remove click_remove">删除</span><br><img class="management_tubiao_huifu click_lookAll" style="display:inline-block;" src="../common/images/Check.png"><span class="management_Summary_comment_allComment lookAll" itemId="'+data.data.pageData[i].itemId+'" commentId="'+data.data.pageData[i].commentId+'">查看全部评论</span></td></tr>'+reply;
 		
 	}
 	$('.allShopComments .management_Summary_comment .first_tbody').html(Character_string_contact)
@@ -2058,7 +2059,7 @@ function getOrderComments(){
 	}
 	console.log(params.page);
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
+		url : testUrl+'/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
 		type : 'post',
 		dataType : 'json',
 		data: params,
@@ -2071,7 +2072,7 @@ function getOrderComments(){
 				backFn:function(p){
 					params.page = p;
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
+						url : testUrl+'/nggirl-web/web/admin/item/comment/sortComment/3.1.0',
 						type : 'post',
 						dataType : 'json',
 						data: params,
@@ -2100,27 +2101,27 @@ function initOrderComments(data){
 		var reply='';
 		var huifuBtn='';
 		if(data.data.pageData[i].isReply=="1"){
-			huifuBtn='<img class="management_tubiao_huifu" style="display:inline-block;" src="./images/huifu.png"><span class="management_Summary_comment_callback">回复</span>';
-			reply='<tr class="dianjia_huifu"><td></td><td><span class="huifu_time">'+data.data.pageData[i].replyTime+'</span></td><td></td><td><span class="maijia_guniang">卖家（南瓜姑娘）</span></td><td><span class="huifu_neirong">'+data.data.pageData[i].replyContent+'</span></td><td></td><td replyId="'+data.data.pageData[i].replyId+'"><span class="dislay_inlineblock danduqiming"><img src="./images/img_gai.png"></span><span class="dislay_inlineblock management_edit" replyId="'+data.data.pageData[i].replyId+'">编辑</span><span class="dislay_inlineblock"><img src="./images/remove.png"></span><span class="dislay_inlineblock management_remove">删除</span></td></tr>';
+			huifuBtn='<img class="management_tubiao_huifu" style="display:inline-block;" src="../common/images/huifu.png"><span class="management_Summary_comment_callback">回复</span>';
+			reply='<tr class="dianjia_huifu"><td></td><td><span class="huifu_time">'+data.data.pageData[i].replyTime+'</span></td><td></td><td><span class="maijia_guniang">卖家（南瓜姑娘）</span></td><td><span class="huifu_neirong">'+data.data.pageData[i].replyContent+'</span></td><td></td><td replyId="'+data.data.pageData[i].replyId+'"><span class="dislay_inlineblock danduqiming"><img src="../common/images/img_gai.png"></span><span class="dislay_inlineblock management_edit" replyId="'+data.data.pageData[i].replyId+'">编辑</span><span class="dislay_inlineblock"><img src="../common/images/remove.png"></span><span class="dislay_inlineblock management_remove">删除</span></td></tr>';
 		}else{
-			huifuBtn='<img class="management_tubiao_huifu click_callback" style="display:inline-block;" src="./images/huifu.png"><span class="management_Summary_comment_callback click_callback">回复</span>';
+			huifuBtn='<img class="management_tubiao_huifu click_callback" style="display:inline-block;" src="../common/images/huifu.png"><span class="management_Summary_comment_callback click_callback">回复</span>';
 		}
 		var shouleShow='';
 		if($(".singleShopComments .management_controller_sort .finish").hasClass("hidden")){
 			if(i==0){
-				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort"><img src="images/img_arr_down.png" class="let_it_downknow sort hidden"><br/>';
+				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort"><img src="../common/images/img_arr_down.png" class="let_it_downknow sort hidden"><br/>';
 			}else if(i==data.data.pageData.length-1){
-				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort"><img src="images/img_arr_up.png" class="let_it_upknow sort hidden"><br/>';
+				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort"><img src="../common/images/img_arr_up.png" class="let_it_upknow sort hidden"><br/>';
 			}else{
-				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort"><img src="images/img_arr_up.png" class="let_it_upknow sort hidden"><br/><img src="images/img_arr_down.png" class="let_it_downknow sort hidden"><br/>';
+				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort"><img src="../common/images/img_arr_up.png" class="let_it_upknow sort hidden"><br/><img src="../common/images/img_arr_down.png" class="let_it_downknow sort hidden"><br/>';
 			}
 		}else{
 			if(i==0){
-				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort hidden"><img src="images/img_arr_down.png" class="let_it_downknow sort"><br/>';
+				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort hidden"><img src="../common/images/img_arr_down.png" class="let_it_downknow sort"><br/>';
 			}else if(i==data.data.pageData.length-1){
-				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort hidden"><img src="images/img_arr_up.png" class="let_it_upknow sort"><br/>';
+				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort hidden"><img src="../common/images/img_arr_up.png" class="let_it_upknow sort"><br/>';
 			}else{
-				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort hidden"><img src="images/img_arr_up.png" class="let_it_upknow sort"><br/><img src="images/img_arr_down.png" class="let_it_downknow sort"><br/>';
+				shouleShow='<input type="checkbox" class="management_Summary_comment_checkbox notsort hidden"><img src="../common/images/img_arr_up.png" class="let_it_upknow sort"><br/><img src="../common/images/img_arr_down.png" class="let_it_downknow sort"><br/>';
 			}
 		}
 		var images='';
@@ -2129,7 +2130,7 @@ function initOrderComments(data){
 		}else{
 			images ='<img class="tupianSizeTwo" src="'+data.data.pageData[i].imgsUrl[0]+'">';
 		}
-		data_store+='<tr style="position:relative" classid="'+data.data.pageData[i].commentId+'"  ><td class="first_none_click_block">'+shouleShow+'<span class="management_Summary_comment_number">'+data.data.pageData[i].commentId+'</span></td><td class="management_Summary_comment_time">'+data.data.pageData[i].commentAuditTime+'</td><td class="management_Summary_comment_mianmo"><span class="management_miaomo">'+data.data.pageData[i].itemName+'(型号:'+data.data.pageData[i].skuName+')</span><br><span class="look_tanchuang"><img classid="'+data.data.pageData[i].orderSkuId+'" class="tupianSize" src="./images/Check.png"></span></td><td class="management_xingming">'+data.data.pageData[i].nickName+'</td><td class="management_Summary_comment_people"><span>'+data.data.pageData[i].content+'</span><br><span>'+images+'</span></td><td class="look_shangxiaxianstate">'+onlineStatus+'</td><td class="controller_huifu_shanchu_ohohoh" style="margin-top: 0px;text-align: left;">'+huifuBtn+'<br><img class="management_tubiao_huifu click_remove" style="display:inline-block;" src="./images/remove.png"><span class="management_Summary_comment_remove click_remove">删除</span></td></tr>'+reply;
+		data_store+='<tr style="position:relative" classid="'+data.data.pageData[i].commentId+'"  ><td class="first_none_click_block">'+shouleShow+'<span class="management_Summary_comment_number">'+data.data.pageData[i].commentId+'</span></td><td class="management_Summary_comment_time">'+data.data.pageData[i].commentAuditTime+'</td><td class="management_Summary_comment_mianmo"><span class="management_miaomo">'+data.data.pageData[i].itemName+'(型号:'+data.data.pageData[i].skuName+')</span><br><span class="look_tanchuang"><img classid="'+data.data.pageData[i].orderSkuId+'" class="tupianSize" src="../common/images/Check.png"></span></td><td class="management_xingming">'+data.data.pageData[i].nickName+'</td><td class="management_Summary_comment_people"><span>'+data.data.pageData[i].content+'</span><br><span>'+images+'</span></td><td class="look_shangxiaxianstate">'+onlineStatus+'</td><td class="controller_huifu_shanchu_ohohoh" style="margin-top: 0px;text-align: left;">'+huifuBtn+'<br><img class="management_tubiao_huifu click_remove" style="display:inline-block;" src="../common/images/remove.png"><span class="management_Summary_comment_remove click_remove">删除</span></td></tr>'+reply;
 			}
 	$(".singleShopComments .management_Summary_comment .second_tbodys").append(data_store)
 	
@@ -2152,7 +2153,7 @@ function getOptionalLabelAndBuyerReading1(){
 			data:[{type:2,content:''}],//初始化内容
 			defaultData:[{type:2,content:''}]//编辑器为空时,默认的元素
 		});*/
-	$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalLabelAndBuyerReading/3.1.0",function(data){
+	$.get(testUrl+"/nggirl-web/web/admin/item/getOptionalLabelAndBuyerReading/3.1.0",function(data){
 			
 			var data=$.parseJSON(data)
 			
@@ -2210,7 +2211,7 @@ function getSeedingPostDetail(){
 	}
 	console.log(params.page);
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getSeedingPostList/3.1.0',
+		url : testUrl+'/nggirl-web/web/admin/item/getSeedingPostList/3.1.0',
 		type : 'get',
 		dataType : 'json',
 		data: params,
@@ -2223,7 +2224,7 @@ function getSeedingPostDetail(){
 				backFn:function(p){
 					params.page = p;
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getSeedingPostList/3.1.0',
+						url : testUrl+'/nggirl-web/web/admin/item/getSeedingPostList/3.1.0',
 						type : 'get',
 						dataType : 'json',
 						data: params,
@@ -2288,3 +2289,49 @@ function allDetItemCategories(num){
 	str +='</div>';
 	return str;
 }
+
+//初始化购买须知
+function needKnowDetail(){
+		$('.editor_contents').createArticleEditor({
+			elements: ['paragraph'],
+			data:[{type:2,content:''}],//初始化内容
+			defaultData:[{type:2,content:''}]//编辑器为空时,默认的元素
+		});
+};
+function needKnowDetail1(del,buyerReading){
+	console.log(buyerReading);
+	for(var i=0;i<del;i++){
+		$('.editor_content'+i+'').createArticleEditor({
+			elements: ['paragraph'],
+			data:buyerReading[i].detail,//初始化内容
+			defaultData:[{type:2,content:''}]//编辑器为空时,默认的元素
+		});
+	}
+};
+
+//时间转换
+	Date.prototype.format = function(format) {
+		var o = {
+			"M+" :this.getMonth() + 1, // month
+			"d+" :this.getDate(), // day
+			"h+" :this.getHours(), // hour
+			"m+" :this.getMinutes(), // minute
+			"s+" :this.getSeconds(), // second
+			"q+" :Math.floor((this.getMonth() + 3) / 3), // quarter
+			"S" :this.getMilliseconds()
+		// millisecond
+		}
+	
+		if (/(y+)/.test(format)) {
+			format = format.replace(RegExp.$1, (this.getFullYear() + "")
+					.substr(4 - RegExp.$1.length));
+		}
+	
+		for ( var k in o) {
+			if (new RegExp("(" + k + ")").test(format)) {
+				format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+						: ("00" + o[k]).substr(("" + o[k]).length));
+			}
+		}
+		return format;
+	}

@@ -2,11 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="js/editor/jquery.pumpkin.article.editor.css" />
-<title>riqian_mangement</title>
+<link rel="stylesheet" href="../common/js/editor/jquery.pumpkin.article.editor.css" />
+<title>riqian_manage</title>
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="../common/js/part/riqian_mangement.js"></script>
+<script type="text/javascript" src="../common/js/part/riqian_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+
 </head>
 <body>
     <div class="weight-box riqian_manages" id="riqian_manage">
@@ -35,10 +42,10 @@
         </div>
         
         <!-- 新建商品 -->
-        <div class="riqian_create">
-           <label>上线时间:</label><input class="Wdate riqian_date" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"><img src="images/tip.png" alt="" /><br /><br />
-           <label>分享内容:</label><input type="text" placeholder="请输入分享内容" class="riqian_share" /><img src="images/tip.png" alt="" /><br /><br />
-           <label>日签图：</label><input type="file" class="riqian_file_cover" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><img src="images/tip.png" alt="" /><br /><br />
+        <div class="riqian_create hidden">
+           <label>上线时间:</label><input class="Wdate riqian_date" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"><img src="../common/images/tip.png" alt="" /><br /><br />
+           <label>分享内容:</label><input type="text" placeholder="请输入分享内容" class="riqian_share" /><img src="../common/images/tip.png" alt="" /><br /><br />
+           <label>日签图：</label><input type="file" class="riqian_file_cover" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><img src="../common/images/tip.png" alt="" /><br /><br />
            <label style="vertical-align:top;">(720*480):</label><img style="width:360px; height:240px;" src="" alt="" id="riqian_img_cover" /> <br /><br />
             <label style="vertical-align:top;width:400px;color:red;">日签推荐商品图必须是690*216</label> <br /><br />
             <div class="editor_content"></div>
@@ -85,11 +92,10 @@
             text-align:center;
         }
     </style>
-    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.work.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.article.editor.js"></script>
 </body>
 
 </html>

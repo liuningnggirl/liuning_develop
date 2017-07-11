@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadAllCommentsPage();
 	var pageL=new LocalStorageDeque('pageRestoreStack');
 	
 	//选择一个虚拟用户
@@ -10,7 +12,7 @@ $(function(){
 	//点击获取虚拟用户列表
 	$('.add_new_ping_lun .add_ping_lun_user_xuni_name').click(function(e) {
 		$('.add_new_ping_lun .add_ping_lun_xuni_li').children('li').remove();
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/listAddWaterUser/3.0.2',function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/post/listAddWaterUser/3.0.2',function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.add_new_ping_lun .add_ping_lun_xuni_li').show();
@@ -31,7 +33,7 @@ $(function(){
 	//获取灌水用户列表V3.0.2
 	$('.add_new_ping_lun .add_ping_lun_user_xuni_name').keyup(function(e) {
 		$('.add_new_ping_lun .add_ping_lun_xuni_li').children('li').remove();
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/listAddWaterUser/3.0.2',{nickName:$('.add_new_ping_lun .add_ping_lun_user_xuni_name').val()},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/post/listAddWaterUser/3.0.2',{nickName:$('.add_new_ping_lun .add_ping_lun_user_xuni_name').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				if(data.data.length > 0){
@@ -63,7 +65,7 @@ $(function(){
 		var ok = $(this);
         //判断是视频还是文章
 		if(ok.attr('postType') == 1){//文章
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getArticleDetail/2.5.3',{postId:ok.attr('postId'),postType:1},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/column/getArticleDetail/2.5.3',{postId:ok.attr('postId'),postType:1},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.all_commonts_look_tie_window,.graybox_ping_list').show();
@@ -84,7 +86,7 @@ $(function(){
 			});				
 		};
 		if(ok.attr('postType') == 2){//视频
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getVideoDetail/2.5.3',{postId:ok.attr('postId'),postType:2},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/column/getVideoDetail/2.5.3',{postId:ok.attr('postId'),postType:2},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.all_commonts_look_tie_window,.graybox_ping_list').show();
@@ -279,7 +281,7 @@ $(function(){
 				alert('删除原因不能为空！！');
 			}else{
 				$('.loading,.graybox_ping_list').show();
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/deleteCommentsAndReplies/2.5.3',{commentIds:$('.all_commonts_del_window .acw_btn_save').attr('commentIds'),replyIds:$('.all_commonts_del_window .acw_btn_save').attr('replyIds'),deleteType:deleteType,reasons:reasons},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/post/deleteCommentsAndReplies/2.5.3',{commentIds:$('.all_commonts_del_window .acw_btn_save').attr('commentIds'),replyIds:$('.all_commonts_del_window .acw_btn_save').attr('replyIds'),deleteType:deleteType,reasons:reasons},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadAllCommentsPage($('body').attr('page'));
@@ -305,7 +307,7 @@ $(function(){
 				//判断是层主还是层中层
 				if(ok.attr('commentType') == 1){//层主
 					$('.loading,.graybox_ping_list').show();
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/deleteComment/2.5.3',{commentId:$(this).attr('commentId'),deleteType:deleteType,reasons:reasons},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/post/deleteComment/2.5.3',{commentId:$(this).attr('commentId'),deleteType:deleteType,reasons:reasons},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							loadAllCommentsPage($('body').attr('page'));
@@ -318,7 +320,7 @@ $(function(){
 				}
 				if(ok.attr('commentType') == 2){//层中层
 					$('.loading,.graybox_ping_list').show();
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/deleteReply/2.5.3',{replyId:$(this).attr('replyId'),deleteType:deleteType,reasons:reasons},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/post/deleteReply/2.5.3',{replyId:$(this).attr('replyId'),deleteType:deleteType,reasons:reasons},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							loadEveryOneTiePage($('.ac_everyOne_list').attr('type'),$('.ac_everyOne_list').attr('id'),$('body').attr('page'));
@@ -348,7 +350,7 @@ $(function(){
 		var r = confirm('确定要屏蔽此条评论？？');
 		if(r == true){
 			if(btn.attr('commentType') == 1){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/shieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('commentId')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/post/shieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('commentId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadAllCommentsPage($('body').attr('page'));
@@ -359,7 +361,7 @@ $(function(){
 				});
 			}
 			if(btn.attr('commentType') == 2){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/shieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('replyId')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/post/shieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('replyId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadAllCommentsPage($('body').attr('page'));
@@ -378,7 +380,7 @@ $(function(){
 		var r = confirm('确定要取消屏蔽此条评论？？');
 		if(r == true){
 			if(btn.attr('commentType') == 1){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/cancelShieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('commentId')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/post/cancelShieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('commentId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadAllCommentsPage($('body').attr('page'));
@@ -389,7 +391,7 @@ $(function(){
 				});
 			}
 			if(btn.attr('commentType') == 2){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/cancelShieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('replyId')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/post/cancelShieldComment/2.0.0',{commentType:btn.attr('commentType'),targetId:btn.attr('replyId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadAllCommentsPage($('body').attr('page'));
@@ -427,7 +429,7 @@ $(function(){
 	$('.add_ping_lun .apl_btn_send').click(function(e) {
 		//判断是层主还是层中层回复
 		if($('.add_ping_lun').attr('commentType') == 1){//层主
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/reply/2.0.0',{commentId:$('.add_ping_lun').attr('commentId'),userId:$('.add_ping_lun .apl_ping_user_id').val(),content:$('.add_ping_lun .apl_ping_conent').val()},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/post/reply/2.0.0',{commentId:$('.add_ping_lun').attr('commentId'),userId:$('.add_ping_lun .apl_ping_user_id').val(),content:$('.add_ping_lun .apl_ping_conent').val()},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.graybox').hide();
@@ -441,7 +443,7 @@ $(function(){
 			});
 		}
 		if($('.add_ping_lun').attr('commentType') == 2){//层中层
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/reply/2.0.0',{commentId:$('.add_ping_lun').attr('commentId'),replyId:$('.add_ping_lun').attr('replyId'),userId:$('.add_ping_lun .apl_ping_user_id').val(),content:$('.add_ping_lun .apl_ping_conent').val()},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/post/reply/2.0.0',{commentId:$('.add_ping_lun').attr('commentId'),replyId:$('.add_ping_lun').attr('replyId'),userId:$('.add_ping_lun .apl_ping_user_id').val(),content:$('.add_ping_lun .apl_ping_conent').val()},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.graybox').hide();
@@ -466,7 +468,7 @@ $(function(){
 		}else if($.trim($('.add_new_ping_lun .apl_ping_user_id').val()) != '' && $.trim($('.add_new_ping_lun .add_ping_lun_user_xuni_name').val()) != ''){
 			userId = $('.add_new_ping_lun .apl_ping_user_id').val();	
 		}
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/comment/2.0.0',{postId:$('.ac_everyOne_list .add_new_ping').attr('postId'),postType:$('.ac_everyOne_list .add_new_ping').attr('postType'),userId:userId,content:$('.add_new_ping_lun .apl_ping_conent').val()},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/post/comment/2.0.0',{postId:$('.ac_everyOne_list .add_new_ping').attr('postId'),postType:$('.ac_everyOne_list .add_new_ping').attr('postType'),userId:userId,content:$('.add_new_ping_lun .apl_ping_conent').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.graybox').hide();
@@ -542,7 +544,7 @@ function createAllCommentsPage(data){
 			params.page = p;
 			$('.all_commonts_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/getAllComments/2.5.3',
+				url : testUrl+'/nggirl-web/web/admin/post/getAllComments/2.5.3',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -707,7 +709,7 @@ function getAllCommentsSearchParams(page){
 function loadAllCommentsPage(page){
 	$('.all_commonts_table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/getAllComments/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/post/getAllComments/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: getAllCommentsSearchParams(page),
@@ -761,7 +763,7 @@ function createEveryOneTiePage(data){
 			params.postType = $('.ac_everyOne_list').attr('type');
 			$('.everyone_commonts_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/getPostComments/2.3.0',
+				url : testUrl+'/nggirl-web/web/admin/post/getPostComments/2.3.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -1041,7 +1043,7 @@ function getEveryOneTieSearchParams(type,id,page){
 function loadEveryOneTiePage(type,id,page){
 	$('.everyone_commonts_table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/post/getPostComments/2.3.0',
+		url : testUrl+'/nggirl-web/web/admin/post/getPostComments/2.3.0',
 		type : 'get',
 		dataType : 'json',
 		data: getEveryOneTieSearchParams(type,id,page),

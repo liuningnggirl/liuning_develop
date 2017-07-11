@@ -2,11 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="js/editor/jquery.pumpkin.article.editor.css" />
+<link rel="stylesheet" href="../common/js/editor/jquery.pumpkin.article.editor.css" />
 <title>lottery_activity_manage</title>
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/lottery_activity_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="../common/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
     <div class="weight-box lottery_activity_manage" id="lottery_activity_manage">
@@ -83,36 +90,36 @@
         </div>
         <!--  新增抽奖活动 -->
         <div class="add_lottery_activity" style="width: 100%;background: #fff;padding: 10px; display:none;">
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">活 动 题 目：</label>
             <input type="text" placeholder="请输入活动题目" class="ala_title" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">活动分享内容：</label>
             <input type="text" placeholder="请输入活动分享内容" class="ala_content" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br /><br />
             <label for="">抽奖活动分享小图：</label>
             <input type="file" class="lottery_activity_file_small_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">（70*70）：</label><img src="" id="lottery_activity_file_cover" alt="" style="width:70px; height:70px; vertical-align: text-top;" /><br /><br />
             <label for="">抽奖活动头图：</label>
             <input type="file" class="lottery_activity_file_toutu_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">（640*320）：</label><img src="" id="lottery_activity_file_small_cover" alt="" style="width:180px; height:120px; vertical-align: text-top;" /><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">转盘图片：</label>
             <input type="file" class="lottery_zhuanpan_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
             <img src="" id="lottery_zhuanpan_cover" alt="" style="width:100px; height:100px; vertical-align: text-top; margin-left: 88px;" /><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">转盘指针图片：</label>
             <input type="file" class="lottery_hand_cover" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
             <img src="" id="lottery_hand_cover" alt="" style="width:100px; height:100px; vertical-align: text-top; margin-left: 88px;" /><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">抽奖活动时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate qian" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><label for=""> 至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate hou" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">在前</label>
             <input type="text" placeholder="请输入抽奖次数" class="lottery_choujiang_num" style="padding:7px 0; border:1px  solid #ccc;" /> <label for="">次将所有奖品抽完</label><br /><br  />
             <label for="">每人每天免费抽奖次数：</label>
             <input type="text" placeholder="请输入免费抽奖次数" class="lottery_everday_num" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br  /><br  />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="">每人抽奖一次所需积分：</label>
             <input type="text" placeholder="请输入抽奖所需积分" class="lottery_once_cost" style="padding:7px 0; width:200px; border:1px solid #ccc;" /><br  /><br  />
 			<input type="button" value="保存" class="lottery_activity_save" style="padding:10px;" />
@@ -121,7 +128,7 @@
         
         <!-- 奖品管理  -->
         <div class="gift_manage" style="display:none;">
-        	<img src="images/tip.png" alt="" class="tip"><label for="">奖品：</label>
+        	<img src="../common/images/tip.png" alt="" class="tip"><label for="">奖品：</label>
             <input type="button" value="商品" class="btn gm_shope" />
             <input type="button" value="南瓜券" class="btn gm_vouchers" />
             <input type="button" value="第三方优惠券" class="btn gm_three_vouchers" />
@@ -147,21 +154,21 @@
         
         <!--  添加商品 -->
         <div class="lottery_add_commodity hidden">
-        	<img src="images/tip.png" alt="" class="tip">
+        	<img src="../common/images/tip.png" alt="" class="tip">
             <label for="" class="la_name">商品名称：</label><input type="text" placeholder="奖品名称" class="laac_txt laac_name" /><br /><br />
             <div class="la_num_box">
-                <img src="images/tip.png" alt="" class="tip">
+                <img src="../common/images/tip.png" alt="" class="tip">
                 <label for="" class="la_num">商品数量：</label><input type="text" placeholder="数量" class="laac_txt laac_num" /><br /><br />
             </div>
             <div class="la_quan_box">
-                <img src="images/tip.png" alt="" class="tip">
+                <img src="../common/images/tip.png" alt="" class="tip">
                 <label for="" class="la_quan">优惠券：</label><input type="text" placeholder="输入兑换码，以“，”号作为兑换码间的间隔符" class="laac_txt laac_quan" /><br /><br />
             </div>
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="" class="la_img">商品图：</label>
             <input type="file" class="la_commodity_img" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
             <label for="">（70*70）：</label><img src="" id="la_commodity_img" alt="" style="width:70px; height:70px; vertical-align: text-top;" /><br /><br />
-            <img src="images/tip.png" alt="" class="tip">
+            <img src="../common/images/tip.png" alt="" class="tip">
             <label for="" class="la_handimg">商品头图：</label>
             <input type="file" class="la_commodity_head_img" multiple="" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0"><br /><br />
             <label for="">（360*240）：</label><img src="" id="la_commodity_head_img" alt="" style="width:180px; height:120px; vertical-align: text-top;" /><br /><br />
@@ -171,10 +178,10 @@
             <input type="button" value="取消" class="la_cancle" style=" padding:7px; background:#ccc;" />
         </div>
     </div>
-    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.article.editor.js"></script>
 </body>
 
 </html>

@@ -439,7 +439,7 @@ $(function(){
 					{"id":"post_manage","name":"帖子管理","parentId":"community_manage","url":"post_manage_new.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"community_commends_manage","name":"社区评论管理","parentId":"community_manage","url":"allCommentsManagement.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"community_label_manage","name":"发布页面标签管理","parentId":"community_manage","url":"community_label_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"popular_searches","name":"热门搜索","parentId":"community_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"popular_searches","name":"热门搜索","parentId":"community_manage","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"post_hot_match","name":"帖子热度匹配","parentId":"community_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 						{"id":"post_hot_match_operators_manage","name":"管理员","parentId":"post_hot_match","url":"tie_hot_admin_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 						{"id":"post_hot_match_admin_manage","name":"运营人员","parentId":"post_hot_match","url":"tie_hot_operators_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
@@ -448,10 +448,11 @@ $(function(){
 				{"id":"operation_manage","name":"运营活动管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 					{"id":"lottery_activity_manage","name":"大转盘抽奖活动","parentId":"operation_manage","url":"lottery_activity_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"free_trial_manage","name":"免费试用活动","parentId":"operation_manage","url":"free_trial_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"riqian_manage","name":"日签","parentId":"operation_manage","url":"riqian_management.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"riqian_manage","name":"日签","parentId":"operation_manage","url":"riqian_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"community_hottopic_manage","name":"话题讨论","parentId":"operation_manage","url":"community_hottopic_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"points_mall_manage","name":"积分商城","parentId":"operation_manage","url":"points_mall_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"pumpkin_person_approve_manage","name":"南瓜达人认证","parentId":"operation_manage","url":"pumpkin_person_approve_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"play_reward_manage","name":"打赏","parentId":"operation_manage","url":"play_reward_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"community_activities_manage","name":"社团活动排版管理","parentId":"operation_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 						{"id":"community_freetrail_manage","name":"免费试用活动","parentId":"community_activities_manage","url":"community_freetrail_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 						{"id":"community_activity_manage","name":"有奖活动","parentId":"community_activities_manage","url":"community_activity_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}

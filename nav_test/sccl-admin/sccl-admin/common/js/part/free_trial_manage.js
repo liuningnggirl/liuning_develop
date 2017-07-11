@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadFreeTrialPage();
 	//妆品试用列表跳转到某一页
 	$('.free_trial_list .redirect_page .all_commonts_redirect_page_ok').click(function(e) {
         loadFreeTrialPage($.trim($('.free_trial_list .redirect_page .all_commonts_redirect_page_num').val()));
@@ -47,7 +49,7 @@ $(function(){
 	$('.look_free_trial_listname_weixin .free_trial_table_listname .edit_report').live('click',function(e) {
 		var btn = $(this);		
 		//获取微信用户试用报告详情V3.0.0
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getWeChatReportDetail/3.0.0',{reportId:btn.attr('reportId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/cosmeticTrial/getWeChatReportDetail/3.0.0',{reportId:btn.attr('reportId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.look_free_trial_listname_weixin').hide();
@@ -82,7 +84,7 @@ $(function(){
 		}
 		var reportDetail = JSON.stringify(finalData);
 		if(typeof($('.add_weixin_report_content').attr('reportId')) == "undefined"){//新增
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/addOrEditWechatReport/3.0.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),nickName:$('.add_weixin_report_content .add_weixin_report_content_username').val(),profile:$('.add_weixin_report_content .add_weixin_report_content_cover').attr('src'),reportDetail:reportDetail},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/addOrEditWechatReport/3.0.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),nickName:$('.add_weixin_report_content .add_weixin_report_content_username').val(),profile:$('.add_weixin_report_content .add_weixin_report_content_cover').attr('src'),reportDetail:reportDetail},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.add_weixin_report_content').hide();
@@ -95,7 +97,7 @@ $(function(){
 		}else{//更新
 			var r = confirm('确定要更新该报告？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/addOrEditWechatReport/3.0.0',{reportId:$('.add_weixin_report_content').show().attr('reportId'),cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),nickName:$('.add_weixin_report_content .add_weixin_report_content_username').val(),profile:$('.add_weixin_report_content .add_weixin_report_content_cover').attr('src'),reportDetail:reportDetail},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/addOrEditWechatReport/3.0.0',{reportId:$('.add_weixin_report_content').show().attr('reportId'),cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),nickName:$('.add_weixin_report_content .add_weixin_report_content_username').val(),profile:$('.add_weixin_report_content .add_weixin_report_content_cover').attr('src'),reportDetail:reportDetail},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.add_weixin_report_content').hide();
@@ -114,7 +116,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该报告？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/deleteReport/2.5.6',{reportId:btn.attr('reportId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/deleteReport/2.5.6',{reportId:btn.attr('reportId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -178,7 +180,7 @@ $(function(){
 			if(typeof($('.virtual_user_add_box').attr('userId')) != "undefined"){
 				var r = confirm('确定要更新虚拟用户信息？');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/addOrEditVirtualUser/2.5.8',{userId:$('.virtual_user_add_box').attr('userId'),nickName:$('.virtual_user_add_box .virtual_user_username').val(),profile:$('.virtual_user_add_box #virtual_user_img').attr('src'),message:$('.virtual_user_add_box .virtual_user_usermessage').val()},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/addOrEditVirtualUser/2.5.8',{userId:$('.virtual_user_add_box').attr('userId'),nickName:$('.virtual_user_add_box .virtual_user_username').val(),profile:$('.virtual_user_add_box #virtual_user_img').attr('src'),message:$('.virtual_user_add_box .virtual_user_usermessage').val()},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							loadVirtualUserListPage();
@@ -194,7 +196,7 @@ $(function(){
 			}else{
 				var r = confirm('确定要添加虚拟用户？');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/addOrEditVirtualUser/2.5.8',{nickName:$('.virtual_user_add_box .virtual_user_username').val(),profile:$('.virtual_user_add_box #virtual_user_img').attr('src'),message:$('.virtual_user_add_box .virtual_user_usermessage').val()},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/addOrEditVirtualUser/2.5.8',{nickName:$('.virtual_user_add_box .virtual_user_username').val(),profile:$('.virtual_user_add_box #virtual_user_img').attr('src'),message:$('.virtual_user_add_box .virtual_user_usermessage').val()},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							loadVirtualUserListPage();
@@ -252,7 +254,7 @@ $(function(){
 	
 	//编辑新增的虚拟用户信息
 	$('.virtual_user_list_table .virtual_table_edit_btn').live('click',function(){
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getVirtaulUserInfo/2.5.8',{userId:$(this).attr('userId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/cosmeticTrial/getVirtaulUserInfo/2.5.8',{userId:$(this).attr('userId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.virtual_user_add_box,.graybox').show();
@@ -271,7 +273,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确定要删除？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/deleteVirtualUser/2.5.8',{userId:btn.attr('userId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/deleteVirtualUser/2.5.8',{userId:btn.attr('userId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -301,7 +303,7 @@ $(function(){
 	//选择虚拟申请用户
 	$('.select_virtual_user_list_table .select_virtual_table_btn_checked').live('click',function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/forCosmeticAddVirtualUser/2.5.8',{userId:btn.attr('userId'),cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/forCosmeticAddVirtualUser/2.5.8',{userId:btn.attr('userId'),cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.addClass('select_virtual_table_btn_cancle').val('取消').css('background','#bd362f').removeClass('select_virtual_table_btn_checked');
@@ -314,7 +316,7 @@ $(function(){
 	//取消选择虚拟申请用户
 	$('.select_virtual_user_list_table .select_virtual_table_btn_cancle').live('click',function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/forCosmeticDeleteVirtualUser/2.5.8',{userId:btn.attr('userId'),cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/forCosmeticDeleteVirtualUser/2.5.8',{userId:btn.attr('userId'),cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.addClass('select_virtual_table_btn_checked').val('选择').css('background','#51a351').removeClass('select_virtual_table_btn_cancle');
@@ -335,7 +337,7 @@ $(function(){
 					var btn = $(this);
 					var r = confirm('确定选中此用户获奖？？');
 					if(r == true){
-						$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/applySuccess/2.3.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),userId:$(this).attr('userId')},function(data){
+						$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/applySuccess/2.3.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),userId:$(this).attr('userId')},function(data){
 							var data = $.parseJSON(data);
 							if(data.code ==0){
 								btn.addClass('free_trial_every_one_cancle').val('取消').removeClass('free_trial_every_one_getjiang');
@@ -358,7 +360,7 @@ $(function(){
 				var btn = $(this);
 				var r = confirm('确定取消此用户获奖');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/applyFailure/2.3.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),userId:$(this).attr('userId')},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/applyFailure/2.3.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId'),userId:$(this).attr('userId')},function(data){
 						var data = $.parseJSON(data);
 						if(data.code ==0){
 							btn.addClass('free_trial_every_one_getjiang').val('获奖').removeClass('free_trial_every_one_cancle');
@@ -378,7 +380,7 @@ $(function(){
 			//判断是否已经推送短信
 			if($('.look_free_trial_list').attr('isPushed') == 0){//未推送短信
 				var btn = $(this);
-				$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/submitJudge/2.3.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+				$.get(testUrl+'/nggirl-web/web/admin/cosmeticTrial/submitJudge/2.3.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code ==0){
 						//判断type值
@@ -386,7 +388,7 @@ $(function(){
 							var t = confirm('确定要公布名单??');
 							if(t == true){
 								//短信推送
-								$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/pushMessage/2.4.2',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+								$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/pushMessage/2.4.2',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 									var data = $.parseJSON(data);
 									if(data.code ==0){
 										$('.look_free_trial_list').hide();
@@ -402,7 +404,7 @@ $(function(){
 							var t = confirm('获奖人数已超出'+data.data.num+'人，确定要公布名单??');
 							if(t == true){
 								//短信推送
-								$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/pushMessage/2.4.2',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+								$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/pushMessage/2.4.2',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 									var data = $.parseJSON(data);
 									if(data.code ==0){
 										$('.look_free_trial_list').hide();
@@ -418,7 +420,7 @@ $(function(){
 							var t = confirm('获奖人数还差'+data.data.num+'人，确定要公布名单??');
 							if(t == true){
 								//短信推送
-								$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/pushMessage/2.4.2',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+								$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/pushMessage/2.4.2',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 									var data = $.parseJSON(data);
 									if(data.code ==0){
 										$('.look_free_trial_list').hide();
@@ -513,7 +515,7 @@ $(function(){
 		if(typeof($('.add_free_trial').attr('status')) == 'undefined' ){//新增
 			var r = confirm('确定保存妆品试用活动？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/addCosmeticTrial/2.4.0',{
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/addCosmeticTrial/2.4.0',{
 					cosmeticImg:$('.add_free_trial #free_trial_file_cover').attr('src'),
 					shareImg:$('.add_free_trial #free_trial_file_small_cover').attr('src'),
 					title:$('.add_free_trial .aft_title').val(),
@@ -540,7 +542,7 @@ $(function(){
 		}else{
 			var r = confirm('确定更新妆品试用活动？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/updateCosmeticTrial/2.4.0',{//更新
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/updateCosmeticTrial/2.4.0',{//更新
 					cosmeticId:$('.add_free_trial').attr('cosmeticId'),
 					cosmeticImg:$('.add_free_trial #free_trial_file_cover').attr('src'),
 					shareImg:$('.add_free_trial #free_trial_file_small_cover').attr('src'),
@@ -573,7 +575,7 @@ $(function(){
 	//获取妆品试用活动详情V2.4.0
 	$('.free_trial_table_list .free_trial_edit_btn').live('click',function(e) {
 		$('.add_free_trial').attr('status','edit');
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getCosmeticTrial/2.4.0',{cosmeticId:$(this).attr('cosmeticId')},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/cosmeticTrial/getCosmeticTrial/2.4.0',{cosmeticId:$(this).attr('cosmeticId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.free_trial_list').hide();
@@ -607,7 +609,7 @@ $(function(){
 		var r = confirm('确定删除此妆品试用活动？？');
 		var ok = $(this);
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/deleteCosmeticTrial/2.4.0',{cosmeticId:ok.attr('cosmeticId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/deleteCosmeticTrial/2.4.0',{cosmeticId:ok.attr('cosmeticId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					ok.parent().parent().remove();
@@ -623,7 +625,7 @@ $(function(){
 		var r = confirm('确定发布此妆品试用活动？？');
 		var ok = $(this);
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/releaseCosmeticTrial/2.4.0',{cosmeticId:ok.attr('cosmeticId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/releaseCosmeticTrial/2.4.0',{cosmeticId:ok.attr('cosmeticId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					ok.addClass('free_trial_look_btn').attr('value','查看申请名单').removeClass('free_trial_fabu_btn').css({'background':'#51a351','color':'#fff'});
@@ -661,7 +663,7 @@ $(function(){
 			$('.look_free_trial_listname').hide();
 			$(".edit_report_content").attr('reportId',btn.attr("reportId"));
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getReportDetail/2.5.6',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getReportDetail/2.5.6',
 				type : 'get',
 				dataType : 'json',
 				data: {reportId:btn.attr("reportId")},
@@ -705,7 +707,7 @@ $(function(){
 		console.log(details);
 		var r = confirm('确认更新该报告？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/addOrEditReport/2.5.6',{reportId:$('.edit_report_content').attr('reportId'),reportDetail:details},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/addOrEditReport/2.5.6',{reportId:$('.edit_report_content').attr('reportId'),reportDetail:details},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					loadAwardUserListPage();
@@ -724,7 +726,7 @@ $(function(){
 		if(!btn.hasClass('no_del')){
 			var r = confirm('确认要删除该报告？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/deleteReport/2.5.6',{reportId:btn.attr('reportId')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticTrial/deleteReport/2.5.6',{reportId:btn.attr('reportId')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						btn.parent().parent().remove();
@@ -748,7 +750,7 @@ function createFreeTrialPage(data){
 			params.page = p;
 			$('.free_trial_table_list>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getCosmeticTrialList/2.4.0',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getCosmeticTrialList/2.4.0',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -805,7 +807,7 @@ function getFreeTrialSearchParams(page){
 function loadFreeTrialPage(page){
 	$('.free_trial_table_list>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getCosmeticTrialList/2.4.0',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getCosmeticTrialList/2.4.0',
 		type : 'post',
 		dataType : 'json',
 		data: getFreeTrialSearchParams(page),
@@ -825,7 +827,7 @@ function createFreeTrialEveryOnePage(data){
 			params.page = p;
 			$('.free_trial_table_everone_list>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getApplyUserList/2.5.8',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getApplyUserList/2.5.8',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -934,7 +936,7 @@ function getFreeTrialSearchEveryOneParams(page){
 function loadFreeTrialEveryOnePage(page){
 	$('.free_trial_table_everone_list>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getApplyUserList/2.5.8',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getApplyUserList/2.5.8',
 		type : 'get',
 		dataType : 'json',
 		data: getFreeTrialSearchEveryOneParams(page),
@@ -987,7 +989,7 @@ function createAwardUserListPage(data){
 			params.cosmeticId = $('.free_trial_manage .look_free_trial_list').attr('cosmeticId');
 			$('.look_free_trial_listname .free_trial_table_listname>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getAwardUserList/2.5.6',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getAwardUserList/2.5.6',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -1032,7 +1034,7 @@ function getAwardUserListSearchParams(page,cosmeticId){
 function loadAwardUserListPage(){
 	$('.look_free_trial_listname .free_trial_table_listname>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getAwardUserList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getAwardUserList/2.5.6',
 		type : 'get',
 		dataType : 'json',
 		data: getAwardUserListSearchParams(1,$('.free_trial_manage .look_free_trial_list').attr('cosmeticId')),
@@ -1058,7 +1060,7 @@ function createVirtualUserListPage(data){
 			$('.virtual_user_list_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$('.select_virtual_user_list_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getVirtualUserList/2.5.8',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getVirtualUserList/2.5.8',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -1100,7 +1102,7 @@ function loadVirtualUserListPage(){
 	$('.virtual_user_list_table>tbody>tr:gt(0)').remove();
 	$('.select_virtual_user_list_table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getVirtualUserList/2.5.8',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticTrial/getVirtualUserList/2.5.8',
 		type : 'get',
 		dataType : 'json',
 		data: getVirtualUserListSearchParams(1,$('.look_free_trial_list').attr('cosmeticId')),
@@ -1111,7 +1113,7 @@ function loadVirtualUserListPage(){
 //获取微信用户免费试用列表
 function getWeChatReportListFn(){
 	$('.look_free_trial_listname_weixin .free_trial_table_listname tbody tr:gt(0)').remove();
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticTrial/getWeChatReportList/3.0.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/cosmeticTrial/getWeChatReportList/3.0.0',{cosmeticId:$('.look_free_trial_list').attr('cosmeticId')},function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('.free_trial_manage .look_free_trial_list').hide();

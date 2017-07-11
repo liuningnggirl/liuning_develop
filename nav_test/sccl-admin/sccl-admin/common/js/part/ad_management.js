@@ -1,8 +1,9 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
-//订单管理
-//<!--  点击搜索按钮 -->
+	listInviteCodes3();
+//点击搜索按钮>
 	$('.ad-list .searchad-btn').click(listInviteCodes3);
-//<!--  点击添加广告按钮 -->
+//点击添加广告按钮
 	$('.ad-list .createad-btn').click(function(e) {
 		clearAd();
 		$('.ad-list').hide();
@@ -48,7 +49,7 @@ $('.fileimg').fileupload({
 			alert("开始时间不能为空");
 		}else if($.trim($('.ad-create .endTime').val()) == ''){
 			alert("结束时间不能为空");
-		}else if($('.ad-create .currentimg:eq(0)').attr("src") == 'images/add.jpg' || $('.ad-create .currentimg:eq(1)').attr("src") == 'images/add.jpg' || $('.ad-create .currentimg:eq(2)').attr("src") == 'images/add.jpg' || $('.ad-create .currentimg:eq(3)').attr("src") == 'images/add.jpg' || $('.ad-create .currentimg:eq(4)').attr("src") == 'images/add.jpg' || $('.ad-create .currentimg:eq(5)').attr("src") == 'images/add.jpg' || $('.ad-create .currentimg:eq(6)').attr("src") == 'images/add.jpg'){
+		}else if($('.ad-create .currentimg:eq(0)').attr("src") == '../common/images/add.jpg' || $('.ad-create .currentimg:eq(1)').attr("src") == '../common/images/add.jpg' || $('.ad-create .currentimg:eq(2)').attr("src") == '../common/images/add.jpg' || $('.ad-create .currentimg:eq(3)').attr("src") == '../common/images/add.jpg' || $('.ad-create .currentimg:eq(4)').attr("src") == '../common/images/add.jpg' || $('.ad-create .currentimg:eq(5)').attr("src") == '../common/images/add.jpg' || $('.ad-create .currentimg:eq(6)').attr("src") == '../common/images/add.jpg'){
 			alert("请选择要展示的图片");
 		}else if(!$('.ad-create .imgurl1').attr('checked') && !$('.ad-create .imgurl2').attr('checked')){
 			alert("请选择是否有链接");
@@ -62,36 +63,11 @@ $('.fileimg').fileupload({
 			}
 		}
 	});
-//点击上线
-/*$(".adlist .adbtn").live('click',function(){
-	var del=$(this);
-	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/adManage/updateAdOnlineStatus/3.0.0',
-		type : 'post',
-		dataType : 'json',
-		data: {id:del.attr('id'),onLine:del.attr('onLine')},
-		success : function(data){
-			if(data.code == 0){
-				if(del.hasClass("redbtn1")){
-					del.val("上线");
-					del.attr('onLine',"1");
-					del.addClass("bluebtn1").removeClass("redbtn1");
-				}else{
-					del.val("下线");
-					del.attr('onLine',"0");
-					del.addClass("redbtn1").removeClass("bluebtn1");
-				}
-			}else{
-				alert(data.data.error);	
-			}
-		}
-	});
-});*/
 //获取编辑广告内容
 $(".rewritebtn").live("click", function(){
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/adManage/getAdDetail/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/adManage/getAdDetail/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: {id:$(this).parent().parent().children('td:eq(0)').html()},
@@ -143,7 +119,7 @@ function clearAd(){
 	$('.ad-create .right_adtxt').val('');
 	$('.ad-create .startTime').val('');
 	$('.ad-create .endTime').val('');
-	$('.ad-create .currentimg').attr("src","images/add.jpg");
+	$('.ad-create .currentimg').attr("src","../common/images/add.jpg");
 	$('.ad-create .creatadvertiser').removeAttr("adid");
 	$('.ad-create .currentimg').removeAttr("photoid");
 	$('.ad-create .imgurl1').click();
@@ -210,7 +186,7 @@ function advertiserInfo2(){
 function creataddetail(){
 	var data=advertiserInfo1();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/adManage/addAdvertiser/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/adManage/addAdvertiser/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {advertiserInfo:data},
@@ -232,7 +208,7 @@ function editaddetail(){
 	//获取除了封面以外上传的其他图片地址
 	var data=advertiserInfo2();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/adManage/updateAdvertiser/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/adManage/updateAdvertiser/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data:{advertiserInfo:data},
@@ -302,7 +278,7 @@ function onClickPageNum3(p){
 	var data = genData3();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/adManage/getAdList/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/adManage/getAdList/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -317,7 +293,7 @@ function listInviteCodes3(){
 	//获取入参
 	var data = genData3();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/adManage/getAdList/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/adManage/getAdList/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: data,

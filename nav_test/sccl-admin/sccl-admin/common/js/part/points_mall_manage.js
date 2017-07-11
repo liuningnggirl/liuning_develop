@@ -1,7 +1,9 @@
-
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadGoodsListPage();
+	loadPorderListPage();
 	//获取用户角色
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getUserRoles',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/common/getUserRoles',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			for(var x = 0; x < data.data.length ;x ++){
@@ -24,7 +26,6 @@ $(function(){
 		window.location.href = "<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/exportOrderList/2.5.4?" + strParam+'&v=<%= VERSION %>';
     });
 	
-//邀请管理
 //<!--  点击积分商城搜索按钮 -->
 	$(".points_goods_create").live('click',function(){
 		clearPointsList();
@@ -116,12 +117,6 @@ $('.randomedit .on-select').change(function(){
 		$(".porder_list").hide();
 		loadGoodsListPage();
 	});
-//失焦
-	/*$(document).on("click", "*", function(){
-		$(".followRole ul").hide();
-		$(".followRolelevel ul").hide();
-		$(".fitType p:last").hide();
-	});*/
 //选择用户角色
 	$(".followRole p").live('click',function(){
 		$(".followRole ul").toggle();
@@ -264,7 +259,7 @@ function pointsListDetail(data){
 //根据不同的页码来渲染页面
 function onclickPointsPageNum(p){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/getGoodsList/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/getGoodsList/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {page:p,num:20,goodsId:$(".points_good_id").val(),name:$(".points_good_name").val()},
@@ -277,7 +272,7 @@ function onclickPointsPageNum(p){
 function loadGoodsListPage(){
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/getGoodsList/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/getGoodsList/3.0.0',
 		type : 'post',
 		dataType : 'json',
 		data: {page:0,num:20,goodsId:$(".points_good_id").val(),name:$(".points_good_name").val()},
@@ -409,7 +404,7 @@ function savePointsGoodsDetail(){
 			freight:"0",startTime:$(".pmstartTime").val(),endTime:$(".pmendTime").val(),fitUserRole:str1,fitType:$(".fitType p:eq(0)").attr("fitType"),
 			fitUserLevel:str2,exchangeTime:$(".changeLimit").val(),goodsDetail:details,codes:$(".codenum").val(),instructions:details1};
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/addOrEditGoods/2.5.3',
+				url : testUrl+'/nggirl-web/web/admin/scoreshop/addOrEditGoods/2.5.3',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -431,7 +426,7 @@ function savePointsGoodsDetail(){
 //商品上下架
 function standUpOrDown(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/standUpOrDown/2.5.2',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/standUpOrDown/2.5.2',
 		type : 'post',
 		dataType : 'json',
 		data: {unionGoodsId:$(".upOrDown").parent().attr("unionGoodsId"),goodsId:$(".upOrDown").parent().attr("goodsId"),goodsType:$(".upOrDown").parent().attr("goodsType"),isAdd:$(".upOrDown").attr("isAdd")},
@@ -456,7 +451,7 @@ function standUpOrDown(){
 //删除商品
 function deletedpointsInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/deleteGoods/2.5.2',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/deleteGoods/2.5.2',
 		type : 'post',
 		dataType : 'json',
 		data: {goodsId:$(".delThisRiqian").parent().attr("goodsId"),goodsType:$(".delThisRiqian").parent().attr("goodsType")},
@@ -472,7 +467,7 @@ function deletedpointsInfo(){
 //获取单个商品信息进行编辑
 function getPointsGoodsInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/getGoodsDetail/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/getGoodsDetail/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: {goodsId:$(".editThisPgoods").parent().attr("goodsId"),goodsType:$(".editThisPgoods").parent().attr("goodsType")},
@@ -594,7 +589,7 @@ function onclickPorderPageNum(p){
 	var data = porderData();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/getOrderList/2.5.2',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/getOrderList/2.5.2',
 		type : 'post',
 		dataType : 'json',
 		data: data,
@@ -608,7 +603,7 @@ function loadPorderListPage(){
 	var data = porderData();
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/getOrderList/2.5.2',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/getOrderList/2.5.2',
 		type : 'post',
 		dataType : 'json',
 		data: data,
@@ -631,7 +626,7 @@ function loadPorderListPage(){
 //商品发货
 function deliverGoodsFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/scoreshop/deliverGoods/2.5.2',
+		url : testUrl+'/nggirl-web/web/admin/scoreshop/deliverGoods/2.5.2',
 		type : 'post',
 		dataType : 'json',
 		data: {orderId:$(".deliverBtn").attr("orderId")},

@@ -1,4 +1,7 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadLotteryListPage();
+	loadLotteryOrderListPage();
 	//导出抽奖活动管理订单
 	$('.lottery_activity_manage .order_search .import_btn').click(function(e) {
 		var strParam = 'awardRecordId='+$(".lam_order_table .order_search .bianhao").val() + '&phoneNum='+$('.lam_order_table .order_search .tel').val() +'&nickName=' + $('.lam_order_table .order_search .nicheng').val() + '&realName='+$('.lam_order_table .order_search .name').val() + '&startTime=' + $('.lam_order_table .order_search .qian').val().replace(/\D/g,'') + '&endTime=' + $('.lam_order_table .order_search .hou').val().replace(/\D/g,'');
@@ -283,7 +286,7 @@ function lotteryListDetail(data){
 function onclickLotteryPageNum(p){
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getLotteryList/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getLotteryList/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {page:p,num:20,activityId:$(".lam_lottery_table .lottery_num").val(),title:$(".lam_lottery_table .lottery_title").val()},
@@ -296,7 +299,7 @@ function onclickLotteryPageNum(p){
 function loadLotteryListPage(){
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getLotteryList/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getLotteryList/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {page:0,num:20,activityId:$(".lam_lottery_table .lottery_num").val(),title:$(".lam_lottery_table .lottery_title").val()},
@@ -319,7 +322,7 @@ function loadLotteryListPage(){
 //发布活动
 function publishLottery(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/publishLottery/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/publishLottery/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {activityId:$(".publishOrNot").parent().attr("activityId")},
@@ -368,7 +371,7 @@ function addOrEditLottery(){
 			startTime:$(".add_lottery_activity .qian").val(),endTime:$(".add_lottery_activity .hou").val(),maxTimes:$(".add_lottery_activity .lottery_choujiang_num").val(),dailyFreeTimes:$(".add_lottery_activity .lottery_everday_num").val(),
 			costScore:$(".add_lottery_activity .lottery_once_cost").val()};
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/addOrEditLottery/2.5.3',
+				url : testUrl+'/nggirl-web/web/admin/lottery/addOrEditLottery/2.5.3',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -389,7 +392,7 @@ function addOrEditLottery(){
 //编辑抽奖活动
 function getLotteryDetail(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getLotteryDetail/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getLotteryDetail/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: {activityId:$(".editorThisLottery").parent().attr("activityId")},
@@ -420,7 +423,7 @@ function getLotteryDetail(){
 //删除抽奖活动
 function deleteLotteryFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/deleteLottery/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/deleteLottery/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {activityId:$(".delThisLottery").parent().attr("activityId")},
@@ -459,7 +462,7 @@ function getAwardDataDetail(data){
 //根据不同的页码来渲染页面
 function getAwardDetailPageNum(p){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getAwardList/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getAwardList/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: {activityId:$(".editorThisAward").parent().attr("activityId"),page:p,num:20},
@@ -472,7 +475,7 @@ function getAwardDetailPageNum(p){
 function getAwardDetail(){
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getAwardList/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getAwardList/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: {activityId:$(".editorThisAward").parent().attr("activityId"),page:0,num:20},
@@ -528,7 +531,7 @@ function addOrEditAward(){
 			var params={activityId:$(".gift_manage").attr("activityId"),awardId:$(".lottery_add_commodity").attr("awardId"),awardType:$(".lottery_add_commodity").attr("awardType"),awardName:$(".lottery_add_commodity .laac_name").val(),
 			awardNum:$(".lottery_add_commodity .laac_num").val(),inviteCodes:$(".lottery_add_commodity .laac_quan").val(),awardImg:$(".lottery_add_commodity #la_commodity_img").attr('src'),awardHeadImg:$(".lottery_add_commodity #la_commodity_head_img").attr('src'),awardDetail:details};
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/addOrEditAward/2.5.3',
+				url : testUrl+'/nggirl-web/web/admin/lottery/addOrEditAward/2.5.3',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -550,7 +553,7 @@ function addOrEditAward(){
 //添加谢谢合作
 function addOrEditAwardForNone(){			
 		$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/addOrEditAward/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/addOrEditAward/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {activityId:$(".gift_manage").attr("activityId"),awardType:0},
@@ -566,7 +569,7 @@ function addOrEditAwardForNone(){
 //编辑奖品
 function editorLotteryAwardFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getAwardDetail/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getAwardDetail/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: {awardId:$(".editorThisLotteryAward").parent().attr("awardId")},
@@ -630,7 +633,7 @@ function editorLotteryAwardFn(){
 //删除活动
 function deleteLotteryAwardFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/deleteAward/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/deleteAward/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {awardId:$(".delThisLotteryAward").parent().attr("awardId")},
@@ -700,7 +703,7 @@ function onclickLotteryOrderPageNum(p){
 	var data = LotteryOrderData();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getLotteryAwardRecords/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getLotteryAwardRecords/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -715,7 +718,7 @@ function loadLotteryOrderListPage(){
 	var data = LotteryOrderData();
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/getLotteryAwardRecords/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/getLotteryAwardRecords/2.5.3',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -746,7 +749,7 @@ function clearAwardOrderList(){
 //奖品发货发货
 function deliverAwardFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/lottery/sendLotteryAwardGoods/2.5.3',
+		url : testUrl+'/nggirl-web/web/admin/lottery/sendLotteryAwardGoods/2.5.3',
 		type : 'post',
 		dataType : 'json',
 		data: {awardRecordId:$(".deliverThisAward").attr("awardRecordId")},

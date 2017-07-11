@@ -1,4 +1,7 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadHotTopicListPage();
+	hotTopicFn();
 	//热门话题-保存社区推荐的全部话题V3.0.0
 	$('.community_hottopic_manage .community_hottopic_manage_content .chmc_btn_save').click(function(e) {
 		var topicIds = '';
@@ -24,7 +27,7 @@ $(function(){
 			str += new_arr[x]+',';	
 		}
 		str = str.substring(0,str.length -1);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveRecommendHotTopics/3.0.0',{topicIds:str},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveRecommendHotTopics/3.0.0',{topicIds:str},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				hotTopicFn();
@@ -40,7 +43,7 @@ $(function(){
 		var btn = $(this);
 		if(!btn.hasClass('chmc_btn_refresh_gray')){
 			btn.addClass('chmc_btn_refresh_gray');
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/initHotpic/4.0.0',function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/initHotpic/4.0.0',function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.removeClass('chmc_btn_refresh_gray');
@@ -100,7 +103,7 @@ $(function(){
 		var btn = $(this);
 		//判断是新增还是编辑
 		if(typeof($('.add_hottopic').attr('topicId')) == "undefined"){//新增
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopic/3.0.0',{name:$.trim($('.add_hottopic .add_hottopic_add_title').val()),picture:$('.add_hottopic .add_hottopic_cover').attr('src'),descrip:$('.add_hottopic .add_hottopic_para').val(),cover:$('.add_hottopic .add_hottopic_fengmian').attr('src')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopic/3.0.0',{name:$.trim($('.add_hottopic .add_hottopic_add_title').val()),picture:$('.add_hottopic .add_hottopic_cover').attr('src'),descrip:$('.add_hottopic .add_hottopic_para').val(),cover:$('.add_hottopic .add_hottopic_fengmian').attr('src')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					loadHotTopicListPage();
@@ -112,7 +115,7 @@ $(function(){
 			});
 		}else{
 			if($('.add_hottopic').attr('recommendPosts') == ''){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopic/3.0.0',{topicId:$('.add_hottopic').attr('topicId'),name:$.trim($('.add_hottopic .add_hottopic_add_title').val()),picture:$('.add_hottopic .add_hottopic_cover').attr('src'),descrip:$('.add_hottopic .add_hottopic_para').val(),initFansNum:$('.add_hottopic').attr('initFansNum'),initPostNum:$('.add_hottopic').attr('initPostNum'),cover:$('.add_hottopic .add_hottopic_fengmian').attr('src')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopic/3.0.0',{topicId:$('.add_hottopic').attr('topicId'),name:$.trim($('.add_hottopic .add_hottopic_add_title').val()),picture:$('.add_hottopic .add_hottopic_cover').attr('src'),descrip:$('.add_hottopic .add_hottopic_para').val(),initFansNum:$('.add_hottopic').attr('initFansNum'),initPostNum:$('.add_hottopic').attr('initPostNum'),cover:$('.add_hottopic .add_hottopic_fengmian').attr('src')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadHotTopicListPage();
@@ -123,7 +126,7 @@ $(function(){
 					}	
 				});
 			}else{
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopic/3.0.0',{topicId:$('.add_hottopic').attr('topicId'),name:$.trim($('.add_hottopic .add_hottopic_add_title').val()),picture:$('.add_hottopic .add_hottopic_cover').attr('src'),descrip:$('.add_hottopic .add_hottopic_para').val(),initFansNum:$('.add_hottopic').attr('initFansNum'),initPostNum:$('.add_hottopic').attr('initPostNum'),recommendPosts:$('.add_hottopic').attr('recommendPosts'),cover:$('.add_hottopic .add_hottopic_fengmian').attr('src')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopic/3.0.0',{topicId:$('.add_hottopic').attr('topicId'),name:$.trim($('.add_hottopic .add_hottopic_add_title').val()),picture:$('.add_hottopic .add_hottopic_cover').attr('src'),descrip:$('.add_hottopic .add_hottopic_para').val(),initFansNum:$('.add_hottopic').attr('initFansNum'),initPostNum:$('.add_hottopic').attr('initPostNum'),recommendPosts:$('.add_hottopic').attr('recommendPosts'),cover:$('.add_hottopic .add_hottopic_fengmian').attr('src')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						loadHotTopicListPage();
@@ -141,7 +144,7 @@ $(function(){
 	//热门话题-获取话题详情V3.0.0
 	$('.chmc_hot_sort .community_hottopic_table .cht_edit_btn').live('click',function(e) {
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/getHotTopic/3.0.0',{topicId:btn.attr('topicId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/community/hottopic/getHotTopic/3.0.0',{topicId:btn.attr('topicId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_content').hide();
@@ -225,7 +228,7 @@ $(function(){
 	
 	//修改模拟粉丝数
 	$('.community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_modify').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopicInitFansNum/3.0.0',{topicId:$('.community_hottopic_manage_fensi_box').attr('topicId'),initFansNum:$('.community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_moni').val()},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopicInitFansNum/3.0.0',{topicId:$('.community_hottopic_manage_fensi_box').attr('topicId'),initFansNum:$('.community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_moni').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_fensi_box').hide();
@@ -238,7 +241,7 @@ $(function(){
 	
 	//恢复模拟粉丝数
 	$('.community_hottopic_manage_fensi_box .community_hottopic_manage_fensi_box_huifu').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopicInitFansNum/3.0.0',{topicId:$('.community_hottopic_manage_fensi_box').attr('topicId'),initFansNum:0},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopicInitFansNum/3.0.0',{topicId:$('.community_hottopic_manage_fensi_box').attr('topicId'),initFansNum:0},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_fensi_box').hide();
@@ -251,7 +254,7 @@ $(function(){
 	
 	//恢复模拟帖子数
 	$('.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_huifu').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopicInitPostNum/3.0.0',{topicId:$('.community_hottopic_manage_tiezi_box').attr('topicId'),initPostNum:0},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopicInitPostNum/3.0.0',{topicId:$('.community_hottopic_manage_tiezi_box').attr('topicId'),initPostNum:0},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_tiezi_box').hide();
@@ -264,7 +267,7 @@ $(function(){
 	
 	//恢复模拟评论数
 	$('.community_hottopic_manage_pinglun_box .community_hottopic_manage_pinglun_box_huifu').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopicInitCommentNum/4.0.0',{topicId:$('.community_hottopic_manage_pinglun_box').attr('topicId'),initTalkNum:0},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopicInitCommentNum/4.0.0',{topicId:$('.community_hottopic_manage_pinglun_box').attr('topicId'),initTalkNum:0},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_pinglun_box').hide();
@@ -277,7 +280,7 @@ $(function(){
 	
 	//修改模拟帖子数
 	$('.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_modify').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopicInitPostNum/3.0.0',{topicId:$('.community_hottopic_manage_tiezi_box').attr('topicId'),initPostNum:$('.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_moni').val()},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopicInitPostNum/3.0.0',{topicId:$('.community_hottopic_manage_tiezi_box').attr('topicId'),initPostNum:$('.community_hottopic_manage_tiezi_box .community_hottopic_manage_tiezi_box_moni').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_tiezi_box').hide();
@@ -290,7 +293,7 @@ $(function(){
 	
 	//修改模拟评论数
 	$('.community_hottopic_manage_pinglun_box .community_hottopic_manage_pinglun_box_modify').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/saveHotTopicInitCommentNum/4.0.0',{topicId:$('.community_hottopic_manage_pinglun_box').attr('topicId'),initTalkNum:$('.community_hottopic_manage_pinglun_box .community_hottopic_manage_pinglun_box_moni').val()},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/saveHotTopicInitCommentNum/4.0.0',{topicId:$('.community_hottopic_manage_pinglun_box').attr('topicId'),initTalkNum:$('.community_hottopic_manage_pinglun_box .community_hottopic_manage_pinglun_box_moni').val()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.community_hottopic_manage_pinglun_box').hide();
@@ -334,7 +337,7 @@ $(function(){
         var btn = $(this);
 		var r = confirm('确定要删除吗？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/deleteHotTopic/3.0.0',{topicId:btn.attr('topicId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/deleteHotTopic/3.0.0',{topicId:btn.attr('topicId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -371,7 +374,7 @@ $(function(){
         var btn = $(this);
 		var r = confirm('确定要删除吗？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/deletePostFromHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postType:btn.attr('postType'),postId:btn.attr('postId')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/deletePostFromHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postType:btn.attr('postType'),postId:btn.attr('postId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -396,7 +399,7 @@ $(function(){
 	//热门话题-向话题中添加帖子V3.0.0
 	$('.community_hottopic_table .community_hottopic_table_btn_add').live('click',function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/addPostToHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postType:btn.attr('postType'),postId:btn.attr('postId')},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/addPostToHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postType:btn.attr('postType'),postId:btn.attr('postId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.addClass('community_hottopic_table_btn_add_cancle').attr('value','已添加').removeClass('community_hottopic_table_btn_add');
@@ -409,7 +412,7 @@ $(function(){
 	//热门话题-删除话题中的帖子V3.0.0
 	$('.community_hottopic_table .community_hottopic_table_btn_add_cancle').live('click',function(e) {
 		var btn = $(this);
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/deletePostFromHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postType:btn.attr('postType'),postId:btn.attr('postId')},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/deletePostFromHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postType:btn.attr('postType'),postId:btn.attr('postId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				btn.addClass('community_hottopic_table_btn_add').attr('value','添加').removeClass('community_hottopic_table_btn_add_cancle');
@@ -424,7 +427,7 @@ $(function(){
 		var ok = $(this);
         //判断是视频还是文章
 		if(ok.attr('postType') == 1){//文章
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getArticleDetail/2.5.3',{postId:ok.attr('postId'),postType:1},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/column/getArticleDetail/2.5.3',{postId:ok.attr('postId'),postType:1},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.all_commonts_look_tie_window,.graybox_ping_list').show();
@@ -445,7 +448,7 @@ $(function(){
 			});				
 		};
 		if(ok.attr('postType') == 2){//视频
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getVideoDetail/2.5.3',{postId:ok.attr('postId'),postType:2},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/column/getVideoDetail/2.5.3',{postId:ok.attr('postId'),postType:2},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.all_commonts_look_tie_window,.graybox_ping_list').show();
@@ -474,7 +477,7 @@ $(function(){
             postList += '{"postType":'+ $(this).attr('postType') +',"postId":'+ $(this).attr('postId') +'},';
         });
 		postList ='['+ postList.substring(0,postList.length -1) +']';
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/addPostListToHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postList:postList},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/community/hottopic/addPostListToHotTopic/3.0.0',{topicId:$('.add_community_hottopic').attr('topicId'),postList:postList},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				loadPostListPage($('.add_community_hottopic').attr('topicId'));
@@ -492,7 +495,7 @@ function hotTopicFn(){
 		$(this).children('.cst_id').attr('disabled','disabled');
 		$(this).children('.cst_id').attr('value','');
 	});
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/getRecommendHotTopics/3.0.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/community/hottopic/getRecommendHotTopics/3.0.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			for(var x = 0; x < data.data.length ; x ++){
@@ -514,7 +517,7 @@ function createHotTopicListPage(data){
 			params.page = p;
 			$('.chmc_hot_sort .community_hottopic_table>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/getHotTopicList/3.0.0',
+				url : testUrl+'/nggirl-web/web/admin/community/hottopic/getHotTopicList/3.0.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -535,17 +538,17 @@ function initHotTopicListPage(data){
 			if(data.data.pageData[x].initPostNum == 0){//没有
 				//判断是否有模拟评论数
 				if(data.data.pageData[x].initTalkNum == 0){//没有
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}else{
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}
 			}else{
 				//有模拟帖子数
 				//判断是否有模拟评论数
 				if(data.data.pageData[x].initTalkNum == 0){//没有
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}else{
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;"></span>'+data.data.pageData[x].realFansNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}
 			}
 		}else{
@@ -555,17 +558,17 @@ function initHotTopicListPage(data){
 			if(data.data.pageData[x].initPostNum == 0){//没有
 				//判断是否有模拟评论数
 				if(data.data.pageData[x].initTalkNum == 0){//没有
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}else{
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realPostNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}
 			}else{
 				//有模拟帖子数
 				//判断是否有模拟评论数
 				if(data.data.pageData[x].initTalkNum == 0){//没有
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;"></span>'+data.data.pageData[x].realTalkNum+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}else{
-					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
+					$('.chmc_hot_sort .community_hottopic_table tbody').append('<tr><td>'+data.data.pageData[x].topicId+'</td><td>'+data.data.pageData[x].name+'</td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].initFansNum + data.data.pageData[x].realFansNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_fensinum_btn" topicId="'+data.data.pageData[x].topicId+'" initFansNum="'+data.data.pageData[x].initFansNum+'" realFansNum="'+data.data.pageData[x].realFansNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realPostNum + data.data.pageData[x].initPostNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_tienum_btn" topicId="'+data.data.pageData[x].topicId+'" initPostNum="'+data.data.pageData[x].initPostNum+'" realPostNum="'+data.data.pageData[x].realPostNum+'"></td><td><span style="float:left;">模拟</span>'+(data.data.pageData[x].realTalkNum + data.data.pageData[x].initTalkNum)+'<img src="../common/images/img_xiugai.png" style="width:13px; cursor:pointer;float: right;margin: 3px;" alt="" class="cht_modify_pingnum_btn" topicId="'+data.data.pageData[x].topicId+'" initTalkNum="'+data.data.pageData[x].initTalkNum+'" realTalkNum="'+data.data.pageData[x].realTalkNum+'"></td><td><input type="button" value="帖子管理" class="cht_tiezi_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="编辑" class="cht_edit_btn" topicId="'+data.data.pageData[x].topicId+'"> <input type="button" value="删除" class="cht_del_btn" topicId="'+data.data.pageData[x].topicId+'"></td></tr>');
 				}
 			}
 		}
@@ -586,7 +589,7 @@ function getHotTopicListSearchParams(page){
 function loadHotTopicListPage(){
 	$('.chmc_hot_sort .community_hottopic_table tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/getHotTopicList/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/community/hottopic/getHotTopicList/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: getHotTopicListSearchParams(1),
@@ -608,7 +611,7 @@ function createPostListOfHotTopicPage(data){
 			params.topicId = $('.add_community_hottopic').attr('topicId');
 			$('.ach_hot_sort .ach_hot_sort_table tbody>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/getPostListOfHotTopic/3.0.0',
+				url : testUrl+'/nggirl-web/web/admin/community/hottopic/getPostListOfHotTopic/3.0.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -644,7 +647,7 @@ function loadPostListOfHotTopicPage(topicId){
 	$('.add_community_hottopic .add_community_hottopic_relation').attr('topicId',topicId);
 	$('.ach_hot_sort .ach_hot_sort_table tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/getPostListOfHotTopic/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/community/hottopic/getPostListOfHotTopic/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: getPostListOfHotTopicSearchParams(1,topicId),
@@ -671,7 +674,7 @@ function createPostListPage(data){
 			params.topicId = $('.add_community_hottopic').attr('topicId');
 			$('.add_community_hottopic_relation_tie .community_hottopic_table tbody>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/searchPostList/3.0.0',
+				url : testUrl+'/nggirl-web/web/admin/community/hottopic/searchPostList/3.0.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -712,7 +715,7 @@ function getPostListSearchParams(page,topicId){
 function loadPostListPage(topicId){
 	$('.add_community_hottopic_relation_tie .community_hottopic_table tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/community/hottopic/searchPostList/3.0.0',
+		url : testUrl+'/nggirl-web/web/admin/community/hottopic/searchPostList/3.0.0',
 		type : 'get',
 		dataType : 'json',
 		data: getPostListSearchParams(1,topicId),
