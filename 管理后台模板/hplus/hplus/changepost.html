@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> 变更组织机构</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet"          href="plugins\zTree_v3\css\demo.css" type="text/css">
+    <link rel="stylesheet"          href="plugins\zTree_v3\css\zTreeStyle\zTreeStyle.css" type="text/css">
+
+    <link rel="stylesheet"          href="css\bootstrap.min.css?v=3.3.6"  >
+    <link rel="stylesheet"          href="css\style.min.css?v=4.1.0"      >
+    <link rel="stylesheet"          href="plugins\select2\select2_metro.css" />
+
+</HEAD>
+
+<BODY>
+<!--<h1>变更组织</h1>-->
+<div class="all">
+    <div class="content_wrap">
+        <div class="zTreeDemoBackground left">
+            <input type="text" placeholder="请在此输入组织"   class="select2-container select2-container-multi input-focblu" id="search_now" style="width: 220px;">
+            <ul id="nowOrg" class="ztree"></ul>
+        </div>
+        <!--<button type="button" class="btn btn-primary btn-sm btn-width" onclick="change()">变更</button>-->
+        <div class="right">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>维护职级</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="form_basic.html#">选项1</a>
+                            </li>
+                            <li><a href="form_basic.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal m-t" id="postForm">
+                        <input id="postId"      type="hidden" name="postId" class="form-control" type="text">
+                        <input id="parentId"    type="hidden" name="parentId" class="form-control" type="text">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary" type="BUTTON" id="AddPostBtn" onclick="create($('#parentId').val(), $('#postName').val())">增加</button>
+                                <button class="btn btn-primary" type="BUTTON" id="ChgPostBtn" onclick="update($('#postId').val(),   $('#postName').val())">变更</button>
+                                <button class="btn btn-primary" type="BUTTON" id="DelPostBtn" onclick="deletePost($('#postId').val())">删除</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">职位名称：</label>
+                            <input id="postName" name="postName" class="form-control" type="text" >
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">所属组织：</label>
+                            <input id="orgName" name="orgName" class="form-control" type="text" disabled="">
+                        </div>
+                        <div class="form-group" id="fullpathdiv">
+                            <label class="control-label">FULLPATH：</label>
+                            <input id="fullpath" name="firstname" class="form-control" type="text" disabled="">
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-sm-12 ">-->
+                                <!--<div class="checkbox">-->
+                                    <!--<label>-->
+                                        <!--<input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js\jquery.min.js"></script>
+<script type="text/javascript" src="js\bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript" src="js\content.min.js?v=1.0.0"></script>
+<script type="text/javascript" src="js\plugins\validate\jquery.validate.min.js"></script>
+<script type="text/javascript" src="js\plugins\validate\messages_zh.min.js"></script>
+<!--<script type="text/javascript" src="js\demo\form-validate-demo.min.js"></script>-->
+
+<script type="text/javascript" src="plugins\zTree_v3\js\jquery.ztree.core.js"></script>
+<script type="text/javascript" src="plugins\zTree_v3\js\jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="plugins\zTree_v3\js\jquery.ztree.exedit.js"></script>
+
+<script type="text/javascript" src="plugins\select2\select2.js"></script>
+<script type="text/javascript" src="plugins\select2\select2_locale_zh-CN.js"></script>
+
+<script type="text/javascript" src="js\Map.js"></script>
+<script type="text/javascript" src="js\common.js"></script>
+<script type="text/javascript" src="js\post\autoexpand.js"></script>
+<script type="text/javascript" src="js\post\orgselect2.js"></script>
+<script type="text/javascript" src="js\post\orgtree.js"></script>
+<script type="text/javascript" src="js\post\post.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE> 变更组织机构</TITLE>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet"          href="plugins\zTree_v3\css\demo.css" type="text/css">
+    <link rel="stylesheet"          href="plugins\zTree_v3\css\zTreeStyle\zTreeStyle.css" type="text/css">
+    <link rel="stylesheet"          href="css\organigramme\org.css">
+    <link rel="stylesheet"          href="css\bootstrap.min.css?v=3.3.6"  >
+    <link rel="stylesheet"          href="css\style.min.css?v=4.1.0"      >
+    <link rel="stylesheet"          href="plugins\select2\select2_metro.css" />
+</HEAD>
+
+<BODY>
+<!--<h1>变更组织</h1>-->
+    <div class="content_wrap cf">
+        <div class="zTreeDemoBackground left fl">
+            <input type="text" placeholder="请在此输入组织"   class="select2-container select2-container-multi input-focblu" id="search_now" style="width: 220px;">
+            <ul id="nowOrg" class="ztree"></ul>
+        </div>
+        <!--<button type="button" class="btn btn-primary btn-sm btn-width" onclick="change()">变更</button>-->
+        <div class="right fl">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div id="employeeform" style="display: none">
+                        <div class="col-lg-9 cf">
+                            <div class="img fl">
+                                <img alt="" class="avatar" src="img/profile_small.jpg">
+                            </div>
+                            <div><a class="file_img">更换</a></div>
+                            <!--<div class="help-block">可上传最大图像为200KB</div>-->
+                        </div>
+                        <form method="get" class="form-horizontal">
+                            <input id="emporgid"    type="hidden" name="parentOrgId" class="form-control" type="text">
+                            <input id="postId"      type="hidden" name="postId" class="form-control" type="text">
+                            <!--<input id="empId"       type="hidden" name="empId" class="form-control" type="text">-->
+                            <div class="form-group cf">
+                                <label class="col-sm-3 control-label">职员姓名：</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="realname" id="realname">
+                                </div>
+                            </div>
+                            <div class="form-group cf">
+                                <label class="col-sm-3 control-label">职员工号：</label>
+                                <div class="col-sm-9">
+                                    <input type="TEXT" class="form-control" name="employeeno" id="employeeno">
+                                </div>
+                            </div>
+                            <div class="form-group cf">
+                                <label class="col-sm-3 control-label">移动号码：</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" name="mobile" id="mobile">
+                                </div>
+                            </div>
+                            <div class="form-group cf">
+                                <label class="col-sm-3 control-label">工作邮箱：</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" name="officeemail" id="officeemail">
+                                </div>
+                            </div>
+                            <!--<div class="form-group cf">-->
+                                <!--<label class="col-sm-4 control-label">身份证号：</label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<input type="number" class="form-control" name="cardno" id="cardno">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <div class="form-group cf">
+                                <label class="col-sm-3 control-label">职员职级：</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="level" id="level">
+                                </div>
+                            </div>
+                            <div class="form-group cf">
+                                <label class="col-sm-3 control-label">入职时间：</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="entrytime" id="entrytime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">上级组织：</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="emporgname" id="emporgname" disabled="">
+                                </div>
+                            </div>
+                            <div class="form-group cf" style="float: right;padding-right: 15px;">
+                                <button class="btn btn-primary" type="BUTTON" id="ChgEmpBtn" onclick="update()">变更</button>
+                                <button class="btn btn-primary" type="BUTTON" id="DelEmpBtn" onclick="deleteBtn()">删除</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="orgform" style="display: none">
+                        <div class="form-horizontal m-t" id="postForm">
+                            <input id="parentOrgId"      type="hidden" name="parentOrgId" class="form-control" type="text">
+                            <input id="currentOrgId"     type="hidden" name="currentOrgId" class="form-control" type="text">
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">上级组织：</label>
+                                <!--<label class="control-label">上级组织：</label>-->
+                                <div class="col-sm-9">
+                                    <input id="parentOrgName" name="parentOrgName" class="form-control" type="text" disabled="">
+                                    <!--<input type="text" class="form-control" name="emporgname" id="emporgname" disabled="">-->
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <!--<label class="control-label">当前组织：</label>-->
+                                <label class="col-sm-3 control-label">当前组织：</label>
+                                <div class="col-sm-9">
+                                    <input id="currentOrgName" name="currentOrgName" class="form-control" type="text" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">下级组织：</label>
+                                <div class="col-sm-9">
+                                    <input id="childOrgName" name="childOrgName" class="form-control" type="text" >
+                                </div>
+                                <!--<label class="control-label">下级组织：</label>-->
+                            </div>
+                            <div class="form-group" style="float: right;padding-right: 15px;">
+                                <button class="btn btn-primary" type="BUTTON" id="AddPostBtn" onclick="create()">增加</button>
+                                <button class="btn btn-primary" type="BUTTON" id="ChgPostBtn" onclick="update()">变更</button>
+                                <button class="btn btn-primary" type="BUTTON" id="DelPostBtn" onclick="deleteBtn()">删除</button>
+                            </div>
+                            <!--<div class="form-group">-->
+                            <!--<div class="col-sm-12 ">-->
+                            <!--<div class="checkbox">-->
+                            <!--<label>-->
+                            <!--<input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意-->
+                            <!--</label>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="js\jquery.min.js"></script>
+<script type="text/javascript" src="js\bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript" src="js\content.min.js?v=1.0.0"></script>
+<script type="text/javascript" src="js\plugins\validate\jquery.validate.min.js"></script>
+<script type="text/javascript" src="js\plugins\validate\messages_zh.min.js"></script>
+<!--<script type="text/javascript" src="js\demo\form-validate-demo.min.js"></script>-->
+
+<script type="text/javascript" src="plugins\zTree_v3\js\jquery.ztree.core.js"></script>
+<script type="text/javascript" src="plugins\zTree_v3\js\jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="plugins\zTree_v3\js\jquery.ztree.exedit.js"></script>
+
+<script type="text/javascript" src="plugins\select2\select2.js"></script>
+<script type="text/javascript" src="plugins\select2\select2_locale_zh-CN.js"></script>
+
+<script type="text/javascript" src="js\Map.js"></script>
+<script type="text/javascript" src="js\common.js"></script>
+<script type="text/javascript" src="js\org2\autoexpand.js"></script>
+<script type="text/javascript" src="js\org2\orgselect2.js"></script>
+<script type="text/javascript" src="js\org2\orgtree.js"></script>
+<script type="text/javascript" src="js\org2\org.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
