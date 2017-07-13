@@ -3,14 +3,21 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
+<link rel="stylesheet" href="../common/css/index.css" />
+<link rel="stylesheet" href="../common/js/editor/jquery.pumpkin.article.editor.css" />
+<script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../common/js/part/guest_column_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+<script src="../common/js/LinkedQueue.js" charset="utf-8"></script>
+<script type="text/javascript" src="../common/My97DatePicker/WdatePicker.js"></script>
 </head>
-
 <body>
  <div class="weight-box guest_column_manage" id="guest_column_manage">
-        <!--<div class="weight-title">
-            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
-            <h5>客座小编帖子录../h5>
-        </div>-->
  <!--  审核通过的帖子列表 -->
         <div class="guest_column_list">
         	<div class="guestTopBtn">
@@ -59,7 +66,7 @@
         </div>
         <!-- 新建帖子 -->
         <div class="guest_column_create hidden">
-        	<img src="images/tip.png" alt="" /><label>帖子题目：</label><input type="text" placeholder="请输入帖子题目"  class="inputborder guest_tit"/><br /><br />
+        	<img src="../common/images/tip.png" alt="" /><label>帖子题目：</label><input type="text" placeholder="请输入帖子题目"  class="inputborder guest_tit"/><br /><br />
             <div class="editor_content"></div>
             <div class="articleBtn">
                <span class="guest_column_save">保存</span><span class="guest_column_back">返回</span>
@@ -68,7 +75,7 @@
       
 
  <!--  草稿箱列表 -->
-        <div class="going_column_list">
+        <div class="going_column_list hidden">
         	<div class="guestTopBtn">
                 <p class="greyBtn online_column">审核通过的帖子</p>
                 <p class="greyBtn going_column on">草稿箱</p>
@@ -96,11 +103,11 @@
             <div class="tcdPageCode"></div>
         </div>
     </div>   
+    <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.work.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.article.editor.js"></script>
     
-    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.work.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadCaPage();
 //时间转换
 	Date.prototype.format = function(format) {
 		var o = {
@@ -36,7 +38,7 @@ $(function(){
 		$('.ddxqq-search').hide();
 		$('.nc-solve-message').hide();
 		$('.nc-history-message').attr('orderId',$(this).parent().parent().parent().children('td:eq(0)').attr('reservationid'));
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/listByOrderId/1.4.0',{orderId:$(this).parent().parent().parent().children('td:eq(0)').attr('reservationid')},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/complaintConsult/listByOrderId/1.4.0',{orderId:$(this).parent().parent().parent().children('td:eq(0)').attr('reservationid')},function(data){
 			var data = $.parseJSON(data);
 			messageFn(data);
 		});
@@ -94,7 +96,7 @@ $(function(){
 			}else{
 				var r = confirm('确认要保存？？');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							//加载订单页面
@@ -123,7 +125,7 @@ $(function(){
 			}else{
 				var r = confirm('确认要保存？？');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:1},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:1},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							alert('保存成功！！');
@@ -156,7 +158,7 @@ $(function(){
 				}else{
 					var r = confirm('确认要保存？？');
 					if(r == true){
-						$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
+						$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
 							var data = $.parseJSON(data);
 							if(data.code == 0){
 								//加载订单页面
@@ -185,7 +187,7 @@ $(function(){
 				}else{
 					var r = confirm('确认要保存？？');
 					if(r == true){
-						$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:1},function(data){
+						$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:1},function(data){
 							var data = $.parseJSON(data);
 							if(data.code == 0){
 								//加载订单页面
@@ -236,7 +238,7 @@ $(function(){
 			}else{
 				var r = confirm('确认要保存？？');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							//加载订单页面
@@ -265,7 +267,7 @@ $(function(){
 			}else{
 				var r = confirm('确认要保存？？');
 				if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:2},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:2},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							alert('关单成功！！');
@@ -300,7 +302,7 @@ $(function(){
 				}else{
 				var r = confirm('确认要保存？？');
 					if(r == true){
-						$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
+						$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/add/1.4.0',dataMessage,function(data){
 							var data = $.parseJSON(data);
 							if(data.code == 0){
 								//加载订单页面
@@ -326,7 +328,7 @@ $(function(){
 				}else{
 					var r = confirm('确认要保存？？');
 					if(r == true){
-						$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:2},function(data){
+						$.post(testUrl+'/nggirl-web/web/admin/complaintConsult/addSolution',{complaintId:$('.new-ca').attr('id'),solution:$('.new-ca .nc-solve').val(),status:2},function(data){
 							var data = $.parseJSON(data);
 							if(data.code == 0){
 								//加载订单页面
@@ -399,7 +401,7 @@ $(function(){
 		$('.nsm-reutn-btn').hide();
 		//把投诉或咨询id加到窗体中
 		$('.new-ca').attr('id',$(this).parent().parent().children('td:eq(0)').html());
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(0)').html()},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(0)').html()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				//判断是咨询还是投诉（1为投诉，2为咨询）
@@ -451,7 +453,7 @@ $(function(){
 		
 		//把投诉或咨询id加到窗体中
 		$('.new-ca').attr('id',$(this).parent().parent().children('td:eq(1)').html());
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(1)').html()},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(1)').html()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				//判断是咨询还是投诉（1为投诉，2为咨询）
@@ -508,7 +510,7 @@ $(function(){
 		$('.nsm-reutn-btn').show();
 		//把投诉或咨询id加到窗体中
 		$('.new-ca').attr('id',$(this).parent().parent().children('td:eq(0)').html());
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(0)').html()},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(0)').html()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){		
 				//清除之前加载的数据
@@ -569,7 +571,7 @@ $(function(){
 //城市选择框
 //获取省的列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCitys',
+			url : testUrl+'/nggirl-web/web/admin/common/getCitys',
 			type : 'get',
 			dataType : 'json',
 			data: {},
@@ -629,7 +631,7 @@ $(function(){
 	$('.untreated').live('click',function(e) {
 		//清除ｎｅｗ-ca窗体里面的id
 		$('.new-ca').removeAttr('id');
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(1)').html()},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/complaintConsult/getDetails/1.4.0',{id:$(this).parent().parent().children('td:eq(1)').html()},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.nc-solve-message').show();
@@ -738,7 +740,7 @@ function messageFn(data){
 
 function messageDataFn(){
 	//重新加载每条订单对应的投诉或者是咨询的记录
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/listByOrderId/1.4.0',{orderId:$('.new-ca').attr('orderid')},function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/complaintConsult/listByOrderId/1.4.0',{orderId:$('.new-ca').attr('orderid')},function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			messageFn(data);
@@ -763,7 +765,7 @@ function createCaPage(data){
 			$('.complaints-table>tbody>tr:gt(0)').remove();
 			$('.advisory-table>tbody>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/list/1.4.0',
+				url : testUrl+'/nggirl-web/web/admin/complaintConsult/list/1.4.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -780,7 +782,7 @@ function createCaPage(data){
 			$('.complaints-table>tbody>tr:gt(0)').remove();
 			$('.advisory-table>tbody>tr:gt(0)').remove();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/list/1.4.0',
+				url : testUrl+'/nggirl-web/web/admin/complaintConsult/list/1.4.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -859,7 +861,7 @@ function loadCaPage(){
 	$('.complaints-table>tbody>tr:gt(0)').remove();
 	$('.advisory-table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/complaintConsult/list/1.4.0',
+		url : testUrl+'/nggirl-web/web/admin/complaintConsult/list/1.4.0',
 		type : 'get',
 		dataType : 'json',
 		data: getCaSearchParams(1),

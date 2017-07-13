@@ -1,5 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
-
+	loadOfflineServerPage();
 	//新增企业上门美妆服务
 	$('.beauty_line_service_company_manage .add_service_company_manage_btn').click(function(){
 		clearEnterprise();
@@ -34,7 +35,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该条记录？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/deleteEnterpriseServer/3.0.3',{id:btn.attr('id')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/deleteEnterpriseServer/3.0.3',{id:btn.attr('id')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -48,7 +49,7 @@ $(function(){
 	//获取企业服务详情V3.0.3
 	$('.beauty_line_service_company_table .btn_edit').live('click',function(){
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerDetail/3.0.3',{id:btn.attr('id')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerDetail/3.0.3',{id:btn.attr('id')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.beauty_line_service_company_manage').hide();
@@ -113,7 +114,7 @@ $(function(){
 		};
 		
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/addOrUpdateEnterprise/3.0.3',genData,function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/addOrUpdateEnterprise/3.0.3',genData,function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.beauty_line_service_company_manage').show();
@@ -142,7 +143,7 @@ function createOfflineServerPage(data){
 			params.page = p;
 			$('.beauty_line_service_company_manage .beauty_line_service_company_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -196,7 +197,7 @@ function getOfflineServerSearchParams(page){
 function loadOfflineServerPage(page){
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getEnterpriseServerList/3.0.3',
 		type : 'post',
 		dataType : 'json',
 		data: getOfflineServerSearchParams(page),
@@ -215,3 +216,29 @@ function clearEnterpriseSearch(){
 	$("#beauty_line_service_company_manage .order-num .apply_status option:eq(0)").attr('selected','selected');
 };
 
+//时间转换
+Date.prototype.format = function(format) {
+	var o = {
+		"M+" :this.getMonth() + 1, // month
+		"d+" :this.getDate(), // day
+		"h+" :this.getHours(), // hour
+		"m+" :this.getMinutes(), // minute
+		"s+" :this.getSeconds(), // second
+		"q+" :Math.floor((this.getMonth() + 3) / 3), // quarter
+		"S" :this.getMilliseconds()
+	// millisecond
+	}
+
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "")
+				.substr(4 - RegExp.$1.length));
+	}
+
+	for ( var k in o) {
+		if (new RegExp("(" + k + ")").test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+					: ("00" + o[k]).substr(("" + o[k]).length));
+		}
+	}
+	return format;
+}

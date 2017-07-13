@@ -1,5 +1,7 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 var topicsStr = '';
 $(function(){
+	loadTopicsPage();
 	//发布专题
 	$('.recommendedTopics-table .check-id .ci-btn').click(function(e) {
 		var arr = '';
@@ -8,7 +10,7 @@ $(function(){
 		});
 		var r = confirm('确定要发布？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/publish/v1.4.0',{specialIds:arr},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/work/special/publish/v1.4.0',{specialIds:arr},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert('发布成功！！');
@@ -25,7 +27,7 @@ $(function(){
 	//删除专题
 	$('.add-recommendedTopics-table .ab-del-btn').live('click',function(e) {
 		var ok = $(this);
-        $.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/delete/v1.4.0',{specialId:$(this).attr('tId')},function(data){
+        $.post(testUrl+'/nggirl-web/web/admin/work/special/delete/v1.4.0',{specialId:$(this).attr('tId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				var r = confirm('确定要删除？？');
@@ -82,7 +84,7 @@ $(function(){
         $('.rtm-page').hide();
 		$('.rp-dresser').show();
 		loadTopicsWorksPage();
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getWorkTypes',function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/common/getWorkTypes',function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				//清除之前加载的数据
@@ -134,7 +136,7 @@ $(function(){
 		//截掉最后一个字符
 		var subid = workid.substring(0,workid.length-1);
 		var qianSubid = topicsStr.substring(0,topicsStr.length -1);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/listSelectedWork/v1.4.0',{workIds :subid},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/work/special/listSelectedWork/v1.4.0',{workIds :subid},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				var newArr = qianSubid.split(',');
@@ -245,7 +247,7 @@ $(function(){
 				//新增专题
 				 var r = confirm('确定要保存？？？');
 				 if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/add/v1.4.0',{specialInfo:specialInfo},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/work/special/add/v1.4.0',{specialInfo:specialInfo},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							alert('添加成功！！');
@@ -262,7 +264,7 @@ $(function(){
 			}else{
 				 var r = confirm('确定要保存？？？');
 				 if(r == true){
-					$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/update/v1.4.0',{specialInfo:specialInfoUpdate},function(data){
+					$.post(testUrl+'/nggirl-web/web/admin/work/special/update/v1.4.0',{specialInfo:specialInfoUpdate},function(data){
 						var data = $.parseJSON(data);
 						if(data.code == 0){
 							alert('更新成功！！');
@@ -293,7 +295,7 @@ $(function(){
 	$('.add-recommendedTopics-table .ab-edit-btn').live('click',function(e) {
 		//存储专题id
 		$('.rtm-page').attr('tid',$(this).attr('tid'));
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/detail/v1.4.0',{specialId:$(this).attr('tid')},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/work/special/detail/v1.4.0',{specialId:$(this).attr('tid')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				//清空信息
@@ -338,7 +340,7 @@ function createTopcisPage(data){
 			params.page = p;
 			$('.add-recommendedTopics-table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/list/v1.4.0',
+				url : testUrl+'/nggirl-web/web/admin/work/special/list/v1.4.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -377,14 +379,14 @@ function getTopicsSearchParams(page){
 function loadTopicsPage(){
 	$('.add-recommendedTopics-table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/list/v1.4.0',
+		url : testUrl+'/nggirl-web/web/admin/work/special/list/v1.4.0',
 		type : 'get',
 		dataType : 'json',
 		data: getTopicsSearchParams(1),
 		success : initTopcisPage,
 	});
 	
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/publishedIds/v1.4.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/work/special/publishedIds/v1.4.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('.recommendedTopics-table .check-online ul li>.co-txt').html('()');
@@ -414,7 +416,7 @@ function createTopicsWorksPage(data){
 			params.page = p;
 			$('.rp-dresser-table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/listWork/v1.4.0',
+				url : testUrl+'/nggirl-web/web/admin/work/special/listWork/v1.4.0',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -461,7 +463,7 @@ function getTopicsWorksSearchParams(page){
 function loadTopicsWorksPage(){
 	$('.rp-dresser-table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/special/listWork/v1.4.0',
+		url : testUrl+'/nggirl-web/web/admin/work/special/listWork/v1.4.0',
 		type : 'post',
 		dataType : 'json',
 		data: getTopicsWorksSearchParams(1),
@@ -549,3 +551,28 @@ function getTxtContentFn(){
 	});
 	return str;
 */}
+
+
+
+//时间格式化
+function getLocalTime(publishTime) {
+	var s = 0;
+	s = new Date(publishTime);
+	var m=parseInt(s.getMonth() + 1);
+	if(m<10){
+		m="0"+m;
+		}
+	var day=parseInt(s.getDate());
+	if(day<10){
+		day="0"+day;
+		}
+	 var hours=parseInt(s.getHours());
+	if(hours<10){
+		hours="0"+hours;
+		}
+	var minutes=parseInt(s.getMinutes());
+	if(minutes<10){
+		minutes="0"+minutes;
+		}
+	return (s.getFullYear() + "-" + m) + "-" +day+ " " +hours+ ":" +minutes ;
+}

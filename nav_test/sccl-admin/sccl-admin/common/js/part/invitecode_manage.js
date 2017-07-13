@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	listInviteCodes();
 //邀请管理
 // 点击“邀请码管理”--》搜索按钮
 	$('.yhqgl .search-btn').click(listInviteCodes);
@@ -16,27 +18,10 @@ $(function(){
 	
 	//导出
 	$('.yhq-list .daochu-btn').click(function(e) {
-		/*param = {
-			code:$('.yhqgl .search.yhq').val(),
-			isForever:$('.yhqgl .on-select option:selected').attr('value'),
-			employeeName:$('.yhqgl .search.creater').val(),
-			startTime:$('.yhq-list .Wdate.startTime').val(),
-			endTime:$('.yhq-list .Wdate.endTime').val(),
-			comment:$('.yhq-list .beizhu').val()
-		}*/
-
-        /*$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/exportCode/2.4.2',param,function(data){
-			var data = $.parseJSON(data);
-			if(data.code == 0){
-				
-			}else{
-				alert(data.data.error);	
-			}
-		})*/
 		var strParam = 'code='+$('.yhqgl .search.yhq').val() + '&isForever='+$('.yhqgl .on-select option:selected').attr('value') +
 			'&employeeName=' + $('.yhqgl .search.creater').val() + '&startTime='+$('.yhq-list .Wdate.startTime').val() +
 			'&endTime=' + $('.yhq-list .Wdate.endTime').val() + '&comment=' + $('.yhq-list .beizhu').val() ;
-		window.location.href = "<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/exportCode/2.4.2?" + strParam+'&v=<%= VERSION %>';
+		window.location.href = testUrl+"/nggirl-web/web/admin/invitecode/exportCode/2.4.2?" + strParam+'&v=<%= VERSION %>';
     });
 	
 //创建邀请码
@@ -67,7 +52,7 @@ $(function(){
 						};
 					}
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/createInviteCode/1.4.0',
+						url : testUrl+'/nggirl-web/web/admin/invitecode/createInviteCode/1.4.0',
 						type : 'post',
 						dataType : 'json',
 						data: {isForever:$('.yhq-create .on-select option:selected').attr('value'),startDate:startDate,endDate:endDate,productName:$('.yhq-create .quan-name').val(),faceValue:$('.yhq-create .quan-money').val(),type:$('.yhq-create .quan-pro option:selected').attr('value'),limitPrice:$('.yhq-create .quan-low-money').val(),allowedTimes:$('.yhq-create .quan-use-num').val(),nums:$('.yhq-create .quan-create-num').val(),isDiscount:$('.yhq-create .is-select option:selected').attr('value'),discount:$('.yhq-create .quan-create-dis').val(),comment:$('.yhq-create .quan-content').val(),effectiveType:$('.yhq-create .quan-duan option:selected').attr('value'),effectiveDate:$('.yhq-create .quan-day').val()},
@@ -112,7 +97,7 @@ $(function(){
 					};
 				}
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/createInviteCode/1.4.0',
+					url : testUrl+'/nggirl-web/web/admin/invitecode/createInviteCode/1.4.0',
 					type : 'post',
 					dataType : 'json',
 					data: {isForever:$('.yhq-create .on-select option:selected').attr('value'),startDate:startDate,endDate:endDate,productName:$('.yhq-create .quan-name').val(),faceValue:$('.yhq-create .quan-money').val(),type:$('.yhq-create .quan-pro option:selected').attr('value'),limitPrice:$('.yhq-create .quan-low-money').val(),allowedTimes:$('.yhq-create .quan-use-num').val(),nums:$('.yhq-create .quan-create-num').val(),isDiscount:$('.yhq-create .is-select option:selected').attr('value'),discount:$('.yhq-create .quan-create-dis').val(),comment:$('.yhq-create .quan-content').val(),effectiveType:$('.yhq-create .quan-duan option:selected').attr('value'),effectiveDate:$('.yhq-create .quan-day').val()},
@@ -154,7 +139,7 @@ $(function(){
 					};
 				}
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/createInviteCode/1.4.0',
+					url : testUrl+'/nggirl-web/web/admin/invitecode/createInviteCode/1.4.0',
 					type : 'post',
 					dataType : 'json',
 					data: {isForever:$('.yhq-create .on-select option:selected').attr('value'),startDate:startDate,endDate:endDate,productName:$('.yhq-create .quan-name').val(),faceValue:$('.yhq-create .quan-money').val(),type:$('.yhq-create .quan-pro option:selected').attr('value'),limitPrice:$('.yhq-create .quan-low-money').val(),allowedTimes:$('.yhq-create .quan-use-num').val(),nums:$('.yhq-create .quan-create-num').val(),isDiscount:$('.yhq-create .is-select option:selected').attr('value'),discount:$('.yhq-create .quan-create-dis').val(),comment:$('.yhq-create .quan-content').val(),effectiveType:$('.yhq-create .quan-duan option:selected').attr('value'),effectiveDate:$('.yhq-create .quan-day').val()},
@@ -222,7 +207,7 @@ $(function(){
 		if(r == true){
 			var del= $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/deleteInviteCode',
+				url : testUrl+'/nggirl-web/web/admin/invitecode/deleteInviteCode',
 				type : 'get',
 				dataType : 'json',
 				data: {codeId:$(this).parent().parent().children('td:eq(0)').attr('codeId')},
@@ -297,7 +282,7 @@ function onClickPageNum(p){
 	var data = genDatai();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/listInviteCodes/2.4.2',
+		url : testUrl+'/nggirl-web/web/admin/invitecode/listInviteCodes/2.4.2',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -312,7 +297,7 @@ function listInviteCodes(){
 	//获取入参
 	var data = genDatai();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/listInviteCodes/2.4.2',
+		url : testUrl+'/nggirl-web/web/admin/invitecode/listInviteCodes/2.4.2',
 		type : 'get',
 		dataType : 'json',
 		data: data,

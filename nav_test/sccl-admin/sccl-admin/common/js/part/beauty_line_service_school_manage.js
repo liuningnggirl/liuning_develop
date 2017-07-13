@@ -1,5 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
-
+	loadSchollPage();
 	//新增校园上门美妆服务
 	$('.beauty_line_service_school_manage .add_service_school_manage_btn').click(function(){
 		clearUniversity();
@@ -34,7 +35,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该条记录？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/deleteUniversityServer/3.0.3',{id:btn.attr('id')},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/deleteUniversityServer/3.0.3',{id:btn.attr('id')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					btn.parent().parent().remove();
@@ -48,7 +49,7 @@ $(function(){
 	//获取学校服务详情V3.0.3
 	$('.add_service_school_table .btn_edit').live('click',function(){
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getUniversityServerDetail/3.0.3',{id:btn.attr('id')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getUniversityServerDetail/3.0.3',{id:btn.attr('id')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.beauty_line_service_school_manage').hide();
@@ -109,7 +110,7 @@ $(function(){
 		};
 		
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/addOrUpdateUniversity/3.0.3',genData,function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/addOrUpdateUniversity/3.0.3',genData,function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						$('.beauty_line_service_school_manage').show();
@@ -138,7 +139,7 @@ function createSchollNextPage(data){
 			params.page = p;
 			$('.beauty_line_service_school_manage .add_service_school_table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getUniversityServerList/3.0.3',
+				url : testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getUniversityServerList/3.0.3',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -191,7 +192,7 @@ function getschoolParams(page){
 function loadSchollPage(page){
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/cosmeticOfflineServer/getUniversityServerList/3.0.3',
+		url : testUrl+'/nggirl-web/web/admin/cosmeticOfflineServer/getUniversityServerList/3.0.3',
 		type : 'post',
 		dataType : 'json',
 		data: getschoolParams(page),
@@ -215,3 +216,30 @@ function isPhoneNum(phoneNum){
 	return reg.test(phoneNum);		
 }
 
+
+//时间转换
+Date.prototype.format = function(format) {
+	var o = {
+		"M+" :this.getMonth() + 1, // month
+		"d+" :this.getDate(), // day
+		"h+" :this.getHours(), // hour
+		"m+" :this.getMinutes(), // minute
+		"s+" :this.getSeconds(), // second
+		"q+" :Math.floor((this.getMonth() + 3) / 3), // quarter
+		"S" :this.getMilliseconds()
+	// millisecond
+	}
+
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "")
+				.substr(4 - RegExp.$1.length));
+	}
+
+	for ( var k in o) {
+		if (new RegExp("(" + k + ")").test(format)) {
+			format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k]
+					: ("00" + o[k]).substr(("" + o[k]).length));
+		}
+	}
+	return format;
+}

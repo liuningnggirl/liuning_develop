@@ -3,14 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>recommended_topics_mangement</title>
+<link rel="stylesheet" href="../common/css/index.css" />
+<script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../common/js/part/recommended_topics_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
 </head>
 <body>
 <!--  上门美妆推荐专题开始 -->
     <div class="weight-box recommendedTopicsMangement" id="topics_manage">
-        <div class="weight-title">
-            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
-            <h5>上门美妆推荐专题</h5>
-        </div>
         <div class="recommendedTopics-table">
             <h1>上门美妆推荐专题</h1><br />
             <div class="check-id">
@@ -76,8 +81,8 @@
                 <tr>
                     <td>1</td>
                     <td>新娘大作战</td>
-                    <td><img src="images/1.jpg" width="100" alt="" /></td>
-                    <td><img src="images/1.jpg" width="100" alt="" /></td>
+                    <td><img src="../common/images/1.jpg" width="100" alt="" /></td>
+                    <td><img src="../common/images/1.jpg" width="100" alt="" /></td>
                     <td>
                         <div class="abt-btn">
                             <input type="button" value="编辑" class="ab-edit-btn" />
@@ -302,14 +307,14 @@
 <!-----------------------------------------------------------------  添加作品开始 ---------------------------------------------------------------->
     <div class="weight-box add-works" style="display:none;">
         <div class="weight-title">
-            <span class="wt-img"><img src="images/block-9_03.png" alt="" /></span>
+            <span class="wt-img"><img src="../common/images/block-9_03.png" alt="" /></span>
             <h5>添加作品详情</h5>
         </div>
         
         <div class="order-num" style="padding: 10px 0 10px 10px;">
             <form name="form0" id="form0-addworks" >
             	<p style="color:#878787;">上传图片：</p>
-                <input type="file" name="file0-add-works" id="file0-add-works" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploads/3.0.0" /><br><img src="images/add.jpg" id="img0-addworks" >
+                <input type="file" name="file0-add-works" id="file0-add-works" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploads/3.0.0" /><br><img src="../common/images/add.jpg" id="img0-addworks" >
             </form><br /><br />
             <label for="">妆束类型：</label>
             <select name="" id="" class="works-type"></select>
@@ -435,9 +440,9 @@
     </div>
 <!-- 新建角色 -->
         <div class="roler_create hidden">
-            <label>角色代码:</label><input type="text" placeholder="请输入角色代码" class="roleCode" /><img src="images/tip.png" alt="" /><br /><br />
-            <label>角色名称:</label><input type="text" placeholder="请输入角色名称" class="roleName" /><img src="images/tip.png" alt="" /><br /><br />
-            <label>角色描述:</label><input type="text" placeholder="请输入角色描述" class="roleDesc" /><img src="images/tip.png" alt="" /><br /><br />
+            <label>角色代码:</label><input type="text" placeholder="请输入角色代码" class="roleCode" /><img src="../common/images/tip.png" alt="" /><br /><br />
+            <label>角色名称:</label><input type="text" placeholder="请输入角色名称" class="roleName" /><img src="../common/images/tip.png" alt="" /><br /><br />
+            <label>角色描述:</label><input type="text" placeholder="请输入角色描述" class="roleDesc" /><img src="../common/images/tip.png" alt="" /><br /><br />
             <input type="button" value="保存" class="rolerSave" style="padding:10px;">
             <input type="button" value="返回" class="rolerBack" style="padding:10px;">
         </div>

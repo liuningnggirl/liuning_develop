@@ -1,5 +1,6 @@
 var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadWorkPage();
 // 点击“作品管理”--》搜索按钮
 	$('.zpxqq .search-btn').click(loadWorkPage);
 
@@ -206,7 +207,7 @@ $(function(){
 				
 				//化妆师注册时已选的化妆品
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/getWorkCosmeticsInfo',
+					url : testUrl+'/nggirl-web/web/admin/work/getWorkCosmeticsInfo',
 					type : 'get',
 					dataType : 'json',
 					data: {workId:workId},
@@ -287,7 +288,7 @@ $(function(){
 			var brand = $(this);
 			//获取化妆品品牌列表
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listCosmeticsBrand',
+				url : testUrl+'/nggirl-web/web/admin/dresser/listCosmeticsBrand',
 				type : 'post',
 				dataType : 'json',
 				data: {cosmeticsClass:$(this).attr('cosmeticsClass')},
@@ -426,7 +427,7 @@ $(function(){
 				var requestData = {workId:workId,workName:$('.works-name').val(),workType:$('.works-type option:selected').html(),timeUsed:$('.works-time option:selected').html(),cost:$('.works-price').val(),tags:$('.tips-selected').html(),descriptions:$('.works-content').val(),cosmetics:str,cover:$('#form0-addworks .box:eq(0)').children('img').attr('src'),contentPhoto:imgContentPhoto};
 				//拿到所有信息发送给后台，添加化妆师信息
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/updateWork/V1.4.0',
+					url : testUrl+'/nggirl-web/web/admin/work/updateWork/V1.4.0',
 					type : 'POST',
 					dataType : 'json',
 					data: requestData,
@@ -473,7 +474,7 @@ function createWorkPage(data){
 			params.page = p;
 			$('.zpxq>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/listWorks/V1.4.1',
+				url : testUrl+'/nggirl-web/web/admin/work/listWorks/V1.4.1',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -541,7 +542,7 @@ function getWorkSearchParams(page){
 function loadWorkPage(){
 	$('.zpxq>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/listWorks/V1.4.1',
+		url : testUrl+'/nggirl-web/web/admin/work/listWorks/V1.4.1',
 		type : 'post',
 		dataType : 'json',
 		data: getWorkSearchParams(1),

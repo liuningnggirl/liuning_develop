@@ -12,7 +12,7 @@
 <script src="../common/js/jquery.fileupload.js"></script>
 <script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
 <script src="../common/js/swiper.min.js" charset="utf-8"></script>
-
+<script type="text/javascript" src="../common/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
     <div class="weight-box zpxqq" id="work_manage">
@@ -57,7 +57,41 @@
        <!--  页码 -->
        <div class="tcdPageCode"></div>
     </div>
-    
+<!-----------------------------------------------------------------  添加作品开始 ---------------------------------------------------------------->
+    <div class="weight-box add-works" style="display:none;">
+        <div class="order-num" style="padding: 10px 0 10px 10px;">
+            <form name="form0" id="form0-addworks" >
+            	<p style="color:#878787;">上传图片：</p>
+                <input type="file" name="file0-add-works" id="file0-add-works" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploads/3.0.0" /><br><img src="../common/images/add.jpg" id="img0-addworks" >
+            </form><br /><br />
+            <label for="">妆束类型：</label>
+            <select name="" id="" class="works-type"></select>
+            <br /><br />
+            <label for="">妆束名称：</label>
+            <input type="text" class="works-name" />
+            <br /><br />
+            <label for="">化妆用时：</label>
+            <select name="" id="" class="works-time">
+                <option value="">60</option>
+                <option value="">90</option>
+                <option value="">120</option>
+            </select>
+            <br /><br />
+            <label for="">费　　用：</label><input type="text" class="works-price" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" />
+            <br /><br />
+            <div class="add-works-tips">
+            	<p class="add-works-tips-select">请选择妆束标签：<span class="tips-selected"></span></p>
+                <div class="works-tips"></div>
+            </div>
+            <p style="color:#878787; line-height:50px;">妆束说明</p>
+            <textarea name="" id="" cols="30" rows="10" class="works-content" ></textarea>
+            <p style="padding:20px 0 0;">使用的化妆品</p>
+            <ul class="cosmetics-class"></ul>
+            <input type="button" value="发布作品" class="published-work-btn" style="background:#51a351; color:#fff;" />
+            <input type="button" value="更新作品" class="published-work-btn-update" style="background:#51a351; color:#fff;display:none;" />
+        </div>
+    </div>
+<!-----------------------------------------------------------------  添加作品结束 ---------------------------------------------------------------->
 <script type="text/javascript">
 $(function(){
 	var bigImg='';

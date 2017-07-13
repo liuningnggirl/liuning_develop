@@ -1,5 +1,6 @@
-// JavaScript Document
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	goingColumnInfo();
 	var ldq=new LocalStorageDeque('pageRestoreStack2');
 	$(".online_column").live('click',function(){
 		$(".going_column_list").hide();
@@ -112,7 +113,7 @@ $(function(){
 		var r = confirm('确定要保存？？？');
 		if(r == true){
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/addOrUpdateArticlePost/2.5.6',
+				url : testUrl+'/nggirl-web/web/admin/guesteditor/addOrUpdateArticlePost/2.5.6',
 				type : 'post',
 				dataType : 'json',
 				data: {postId:$(".guest_column_create").attr("postId"),title:$(".guest_column_create .guest_tit").val(),articles:articles},
@@ -172,7 +173,7 @@ function onclickGuestPageNum(p){
 	var data = guestColumnData();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/getPublishedPostList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/guesteditor/getPublishedPostList/2.5.6',
 		type : 'post',
 		dataType : 'json',
 		data: data,
@@ -187,7 +188,7 @@ function guestColumnInfo(){
 	//获取入参
 	var data = guestColumnData();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/getPublishedPostList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/guesteditor/getPublishedPostList/2.5.6',
 		type : 'post',
 		dataType : 'json',
 		data: data,
@@ -229,7 +230,7 @@ function goingColumnListdetail(data){
 function onclickgoingPageNum(p){
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/getDraftPostList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/guesteditor/getDraftPostList/2.5.6',
 		type : 'post',
 		dataType : 'json',
 		data: {page:p,num:20,title:$(".going_column_list .guest_online_tit").val()},
@@ -244,7 +245,7 @@ function goingColumnInfo(){
 	console.log($(".going_column_list .guest_online_tit").val());
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/getDraftPostList/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/guesteditor/getDraftPostList/2.5.6',
 		type : 'post',
 		dataType : 'json',
 		data: {page:0,num:20,title:$(".going_column_list .guest_online_tit").val()},
@@ -273,7 +274,7 @@ function clearGuestArtical(){
 //获取专栏名称
 function guestColumnNameInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/column/getAllColumnList/2.4.0',
+		url : testUrl+'/nggirl-web/web/admin/column/getAllColumnList/2.4.0',
 		type : 'get',
 		dataType : 'json',
 		data: {},
@@ -294,7 +295,7 @@ function guestColumnNameInfo(){
 //删除帖子
 function deletedGuestColumnInfo(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/deletePostArticle/2.5.6',
+		url : testUrl+'/nggirl-web/web/admin/guesteditor/deletePostArticle/2.5.6',
 		type : 'post',
 		dataType : 'json',
 		data: {postId:$(".delThisGuestColumn").attr("postId")},
@@ -307,40 +308,12 @@ function deletedGuestColumnInfo(){
 		},
 	});
 };
-//查看帖子 
-//function lookGuestColumnInfo(btn){
-//	var del=btn;
-//	$.ajax({
-//	url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/getArticleDetail/2.5.6',
-//	type : 'get',
-//	dataType : 'json',
-//	data: {postId:del.attr('postId')},
-//	success : function(data){
-//		if(data.code == 0){
-//			$(".look_guest_column p").html(data.data.title);
-//			$('.guest_column_create .editor_content').createArticleEditor({
-//				elements: ['paragraph', 'title', 'note', 'image', 'goods', 'preview', 'fullScreen'],
-//				data:data.data.articles,//初始化内容
-//				defaultData:[{type:2,content:''}]//编辑器为空时,默认的元素
-//			});
-//			$(".look_guest_column .look_guest_column_det").append($('.guest_column_create .editor_content .article_editor').html());
-//			//$(".look_guest_column .look_guest_column_det").createArticleEditor({data:data.data.articles});
-///*			var str='';
-//			$.each(data.data.articles,function(key,val){
-//				
-//			});
-//			$(".look_guest_column .look_guest_column_det").append(str);*/
-//		}else{
-//			alert(data.data.error);
-//		}
-//	}
-//});
-//}
+
 //编辑帖子 
 function getGuestTieDetailsFn(btn){
 	var del=btn;
 	$.ajax({
-	url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/getArticleDetail/2.5.6',
+	url : testUrl+'/nggirl-web/web/admin/guesteditor/getArticleDetail/2.5.6',
 	type : 'get',
 	dataType : 'json',
 	data: {postId:del.attr('postId')},
@@ -365,7 +338,7 @@ function getGuestTieDetailsFn(btn){
 //提交帖子 
 function pushGuestTieDetailsFn(){
 	$.ajax({
-	url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/guesteditor/submitPostArticle/2.5.6',
+	url : testUrl+'nggirl-web/web/admin/guesteditor/submitPostArticle/2.5.6',
 	type : 'post',
 	dataType : 'json',
 	data: {postId:$(".pushThisColumn").attr('postId')},

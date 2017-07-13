@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadZiXunPage();
 //资讯管理--》搜索按钮
 	$('.zxgll .search-btn').click(loadZiXunPage);
 //资讯管理--》删除按钮
@@ -7,7 +9,7 @@ $(function(){
 		if(r == true){
 			var del = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/focuscontent/delete',
+				url : testUrl+'/nggirl-web/web/admin/focuscontent/delete',
 				type : 'post',
 				dataType : 'json',
 				data: {contentId:$(this).parent().parent().children('td:eq(0)').html()},
@@ -34,7 +36,7 @@ $(function(){
 		if(r == true){
 			var fabu = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/focuscontent/publish',
+				url : testUrl+'/nggirl-web/web/admin/focuscontent/publish',
 				type : 'post',
 				dataType : 'json',
 				data: {contentId:$(this).parent().parent().children('td:eq(0)').html()},
@@ -58,7 +60,7 @@ $(function(){
 		if(r == true){
 			var cancle = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/focuscontent/depublish',
+				url : testUrl+'/nggirl-web/web/admin/focuscontent/depublish',
 				type : 'post',
 				dataType : 'json',
 				data: {contentId:$(this).parent().parent().children('td:eq(0)').html()},
@@ -96,10 +98,9 @@ function initZiXunPage(data){
 
 //资讯加载页面
 function  loadZiXunPage(){
-	/*$('.zxgl tbody tr:gt(0)').remove(); //清除原来的表格信息*/
 	var params = getZiXunParams();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/focuscontent/list',
+		url : testUrl+'/nggirl-web/web/admin/focuscontent/list',
 		type : 'get',
 		dataType : 'json',
 		data: params,
@@ -133,7 +134,7 @@ function  createZiXunPage(data){
 			params.page = p;
 			$('.zxgl tbody tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/focuscontent/list',
+				url : testUrl+'/nggirl-web/web/admin/focuscontent/list',
 				type : 'get',
 				dataType : 'json',
 				data: params,

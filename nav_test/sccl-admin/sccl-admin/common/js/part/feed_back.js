@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadFeedback();
 //点击“反馈意见”--》取消全部--》清空文本框 
 	$('.fkxq .cancle-btn').click(function(e) {
         $('.fkxq .search').val('');
@@ -11,7 +13,7 @@ function loadFeedback() {
 	$('.fkxq .search').val('');
 	var listnum = $('.fkxq .on-select  option:selected').index();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/listFeedbacks',
+		url : testUrl+'/nggirl-web/web/admin/feedback/listFeedbacks',
 		type : 'get',
 		dataType : 'json',
 		data: {phoneNum:$('.fkxq .search').val(),userType:$('.fkxq .on-select option:selected').index()+1,page:1},
@@ -22,7 +24,7 @@ function loadFeedback() {
 				current:parseInt(data.data.currnetPageNum),
 				backFn:function(p){
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/listFeedbacks',
+						url : testUrl+'/nggirl-web/web/admin/feedback/listFeedbacks',
 						type : 'get',
 						dataType : 'json',
 						data: {phoneNum:$('.fkxq .search').val(),userType:$('.fkxq .on-select option:selected').index()+1,page:p},
@@ -54,7 +56,7 @@ function loadFeedback() {
 											var feedbackId = $('.fkxqq tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(0)').attr('feedbackId');
 											var chuli = $(this);
 											$.ajax({
-												url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/processFeedback',
+												url : testUrl+'/nggirl-web/web/admin/feedback/processFeedback',
 												type : 'post',
 												dataType : 'json',
 												data: {userType:listnum+1,feedbackId:feedbackId},
@@ -101,7 +103,7 @@ function loadFeedback() {
 							var feedbackId = $('.fkxqq tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(0)').attr('feedbackId');
 							var chuli = $(this);
 							$.ajax({
-								url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/processFeedback',
+								url : testUrl+'/nggirl-web/web/admin/feedback/processFeedback',
 								type : 'post',
 								dataType : 'json',
 								data: {userType:listnum+1,feedbackId:feedbackId},
@@ -124,7 +126,7 @@ function loadFeedback() {
 	$('.fkxq .search-btn').click(function(e) {
 	$('.fkxqq tbody tr:gt(0)').remove();
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/listFeedbacks',
+			url : testUrl+'/nggirl-web/web/admin/feedback/listFeedbacks',
 			type : 'get',
 			dataType : 'json',
 			data: {phoneNum:$('.fkxq .search').val(),userType:$('.fkxq .on-select option:selected').index()+1},
@@ -135,7 +137,7 @@ function loadFeedback() {
 					current:parseInt(data.data.currnetPageNum),
 					backFn:function(p){
 						$.ajax({
-							url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/listFeedbacks',
+							url : testUrl+'/nggirl-web/web/admin/feedback/listFeedbacks',
 							type : 'get',
 							dataType : 'json',
 							data: {phoneNum:$('.fkxq .search').val(),userType:$('.fkxq .on-select option:selected').index()+1,page:p},
@@ -168,7 +170,7 @@ function loadFeedback() {
 												var chuli = $(this);
 												$('.fkxqq tbody tr:gt(0)').remove();
 												$.ajax({
-													url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/processFeedback',
+													url : testUrl+'/nggirl-web/web/admin/feedback/processFeedback',
 													type : 'post',
 													dataType : 'json',
 													data: {userType:listnum+1,feedbackId:feedbackId},
@@ -216,7 +218,7 @@ function loadFeedback() {
 								var chuli = $(this);
 								$('.fkxqq tbody tr:gt(0)').remove();
 								$.ajax({
-									url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/feedback/processFeedback',
+									url : testUrl+'/nggirl-web/web/admin/feedback/processFeedback',
 									type : 'post',
 									dataType : 'json',
 									data: {userType:listnum+1,feedbackId:feedbackId},

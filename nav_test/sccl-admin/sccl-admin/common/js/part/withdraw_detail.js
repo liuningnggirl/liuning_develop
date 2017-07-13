@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadWithdrawDetail();
 //提现管理--》搜索按钮
 	$('.txgl .search-btn').click(function(e) {
 		$('.txgll>tbody>tr:gt(0)').remove();
@@ -6,7 +8,7 @@ $(function(){
 		var startTime = $('.txgl .qian').val().replace(re, "");
 		var endTime = $('.txgl .hou').val().replace(re, "");
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
+			url : testUrl+'/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
 			type : 'get',
 			dataType : 'json',
 			data: {realName:$('.txgl .search_realname').val(),nickName:$('.txgl .search').val(),startTime:startTime,endTime:endTime,status:$('.txgl .on-select option:selected').attr('value'),page:1},
@@ -16,7 +18,7 @@ $(function(){
 					current:parseInt(data.data.currnetPageNum),
 					backFn:function(p){
 						$.ajax({
-							url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
+							url : testUrl+'/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
 							type : 'get',
 							dataType : 'json',
 							data: {realName:$('.txgl .search_realname').val(),nickName:$('.txgl .search').val(),startTime:startTime,endTime:endTime,status:$('.txgl .on-select option:selected').attr('value'),page:p},
@@ -35,7 +37,7 @@ $(function(){
 										   if(r == true){
 											   var requireId = $('.txgl table tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(0)').attr('requireId');
 											   $.ajax({
-													url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/processWithdrawRequire',
+													url : testUrl+'/nggirl-web/web/admin/withdraw/processWithdrawRequire',
 													type : 'post',
 													dataType : 'json',
 													data: {requireId:requireId},
@@ -74,7 +76,7 @@ $(function(){
 						   if(r == true){
 							   var requireId = $('.txgl table tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(0)').attr('requireId');
 							   $.ajax({
-									url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/processWithdrawRequire',
+									url : testUrl+'/nggirl-web/web/admin/withdraw/processWithdrawRequire',
 									type : 'post',
 									dataType : 'json',
 									data: {requireId:requireId},
@@ -116,7 +118,7 @@ function loadWithdrawDetail(){
     $('.txgl .hou').val('');
 	$('.txgl tr:gt(0)').remove(); //清除原来的表格信息
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
+		url : testUrl+'/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
 		type : 'get',
 		dataType : 'json',
 		data: {page:1},
@@ -127,7 +129,7 @@ function loadWithdrawDetail(){
 				current:parseInt(data.data.currnetPageNum),
 				backFn:function(p){
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
+						url : testUrl+'/nggirl-web/web/admin/withdraw/listWithdrawRequires/1.5.0',
 						type : 'get',
 						dataType : 'json',
 						data: {page:p},
@@ -146,7 +148,7 @@ function loadWithdrawDetail(){
 									   if(r == true){
 										   var requireId = $('.txgl table tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(0)').attr('requireId');
 										   $.ajax({
-												url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/processWithdrawRequire',
+												url : testUrl+'/nggirl-web/web/admin/withdraw/processWithdrawRequire',
 												type : 'post',
 												dataType : 'json',
 												data: {requireId:requireId},
@@ -185,7 +187,7 @@ function loadWithdrawDetail(){
 					   if(r == true){
 						   var requireId = $('.txgl table tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(0)').attr('requireId');
 						   $.ajax({
-								url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/withdraw/processWithdrawRequire',
+								url : testUrl+'/nggirl-web/web/admin/withdraw/processWithdrawRequire',
 								type : 'post',
 								dataType : 'json',
 								data: {requireId:requireId},

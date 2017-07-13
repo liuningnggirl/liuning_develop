@@ -1,9 +1,9 @@
-
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	listInviteCodes2();
 //邀请管理
-//<!--  点击“邀请码管理”--》搜索按钮 -->
+//点击“邀请码管理”--》搜索按钮
 	$('.random-list .comsearch-btn').click(listInviteCodes2);
-	//listInviteCodes2();
 
 //创建邀请码
 	//判断是否为永久有效（1：永久有效时隐藏）
@@ -25,9 +25,9 @@ $(function(){
 	
 	//删除面值行
 	$(".delline").live('click',function(){
-			$(this).parent("td").parent("tr").remove();
-			$(".moneyweight tr:last-child").addClass("thisline").siblings("tr").removeClass("thisline")
-			$(".moneyweight tr:last-child .ran-money").addClass("ran-moneys");
+		$(this).parent("td").parent("tr").remove();
+		$(".moneyweight tr:last-child").addClass("thisline").siblings("tr").removeClass("thisline")
+		$(".moneyweight tr:last-child .ran-money").addClass("ran-moneys");
 	 });
 	 //有效期类型为时间段
 	 $('.random-create .quan-duan').change(function(){
@@ -86,7 +86,7 @@ $(function(){
 		$('.random-list').hide();
         $('.random-create').show();
     });	
-//<!--  点击--》返回--》返回到邀请码列表 -->	
+//点击--》返回--》返回到邀请码列表	
 	$('.return-rancode,.ranbtn-return').click(function(e) {
 		listInviteCodes2();
 		$('.random-txt').html('');
@@ -94,7 +94,7 @@ $(function(){
         $('.random-create').hide();
 		$('.random-success').hide();
     });			
-//<!--  继续创建 -->
+//继续创建 
 	$('.ranbtn-create').click(function(e) {
 		$('.random-create .quan-name').val('');
 		$('.random-create .quan-pro option:eq(0)').attr('selected','selected');
@@ -127,7 +127,7 @@ $(".moneyweight input").live('afterpaste',function(){
         $('.randomedit').show();
 		 var del=$(this);
 		  $.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/getRandomInviteCodeInfo',
+					url : testUrl+'/nggirl-web/web/admin/invitecoderandom/getRandomInviteCodeInfo',
 					type : 'get',
 					dataType : 'json',
 					data: {codeId:del.parent().parent().children('td:eq(0)').attr('codeId')},
@@ -168,7 +168,7 @@ $(".moneyweight input").live('afterpaste',function(){
 									}
 							}
 						for(var i =0; i < data.data.faceValueAndWeight.length; i ++){
-							$(".randomedit  .moneyweight").append('<tr><td><input type="text" class="ran-money weightwidth" value='+data.data.faceValueAndWeight[i].faceValue+' /></td><td><input type="text" class="ran-ratio weightwidth" value='+data.data.faceValueAndWeight[i].weight+' /></td><td><img src="images/ele-del.png" class="delline"></td></tr>');
+							$(".randomedit  .moneyweight").append('<tr><td><input type="text" class="ran-money weightwidth" value='+data.data.faceValueAndWeight[i].faceValue+' /></td><td><input type="text" class="ran-ratio weightwidth" value='+data.data.faceValueAndWeight[i].weight+' /></td><td><img src="../common/images/ele-del.png" class="delline"></td></tr>');
 							
 							}
 						$(".randomedit  .moneyweight tr:last-child").addClass("thisline").siblings("tr").removeClass("thisline");
@@ -210,7 +210,7 @@ $(".commitbox .surecom").click(function(){
 		$(".delcodebox .suredel").click(function(){
 			$(".delcodebox,.allbox").hide();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/deleteRandomInviteCode',
+				url : testUrl+'/nggirl-web/web/admin/invitecoderandom/deleteRandomInviteCode',
 				type : 'post',
 				dataType : 'json',
 				data: {codeId:del.parent().parent().children('td:eq(0)').attr('codeId')},
@@ -272,7 +272,7 @@ function onClickPageNum2(p){
 	var data = genData2();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/listRandomInviteCodes',
+		url : testUrl+'/nggirl-web/web/admin/invitecoderandom/listRandomInviteCodes',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -287,7 +287,7 @@ function listInviteCodes2(){
 	//获取入参
 	var data = genData2();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/listRandomInviteCodes',
+		url : testUrl+'/nggirl-web/web/admin/invitecoderandom/listRandomInviteCodes',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -330,7 +330,7 @@ function createrandomcode(){
 							}
 					};
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/createRandomInviteCode',
+						url : testUrl+'/nggirl-web/web/admin/invitecoderandom/createRandomInviteCode',
 						type : 'post',
 						dataType : 'json',
 						data: {productName:$('.random-create .quan-name').val(),type:$('.random-create .quan-pro option:selected').attr('value'),allowedTimes:$('.random-create .quan-use-num').val(),limitPrice:$('.random-create .quan-low-money').val(),isForever:$('.random-create .on-select option:selected').attr('value'),faceValueAndWeight:str2},
@@ -372,7 +372,7 @@ function createrandomcode(){
 				var startDate = $('.random-create .qian').val().replace(re, "");
 				var endDate = $('.random-create .hou').val().replace(re, "");
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/createRandomInviteCode',
+					url : testUrl+'/nggirl-web/web/admin/invitecoderandom/createRandomInviteCode',
 					type : 'post',
 					dataType : 'json',
 					data: {productName:$('.random-create .quan-name').val(),type:$('.random-create .quan-pro option:selected').attr('value'),allowedTimes:$('.random-create .quan-use-num').val(),limitPrice:$('.random-create .quan-low-money').val(),isForever:$('.random-create .on-select option:selected').attr('value'),effectiveType:$('.random-create .quan-duan option:selected').attr('value'),startDate:startDate,endDate:endDate,faceValueAndWeight:str2},
@@ -410,7 +410,7 @@ function createrandomcode(){
 				var startDate = $('.random-create .qian').val().replace(re, "");
 				var endDate = $('.random-create .hou').val().replace(re, "");
 			    $.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/createRandomInviteCode',
+					url : testUrl+'/nggirl-web/web/admin/invitecoderandom/createRandomInviteCode',
 					type : 'post',
 					dataType : 'json',
 					data: {productName:$('.random-create .quan-name').val(),type:$('.random-create .quan-pro option:selected').attr('value'),allowedTimes:$('.random-create .quan-use-num').val(),limitPrice:$('.random-create .quan-low-money').val(),isForever:$('.random-create .on-select option:selected').attr('value'),effectiveType:$('.random-create .quan-duan option:selected').attr('value'),effectiveDate:$('.random-create .quan-day').val(),faceValueAndWeight:str2},
@@ -520,7 +520,7 @@ function typeone(){
 		var str3=str3+$('.randomedit .ran-money:eq('+i+')').val()+","+$('.randomedit .ran-ratio:eq('+i+')').val()+";";
 	};
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/updateRandomInviteCode',
+		url : testUrl+'/nggirl-web/web/admin/invitecoderandom/updateRandomInviteCode',
 		type : 'post',
 		dataType : 'json',
 		data: {codeId:$(".randomedit").attr("codeId"),productName:$('.randomedit .quan-name').val(),type:$('.randomedit .quan-pro option:selected').attr('value'),allowedTimes:$('.randomedit .quan-use-num').val(),limitPrice:$('.randomedit .quan-low-money').val(),isForever:$('.randomedit .on-select option:selected').attr('value'),faceValueAndWeight:str3},
@@ -543,7 +543,7 @@ function typetwo(){
 	var startDate = $('.randomedit .qian').val().replace(re, "");
 	var endDate = $('.randomedit .hou').val().replace(re, "");
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/updateRandomInviteCode',
+		url : testUrl+'/nggirl-web/web/admin/invitecoderandom/updateRandomInviteCode',
 		type : 'post',
 		dataType : 'json',
 		data: {codeId:$(".randomedit").attr("codeId"),productName:$('.randomedit .quan-name').val(),type:$('.randomedit .quan-pro option:selected').attr('value'),allowedTimes:$('.randomedit .quan-use-num').val(),limitPrice:$('.randomedit .quan-low-money').val(),isForever:$('.randomedit .on-select option:selected').attr('value'),effectiveType:$('.randomedit .quan-duan option:selected').attr('value'),startDate:startDate,endDate:endDate,faceValueAndWeight:str3},
@@ -562,7 +562,7 @@ function typethree(){
 		var str3=str3+$('.randomedit .ran-money:eq('+i+')').val()+","+$('.randomedit .ran-ratio:eq('+i+')').val()+";";
 	};
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecoderandom/updateRandomInviteCode',
+		url : testUrl+'/nggirl-web/web/admin/invitecoderandom/updateRandomInviteCode',
 		type : 'post',
 		dataType : 'json',
 		data: {codeId:$(".randomedit").attr("codeId"),productName:$('.randomedit .quan-name').val(),type:$('.randomedit .quan-pro option:selected').attr('value'),allowedTimes:$('.randomedit .quan-use-num').val(),limitPrice:$('.randomedit .quan-low-money').val(),isForever:$('.randomedit .on-select option:selected').attr('value'),effectiveType:$('.randomedit .quan-duan option:selected').attr('value'),effectiveDate:$('.randomedit .quan-day').val(),faceValueAndWeight:str3},

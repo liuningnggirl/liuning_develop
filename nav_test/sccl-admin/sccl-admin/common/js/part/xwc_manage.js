@@ -1,10 +1,11 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
 	//获取所有活动列表
-	//loadXwcPage();
+	loadXwcPage();
 	
 	//获取城市列表
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCitys',
+		url : testUrl+'/nggirl-web/web/admin/common/getCitys',
 		type : 'get',
 		dataType : 'json',  
 		success : function(data){
@@ -18,7 +19,7 @@ $(function(){
 	$('.mac-activity-address #province').change(function(){
 		//获取地区列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCountys',
+			url : testUrl+'/nggirl-web/web/admin/common/getCountys',
 			type : 'get',
 			data : ({cityId:$('.mac-activity-address .mine-city option:selected').attr('cityId')}),
 			dataType : 'json',  
@@ -42,7 +43,7 @@ $(function(){
 		var del = $(this);
 		if(r == true){
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/work/setOnline',
+				url : testUrl+'/nggirl-web/web/admin/salon/work/setOnline',
 				type : 'get',
 				dataType : 'json',
 				data: {atId:del.attr("atId"),flag:del.attr("flag")},
@@ -183,7 +184,7 @@ $(function(){
 					//更新活动信息
 					if(r == true){
 						$.ajax({
-							url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/work/addOrUpdateSalonDetails/2.5.8',
+							url : testUrl+'/nggirl-web/web/admin/salon/work/addOrUpdateSalonDetails/2.5.8',
 							type : 'POST',
 							dataType : 'json',
 							data: data,
@@ -204,7 +205,7 @@ $(function(){
 					//新增活动信息
 					if(r == true){
 						$.ajax({
-							url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/work/addOrUpdateSalonDetails/2.5.8',
+							url : testUrl+'/nggirl-web/web/admin/salon/work/addOrUpdateSalonDetails/2.5.8',
 							type : 'POST',
 							dataType : 'json',
 							data: data,
@@ -236,7 +237,7 @@ $(function(){
 		$('.mzxwc-activity-content').attr('id','edit');
 		$('.mzxwc-gl').attr('atId',$(this).parent().parent().children('td:eq(0)').html());
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/work/getSalonDetails/2.5.8',
+			url : testUrl+'/nggirl-web/web/admin/salon/work/getSalonDetails/2.5.8',
 			type : 'get',
 			dataType : 'json',
 			data: {atId:$(this).parent().parent().children('td:eq(0)').html()},
@@ -268,7 +269,7 @@ $(function(){
 				var areaname = data.data.areaName;
 				//回显所在城区
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCountys',
+					url : testUrl+'/nggirl-web/web/admin/common/getCountys',
 					type : 'get',
 					data : ({cityId:$('.mac-activity-address .mine-city option:selected').attr('cityId')}),
 					dataType : 'json',  
@@ -441,7 +442,7 @@ function initXwcPage(data){
 function loadXwcPage(){
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/work/listWorks/2.5.8',
+		url : testUrl+'/nggirl-web/web/admin/salon/work/listWorks/2.5.8',
 		type : 'get',
 		dataType : 'json',
 		data: getXwcSearchParams(1),
@@ -467,7 +468,7 @@ function createXwcPage(p){
 	data.page = p;
 	
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/work/listWorks/2.5.8',
+		url : testUrl+'/nggirl-web/web/admin/salon/work/listWorks/2.5.8',
 		type : 'get',
 		dataType : 'json',
 		data: data,

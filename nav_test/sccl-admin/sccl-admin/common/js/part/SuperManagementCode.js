@@ -1,18 +1,21 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	listInviteCodess();
 //邀请管理
-//<!--  点击“邀请码管理”--》搜索按钮 -->
+//点击“邀请码管理”--》搜索按钮
 	$('.surpercodes .search-btn').click(listInviteCodess);
-	//listInviteCodess();
-//<!--  点击“普通码管理”--》搜索按钮 -->
+	
+//点击“普通码管理”--》搜索按钮
 	$('.commontop .searchcom').click(listInviteCodescom);
-	//listInviteCodess();
-//<!--  点击“邀请码管理”--》全部取消按钮 -->
+
+//点击“邀请码管理”--》全部取消按钮
 	$('.surpercodes .cancle-btn').click(function(e) {
 		$('.surpercodes .search.yhq').val('');
 		$('.surpercodes .search.creater').val('');
 		$('.surpercodes .on-select option:eq(0)').attr('selected','selected');
 	});
-//<!--  创建超级邀请码信息 -->
+	
+//创建超级邀请码信息
 	$('.mcreate-btn').click(function(e) {
 		$('.myhq-create .surpercode').val('');
 		$('.myhq-create .all-time').val('');
@@ -31,7 +34,7 @@ $(function(){
 		}
 		else{
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/createSuperInviteCode',
+				url : testUrl+'/nggirl-web/web/admin/invitecodesuper/createSuperInviteCode',
 				type : 'post',
 				dataType : 'json',
 				data: {"code":$(".surpercode").val(),"allowedTimes":$(".all-time").val(), "comment":$(".supremark").val()},
@@ -89,7 +92,7 @@ $(function(){
 //封装超级邀请码
 	function surpercodeall(date){
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/listUnionInviteCodes',
+			url : testUrl+'/nggirl-web/web/admin/invitecodesuper/listUnionInviteCodes',
 			type : 'get',
 			dataType : 'json',
 			data: {superCodeId:date},
@@ -133,7 +136,7 @@ $(function(){
 	$(".addcommonlink").live('click',function(e) {
 		var del=$(this);
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/createUnion',
+			url : testUrl+'/nggirl-web/web/admin/invitecodesuper/createUnion',
 			type : 'post',
 			dataType : 'json',
 			data: {superCodeId:$(".surpercode-detail").attr('superCodeId'),commonCodeId:$(this).parent().parent().children('td:eq(0)').attr('codeId'),},
@@ -156,7 +159,7 @@ $(function(){
 		$(".canclecodebox .suredel").click(function(){
 			$(".canclecodebox,.allbox").hide();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/deleteUnion',
+				url : testUrl+'/nggirl-web/web/admin/invitecodesuper/deleteUnion',
 				type : 'post',
 				dataType : 'json',
 				data: {superCodeId:$(".surpercode-detail").attr('superCodeId'),commonCodeId:del.parent().parent().children('td:eq(0)').attr('codeId'),},
@@ -183,7 +186,7 @@ $(function(){
 		$(".canclecodebox .suredel").click(function(){
 		$(".canclecodebox,.allbox").hide();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/deleteUnion',
+				url : testUrl+'/nggirl-web/web/admin/invitecodesuper/deleteUnion',
 				type : 'post',
 				dataType : 'json',
 				data: {superCodeId:$(".surpercode-detail").attr('superCodeId'),commonCodeId:del.parent().parent().children('td:eq(0)').attr('codeId'),},
@@ -211,7 +214,7 @@ $(function(){
 		$(".confirmdel .suredel").click(function(){
 			$(".confirmdel,.allbox").hide();
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/deleteSuperInviteCode',
+				url : testUrl+'/nggirl-web/web/admin/invitecodesuper/deleteSuperInviteCode',
 				type : 'post',
 				dataType : 'json',
 				data: {codeId:del.parent().parent().children('td:eq(0)').attr('codeId')},
@@ -260,7 +263,7 @@ function onClickPageNums(p){
 	var data = genDatas();
 	data.page = p;
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/listSuperInviteCodes',
+		url : testUrl+'/nggirl-web/web/admin/invitecodesuper/listSuperInviteCodes',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -275,7 +278,7 @@ function listInviteCodess(){
 	//获取入参
 	var data = genDatas();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/listSuperInviteCodes',
+		url : testUrl+'/nggirl-web/web/admin/invitecodesuper/listSuperInviteCodes',
 		type : 'get',
 		dataType : 'json',
 		data: data,
@@ -332,7 +335,7 @@ function listInviteCodess(){
 		var data = genData1();
 		data.page = p;
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/listCommonInviteCodes',
+			url : testUrl+'/nggirl-web/web/admin/invitecodesuper/listCommonInviteCodes',
 			type : 'get',
 			dataType : 'json',
 			data: data,
@@ -347,7 +350,7 @@ function listInviteCodess(){
 		//获取入参
 		var data = genData1();
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecodesuper/listCommonInviteCodes',
+			url : testUrl+'/nggirl-web/web/admin/invitecodesuper/listCommonInviteCodes',
 			type : 'get',
 			dataType : 'json',
 			data: data,

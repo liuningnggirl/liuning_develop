@@ -479,25 +479,25 @@ $(function(){
 					{"id":"xwcOrder_manage","name":"美妆下午茶订单","parentId":"beauty_business_manage","url":"xwc_order_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"order_manage","name":"上门美妆服务订单","parentId":"beauty_business_manage","url":"order_detail.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"dresser_manage","name":"化妆师管理","parentId":"beauty_business_manage","url":"dresser_detail.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"work_manage","name":"作品管理","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"smmzTopics_manage","name":"上门美妆专题","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"xwc_manage","name":"美妆下午茶","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"cash_manage","name":"现金提现","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"complaint_advisory_manage","name":"美妆投诉/咨询","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"work_manage","name":"作品管理","parentId":"beauty_business_manage","url":"work_detail.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"smmzTopics_manage","name":"上门美妆专题","parentId":"beauty_business_manage","url":"recommended_topics_mangement.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"xwc_manage","name":"美妆下午茶","parentId":"beauty_business_manage","url":"xwc_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"cash_manage","name":"现金提现","parentId":"beauty_business_manage","url":"withdraw_detail.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"complaint_advisory_manage","name":"美妆投诉/咨询","parentId":"beauty_business_manage","url":"complaints_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"beauty_line_service_manage","name":"美妆线下服务管理","parentId":"beauty_business_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-						{"id":"beauty_line_service_company_manage","name":"企业上门美妆服务","parentId":"beauty_line_service_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"beauty_line_service_school_manage","name":"校园美妆课堂","parentId":"beauty_line_service_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+						{"id":"beauty_line_service_company_manage","name":"企业上门美妆服务","parentId":"beauty_line_service_manage","url":"beauty_line_service_company_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"beauty_line_service_school_manage","name":"校园美妆课堂","parentId":"beauty_line_service_manage","url":"beauty_line_service_school_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 					]}
 				]},
 				{"id":"other_manage","name":"其他","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
 					{"id":"invitation_code_manage","name":"邀请码管理","parentId":"community_manage","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-						{"id":"normal_manage","name":"普通邀请码","parentId":"post_hot_match","url":"test1.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"superInvite_manage","name":"超级邀请码","parentId":"post_hot_match","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-						{"id":"randomInvite_manage","name":"随机邀请码","parentId":"post_hot_match","url":"test2.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+						{"id":"normal_manage","name":"普通邀请码","parentId":"post_hot_match","url":"invitecode_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"superInvite_manage","name":"超级邀请码","parentId":"post_hot_match","url":"SuperManagementCode.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+						{"id":"randomInvite_manage","name":"随机邀请码","parentId":"post_hot_match","url":"randominvitecode_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 					]},
-					{"id":"anyway_message_manage","name":"资讯管理","parentId":"official_push_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"anyway_message_manage","name":"客座小编帖子录入管理","parentId":"official_push_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"anyway_message_manage","name":"意见反馈","parentId":"official_push_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
+					{"id":"anyway_message_manage","name":"资讯管理","parentId":"official_push_manage","url":"focush5_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"anyway_message_manage","name":"客座小编帖子录入管理","parentId":"official_push_manage","url":"guest_column_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"anyway_message_manage","name":"意见反馈","parentId":"official_push_manage","url":"feed_back.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 				]}
 			];
 	initMenu(menu,$(".side-menu"));
