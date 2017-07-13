@@ -1,11 +1,13 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadMessagePush();
 //统计推送消息字数
 	$('.text-area').keyup(function(e) {
         $('.txt-num-readonly').val($.trim($('.text-area').val()).length);
     });
 	
 //获取城市
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/getCitys',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/dresser/getCitys',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			for(var x = 0; x < data.data.length; x ++){
@@ -56,7 +58,7 @@ $(function(){
 			utype ='化妆师';
 		}
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/listMessages',
+			url : testUrl+'/nggirl-web/web/admin/sysmessage/listMessages',
 			type : 'get',
 			dataType : 'json',
 			data: {userType:$("input[name='usertype']:checked").val()},
@@ -103,14 +105,14 @@ $(function(){
 			var r = confirm('确认要提交？？');
 			if(r == true){
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/sendMessage/1.4.1',
+					url : testUrl+'/nggirl-web/web/admin/sysmessage/sendMessage/1.4.1',
 					type : 'post',
 					dataType : 'json',
 					data: {userType:$("input[name='usertype']:checked").val(),content:$.trim($('.text-area').val()),sendType:$('.sel-option option:selected').attr('value'),messagetype:$('.messagetype option:selected').attr('value'),forwardkey:$('.forwardkey').val(),isAllCity:$('.message-city input:eq(0)').attr('value'),cityIds:cityEndStr},
 					success : function(data){
 						if(data.code == 0){
 							$.ajax({
-								url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/listMessages',
+								url : testUrl+'/nggirl-web/web/admin/sysmessage/listMessages',
 								type : 'get',
 								dataType : 'json',
 								data: {userType:$("input[name='usertype']:checked").val()},
@@ -138,14 +140,14 @@ $(function(){
 				var r = confirm('确认要提交？？');
 				if(r == true){
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/sendMessage/1.4.1',
+						url : testUrl+'/nggirl-web/web/admin/sysmessage/sendMessage/1.4.1',
 						type : 'post',
 						dataType : 'json',
 						data: {userType:$("input[name='usertype']:checked").val(),content:$.trim($('.text-area').val()),sendType:$('.sel-option option:selected').attr('value'),messagetype:$('.messagetype option:selected').attr('value'),forwardkey:$('.forwardkey').val()},
 						success : function(data){
 							if(data.code == 0){
 								$.ajax({
-									url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/listMessages',
+									url : testUrl+'/nggirl-web/web/admin/sysmessage/listMessages',
 									type : 'get',
 									dataType : 'json',
 									data: {userType:$("input[name='usertype']:checked").val()},
@@ -182,7 +184,7 @@ function loadMessagePush(){
 		utype ='化妆师';
 	}
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/listMessages',
+		url : testUrl+'/nggirl-web/web/admin/sysmessage/listMessages',
 		type : 'get',
 		dataType : 'json',
 		data: {userType:$("input[name='usertype']:checked").val(),page:1},
@@ -195,7 +197,7 @@ function loadMessagePush(){
 				current:parseInt(data.data.currnetPageNum),
 				backFn:function(p){
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/listMessages',
+						url : testUrl+'/nggirl-web/web/admin/sysmessage/listMessages',
 						type : 'get',
 						dataType : 'json',
 						data: {userType:$("input[name='usertype']:checked").val(),page:p},

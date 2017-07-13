@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/shope_after_sale_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script type="text/javascript" src="../common/My97DatePicker/WdatePicker.js"></script>
+
 </head>
 <body>
     <div class="weight-box shope_after_sale_manage" id="shope_after_sale_manage">
@@ -52,8 +55,8 @@
                     <th style="width:300px;">内容</th>
                     <th class="apply_time">
                     	<span style="vertical-align: super;">申诉时间</span>
-                        <img src="images/ele-down.png" alt="" style="width:20px;" value='1' class="apply_time_down" />
-                        <img src="images/ele-up.png" alt="" style="width:20px;" value='2' class="apply_time_up" />
+                        <img src="../common/images/ele-down.png" alt="" style="width:20px;" value='1' class="apply_time_down" />
+                        <img src="../common/images/ele-up.png" alt="" style="width:20px;" value='2' class="apply_time_up" />
                     </th>
                     <th>申诉类型</th>
                     <th>当前状态</th>
@@ -124,12 +127,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="images/modify_icon.png" style="width:17px; vertical-align: sub;" alt="" class="modify_wuliu_shang" />
+                            <img src="../common/images/modify_icon.png" style="width:17px; vertical-align: sub;" alt="" class="modify_wuliu_shang" />
                             <select name="" id="" style="padding:7px; border:1px solid #ccc;" class="kuaidi_name"></select>
                         </td>
                         <td>
-                            <img src="images/modify_icon.png" style="width:17px; vertical-align:middle;" alt="" class="modify_wuliu_danhao" /> 
-                            <img src="images/look_icon.jpg" style="width:20px; vertical-align:text-bottom;" alt="" class="looks_wuliu_danhao" />
+                            <img src="../common/images/modify_icon.png" style="width:17px; vertical-align:middle;" alt="" class="modify_wuliu_danhao" /> 
+                            <img src="../common/images/look_icon.jpg" style="width:20px; vertical-align:text-bottom;" alt="" class="looks_wuliu_danhao" />
                             <input type="text" value="" class="text_padding wuliu_danhao" />
                         </td>
                         <td>
@@ -146,8 +149,8 @@
                 <span class="font_color_red">（注：换货后会给用户发送短信通知信息）</span><br /><br />
                 <div class="shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang" style="display:none;">
                 	物流商：<select name="" id="" style="padding:7px; border:1px solid #ccc;" class="wuliu_shang"></select>
-                    <img class="modify_wuliu_shang" src="images/modify_icon.png?v=a992452d79" style="width:17px; vertical-align: sub;" alt="" >
-                    物流单号：<input type="text" class="text_padding wuliu_danhao" /> <img class="modify_wuliu_danhao" src="images/modify_icon.png?v=a992452d79" style="width:17px; vertical-align: sub;" alt="">
+                    <img class="modify_wuliu_shang" src="../common/images/modify_icon.png?v=a992452d79" style="width:17px; vertical-align: sub;" alt="" >
+                    物流单号：<input type="text" class="text_padding wuliu_danhao" /> <img class="modify_wuliu_danhao" src="../common/images/modify_icon.png?v=a992452d79" style="width:17px; vertical-align: sub;" alt="">
                 </div>
                 <label for="caozuo_check_unpass">商品召回，不做换货处理：</label><input type="checkbox" id="caozuo_check_unpass" />
                 <span class="font_color_red">（注：换货后会给用户发送短信通知信息）</span><br /><br />
@@ -229,5 +232,19 @@
     </div>
    
     
+    <!--  查看订单详情 -->
+    <div class="shope_order_manage_look_order_message" style=" display:none;margin-left: -250px;position:absolute; top:100px; left:50%; border:1px solid #ccc; padding:20px; width:500px; height:auto; background:#fff;">
+        <label for="">订单商品：</label><span class="font_color_red shope_name">商品名称</span><br /><br />
+        <label for="">订单编号：</label><span class="font_color_red order_id">订单编号</span><br /><br />
+        <label for="">物流编号：</label><span class="font_color_red wuliu_id">物流编号</span><br /><br />
+        <label for="">下单时间：</label><span class="font_color_red xiadan_time">下单时间</span><br /><br />
+        <label for="">用户姓名：</label><input type="text" style="padding:7px;" class="user_name" /><br /><br />
+        <label for="">用户电话：</label><input type="text" style="padding:7px;" class="user_tel" /><br /><br />
+        <label for="">用户地址：</label><input type="text" style="padding:7px;" class="user_address" /><br /><br />
+        <label for="">订单金额：</label><input type="text" style="padding:7px;" class="order_money" /><br /><br />
+        <label for="">运费金额：</label><input type="text" style="padding:7px;" class="yunfei_money" /><br /><br />
+        <input type="button" value="保存"  style="padding:7px;" class="shope_order_manage_look_order_message_save_btn green" />
+        <input type="button" value="取消" style="padding:7px;" class="shope_order_manage_look_order_message_cancle_btn red" />
+    </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-// JavaScript Document
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
 	//判断输入数
 	$('.thirdpart .contentcount').keyup(function(e) {
@@ -85,7 +85,7 @@ $(function(){
 //获取可推送类型V2.1.0
 function getSingleFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/getSysMessageTypes/2.1.0',
+		url : testUrl+'/nggirl-web/web/admin/sysmessage/getSysMessageTypes/2.1.0',
 		type : 'get',
 		dataType : 'json',
 		data: {},
@@ -116,7 +116,7 @@ function getSingleFn(){
 //发送推送信息
 function sendMessageFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/sendGetui/2.1.0',
+		url : testUrl+'/nggirl-web/web/admin/sysmessage/sendGetui/2.1.0',
 		type : 'post',
 		dataType : 'json',
 		data: {platform:$('.firstpart select option:selected').attr('value'),cities:$(".secondpart select").val(),content:$('.thirdpart input').val(),sysMessageType:$(".fivepart select option:selected").attr('type'),forwardkey:$.trim($('.sevenpart input').val())},
@@ -134,7 +134,7 @@ function sendMessageFn(){
 //发送推送信息给单个用户
 function sendGetuiToSingleFn(){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/sysmessage/sendGetuiToSingle/2.1.0',
+		url : testUrl+'/nggirl-web/web/admin/sysmessage/sendGetuiToSingle/2.1.0',
 		type : 'post',
 		dataType : 'json',
 		data: {userId:$(".onepart input").val(),platform:$('.firstpart select option:selected').attr('value'),cities:$(".secondpart select").val(),content:$('.thirdpart input').val(),sysMessageType:$(".fivepart select option:selected").attr('type'),forwardkey:$.trim($('.sevenpart input').val())},

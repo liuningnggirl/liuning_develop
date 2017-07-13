@@ -1,4 +1,14 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadShopeAfterSalePage();
+	
+	//点击取消按钮，关闭查看订单信息弹框
+	$('.shope_order_manage_look_order_message .shope_order_manage_look_order_message_cancle_btn').click(function(e) {
+        $('.shope_order_manage_look_order_message').hide().removeAttr('orderId');
+		$('.shope_order_manage_look_order_message').children('input[type="text"]').removeAttr('disabled');
+		$('.shope_order_manage_look_order_message .shope_order_manage_look_order_message_save_btn').show();
+    });
+	
 	//跳转指定页面按钮
 	$('.shope_after_sale_manage .goto_page_box .goto_page_ok').click(function(){
 		if($(".shope_after_sale_manage .goto_page_box .goto_redirect_page_num").val() > $(".shope_after_sale_manage .goto_page_box").attr("totnum")){
@@ -28,7 +38,7 @@ $(function(){
 		var btn = $(this);
 		$('.shope_after_sale_manage_wuliu_message').show().css('top',$(window).scrollTop()+50);
 		$('.shope_after_sale_manage_wuliu_message ul li').remove();
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getExpressTrace/3.1.0',{companyCode:btn.attr('clientExpressCompanyCode'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .wuliu_danhao').val())},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/service/getExpressTrace/3.1.0',{companyCode:btn.attr('clientExpressCompanyCode'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .wuliu_danhao').val())},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				if(data.data.traces == null){
@@ -73,7 +83,7 @@ $(function(){
 		$('.shope_after_sale_manage_after_sale .shope_after_sale_manage_after_sale_qian_table tbody tr').remove();
 		$('.shope_after_sale_manage_after_sale .shope_after_sale_manage_after_sale_hou_table tbody tr').remove();
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/dealItemService/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/service/dealItemService/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.shope_after_sale_manage_after_sale').show().attr('serviceId',btn.attr('serviceId'));
@@ -108,7 +118,7 @@ $(function(){
 		}else if(btn.attr('serviceType') == 1 && btn.attr('operStatus') == 1){//serviceType=1(退货),serviceStatus=1(处理中)
 			$('.shope_after_sale_manage_after_sale_pass_liyou,.shope_after_sale_manage_after_sale_caozuo_pass,.shope_after_sale_manage_after_sale_caozuo_tuikuan .shope_after_sale_manage_after_sale_caozuo_tuikuan_wuliushang,.shope_after_sale_manage_after_sale_caozuo_tuikuan_money').hide();
 			//获取退换货详情V3.1.0
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.shope_after_sale_manage_after_sale .shope_after_sale_manage_after_sale_caozuo,.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_tuikuan,.shope_after_sale_manage_after_sale_caozuo_table').show();
@@ -135,7 +145,7 @@ $(function(){
 			});
 		}else if(btn.attr('serviceType') == 1 && btn.attr('operStatus') == 2){//serviceType=1(退货),serviceStatus=2(处理完成)
 			//获取退换货详情V3.1.0
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.shope_after_sale_manage_after_sale_pass').children().attr('disabled','disabled');
@@ -180,7 +190,7 @@ $(function(){
 			$('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_pass').show();
 		}else if(btn.attr('serviceType') == 2 && btn.attr('operStatus') == 1){//serviceType=2(换货),serviceStatus=1(处理中)
 			//获取退换货详情V3.1.0
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.shope_after_sale_manage_after_sale_pass_liyou,.shope_after_sale_manage_after_sale_caozuo_tuikuan,.shope_after_sale_manage_after_sale_caozuo_pass_wuliushang,.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang').hide();
@@ -214,7 +224,7 @@ $(function(){
 			});
 		}else if(btn.attr('serviceType') == 2 && btn.attr('operStatus') == 2){//serviceType=2(换货),serviceStatus=2(处理完成)
 			//获取退换货详情V3.1.0
-			$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
+			$.get(testUrl+'/nggirl-web/web/admin/item/service/getfundOrExchangeItemInfo/3.1.0',{serviceId:btn.attr('serviceId')},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					$('.shope_after_sale_manage_after_sale_pass').children().attr('disabled','disabled');
@@ -374,7 +384,7 @@ $(function(){
 		if(btn.hasClass('green')){
 			var r = confirm('确认收货？？');
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/receiceItem/3.1.0',{serviceId:$('.shope_after_sale_manage_after_sale').attr('serviceId'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .wuliu_danhao').val()),expressCompanyCode:$('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .kuaidi_name option:selected').attr('code')},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/receiceItem/3.1.0',{serviceId:$('.shope_after_sale_manage_after_sale').attr('serviceId'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .wuliu_danhao').val()),expressCompanyCode:$('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .kuaidi_name option:selected').attr('code')},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeClass('green').attr('value','已确认');
@@ -392,7 +402,7 @@ $(function(){
         $('.shope_order_manage_look_order_message').show().css('top',$(window).scrollTop());
 		$('.shope_order_manage_look_order_message').children('input[type="text"]').attr('disabled','disabled');
 		$('.shope_order_manage_look_order_message .shope_order_manage_look_order_message_save_btn').hide();
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/order/getOrderDetail/3.1.0',{orderId:$(this).attr('orderId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/order/getOrderDetail/3.1.0',{orderId:$(this).attr('orderId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				if(data.data.strings.length >0){
@@ -423,7 +433,7 @@ $(function(){
 	
 	//修改用户填写物流信息
 	$('.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .modify_wuliu_shang,.shope_after_sale_manage_after_sale_caozuo .shope_after_sale_manage_after_sale_caozuo_table .modify_wuliu_danhao').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/updateExpressInfo/3.1.0',{serviceId:$('.shope_after_sale_manage_after_sale').attr('serviceId'),expressCompanyCode:$('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_shang option:selected').attr('code'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_danhao').val())},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/item/service/updateExpressInfo/3.1.0',{serviceId:$('.shope_after_sale_manage_after_sale').attr('serviceId'),expressCompanyCode:$('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_shang option:selected').attr('code'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_danhao').val())},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				alert('修改成功！！');
@@ -435,7 +445,7 @@ $(function(){
 	
 	//修改卖家填写物流信息
 	$('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .modify_wuliu_shang,.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .modify_wuliu_danhao').click(function(e) {
-		$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/fillMerchantExpressInfo/3.1.0',{serviceId:$('.shope_after_sale_manage_after_sale').attr('serviceId'),expressCompanyCode:$('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_shang option:selected').attr('code'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_danhao').val())},function(data){
+		$.post(testUrl+'/nggirl-web/web/admin/item/service/fillMerchantExpressInfo/3.1.0',{serviceId:$('.shope_after_sale_manage_after_sale').attr('serviceId'),expressCompanyCode:$('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_shang option:selected').attr('code'),expressNum:$.trim($('.shope_after_sale_manage_after_sale_caozuo_pass_modify_wuliushang .wuliu_danhao').val())},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				alert('修改成功！！');
@@ -446,7 +456,7 @@ $(function(){
     });	
 		
 	//获取全部物流商信息V3.1.0
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getAllExpressInfo/3.1.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/item/service/getAllExpressInfo/3.1.0',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			$('body').data('wuliu', data.data);
@@ -473,7 +483,7 @@ $(function(){
 			var r = confirm('确认同意召回？？');
 			if(r == true){
 				btn.attr('disabled','disabled');
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/saveFundService/3.1.0',changeSaveFundServiceFn(2,''),function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/saveFundService/3.1.0',changeSaveFundServiceFn(2,''),function(data){
 					var data  = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeAttr('disabled');
@@ -496,7 +506,7 @@ $(function(){
 			var r = confirm('确认不同意召回？？');
 			if(r == true){
 				btn.attr('disabled','disabled');
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/saveFundService/3.1.0',changeSaveFundServiceFn(1,$.trim($('.shope_after_sale_manage_after_sale_shensu_unpass .liyou').val())),function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/saveFundService/3.1.0',changeSaveFundServiceFn(1,$.trim($('.shope_after_sale_manage_after_sale_shensu_unpass .liyou').val())),function(data){
 					var data  = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeAttr('disabled');
@@ -520,7 +530,7 @@ $(function(){
 			var r = confirm('确认同意换货？？');
 			if(r == true){
 				btn.attr('disabled','disabled');
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/isExchangeItem/3.1.0',changeExchangeItemFn(2,''),function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/isExchangeItem/3.1.0',changeExchangeItemFn(2,''),function(data){
 					var data  = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeAttr('disabled');
@@ -543,7 +553,7 @@ $(function(){
 			var r = confirm('确认不同意换货？？');
 			if(r == true){
 				btn.attr('disabled','disabled');
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/isExchangeItem/3.1.0',changeExchangeItemFn(1,$.trim($('.shope_after_sale_manage_after_sale_shensu_changeShope_unpass .liyou').val()),''),function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/isExchangeItem/3.1.0',changeExchangeItemFn(1,$.trim($('.shope_after_sale_manage_after_sale_shensu_changeShope_unpass .liyou').val()),''),function(data){
 					var data  = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeAttr('disabled');
@@ -568,7 +578,7 @@ $(function(){
 			var r = confirm('确认同意退款？？');
 			if(r == true){
 				btn.attr('disabled','disabled');
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/isFundItem/4.0.6',changeFundItemFn(2,'',$.trim($('.shope_after_sale_manage_after_sale_shensu_tuikuan_pass .tuikuan_remark').val())),function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/isFundItem/4.0.6',changeFundItemFn(2,'',$.trim($('.shope_after_sale_manage_after_sale_shensu_tuikuan_pass .tuikuan_remark').val())),function(data){
 					var data  = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeAttr('disabled');
@@ -592,7 +602,7 @@ $(function(){
 			var r = confirm('不同意退款？？');
 			if(r == true){
 				btn.attr('disabled','disabled');
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/isFundItem/4.0.6',changeFundItemFn(1,$.trim($('.shope_after_sale_manage_after_sale_shensu_tuikuan_unpass .liyou').val())),function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/service/isFundItem/4.0.6',changeFundItemFn(1,$.trim($('.shope_after_sale_manage_after_sale_shensu_tuikuan_unpass .liyou').val())),function(data){
 					var data  = $.parseJSON(data);
 					if(data.code == 0){
 						btn.removeAttr('disabled');
@@ -620,7 +630,7 @@ function createShopeAfterSalePage(data){
 			params.page = p;
 			$('.shope_after_sale_manage .shope_after_sale_manage_table tbody tr').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getItemServices/3.1.0',
+				url : testUrl+'/nggirl-web/web/admin/item/service/getItemServices/3.1.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -674,7 +684,7 @@ function searchShopeAfterSaleParams(page,serviceTimeSign){
 //加载品牌列表V3.1.0分页数据
 function loadShopeAfterSalePage(page,serviceTimeSign){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/service/getItemServices/3.1.0',
+		url : testUrl+'/nggirl-web/web/admin/item/service/getItemServices/3.1.0',
 		type : 'get',
 		dataType : 'json',
 		data: searchShopeAfterSaleParams(page,serviceTimeSign),

@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	esbPageDetail();
 	//全部取消
 	$('.electricity_supplier_branch_manage .cancle-btn').click(function(e) {
         clearesbSearch();
@@ -40,7 +42,7 @@ $(function(){
 					brandDesc:$.trim($(".electricity_supplier_branch_manage_branch_create .brand_introduce").val()),
 					brandImg:$('.electricity_supplier_branch_manage_branch_create .brandImg').attr('src')
 				};
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/addOrUpdateBrand/3.1.0',paramData,function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/addOrUpdateBrand/3.1.0',paramData,function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						esbPageDetail();
@@ -81,7 +83,7 @@ $(function(){
 	//获取品牌详情V3.1.0
 	$('.electricity_supplier_branch_manage .esb_table .esb_table_edit').live('click',function(e) {
 		var btn = $(this);
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getBrandDetail/3.1.0',{brandId:btn.attr('brandId')},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/getBrandDetail/3.1.0',{brandId:btn.attr('brandId')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$(".electricity_supplier_branch_manage_branch_create").attr('brandId',btn.attr('brandId'));
@@ -109,7 +111,7 @@ $(function(){
 		var btn = $(this);
 		var r = confirm('确认要删除该品牌信息？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteBrand/3.1.0',{brandIds:brandIds},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/item/deleteBrand/3.1.0',{brandIds:brandIds},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					esbPageDetail();
@@ -159,7 +161,7 @@ function createesbPage(data){
 			params.page = p;
 			$('.electricity_supplier_branch_manage .esb_table>tbody>tr').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemBrandList/3.1.0',
+				url : testUrl+'/nggirl-web/web/admin/item/getItemBrandList/3.1.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -177,7 +179,7 @@ function initesbPage(data){
 	$('.electricity_supplier_branch_manage .goto_page_box .totNum').text(data.data.totalNum).css("color","#f00");
 	createesbPage(data)
 	for(var x = 0; x < data.data.pageData.length ; x ++){
-		$('.electricity_supplier_branch_manage .esb_table tbody').append('<tr brandId='+data.data.pageData[x].brandId+'><td><input type="checkbox" style="vertical-align: text-bottom;" />'+data.data.pageData[x].brandId+'</td><td>'+data.data.pageData[x].brandName+'</td><td>'+data.data.pageData[x].country+'</td><td><img src="'+data.data.pageData[x].brandImg+'" style="width:50px; height:50px;" alt="" /></td><td>'+data.data.pageData[x].itemNum+'</td><td><div class="esb_table_edit" brandId='+data.data.pageData[x].brandId+'><img src="images/modify_icon.png" alt="" style=" width:20px;vertical-align: bottom;" /> 编辑</div></td></tr>');
+		$('.electricity_supplier_branch_manage .esb_table tbody').append('<tr brandId='+data.data.pageData[x].brandId+'><td><input type="checkbox" style="vertical-align: text-bottom;" />'+data.data.pageData[x].brandId+'</td><td>'+data.data.pageData[x].brandName+'</td><td>'+data.data.pageData[x].country+'</td><td><img src="'+data.data.pageData[x].brandImg+'" style="width:50px; height:50px;" alt="" /></td><td>'+data.data.pageData[x].itemNum+'</td><td><div class="esb_table_edit" brandId='+data.data.pageData[x].brandId+'><img src="../common/images/modify_icon.png" alt="" style=" width:20px;vertical-align: bottom;" /> 编辑</div></td></tr>');
 	}
 }
 
@@ -198,7 +200,7 @@ function esbSearchParams(page){
 function esbPageDetail(page){
 	$('.electricity_supplier_branch_manage #electricity_supplier_branch_manage_select_all').removeAttr('checked');
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getItemBrandList/3.1.0',
+		url : testUrl+'/nggirl-web/web/admin/item/getItemBrandList/3.1.0',
 		type : 'get',
 		dataType : 'json',
 		data: esbSearchParams(page),

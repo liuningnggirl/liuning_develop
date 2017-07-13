@@ -1,5 +1,6 @@
-
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadGoodsColumnListPage();
 //<!--  点击商品专栏搜索按钮 -->
 	$(".goods_column_list .gcSearch .gc_create").live('click',function(){
 		clearPointsColumnList();
@@ -73,7 +74,7 @@ function goodsColumnDetail(data){
 //根据不同的页码来渲染页面
 function onclickgoodsColumnPageNum(p){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/comodityColumn/list/2.5.4',
+		url : testUrl+'/nggirl-web/web/admin/comodityColumn/list/2.5.4',
 		type : 'post',
 		dataType : 'json',
 		data: {page:p,num:20,goodsId:$(".points_good_id").val(),name:$(".points_good_name").val()},
@@ -86,7 +87,7 @@ function onclickgoodsColumnPageNum(p){
 function loadGoodsColumnListPage(){
 	//获取入参
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/comodityColumn/list/2.5.4',
+		url : testUrl+'/nggirl-web/web/admin/comodityColumn/list/2.5.4',
 		type : 'post',
 		dataType : 'json',
 		data: {currnetPageNum:0,num:20,name:$(".goods_column_list .goods_column_name").val(),columnId:$(".goods_column_list .goods_column_ID").val(),content:$('.goods_column_list .goods_column_content').val()},
@@ -145,7 +146,7 @@ function saveGoodsColumnDetail(){
 		if(r == true){
 			var params={name:$.trim($(".gcnameVal").val()),headImg:$(".gc_head_img").attr('src'),content:$.trim($(".gcContent").val()),seedProductIds:details,columnId:$(".goods_column_create").attr("columnId")};
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/comodityColumn/addOrEdit/2.5.4',
+				url : testUrl+'/nggirl-web/web/admin/comodityColumn/addOrEdit/2.5.4',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -168,7 +169,7 @@ function saveGoodsColumnDetail(){
 //删除商品
 function deletedpointsInfo(btn){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/comodityColumn/delete/2.5.4',
+		url : testUrl+'/nggirl-web/web/admin/comodityColumn/delete/2.5.4',
 		type : 'post',
 		dataType : 'json',
 		data: {columnId:btn.attr('columnId')},
@@ -184,7 +185,7 @@ function deletedpointsInfo(btn){
 //获取单个商品信息进行编辑
 function getGoodsColumnInfo(btn){
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/comodityColumn/detail/2.5.4',
+		url : testUrl+'/nggirl-web/web/admin/comodityColumn/detail/2.5.4',
 		type : 'get',
 		dataType : 'json',
 		data: {columnId:btn.attr('columnId')},

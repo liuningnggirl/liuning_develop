@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	getOptionalLabelAndBuyerReading();
 	//添加购买须知图片
 	$('.electricity_buy_know_manage .beforeBuy .buyKnowFile').live('click',function(){
 		$(".changThis").removeClass("changThis");
@@ -41,7 +43,7 @@ $(".add_buy_need_know_they").live('click',function(){
 		var del=$(this);
 		if(r == true){
 		var labelid=$(this).attr('labelid');
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteLabel/3.1.0",{labelId:labelid},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/deleteLabel/3.1.0",{labelId:labelid},function(data){
 			var data=$.parseJSON(data)
 			
 			if(data.code !=0){
@@ -70,7 +72,7 @@ $(".add_buy_need_know_they").live('click',function(){
 			var labelid=$(this).attr('labelid');
 			var shortWord=$(this).siblings(".buyKnowDesc").val();
 			var imgUrl=$(this).siblings("img").attr("src");
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/savaLabel/3.1.0",{labelId:labelid,shortWord:shortWord,imgUrl:imgUrl},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/savaLabel/3.1.0",{labelId:labelid,shortWord:shortWord,imgUrl:imgUrl},function(data){
 				console.log("保存某个购物须知标签")
 				getOptionalLabelAndBuyerReading();
 			})
@@ -84,7 +86,7 @@ $(".add_buy_need_know_they").live('click',function(){
 		var del=$(this)
 		var r=confirm("确定删除？");
 		if(r == true){
-		$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteBuyerReading/3.1.0",{templateId:templateId},function(data){
+		$.post(testUrl+"/nggirl-web/web/admin/item/deleteBuyerReading/3.1.0",{templateId:templateId},function(data){
 			del.parent().parent().remove();
 		})
 		}
@@ -110,7 +112,7 @@ $(".add_buy_need_know_they").live('click',function(){
 			}
 			var usnounys = JSON.stringify(usnouny);
 			/*调保存文档编辑接口*/
-			$.post("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveBuyerReading/3.1.0",{templateId:templateId,detail:usnounys},function(data){
+			$.post(testUrl+"/nggirl-web/web/admin/item/saveBuyerReading/3.1.0",{templateId:templateId,detail:usnounys},function(data){
 				getOptionalLabelAndBuyerReading();
 			})	
 		}
@@ -118,7 +120,7 @@ $(".add_buy_need_know_they").live('click',function(){
 });
 /*获取可选标签和购物须知*/
 function getOptionalLabelAndBuyerReading(){
-	$.get("<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalLabelAndBuyerReading/3.1.0",function(data){
+	$.get(testUrl+"/nggirl-web/web/admin/item/getOptionalLabelAndBuyerReading/3.1.0",function(data){
 		$(".beforeBuy .buyKnow,.esg_box_one_import .store_div_buyknow .duanluo_div_haalo").remove();
 		var data=$.parseJSON(data)
 		var itemLables=data.data.itemLables;

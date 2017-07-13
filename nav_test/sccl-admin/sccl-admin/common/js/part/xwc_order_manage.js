@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadXwcOrderPage();
 	// 点击“美妆下午茶订单管理”--》搜索按钮
 	$('.xwc-manage .search-btn').click(loadXwcOrderPage);
 
@@ -25,7 +27,7 @@ $(function(){
 function loadXwcOrderPage(){
 	$('.xwc-table>tbody>tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/reservation/listReservations',
+		url : testUrl+'/nggirl-web/web/admin/salon/reservation/listReservations',
 		type : 'get',
 		dataType : 'json',
 		data: getXwcOrderSearchParams(1),
@@ -119,7 +121,7 @@ function createXwcOrderPage(data){
 			params.page = p;
 			$('.xwc-table>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/salon/reservation/listReservations',
+				url : testUrl+'/nggirl-web/web/admin/salon/reservation/listReservations',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -177,7 +179,7 @@ function initXwcOrderAction(data){
 				$('.xwc-order-refund .xwc-or-btn-ok').click(function(e) {
 					//微信退款
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/charge/weixinpay/salon/refund',
+						url : testUrl+'/nggirl-web/web/admin/charge/weixinpay/salon/refund',
 						type : 'post',
 						dataType : 'json',
 						data: {unionReservationId:tuikuan.parent().parent().children('td:eq(0)').attr('unionReservationId'),refundMoney:$('.xwc-order-refund .xwc-order-refund-money').val()},
@@ -209,7 +211,7 @@ function initXwcOrderAction(data){
 				$('.xwc-order-refund .xwc-or-btn-ok').unbind('click');
 				$('.xwc-order-refund .xwc-or-btn-ok').click(function(e) {
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/charge/alipay/salon/refund/nopwd',
+						url : testUrl+'/nggirl-web/web/admin/charge/alipay/salon/refund/nopwd',
 						type : 'post',
 						dataType : 'json',
 						data: {unionReservationId:tuikuan.parent().parent().children('td:eq(0)').attr('unionReservationId'),refundMoney:$('.xwc-order-refund .xwc-order-refund-money').val()},

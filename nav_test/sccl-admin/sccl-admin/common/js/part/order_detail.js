@@ -1,11 +1,13 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){	
+	loadListReservationsPage();
 	$(window).scroll(function(e) {
         $('.order-refund').animate({'top':$(window).scrollTop()+100},1);
     });
 
 	//获取城市列表
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCitys',  
+		url : testUrl+'/nggirl-web/web/admin/common/getCitys',  
 		type : 'get',
 		dataType : 'json',  
 		success : function(data){
@@ -23,7 +25,7 @@ $(function(){
 	$('.order-create #province').change(function(){
 		//获取地区列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCountys',
+			url : testUrl+'/nggirl-web/web/admin/common/getCountys',
 			type : 'get',
 			data : ({cityId:$('.order-create .mine-city option:selected').attr('cityId')}),
 			dataType : 'json',  
@@ -90,7 +92,7 @@ $(function(){
 			alert('请输入预约价格');	
 		}else{
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/createReservation/1.3.3',
+				url : testUrl+'/nggirl-web/web/admin/reservation/createReservation/1.3.3',
 				type : 'post',
 				dataType : 'json',
 				data: {userId:$('.order-create .order-user').attr('userId'),workId:$('.order-create .order-pro').attr('workId'),resDate:$('.order-year option:selected').attr('resDate'),resTime:$('.order-year option:selected').attr('resTimes'),resAddress:$('.order-create .order-area').val(),userPhoneNum:$('.order-create .order-user-tel').val(),price:$('.order-create .order-price').val(),resDate:$('.order-create .order-qian').val(),resTime:$('.order-create .order-year option:selected').html(),cityId:$('.order-create .mine-city option:selected').attr('cityId'),areaId:$('.order-create .mine-area option:selected').attr('areaId')},
@@ -164,7 +166,7 @@ $(function(){
 			$('.order-create .order-user').val($('.user_order_information').attr('nickName'));
 		}
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/reservationDetail/1.3.3',
+			url : testUrl+'/nggirl-web/web/admin/reservation/reservationDetail/1.3.3',
 			type : 'get',
 			dataType : 'json',
 			data: {reservationId:$(this).parent().parent().children('td:eq(0)').html()},
@@ -182,7 +184,7 @@ $(function(){
 				var resTime =data.data.resTime;
 				//回显预约时间
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/resDateAndTimes/1.3.3',
+					url : testUrl+'/nggirl-web/web/admin/reservation/resDateAndTimes/1.3.3',
 					type : 'get',
 					dataType : 'json',
 					data: {dresserId:$('.order-create .order-pro').attr('dresserId')},
@@ -216,7 +218,7 @@ $(function(){
 				var areaname = data.data.areaName;
 				//回显所在城区
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCountys',
+					url : testUrl+'/nggirl-web/web/admin/common/getCountys',
 					type : 'get',
 					data : ({cityId:$('.order-create .mine-city option:selected').attr('cityId')}),
 					dataType : 'json',  
@@ -238,7 +240,7 @@ $(function(){
 	
 	//获取作品查询--》作品类型
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/invitecode/getSysWorkType',
+		url : testUrl+'/nggirl-web/web/admin/invitecode/getSysWorkType',
 		type : 'get',
 		dataType : 'json',
 		data: {},
@@ -286,7 +288,7 @@ $('.order-create .order-qian').blur(function(e) {
 		$('.ws-search .ws-time option:gt(0)').remove();
 		//获取城市列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCitys',
+			url : testUrl+'/nggirl-web/web/admin/common/getCitys',
 			type : 'get',
 			dataType : 'json',  
 			success : function(data){
@@ -301,7 +303,7 @@ $('.order-create .order-qian').blur(function(e) {
 		});
 		
 		//获取可预约时段
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/getAllTimeRanges/2.1.0',function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/reservation/getAllTimeRanges/2.1.0',function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				for(var x = 0; x < data.data.length; x ++){
@@ -353,7 +355,7 @@ function  loadListReservationsPage(){
 	$('.ddxq>tbody>tr:gt(0)').remove();
     //加载订单管理页面
     $.ajax({
-        url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/listReservations/1.4.2',
+        url : testUrl+'/nggirl-web/web/admin/reservation/listReservations/1.4.2',
         type : 'get',
         dataType : 'json',
         data: getListReservationsParams(),
@@ -415,7 +417,7 @@ function initListReservationsPage(data){
 			params.page = p;
 			$('.ddxq>tbody>tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/listReservations/1.4.2',
+				url : testUrl+'/nggirl-web/web/admin/reservation/listReservations/1.4.2',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -529,7 +531,7 @@ function initAction(data){
 				$('.order-refund .or-btn-ok').click(function(e) {
                     //微信退款
                     $.ajax({
-                        url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/charge/weixinpay/refund',
+                        url : testUrl+'/nggirl-web/web/admin/charge/weixinpay/refund',
                         type : 'post',
                         dataType : 'json',
                         data: {reservationId:tuikuan.parent().parent().children('td:eq(0)').html(),refundMoney:$.trim($('.order-refund .order-refund-money').val())},
@@ -562,7 +564,7 @@ function initAction(data){
 				$('.order-refund .or-btn-ok').unbind('click');
 				$('.order-refund .or-btn-ok').click(function(e) {
                     $.ajax({
-                        url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/charge/alipay/refund/nopwd',
+                        url : testUrl+'/nggirl-web/web/admin/charge/alipay/refund/nopwd',
                         type : 'post',
                         dataType : 'json',
                         data: {reservationId:tuikuan.parent().parent().children('td:eq(0)').html(),refundMoney:$.trim($('.order-refund .order-refund-money').val())},
@@ -646,7 +648,7 @@ function  createWorksQueryPage(data){
 			params.page = p;
 			$('.works-select table tbody tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/listWorks/2.2.0',
+				url : testUrl+'/nggirl-web/web/admin/reservation/listWorks/2.2.0',
 				type : 'post',
 				dataType : 'json',
 				data: params,
@@ -661,7 +663,7 @@ function  createWorksQueryPage(data){
 function  loadWorksQueryPage(){
 	var params = getWorksQueryParams();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/listWorks/2.2.0',
+		url : testUrl+'/nggirl-web/web/admin/reservation/listWorks/2.2.0',
 		type : 'post',
 		dataType : 'json',
 		data: params,
@@ -697,7 +699,7 @@ function getUserQueryParams(page){
 function  loadUserQueryPage(){
 	var params = getUserQueryParams();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/listUsers',
+		url : testUrl+'/nggirl-web/web/admin/reservation/listUsers',
 		type : 'get',
 		dataType : 'json',
 		data: params,
@@ -719,7 +721,7 @@ function  createUserQueryPage(data){
 			params.page = p;
 			$('.user-select table tbody tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/listUsers',
+				url : testUrl+'/nggirl-web/web/admin/reservation/listUsers',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -738,7 +740,7 @@ function getMonday(){
 		if($('.order-create .order-qian').val() != ''){
 		   //预约时间查询
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/reservation/resDateAndTimes/1.3.3',
+				url : testUrl+'/nggirl-web/web/admin/reservation/resDateAndTimes/1.3.3',
 				type : 'get',
 				dataType : 'json',
 				data: {dresserId:$('.order-create .order-pro').attr('dresserId')},

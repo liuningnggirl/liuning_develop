@@ -6,6 +6,13 @@
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/electricity_supplier_branch_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
+
 </head>
 <body>
     <div class="weight-box electricity_supplier_branch_manage" id="electricity_supplier_branch_manage">
@@ -44,8 +51,8 @@
     </div> 
 <!--  电商商城管理——新增品牌 -->
     <div class="electricity_supplier_branch_manage_branch_create" style=" display:none;padding: 20px;background: #fff;">
-        <img src="images/tip.png" alt="" /><label>所属国家：</label><input type="text" class="country_name"  placeholder="请输入国家名" maxlength="20" style="padding: 10px; width: 480px;"/><br/><br/>
-        <img src="images/tip.png" alt="" /><label>品牌名：</label><input type="text" class="brand_name" placeholder="请输入品牌名" maxlength="100" style="padding: 10px; width: 480px;" /><br/><br/>
+        <img src="../common/images/tip.png" alt="" /><label>所属国家：</label><input type="text" class="country_name"  placeholder="请输入国家名" maxlength="20" style="padding: 10px; width: 480px;"/><br/><br/>
+        <img src="../common/images/tip.png" alt="" /><label>品牌名：</label><input type="text" class="brand_name" placeholder="请输入品牌名" maxlength="100" style="padding: 10px; width: 480px;" /><br/><br/>
         <label>品牌介绍：</label><textarea  placeholder="请输入品牌介绍" maxlength="1000" class="brand_introduce" style="height: 250px;border: #dcdcdc solid 1px;width: 100%;box-sizing: border-box;padding: 10px;vertical-align: top;resize: none;"></textarea><br/><br/>
         <label for="">品牌图：</label><input type="file" style="display: inline-block;text-align: right;min-width: 80px;" multiple class="branch_img" data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
         <label for="" style="vertical-align:top;">(360*360)：</label><img style="width:180px; height:180px;" src="" alt="" class="brandImg" /> <br /><br />

@@ -20,7 +20,7 @@ header .exit:hover{background:#000; border-left:1px solid #2e363f; border-right:
 .total-page:hover{ background:#333;}
 .total-page .f32{ font-size:32px; padding: 10px 0 5px 0;}
 .total-page .f13{ font-size:13px;}
-.weight-box{ width:100%; border:1px solid #cdcdcd; margin:0 auto; clear:both; overflow:hidden;box-sizing: border-box;}
+.weight-box{ width:100%; margin:0 auto; clear:both; overflow:hidden;box-sizing: border-box;}
 .weight-box .weight-title{ overflow:hidden; border-bottom:1px solid #cdcdcd;}
 .weight-box .wt-img{ display:inline-block;padding: 14px 10px 19px 11px; border-right:1px solid #cdcdcd; float:left;}
 .weight-box .wt-img img{ height:10px;}
@@ -79,7 +79,7 @@ header .exit:hover{background:#000; border-left:1px solid #2e363f; border-right:
 .delete-btn{ background:#bd362f;}
 
 /*  鎻愮幇 */
-.recent-posts ul li{ font-size:12px; overflow:hidden; padding:10px; border-bottom: 1px dotted #AEBDC8; border-top: 1px dotted #AEBDC8; }
+.recent-posts ul li{ width:100%; font-size:12px; overflow:hidden; padding:10px; border-bottom: 1px dotted #AEBDC8; border-top: 1px dotted #AEBDC8; }
 .recent-posts ul li p{ line-height:20px;}
 
 /*  闁圭粯鍔楅獮鍥╃不閿涘嫭鍊� */

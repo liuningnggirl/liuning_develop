@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="../common/css/index.css" />
 <script type="text/javascript" src="../common/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="../common/js/part/goods_column_manage.js"></script>
+<script type="text/javascript" src="../common/js/jquery.page.js"></script>
+<script src="../common/js/jquery.ui.widget.js"></script>
+<script src="../common/js/jquery.iframe-transport.js"></script>
+<script src="../common/js/jquery.fileupload.js"></script>
+<script src="../common/js/ajaxfileupload.js" charset="utf-8"></script>
+<script src="../common/js/swiper.min.js" charset="utf-8"></script>
 </head>
 <body>
 	<div class="weight-box goods_column_manage" id="goods_column_manage">       
@@ -16,8 +22,6 @@
             	<input type="text" class="search goods_column_name" placeholder="专题名称">
                 <input type="text" class="search goods_column_ID" placeholder="专题ID">
                 <input type="text" class="search goods_column_content" placeholder="专题内容">
-				<!-- <label for="">发布时间：</label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate gcStartTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
-                <label for="">至 </label><input style="height:29px; border:1px solid #cdcdcd;" class="Wdate gcEndTime" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"> -->
               	<input class="goods_column_search data0" type="button" value="搜索" >
                 <input class="cancle_btn" type="button" value="全部取消" >
                 <br><br>
@@ -46,10 +50,10 @@
         <!-- 新建商品 -->
         <div class="goods_column_create hidden">
             <form action="">
-                <img src="images/tip.png" alt="" /><label>专题名称：</label> <input type="text" placeholder="请输入专题名称"  maxlength="50" class="gcnameVal"/><br /><br />
-                <img src="images/tip.png" alt="" /><label>专题头图：</label><input type="file" class="inputborder goods_column_head_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
+                <img src="../common/images/tip.png" alt="" /><label>专题名称：</label> <input type="text" placeholder="请输入专题名称"  maxlength="50" class="gcnameVal"/><br /><br />
+                <img src="../common/images/tip.png" alt="" /><label>专题头图：</label><input type="file" class="inputborder goods_column_head_img" multiple data-url="https://photos.nggirl.com.cn/uploadserver/app/image/uploadsCompress/3.0.0" /><br /><br />
                 <label for="" style="vertical-align:top;">(360*180):</label><img style="width:360px; height:180px;" src="" alt="" class="upImg gc_head_img" /> <br /><br />
-                <img src="images/tip.png" alt="" /><label>专题内容：</label><br /><br />
+                <img src="../common/images/tip.png" alt="" /><label>专题内容：</label><br /><br />
                 <textarea class="gcContent"></textarea><br /><br />
                 <div class="editor_content"></div><br /><br />
            </form>
@@ -64,10 +68,10 @@
             text-align:center;
         }
     </style>
-    <script src="js/editor/jquery.caret.0.3.1.min.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.work.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.goods.selector.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.image.upload.box.js"></script>
-    <script type="text/javascript" src="js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.article.editor.js"></script>
+    <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.work.selector.js"></script>
 </body>
 </html>

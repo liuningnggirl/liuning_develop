@@ -1,3 +1,4 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
 // 点击“作品管理”--》搜索按钮
 	$('.zpxqq .search-btn').click(loadWorkPage);
@@ -15,7 +16,7 @@ $(function(){
     });
 	
 //获取装束类型
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getWorkTypes',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/common/getWorkTypes',function(data){
 		var data = $.parseJSON(data);
 		if(data.code == 0){
 			for(var x = 0; x < data.data.length; x ++){
@@ -34,7 +35,7 @@ $(function(){
 //删除作品
 	$('.zpxq .del-btn').live('click',function(e) {
 		var ok = $(this);
-        $.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/deleteWork',{workId:$(this).attr('workid')},function(data){
+        $.post(testUrl+'/nggirl-web/web/admin/work/deleteWork',{workId:$(this).attr('workid')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				var r = confirm('确定要删除？？');
@@ -51,7 +52,7 @@ $(function(){
 //点击“上线”按钮
 	$('.zpxq-line .on-line').live('click',function(e) {
 		var online = $(this);
-        $.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/audit/1.4.1',{auditType:$(this).attr('audittype'),workId:$(this).attr('workid')},function(data){
+        $.post(testUrl+'/nggirl-web/web/admin/work/audit/1.4.1',{auditType:$(this).attr('audittype'),workId:$(this).attr('workid')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				var r = confirm('确定要上线？？');
@@ -69,7 +70,7 @@ $(function(){
 //点击“下线”按钮
 	$('.zpxq-line .down-line').live('click',function(e) {
 		var downline = $(this);
-        $.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/audit/1.4.1',{auditType:$(this).attr('audittype'),workId:$(this).attr('workid')},function(data){
+        $.post(testUrl+'/nggirl-web/web/admin/work/audit/1.4.1',{auditType:$(this).attr('audittype'),workId:$(this).attr('workid')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				var r = confirm('确定要下线？？');
@@ -120,7 +121,7 @@ $(function(){
 		
 		//获取装束类型
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listWorkType',
+			url : testUrl+'/nggirl-web/web/admin/dresser/listWorkType',
 			type : 'get',
 			dataType : 'json',
 			data: {},
@@ -140,7 +141,7 @@ $(function(){
 			var arr = $('.tips-selected').html().split(' ');
 			console.log('arr'+arr);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listWorkTag',
+				url : testUrl+'/nggirl-web/web/admin/dresser/listWorkTag',
 				type : 'get',
 				dataType : 'json',
 				data: {},
@@ -192,7 +193,7 @@ $(function(){
 		
 		//获取化妆品品类列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listCosmeticsClass',
+			url : testUrl+'/nggirl-web/web/admin/dresser/listCosmeticsClass',
 			type : 'get',
 			dataType : 'json',
 			data: {},

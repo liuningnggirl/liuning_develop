@@ -1,5 +1,6 @@
 var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	getItemComments();
 	$(".choice_goods_picture_more .editImg").live("click",function(){
 		$(".editThisImgOn").removeClass("editThisImgOn");
 		$(this).siblings(".needEditImg").addClass("editThisImgOn");
@@ -1059,7 +1060,8 @@ $(".zengjia_pointer").live('click',function(){
 		$("#shope_evaluate_manage").show();
 		$('.allShopComments').hide();
 		$('.singleShopComments,.lookAll_someManagement').show();
-		$('.shope_evaluate_manage .singleShopComments').attr("itemId",$(this).attr("itemId"))
+		$('.shope_evaluate_manage .singleShopComments').attr("itemId",$(this).attr("itemId"));
+		$('#electricity_supplier_goods_manage').attr("itemId",$(this).attr("itemId"));
 		clearSingleComments();
 		getOrderComments();
 	});
@@ -1307,7 +1309,7 @@ $(".zengjia_pointer").live('click',function(){
 	$(".shen_zhi_yizu").live('click',function(){
 		$(this).change(function(){
 			var img_last=$(this).val().split("\\")
-			var lujing="images/"+img_last[img_last.length-1]
+			var lujing="../common/images/"+img_last[img_last.length-1]
 			$(this).next().next().attr('src',lujing)
 			console.log($(this).next().next().attr("src"))
 		})
@@ -2042,7 +2044,7 @@ function getOrderCommentsParams(page){
 	params.beginBrandTime = $('.shope_evaluate_manage .singleShopComments .evaluateManagement_start').val();
 	params.endBrandTime = $('.shope_evaluate_manage .singleShopComments .evaluateManagement_end').val();
 	params.commentId=' ';
-	params.itemId=$('.shope_evaluate_manage .singleShopComments').attr("itemId");
+	params.itemId=$('#electricity_supplier_goods_manage').attr("itemId");
 	params.toExchangeCommentId=' ';
 	return params;
 }

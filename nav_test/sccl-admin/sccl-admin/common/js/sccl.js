@@ -476,9 +476,9 @@ $(function(){
 					{"id":"anyway_message_manage","name":"其他推送","parentId":"official_push_manage","url":"message_push.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""}
 				]},
 				{"id":"beauty_business_manage","name":"美妆业务管理","parentId":"0","url":"","icon":"","order":"1","isHeader":"0","childMenus":[
-					{"id":"xwcOrder_manage","name":"美妆下午茶订单","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"order_manage","name":"上门美妆服务订单","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
-					{"id":"dresser_manage","name":"化妆师管理","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"xwcOrder_manage","name":"美妆下午茶订单","parentId":"beauty_business_manage","url":"xwc_order_manage.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"order_manage","name":"上门美妆服务订单","parentId":"beauty_business_manage","url":"order_detail.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
+					{"id":"dresser_manage","name":"化妆师管理","parentId":"beauty_business_manage","url":"dresser_detail.html","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"work_manage","name":"作品管理","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"smmzTopics_manage","name":"上门美妆专题","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},
 					{"id":"xwc_manage","name":"美妆下午茶","parentId":"beauty_business_manage","url":"","icon":"&#xe600;","order":"1","isHeader":"0","childMenus":""},

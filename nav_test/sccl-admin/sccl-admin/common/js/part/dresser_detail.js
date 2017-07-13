@@ -1,4 +1,6 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
+	loadDresserPage();
 /*----------------------------------------------------------添加化妆师作品开始----------------------------------------------------------*/
 //<!--  点击“化妆师管理”--》全部取消按钮 -->
 	$('.hzsxqq  .cancle-btn').live('click',function(e) {
@@ -27,7 +29,7 @@ $(function(){
 		
 		//获取装束类型
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listWorkType',
+			url : testUrl+'/nggirl-web/web/admin/dresser/listWorkType',
 			type : 'get',
 			dataType : 'json',
 			data: {},
@@ -44,7 +46,7 @@ $(function(){
 			var arr = $('.tips-selected').html().split(' ');
 			console.log('arr'+arr);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listWorkTag',
+				url : testUrl+'/nggirl-web/web/admin/dresser/listWorkTag',
 				type : 'get',
 				dataType : 'json',
 				data: {},
@@ -96,7 +98,7 @@ $(function(){
 		
 		//获取化妆品品类列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listCosmeticsClass',
+			url : testUrl+'/nggirl-web/web/admin/dresser/listCosmeticsClass',
 			type : 'get',
 			dataType : 'json',
 			data: {},
@@ -106,7 +108,7 @@ $(function(){
 				}
 				//化妆师注册时已选的化妆品
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/getCosmeticsInfo',
+					url : testUrl+'/nggirl-web/web/admin/dresser/getCosmeticsInfo',
 					type : 'get',
 					dataType : 'json',
 					data: {dresserId:$('.add-works-btm').attr('dresserId')},
@@ -130,7 +132,7 @@ $(function(){
 			var brand = $(this);
 			//获取化妆品品牌列表
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listCosmeticsBrand',
+				url : testUrl+'/nggirl-web/web/admin/dresser/listCosmeticsBrand',
 				type : 'post',
 				dataType : 'json',
 				data: {cosmeticsClass:$(this).attr('cosmeticsClass')},
@@ -254,7 +256,7 @@ $(function(){
 			var requestData = {dresserId:$('.add-works-btm').attr('dresserId'),workName:$('.works-name').val(),workType:$('.works-type option:selected').html(),timeUsed:$('.works-time option:selected').html(),cost:$('.works-price').val(),tags:$('.tips-selected').html(),descriptions:$('.works-content').val(),cosmetics:str,cover:$('#form0-addworks .box:eq(0)').children('img').attr('src'),contentPhoto:imgContentPhoto};
 			//拿到所有信息发送给后台，添加化妆师信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/addWork/V1.4.0',
+				url : testUrl+'/nggirl-web/web/admin/dresser/addWork/V1.4.0',
 				type : 'POST',
 				dataType : 'json',
 				data: requestData,
@@ -280,7 +282,7 @@ $(function(){
 /*----------------------------------------------------------编辑化妆师履历开始----------------------------------------------------------*/
 	$('.editResume-works-btm').click(function(e) {
 		//获取化妆师履历
-        $.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/getDresserResumeDetail/1.5.0',{dresserId:$('.ckxq-box .cb-left').attr('dresserid')},function(data){
+        $.get(testUrl+'/nggirl-web/web/admin/dresser/getDresserResumeDetail/1.5.0',{dresserId:$('.ckxq-box .cb-left').attr('dresserid')},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.editResume-dresser').attr('dresserid',$('.ckxq-box .cb-left').attr('dresserid'));
@@ -307,7 +309,7 @@ $(function(){
 		});
 		
 		//获取系统默认擅长领域
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/getSysSpecial/1.5.0',{},function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/dresser/getSysSpecial/1.5.0',{},function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				$('.editResume-dresser .reference span').html(data.data.sysSpecial);
@@ -373,7 +375,7 @@ $(function(){
 		+'","serviceYear":' + $('.editResume-dresser .ed-year').val() +'}';
 		var r = confirm('确定要保存？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/updateDresserResume/1.5.0',{dresserResumeInfo:dresserResumeInfo},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/dresser/updateDresserResume/1.5.0',{dresserResumeInfo:dresserResumeInfo},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert('保存成功！！');
@@ -391,7 +393,7 @@ $(function(){
 		var bizStr = '{"cityId":'+$('.busi-circle').attr('cityid')+',"areas":[' + getAreasFn() + ']}'
 		var r = confirm('确定要保存？？');
 		if(r == true){
-			$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/saveDresserBizAreas/1.5.0',{dresserId:$('.busi-circle').attr('dresserid'),bizAreas:bizStr,cityId:1},function(data){
+			$.post(testUrl+'/nggirl-web/web/admin/dresser/saveDresserBizAreas/1.5.0',{dresserId:$('.busi-circle').attr('dresserid'),bizAreas:bizStr,cityId:1},function(data){
 				var data = $.parseJSON(data);
 				if(data.code == 0){
 					alert('保存成功！！');
@@ -601,7 +603,7 @@ function getBizAreasFn(arr){
 		
 		//获取省的列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/getCitys',
+			url : testUrl+'/nggirl-web/web/admin/dresser/getCitys',
 			type : 'get',
 			dataType : 'json',
 			data: {},
@@ -616,7 +618,7 @@ function getBizAreasFn(arr){
 		$('#dresser-province').change(function(){
 			//获取省对应城市的列表
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/getCountys',
+				url : testUrl+'/nggirl-web/web/admin/dresser/getCountys',
 				type : 'get',
 				dataType : 'json',
 				data: {cityId:$('#dresser-province option:selected').attr('cityId')},
@@ -631,7 +633,7 @@ function getBizAreasFn(arr){
 			
 		//获取化妆品品类列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listCosmeticsClass',
+			url : testUrl+'/nggirl-web/web/admin/dresser/listCosmeticsClass',
 			type : 'get',
 			dataType : 'json',
 			data: {},
@@ -649,7 +651,7 @@ function getBizAreasFn(arr){
 			var brand = $(this);
 			//获取化妆品品牌列表
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listCosmeticsBrand',
+				url : testUrl+'/nggirl-web/web/admin/dresser/listCosmeticsBrand',
 				type : 'post',
 				dataType : 'json',
 				data: {cosmeticsClass:$(this).attr('cosmeticsClass')},
@@ -693,7 +695,7 @@ function getBizAreasFn(arr){
    
 	//获取城市列表
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCitys',
+		url : testUrl+'/nggirl-web/web/admin/common/getCitys',
 		type : 'get',
 		dataType : 'json',  
 		success : function(data){
@@ -707,7 +709,7 @@ function getBizAreasFn(arr){
 	$('.cn-city #province').change(function(){
 		//获取地区列表
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCountys',
+			url : testUrl+'/nggirl-web/web/admin/common/getCountys',
 			type : 'get',
 			data : ({cityId:$('.cn-city .mine-city option:selected').attr('cityId')}),
 			dataType : 'json',  
@@ -776,7 +778,7 @@ function getBizAreasFn(arr){
 			var requestData = {nickName:$('.dresser-nickname').val(),realName:$('.dresser-name').val(),sex:$('.add-dresser input[name="sex"]:checked').val(),city:$('#dresser-province option:selected').html(),county:$('.dresser-city option:selected').html(),phoneNum:$('.dresser-tel').val(),profile:$('#img0-touxiang').attr('src'),identificationCard:$('.dresser-id').val(),identificationUpside:$('#img0-qian').attr('src'),identificationDownside:$('#img0-hou').attr('src'),cosmeticsInfo:str,cityId:$('.add-dresser #dresser-province option:selected').attr('cityid'),areaId:$('.add-dresser .dresser-city option:selected').attr('areaid')};
 			//拿到所有信息发送给后台，添加化妆师信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/addDresser/1.5.0',
+				url : testUrl+'/nggirl-web/web/admin/dresser/addDresser/1.5.0',
 				type : 'POST',
 				dataType : 'json',
 				data: requestData,
@@ -804,7 +806,7 @@ function getBizAreasFn(arr){
 			var dresserId = $('.hzsxq tbody>tr:eq('+$(this).parent().parent().parent().index()+') td:eq(0)').html();
 			var renzheng = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/certification',
+				url : testUrl+'/nggirl-web/web/admin/dresser/certification',
 				type : 'post',
 				dataType : 'json',
 				data: {dresserId:dresserId},
@@ -827,7 +829,7 @@ function getBizAreasFn(arr){
 			var dresserId = $('.hzsxq tbody>tr:eq('+$(this).parent().parent().parent().index()+') td:eq(0)').html();
 			var qxrenzheng = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/cancelCertification',
+				url : testUrl+'/nggirl-web/web/admin/dresser/cancelCertification',
 				type : 'post',
 				dataType : 'json',
 				data: {dresserId:dresserId},
@@ -851,7 +853,7 @@ function getBizAreasFn(arr){
 			var dresserId = $('.hzsxq tbody>tr:eq('+$(this).parent().parent().parent().index()+') td:eq(0)').html();
 			var qxplusv = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/subv',
+				url : testUrl+'/nggirl-web/web/admin/dresser/subv',
 				type : 'post',
 				dataType : 'json',
 				data: {dresserId:dresserId},
@@ -871,7 +873,7 @@ function getBizAreasFn(arr){
 			var dresserId = $('.hzsxq tbody>tr:eq('+$(this).parent().parent().parent().index()+') td:eq(0)').html();
 			var plusv = $(this);
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/addv',
+				url : testUrl+'/nggirl-web/web/admin/dresser/addv',
 				type : 'post',
 				dataType : 'json',
 				data: {dresserId:dresserId},
@@ -896,7 +898,7 @@ function getBizAreasFn(arr){
 		var dresserName = $('.hzsxq tbody>tr:eq('+$(this).parent().parent().index()+') td:eq(1)').html();
 		//<!--  显示化妆师详细信息 -->
 		$.ajax({
-			url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/dresserDetail/1.5.0',
+			url : testUrl+'/nggirl-web/web/admin/dresser/dresserDetail/1.5.0',
 			type : 'get',
 			dataType : 'json',
 			data: {dresserId:dresserId},
@@ -922,7 +924,7 @@ function getBizAreasFn(arr){
 				var areaname = data.data.countyName;
 				//回显所在城区
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/common/getCountys',
+					url : testUrl+'/nggirl-web/web/admin/common/getCountys',
 					type : 'get',
 					data : ({cityId:$('.cn-city .mine-city option:selected').attr('cityId')}),
 					dataType : 'json',  
@@ -953,7 +955,7 @@ function getBizAreasFn(arr){
 		if(r == true){
 			if(isPhoneNum($.trim($('.cb-left .ckxq-name .ct-tel').val()))){
 				$.ajax({
-					url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/updateDresser/1.5.0',
+					url : testUrl+'/nggirl-web/web/admin/dresser/updateDresser/1.5.0',
 					type : 'post',
 					dataType : 'json',
 					data: {dresserId:$('.ckxq-box .cb-left').attr('dresserId'),nickName:$.trim($('.cb-left .ckxq-name .ct-name').val()),phoneNum:$.trim($('.cb-left .ckxq-name .ct-tel').val()),cardId:$.trim($('.cb-left .ckxq-name .ct-id').val()),cityId:$('.ckxq-name .mine-city').children('option:selected').attr('cityid'),areaId:$('.ckxq-name .city').children('option:selected').attr('areaid'),realName:$.trim($('.ckxq-name .ct-true-name').val()),cardUpside:$('.ckxq-name .qian').attr('src'),cardDownside:$('.ckxq-name .hou').attr('src')},
@@ -1014,7 +1016,7 @@ function getBizAreasFn(arr){
 		var r = confirm('确定删除？？？');
 		if(r == true){
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/work/deleteWork',
+				url : testUrl+'/nggirl-web/web/admin/work/deleteWork',
 				type : 'post',
 				dataType : 'json',
 				data: {num:20,workId:$('.tm-zpgl tbody>tr:eq('+par+') td:eq(0)').html()},
@@ -1035,7 +1037,7 @@ function getBizAreasFn(arr){
 function getDresserWorkFn(dresserId){
 	$('.tm-zpgl tr:gt(0)').remove();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listDresserWorks',
+		url : testUrl+'/nggirl-web/web/admin/dresser/listDresserWorks',
 		type : 'get',
 		dataType : 'json',
 		data: {dresserId:dresserId,page:1},
@@ -1045,7 +1047,7 @@ function getDresserWorkFn(dresserId){
 				current:parseInt(data.data.currnetPageNum),
 				backFn:function(p){
 					$.ajax({
-						url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listDresserWorks',
+						url : testUrl+'/nggirl-web/web/admin/dresser/listDresserWorks',
 						type : 'get',
 						dataType : 'json',
 						data: {dresserId:dresserId,page:p},
@@ -1134,7 +1136,7 @@ function  createDresserPage(data){
 			params.page = p;
 			$('.hzsxq tr:gt(0)').remove(); //清除原来的表格信息
 			$.ajax({
-				url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listDressers/1.5.0',
+				url : testUrl+'/nggirl-web/web/admin/dresser/listDressers/1.5.0',
 				type : 'get',
 				dataType : 'json',
 				data: params,
@@ -1186,7 +1188,7 @@ function  loadDresserPage(){
 	$('.hzsxq tr:gt(0)').remove(); //清除原来的表格信息
 	var params = getDresserSearchParams();
 	$.ajax({
-		url : '<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/dresser/listDressers/1.5.0',
+		url : testUrl+'/nggirl-web/web/admin/dresser/listDressers/1.5.0',
 		type : 'get',
 		dataType : 'json',
 		data: params,

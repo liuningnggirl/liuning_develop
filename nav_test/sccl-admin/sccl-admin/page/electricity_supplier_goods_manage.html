@@ -454,6 +454,21 @@
             <input type="button" value="确定" style="padding:5px;" class="goto_page_btn" />
         </div>
     </div>
+    
+    <!-- 添加虚拟评价 -->
+    <div class="increase_virtual_user" style="display: none;">
+        <span class="Evaluator_id">评价者id</span>
+        <input type="text" name="" class="Fill_Evaluator_id thereCommonTwo">
+        <span class="choice_virtual_user">选择虚拟用户</span>
+        <input type="text" name="" class="Fill_choice_virtual_user thereCommonTwo" contenteditable="false">
+        <ul style="position:absolute;width: 133px; max-height: 280px;overflow-y: scroll; display:none;" class="increase_user_list">
+         </ul>
+        <span class="virtual_user_shuoming">*评价者与虚拟用户只能填一个,两个都填情况下默认使用评价者id用户</span>
+        <div class="editor_content"></div>
+        <span class="virtual_user_fabu">发布</span>
+        <span class="virtual_user_cancel">取消</span>
+    </div>
+    
     <script src="../common/js/editor/jquery.caret.0.3.1.min.js"></script>
     <script type="text/javascript" src="../common/js/editor/jquery.pumpkin.goods.selector.js"></script>
     <script type="text/javascript" src="../common/js/editor/jquery.image.upload.box.js"></script>

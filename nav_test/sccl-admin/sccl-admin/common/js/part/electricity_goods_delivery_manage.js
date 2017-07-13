@@ -1,6 +1,8 @@
+var testUrl = 'https://testcli.nggirl.com.cn';
 $(function(){
 	getCompanyTypeFn();
 	getCityTypeFn();
+	deliveryDetail();
 	//勾选是否有运费
 	$('.electricity_goods_delivery_manage .esg_box .deliveryMessage .fare').live("click",function(){
 		$(this).attr("checked","checked").siblings(".fare").removeAttr("checked");
@@ -46,7 +48,7 @@ $(function(){
 			if(del.attr("templateId")==undefined){
 				del.parent().parent().remove();	
 			}else{
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/deleteExpressTemplate/3.1.0',{templateId:del.attr("templateId")},function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/deleteExpressTemplate/3.1.0',{templateId:del.attr("templateId")},function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						del.parent().parent().remove();	
@@ -110,7 +112,7 @@ $(function(){
 		console.log(genData)
 		var r=confirm("确定保存？");
 			if(r == true){
-				$.post('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/saveExpressTemplate/3.1.0',genData,function(data){
+				$.post(testUrl+'/nggirl-web/web/admin/item/saveExpressTemplate/3.1.0',genData,function(data){
 					var data = $.parseJSON(data);
 					if(data.code == 0){
 						alert("保存成功！");
@@ -127,7 +129,7 @@ $(function(){
 
 //获取快递详情V3.1.0
 	function deliveryDetail(){
-		$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getOptionalExpressTemplates/3.1.0',function(data){
+		$.get(testUrl+'/nggirl-web/web/admin/item/getOptionalExpressTemplates/3.1.0',function(data){
 			var data = $.parseJSON(data);
 			if(data.code == 0){
 				var str='';
@@ -147,7 +149,7 @@ $(function(){
 						//citys+='<span provinceId="'+val.provinceId+'" class="provinceId">'+val.provinceName+'，</span>';
 					})
 					citys = citys.substring(0,citys.length -1);
-					str+=citys+'</p>'+'<img src="images/down.png" class="down" /></div>';
+					str+=citys+'</p>'+'<img src="../common/images/down.png" class="down" /></div>';
 					str+='<div class="nowHidden gCity">'+GetCityDetail(ids)+'</div>';
 					str+='</td><td><input type="button" name=""  class="edit_btn green" value="编辑" templateId="'+val.templateId+'"><input type="button" name=""  class="del_btn red" value="删除" templateId="'+val.templateId+'"></td></tr>';
 					
@@ -161,7 +163,7 @@ $(function(){
 	};
 //获取快递名称详情接口
 function getCompanyTypeFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getAllCompanies/3.1.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/item/getAllCompanies/3.1.0',function(data){
 		var data = $.parseJSON(data);
 		var str = '';
 		if(data.code == 0){
@@ -203,7 +205,7 @@ function getCompanyTypeFn(){
 	};
 //获取快递名称详情接口
 function getCityTypeFn(){
-	$.get('<%= CLI_HOST_API_URL %>/nggirl-web/web/admin/item/getAllProvinces/3.1.0',function(data){
+	$.get(testUrl+'/nggirl-web/web/admin/item/getAllProvinces/3.1.0',function(data){
 		var data = $.parseJSON(data);
 		var str = '';
 		if(data.code == 0){
@@ -218,7 +220,7 @@ function getCityTypeFn(){
 		var data = $('.deliveryMessage').data('getAllProvinces');
 		if(data != undefined && data.length != undefined){
 			var str='';
-			str+='<div class="cityBox"><input type="text" placeholder="请选择地区" readonly="readonly" class="selectCity"><img src="images/down.png" class="down">';
+			str+='<div class="cityBox"><input type="text" placeholder="请选择地区" readonly="readonly" class="selectCity"><img src="../common/images/down.png" class="down">';
 			str+='<ul class="cityBoxlist"><li value="1" class="selectAll">全选<input type="checkbox"></li>';
 								
 			$.each(data,function(key,val){
@@ -237,7 +239,7 @@ function getCityTypeFn(){
 		var data = $('.deliveryMessage').data('getAllProvinces');
 		if(data != undefined && data.length != undefined){
 			var str='';
-			str+='<div class="cityBox"><input type="text" placeholder="请选择地区" readonly="readonly" class="selectCity"><img src="images/down.png" class="down">';
+			str+='<div class="cityBox"><input type="text" placeholder="请选择地区" readonly="readonly" class="selectCity"><img src="../common/images/down.png" class="down">';
 			str+='<ul class="cityBoxlist"><li value="" class="selectAll">全选<input type="checkbox"></li>';				
 			$.each(data,function(key,val){
 				str+='<li value="'+val.provinceId+'" class="selectAreaCity">'+val.provinceName+'<input type="checkbox"></li>';
