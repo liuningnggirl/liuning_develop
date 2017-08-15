@@ -12,7 +12,7 @@ Page({
     var that = this;
     // 页面初始化 options为页面跳转所带来的参数
     /*wx.request({
-      url: 'https://testcli.nggirl.com.cn/nggirl/app/cli/works/weixin/listWorksAtWxHome/1.4.1',
+      url: 'https://cli.nggirl.com.cn/nggirl/app/cli/works/weixin/listWorksAtWxHome/1.4.1',
       data: util.getFinalRequestObject({promotionName: '婚博会专场', num: 4 }),
       method: 'POST',
       dataType: "json",
@@ -37,7 +37,7 @@ Page({
 
 
     wx.request({
-      url: 'https://testcli.nggirl.com.cn/nggirl/app/cli/works/weixin/listWorksAtWxHome/1.4.1',
+      url: 'https://cli.nggirl.com.cn/nggirl/app/cli/works/weixin/listWorksAtWxHome/1.4.1',
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       method: "POST",
       data: util.json2Form(util.getFinalRequestObject({ accessToken: util.getAccessToken, promotionName: '婚博会专场', num: 4 })),

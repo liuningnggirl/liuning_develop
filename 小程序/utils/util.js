@@ -181,7 +181,7 @@ function getAccessToken() {
 }
 //设置accessToken
 function setAccessToken(accessToken) {
-  wx.getStorageSync('accessToken') = accessToken;
+  //wx.getStorageSync('accessToken') = accessToken;
 }
 
 
