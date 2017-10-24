@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./css/mui.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/attendanceIndex.css" />
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <title>首页</title>
+    <style>
+        .mui-pull-top-tips {
+            top: -20px;
+        }
+    </style>
+</head>
+<body>
+<div class="content_box">
+    <div id="leftTabBox" class="tabBox">
+        <div class="th_box">
+            <div class="tab_hd">
+                <div class="hd">
+                    <ul>
+                        <li class="shou_ok"><p>全部</p></li>
+                        <li class="shou_no"><p>正常</p></li>
+                        <li class="shou_no"><p>休假</p></li>
+                        <li class="shou_no"><p>外出</p></li>
+                        <li class="shou_no"><p>出差</p></li>
+                        <li class="shou_no"><p>其他</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cb_status hidden">
+            <img src="./images/refresh.png" alt="">
+        </div>
+        <div class="cb_status_gate_roke hidden">
+            网络不给力，请检查网络设置
+            <img src="./images/arr_right.png" alt="" class="cs_right">
+        </div>
+        <div id="pullrefresh" class="mui-content">
+            <div id="leftTabBox_db" class="bd mui-table-view mui-table-view-chevron">
+                <div class="con">
+                    <div class="no_content hidden">
+                        <img src="./images/none_content.png" alt="">
+                        <p>暂无内容</p>
+                    </div>
+                    <div class="no_content_gate_broke hidden">
+                        <img src="./images/gate_broke@iOS_2x.png" alt="">
+                        <p>网络连接失败</p>
+                        <div>重新加载</div>
+                    </div>
+                    <ul class="tab_all"></ul>
+                </div>
+                <div class="con">
+                    <div class="no_content hidden">
+                        <img src="./images/none_content.png" alt="">
+                        <p>暂无内容</p>
+                    </div>
+                    <div class="no_content_gate_broke hidden">
+                        <img src="./images/gate_broke@iOS_2x.png" alt="">
+                        <p>网络连接失败</p>
+                        <div>重新加载</div>
+                    </div>
+                    <ul class="tab_normal"></ul>
+                </div>
+                <div class="con">
+                    <div class="no_content hidden">
+                        <img src="./images/none_content.png" alt="">
+                        <p>暂无内容</p>
+                    </div>
+                    <div class="no_content_gate_broke hidden">
+                        <img src="./images/gate_broke@iOS_2x.png" alt="">
+                        <p>网络连接失败</p>
+                        <div>重新加载</div>
+                    </div>
+                    <ul class="tab_leave"></ul>
+                </div>
+                <div class="con">
+                    <div class="no_content hidden">
+                        <img src="./images/none_content.png" alt="">
+                        <p>暂无内容</p>
+                    </div>
+                    <div class="no_content_gate_broke hidden">
+                        <img src="./images/gate_broke@iOS_2x.png" alt="">
+                        <p>网络连接失败</p>
+                        <div>重新加载</div>
+                    </div>
+                    <ul class="tab_goout"></ul>
+                </div>
+                <div class="con">
+                    <div class="no_content hidden">
+                        <img src="./images/none_content.png" alt="">
+                        <p>暂无内容</p>
+                    </div>
+                    <div class="no_content_gate_broke hidden">
+                        <img src="./images/gate_broke@iOS_2x.png" alt="">
+                        <p>网络连接失败</p>
+                        <div>重新加载</div>
+                    </div>
+                    <ul class="tab_chai"></ul>
+                </div>
+                <div class="con">
+                    <div class="no_content hidden">
+                        <img src="./images/none_content.png" alt="">
+                        <p>暂无内容</p>
+                    </div>
+                    <div class="no_content_gate_broke hidden">
+                        <img src="./images/gate_broke@iOS_2x.png" alt="">
+                        <p>网络连接失败</p>
+                        <div>重新加载</div>
+                    </div>
+                    <ul class="tab_another"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_bar"></div>
+</div>
+<!--遮罩层_start-->
+<div class="sign-box hidden"></div>
+<!--遮罩层_end-->
+
+<!--首次登陆弹出层_start-->
+<div class="first_box_shadow hidden">
+    <div class="fs_msg_center">
+        <img src="./images/ic_nav_setting@2x.png" alt="" class="fs_msg">
+    </div>
+    <img src="./images/arr_left.png" alt="" class="fs_arr">
+    <img src="./images/i_now.png" alt="" class="fs_now">
+    <div class="fs_center">
+        <img src="./images/circle_border_white.png" alt="" class="fs_circle">
+    </div>
+</div>
+<!--首次登陆弹出层_end-->
+<div class="error-msg"></div>
+<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/mui.pullToRefresh.js"></script>
+<script src="./js/mui.pullToRefresh.material.js"></script>
+<script type="text/javascript" src="./js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="./js/util.js"></script>
+<script type="text/javascript" src="./js/attendanceIndex.js"></script>
+<script type="text/javascript" src="./js/common.js"></script>
+</body>
+</html>
