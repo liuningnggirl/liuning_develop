@@ -4,6 +4,13 @@ var localStr = window.location.href;
 var ua = navigator.userAgent;
 localStr = localStr.substring(0,localStr.indexOf('kaoqin'));
 var imgStr = './images/default_img.png';
+var updatedata = '';
+if(localStorage.getItem("updatedata") == null || localStorage.getItem("updatedata") == undefined || localStorage.getItem("updatedata") == ''){
+    updatedata = new Date().toString();
+}else{
+    updatedata = localStorage.getItem("updatedata");
+}
+
 $(function(){
     //隐藏客户端标题栏箭头
     var leftIsShow = '{"type": "leftIsShow","data": {"isHide":"1"}}';
@@ -26,8 +33,10 @@ $(function(){
 
     //切换导航-->我的
     $('.footer_bar div.fb_right').live('click',function(){
-        genFooterBar('./images/index_before.png','./images/mine_after.png','mine');
-        window.location.href = "attendanceMine.html?employeeid="+getParam.employeeid;
+        if(bbNetwork.isOnline()){
+            genFooterBar('./images/index_before.png','./images/mine_after.png','mine');
+            window.location.href = "attendanceMine.html?employeeid="+getParam.employeeid;
+        }
     });
 
     //关闭首次登录弹窗
@@ -42,29 +51,30 @@ $(function(){
     TouchSlide({slideCell:"#leftTabBox",
         endFun:function(i){ //高度自适应
             var bd = document.getElementById("leftTabBox_db");
+            updatedata = localStorage.getItem("updatedata");
             effect:"leftLoop";
             if(i == 0){
-                getAllEmployStatus(0,new Date().toString(),$('.tab_all'));//全部
+                getAllEmployStatus(0,updatedata,$('.tab_all'));//全部
                 $('.tab_all').parent().addClass('ons').siblings().removeClass('ons');
                 window.scrollTo(0,0);
             }else if(i == 1){
-                getAllEmployStatus(1,new Date().toString(),$('.tab_normal'));//正常
+                getAllEmployStatus(1,updatedata,$('.tab_normal'));//正常
                 $('.tab_normal').parent().addClass('ons').siblings().removeClass('ons');
                 window.scrollTo(0,0);
             }else if(i == 2){
-                getAllEmployStatus(2,new Date().toString(),$('.tab_leave'));//休假
+                getAllEmployStatus(2,updatedata,$('.tab_leave'));//休假
                 $('.tab_leave').parent().addClass('ons').siblings().removeClass('ons');
                 window.scrollTo(0,0);
             }else if(i == 3){
-                getAllEmployStatus(3,new Date().toString(),$('.tab_goout'));//外出
+                getAllEmployStatus(3,updatedata,$('.tab_goout'));//外出
                 $('.tab_goout').parent().addClass('ons').siblings().removeClass('ons');
                 window.scrollTo(0,0);
             }else if(i == 4){
-                getAllEmployStatus(4,new Date().toString(),$('.tab_chai'));//出差
+                getAllEmployStatus(4,updatedata,$('.tab_chai'));//出差
                 $('.tab_chai').parent().addClass('ons').siblings().removeClass('ons');
                 window.scrollTo(0,0);
             }else{
-                getAllEmployStatus(99,new Date().toString(),$('.tab_another'));//其他
+                getAllEmployStatus(99,updatedata,$('.tab_another'));//其他
                 $('.tab_another').parent().addClass('ons').siblings().removeClass('ons');
                 window.scrollTo(0,0);
             }
@@ -80,7 +90,9 @@ $(function(){
 
     //重新加载
     $('.no_content_gate_broke div').click(function(){
-       window.location.reload();
+       if(bbNetwork.isOnline()){
+           window.location.reload();
+       }
     });
 
     //网络检查_跳转到客户端设置
@@ -90,8 +102,17 @@ $(function(){
             window.jsToJava.jsCallbackMethod(jsCallNetWork);
         };
     });
-    // getAllEmployStatus(0,new Date().toString(),$('.tab_all'));//全部
 
+    //签到
+    $('.fb_center img').click(function(){
+        if(bbNetwork.isOnline()){
+            $('.sign-box').removeClass('hidden');
+            $('.sign-states ul li').addClass('animated fadeInUp');
+            $('.sign-states .sign-normal,.sign-footer .sign-close').addClass('animated fadeInUp');
+        }
+    });
+
+    //上拉加载、下拉刷新
     mui.init();
     (function($) {
         $.ready(function() {
@@ -104,23 +125,24 @@ $(function(){
                             self.endPullDownToRefresh();
                             $('#leftTabBox_db>div').each(function(e){
                                 if($(this)[0].className.indexOf('ons') >= 0){
+                                    updatedata = localStorage.getItem("updatedata");
                                     if($(this)[0].children[2].className == 'tab_all'){
-                                        getAllEmployStatus(0,Date.parse(new Date()),$('.tab_all'));//全部
+                                        getAllEmployStatus(0,updatedata,$('.tab_all'));//全部
                                         return false;
                                     }else if($(this)[0].children[2].className == 'tab_normal'){
-                                        getAllEmployStatus(1,Date.parse(new Date()),$('.tab_normal'));
+                                        getAllEmployStatus(1,updatedata,$('.tab_normal'));
                                         return false;
                                     }else if($(this)[0].children[2].className == 'tab_leave'){
-                                        getAllEmployStatus(2,Date.parse(new Date()),$('.tab_leave'));
+                                        getAllEmployStatus(2,updatedata,$('.tab_leave'));
                                         return false;
                                     }else if($(this)[0].children[2].className == 'tab_goout'){
-                                        getAllEmployStatus(3,Date.parse(new Date()),$('.tab_goout'));
+                                        getAllEmployStatus(3,updatedata,$('.tab_goout'));
                                         return false;
                                     }else if($(this)[0].children[2].className == 'tab_chai'){
-                                        getAllEmployStatus(4,Date.parse(new Date()),$('.tab_chai'));
+                                        getAllEmployStatus(4,updatedata,$('.tab_chai'));
                                         return false;
                                     }else if($(this)[0].children[2].className == 'tab_another'){
-                                        getAllEmployStatus(99,Date.parse(new Date()),$('.tab_another'));
+                                        getAllEmployStatus(99,updatedata,$('.tab_another'));
                                         return false;
                                     }
                                     window.scrollTo(0,0);
@@ -154,6 +176,13 @@ function getAllEmployStatus(state,updatedata,con){
             var endData = data.responseBody.result;
             $(con).children('li').remove();
             if(endData.length > 0 && data.retCode == '200'){
+                localStorage.setItem("updatedata",data.responseBody.updatedata);
+                updatedata = data.responseBody.updatedata;
+                //判断刷新时是否有更新状态
+                if(data.responseBody.updatesum != 0 && data.responseBody.updatesum != null && data.responseBody.updatesum != undefined){
+                    $('.cb_status .cs_num').html(data.responseBody.updatesum)
+                    $(".cb_status").animate({"margin-top":"0px"}).delay(800).animate({"margin-top":"-50px"});
+                }
                 for(x in endData){
                     //员工是否置顶标识  0：不置顶，1：置顶，2：显示在列表最上方
                     if(endData[x].stick == 1 || endData[x].stick == 2){
@@ -195,6 +224,8 @@ function getAllEmployStatus(state,updatedata,con){
                 }
                 return;
             }if(endData.length > 0 && data.retCode == '200'  && state!= 0){
+                localStorage.setItem("updatedata",data.responseBody.updatedata);
+                updatedata = data.responseBody.updatedata;
                 for(x in endData){
                     $(con).attr('refreshNum',endData.length).append('<li employeeid="'+endData[x].employeeid+'">\n' +
                         '                        <div class="ta_left">\n' +
@@ -230,21 +261,20 @@ var bbNetwork = new BBNetwork(function(status){
     if("online" != status){
         $('.cb_status_gate_roke,.no_content_gate_broke').removeClass('hidden');
         $('.no_content').addClass('hidden');
-        $('.con u l li').remove();
+        $('.con ul li').remove();
     }else{
         $('.cb_status_gate_roke,.no_content_gate_broke').addClass('hidden');
-        getAllEmployStatus(0,new Date().toString(),$('.tab_all'));//全部
+        //getAllEmployStatus(0,updatedata,$('.tab_all'));//全部
     }
 }) ;
 if(!bbNetwork.isOnline()){
     $('.cb_status_gate_roke,.no_content_gate_broke').removeClass('hidden');
     $('.no_content').addClass('hidden');
     $('.con ul li').remove();
+}else{
+    $('.cb_status_gate_roke,.no_content_gate_broke').addClass('hidden');
+    //getAllEmployStatus(0,updatedata,$('.tab_all'));//全部
 }
-// else{
-//     $('.cb_status_gate_roke,.no_content_gate_broke').addClass('hidden');
-//     getAllEmployStatus(0,new Date().toString(),$('.tab_all'));//全部
-// }
 
 //判断是否有图片，乜有则给一张默认图片
 function giveDefaultImgFn(img){

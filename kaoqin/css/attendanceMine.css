@@ -8,7 +8,7 @@ img[src=""]{
 
 .cb_message{ padding: 16px 15px;  background: #fff;  box-sizing: border-box;  overflow: hidden;  box-shadow: 0 2px 4px 0 rgba(212,212,212,0.50);  border-radius: 1px;  position: relative; width:100%;margin: 15px 0;}
 .cb_message .ta_left img{ width:52px;height:52px; border-radius:5px; border:none; display: inline-block; outline: none; }
-.cb_message .ta_left{border:none;margin:0 15px 0 0; width:50px; height:50px; overflow: hidden;}
+.cb_message .ta_left{border:none;margin:0 15px 0 0;}
 .cb_message .ta_right{float:right;text-align: right;}
 .cb_message .ta_center .tc_name{font-size:20px; color:#333;}
 .cb_message .ta_center .tc_type{font-size:14px; color:#999; margin: 16px 0 0 0;}

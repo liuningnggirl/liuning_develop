@@ -1,72 +1,93 @@
 $(function(){
     //打卡正常
     $('.sign-normal').live('touchstart',function(){
-        $(this).unbind('touchstart');
-        $('.sign-normal img').attr('src','./images/ic_nav_normal_setting@2x.png');
-        $('.sign-normal').css({'color':'#999'});
+        if(bbNetwork.isOnline()){
+            $(this).unbind('touchstart');
+            $('.sign-normal img').attr('src','./images/ic_nav_normal_setting@2x.png');
+            $('.sign-normal').css({'color':'#999'});
+        }
     });
     $('.sign-normal').live('touchend',function(){
-        $(this).bind('touchstart');
-        $('.sign-normal img').attr('src','./images/ic_nav_normal_setting_hl@2x.png');
-        $('.sign-normal').css({'color':'#333'});
-        signFn("1");
+        if(bbNetwork.isOnline()){
+            $(this).bind('touchstart');
+            $('.sign-normal img').attr('src','./images/ic_nav_normal_setting_hl@2x.png');
+            $('.sign-normal').css({'color':'#333'});
+            signFn("1");
+        }
     });
     //打卡休假
     $('.sign-holiday').live('touchstart',function(){
-        $('.sign-holiday img').attr('src','./images/ic_nav_xiujia_setting@2x.png');
-        $('.sign-holiday').css({'color':'#999'});
+        if(bbNetwork.isOnline()){
+            $('.sign-holiday img').attr('src','./images/ic_nav_xiujia_setting@2x.png');
+            $('.sign-holiday').css({'color':'#999'});
+        }
     });
     $('.sign-holiday').live('touchend',function(){
-        $('.sign-holiday img').attr('src','./images/ic_nav_xiujia_setting_hl@2x.png');
-        $('.sign-holiday').css({'color':'#333'});
-        signFn("2");
+        if(bbNetwork.isOnline()){
+            $('.sign-holiday img').attr('src','./images/ic_nav_xiujia_setting_hl@2x.png');
+            $('.sign-holiday').css({'color':'#333'});
+            signFn("2");
+        }
     });
     //打卡外出
     $('.sign-out').live('touchstart',function(){
-        $('.sign-out img').attr('src','./images/ic_nav_out_setting@2x.png');
-        $('.sign-out').css({'color':'#999'});
+        if(bbNetwork.isOnline()){
+            $('.sign-out img').attr('src','./images/ic_nav_out_setting@2x.png');
+            $('.sign-out').css({'color':'#999'});
+        }
     });
     $('.sign-out').live('touchend',function(){
-        $('.sign-out img').attr('src','./images/ic_nav_out_setting_hl@2x.png');
-        $('.sign-out').css({'color':'#333'});
-        //signFn("3");
-        window.location.href = "attendanceLeave.html?employeeid="+getParam.employeeid;
+        if(bbNetwork.isOnline()){
+            $('.sign-out img').attr('src','./images/ic_nav_out_setting_hl@2x.png');
+            $('.sign-out').css({'color':'#333'});
+            //signFn("3");
+            window.location.href = "attendanceLeave.html?employeeid="+getParam.employeeid;
+        }
     });
     //打卡其他
     $('.sign-another').live('touchstart',function(){
-        $('.sign-another img').attr('src','./images/ic_nav_orther_setting@2x.png');
-        $('.sign-another').css({'color':'#999'});
+        if(bbNetwork.isOnline()){
+            $('.sign-another img').attr('src','./images/ic_nav_orther_setting@2x.png');
+            $('.sign-another').css({'color':'#999'});
+        }
     });
     $('.sign-another').live('touchend',function(){
-        $('.sign-another img').attr('src','./images/ic_nav_orther_setting_hl@2x.png');
-        $('.sign-another').css({'color':'#333'});
-        signFn("99");
+        if(bbNetwork.isOnline()){
+            $('.sign-another img').attr('src','./images/ic_nav_orther_setting_hl@2x.png');
+            $('.sign-another').css({'color':'#333'});
+            signFn("99");
+        }
     });
     //打卡出差
     $('.sign-chuchai').live('touchstart',function(){
-        $('.sign-chuchai img').attr('src','./images/ic_nav_chuchai_setting@2x.png');
-        $('.sign-chuchai').css({'color':'#999'});
+        if(bbNetwork.isOnline()){
+            $('.sign-chuchai img').attr('src','./images/ic_nav_chuchai_setting@2x.png');
+            $('.sign-chuchai').css({'color':'#999'});
+        }
     });
     $('.sign-chuchai').live('touchend',function(){
-        $('.sign-chuchai img').attr('src','./images/ic_nav_chuchai_setting_hl@2x.png');
-        $('.sign-chuchai').css({'color':'#333'});
-        //signFn("4");
-        window.location.href = "attendanceChai.html?employeeid="+getParam.employeeid;
+        if(bbNetwork.isOnline()){
+            $('.sign-chuchai img').attr('src','./images/ic_nav_chuchai_setting_hl@2x.png');
+            $('.sign-chuchai').css({'color':'#333'});
+            //signFn("4");
+            window.location.href = "attendanceChai.html?employeeid="+getParam.employeeid;
+        }
     });
 
     //关闭
     $('.sign-close').live('click',function(){
         $('.sign-box').addClass('hidden');
     });
-
-    //签到
-    $('.fb_center img').click(function(){
-        $('.sign-box').removeClass('hidden');
-        $('.sign-states ul li').addClass('animated fadeInUp');
-        $('.sign-states .sign-normal,.sign-footer .sign-close').addClass('animated fadeInUp');
-    });
 });
 
+//网络状态
+var bbNetwork = new BBNetwork(function(status){
+    if("online" != status){
+        //没网
+    }else{
+        //有网
+    }
+}) ;
 //签到
 function signFn(state){
     var obj_qian = {};
@@ -105,11 +126,6 @@ function signAjaxFn(obj_qian){
         },
         success: function (data) {
             if(data.responseBody.success  && data.retCode == 200){
-                // if(state == 4 || state == 3){
-                //     window.location.href = "attendanceIndex.html?employeeid="+getParam.employeeid+'&loginNum='+getParam.loginNum;
-                // }else{
-                //     window.location.reload();
-                // }
                 window.location.href = "attendanceIndex.html?employeeid="+getParam.employeeid;
             }else{
                 errorMessageSlideUpFn(data.responseBody.returnmessage);

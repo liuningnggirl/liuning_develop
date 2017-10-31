@@ -109,7 +109,7 @@ $(function(){
 
     //限制最大输入字符
     $('.cb_bottom textarea').on('input',function(){
-        if($.trim($('.cb_bottom textarea').val()).length >= 14){
+        if($('.chai_box').is(':hidden') && $.trim($('.cb_bottom textarea').val()).length >= 14){
             $('.chai_box').stop().fadeIn().delay(800).fadeOut();
         }
     })

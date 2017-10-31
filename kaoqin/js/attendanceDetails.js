@@ -33,8 +33,8 @@ $(function(){
                     auto: false,
                     offset: 100, //距离底部高度(到达该高度即触发)
                     show: true,
-                    contentinit: '上拉显示更多',
-                    contentdown: '上拉显示更多',
+                    contentinit: '',
+                    contentdown: '',
                     contentrefresh: '正在加载...',
                     contentnomore: '已经加载完全部数据',
                     callback: function() {

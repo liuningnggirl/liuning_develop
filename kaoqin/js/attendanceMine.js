@@ -19,8 +19,10 @@ $(function(){
 
     //切换导航-->首页
     $('.footer_bar div.fb_left').live('click',function(){
-        genFooterBar('./images/index_before.png','./images/mine_after.png','mine');
-        window.location.href = "attendanceIndex.html?employeeid="+getParam.employeeid;
+        if(bbNetwork.isOnline()){
+            genFooterBar('./images/index_before.png','./images/mine_after.png','mine');
+            window.location.href = "attendanceIndex.html?employeeid="+getParam.employeeid;
+        }
     });
 
     //设置
@@ -33,7 +35,9 @@ $(function(){
 
     //重新加载
     $('.no_content_gate_broke div').click(function(){
-        window.location.reload();
+        if(bbNetwork.isOnline()){
+            window.location.reload();
+        }
     });
 
     //网络检查
@@ -43,6 +47,16 @@ $(function(){
             window.jsToJava.jsCallbackMethod(jsCallNetWork);
         };
     });
+
+    //签到
+    $('.fb_center img').click(function(){
+        if(bbNetwork.isOnline()){
+            $('.sign-box').removeClass('hidden');
+            $('.sign-states ul li').addClass('animated fadeInUp');
+            $('.sign-states .sign-normal,.sign-footer .sign-close').addClass('animated fadeInUp');
+        }
+    });
+
 
     //删除状态
     $('.list-li .btn').live('click',function(){
@@ -75,6 +89,7 @@ $(function(){
         });
     });
 
+    //上拉刷新、下拉加载
     mui.init();
     (function($) {
         $.ready(function() {
@@ -94,8 +109,8 @@ $(function(){
                     auto: false,
                     offset: 100, //距离底部高度(到达该高度即触发)
                     show: true,
-                    contentinit: '上拉显示更多',
-                    contentdown: '上拉显示更多',
+                    contentinit: '',
+                    contentdown: '',
                     contentrefresh: '正在加载...',
                     contentnomore: '已经加载完全部数据',
                     callback: function() {

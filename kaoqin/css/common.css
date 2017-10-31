@@ -527,7 +527,7 @@ html{
 }
 
 /*网络断开样式_start*/
-.cb_status_gate_roke{ width:100%; text-align:center; color:#fff; font-size:14px; padding:14px 0; background:#E33737; position: relative;}
+.cb_status_gate_roke{ width:100%; text-align:center; color:#fff; font-size:14px; padding:14px 0; background:#E33737; position: relative; margin-top: 3px;}
 .cb_status_gate_roke .cs_right{ width:7.4px; position: absolute;right:15px; top:15px; }
 .no_content_gate_broke{ text-align: center;margin: 30% 0;}
 .no_content_gate_broke img{ width:50%;}
