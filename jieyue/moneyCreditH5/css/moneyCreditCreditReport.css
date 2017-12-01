@@ -1,0 +1,8 @@
+body{ background: #fff;}
+.hidden{ display: none;}
+.content_box .cb_title{background: #FFF3DF;font-size: 12px; color: #F5A623;  line-height: 20px;}
+.content_box .cb_title div{    display: inline-block; padding: 5px 0; margin-left: 10.5px; width: 76%; margin-right: 22px;}
+.content_box .ct_img{ width:14.5px;margin: 8px 0 0 24.5px; vertical-align: top;}
+.content_box .cb_content{ padding:23px; box-sizing: border-box;}
+.content_box .cb_content p{font-size: 12px; color: #333333; letter-spacing: -0.19px; line-height: 18px; text-align: justify;}
+.cb_content .tag{ margin:21px 6px 21px 0; display: inline-block; padding:3px 3px 3px 0px; text-align: center; font-size: 12px; color: #FFFFFF; letter-spacing: -0.19px; width:42px; height:22px; background:url("../images/QQ截图20171107152652.png") no-repeat; background-size:contain;}

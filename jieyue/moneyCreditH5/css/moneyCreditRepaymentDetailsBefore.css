@@ -1,0 +1,15 @@
+body{ background: #f6f6f6;}
+.hidden{ display: none;}
+.content_box{ margin:14px 0 0 0;}
+.content_box ul{ padding:0 14px; background: #fff;}
+.content_box ul li{ border-bottom: 1px solid rgba(151,151,151,.23); padding:21px 0;}
+.content_box ul li.border_none{ border:none; padding:21px 0;}
+.content_box ul li span{width:19%; text-align: center; display:inline-block;}
+.content_box ul li span:nth-child(1){ width:15%;}
+.content_box ul li span:nth-child(2){ width:58%;}
+.content_box ul li span:nth-child(3),.content_box ul li span:nth-child(4){ width:22%;}
+.content_box ul li span{font-size: 14px; color: #333333; line-height: 15px;}
+.content_box .cb_msg{ padding:15.5px 25.5px;}
+.content_box .cb_msg img{ width:14.5px;height:14.5px;vertical-align: sub;}
+.content_box .cb_msg p{ display: inline-block;font-size: 12px; color: #999999;}
+

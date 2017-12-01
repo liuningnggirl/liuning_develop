@@ -1,0 +1,10 @@
+body{ background: #f6f6f6;}
+.hidden{ display: none;}
+.content_box .cb_title{ padding:14px 20px;}
+.content_box .cb_title p{font-size: 15px; color: #151515; letter-spacing: -0.23px; line-height: 21px;  display: inline-block;}
+.content_box .cb_title img{ display: inline-block;width: 15px;margin-left: -6px;}
+.content_box .cb_content{ background: #FFFFFF; box-shadow: 0 0 1px 1px rgba(217,217,217,0.50);}
+.content_box .cb_content li{ padding:20px 17px; box-sizing: border-box; position: relative;}
+.content_box .cb_content li .cc_select{ width: 22px; height:22px; position: absolute; top:19px; right:23px;}
+.content_box .cb_content li .cc_msg{font-size: 14px; color: #333333; letter-spacing: -0.22px;}
+.content_box .cb_btn{ margin:25px auto; width:83%; padding:11px 0; text-align:center;font-size: 14px; color: #FFFFFF;background-image: linear-gradient(-90deg, #0C9BFF 0%, #4DA3FF 98%);border-radius: 100px;}

@@ -1,0 +1,93 @@
+body {
+    background: #f6f6f6;
+}
+
+.suggest-box p {
+    padding: 0 25px;
+    font-size: 15px;
+    color: #333;
+    line-height: 50px;
+    height: 50px;
+    clear: both;
+}
+
+.suggest-box p > span > img {
+    width:17px;
+    height : 17px;
+}
+
+.suggest-box ul {
+    padding: 0 25px;
+}
+.suggest-box ul {
+    width:100%;
+    overflow:hidden;
+}
+.suggest-box ul li {
+    margin-right: 3%;
+    float: left;
+    font-size: 14px;
+    margin-bottom: 9px;
+    height : 32px;
+    width:31.3%;
+}
+.suggest-box ul li:nth-child(3n){ margin-right:0px;}
+
+.suggest-box ul .s-li {
+    margin-right:10px;
+    border: 1px solid #C2C2C2;
+    border-radius: 18px;
+    color: #6E757F;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    width:100%;
+}
+
+.suggest-box ul .s-li.active {
+    border: 1px solid #0C9BFF;
+    color: #179CFF;
+    border-radius: 18px;
+    width: 100%;
+}
+
+textarea {
+    width : 100%;
+    height: 130px;
+    border: none;
+    padding: 23px 25px;
+    line-height: 20px;
+    border-top: 1px solid #eeedee;
+    border-bottom: 1px solid #eeedee;
+    resize: none;
+    box-sizing : border-box;
+    font-size:15px;
+}
+
+/* 蓝色渐变阴影按钮 */
+.next-step {
+    margin: 10% auto 5%;
+    width: 76%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 100px;
+    background-image: -webkit-linear-gradient(90deg, #0C9BFF 0%, #4DA3FF 100%);
+    background-image: linear-gradient(90deg, #0C9BFF 0%, #4DA3FF 100%);
+    /*-webkit-box-shadow: 0 5px 5px 0 #4DA3FF;*/
+    /*-moz-box-shadow: 0 5px 5px 0 #4DA3FF;*/
+    /*box-shadow: 0 5px 5px 0 #4DA3FF;*/
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    border-radius: 100px;
+}
+
+/*input placeholder font-color*/
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {  color: #C2C2C2;  }
+input:-moz-placeholder, textarea:-moz-placeholder {  color: #C2C2C2;  }
+input::-moz-placeholder, textarea::-moz-placeholder {  color: #C2C2C2;  }
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {  color: #C2C2C2;  }
+.font_num span{ font-size:14px;color: #333;}
+.font_num{ text-align: right; margin: 5px 15px;}
+.font_num .fn_left_color{ color:red;}
