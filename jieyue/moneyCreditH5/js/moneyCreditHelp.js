@@ -1,5 +1,5 @@
+var ua = navigator.userAgent;
 $(function(){
-    var ua = navigator.userAgent;
     $('.content_box ul li').click(function(){
         var this_=$(this).children('.cb_li').children('.cb_arr');
         if(this_.hasClass('on')){
@@ -14,7 +14,6 @@ $(function(){
     });
 
     $('.cb_msg .ti_cash').click(function(event){
-        alert();
         event.stopPropagation();
         var param = '{"type": "helpToCash","data":""}';
         if(ua.indexOf('iOS') >= 0){
@@ -27,5 +26,13 @@ $(function(){
 
     $('.cb_msg .call_phone').click(function(event){
         event.stopPropagation();
-    })
+    });
+
+    //立即开启网络
+    $('.open_online').click(function(){
+        var jsCallNetWork = '{"type": "requestNetwork","data": {}}';
+        if(ua.indexOf("iOS") >= 0){
+            window.webkit.messageHandlers.jsCallbackMethod.postMessage(jsCallNetWork);
+        };
+    });
 });

@@ -53,6 +53,9 @@ $(function(){
                         '            </div>\n' +
                         '        </li>');
                 }
+            }else if(decryptData.header.rspCode == '-999999'){
+                tokenInvalidParamFn(ua.appType,decryptData.header.rspMsg);
+                loader.hideL();
             }else{
                 showMsg($('.error-msg'), decryptData.header.rspMsg);
                 loader.hideL();

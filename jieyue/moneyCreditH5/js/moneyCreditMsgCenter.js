@@ -3,10 +3,12 @@ var ua = navigator.userAgent;
 loader.init();
 var randomStr = Math.random().toString(36).substr(2);
 $(function(){
+    $('.mask').css('top','60px');
     ua = JSON.parse(ua.substring(ua.lastIndexOf('/')+1));
     getMineMessage();
     //tab切换
     $('.msg-title li').click(function(){
+        var randomStr = Math.random().toString(36).substr(2);
         var this_ = $(this);
         this_.addClass('on').siblings().removeClass('on');
         $('.mb_content>div').eq(this_.index()).removeClass('hidden').siblings().addClass('hidden');
@@ -17,10 +19,16 @@ $(function(){
         }
     });
 
-    //查看消息详情
-    $('.list-ul .list-li .con,.list-ul .list-li .conn').live('click',function(){
+    //查看我的消息详情
+    $('.list-ul .list-li .con').live('click',function(){
         var this_ = $(this);
         window.location.href = "moneyCreditMsgDetails.html?time="+this_.parent().attr('time')+'&title='+this_.parent().attr('title')+'&content='+this_.parent().attr('content');
+    })
+
+    //查看系统消息详情
+    $('.list-ul .list-li .conn').live('click',function(){
+        var this_ = $(this);
+        window.location.href = "moneyCreditMsgDetailsSys.html?time="+this_.parent().attr('time')+'&title='+this_.parent().attr('title')+'&content='+this_.parent().attr('content');
     })
 
     //同一时刻只有一个删除按钮
@@ -31,6 +39,7 @@ $(function(){
     //删除
     $('ul .list-li .btn').live("click",function(){
         var this_ = $(this);
+        var randomStr = Math.random().toString(36).substr(2);
         var bodyObj = {
             "id":parseInt(this_.attr('id'))
         }
@@ -56,19 +65,25 @@ $(function(){
         $.ajax({
             type: 'POST',
             contentType: "text/html; charset=UTF-8",
-            url: '/api/appUser/deleteInnerMail/ValidateState/',
+            url: '/api/appUser/deleteInnerMail/v1/',
             headers:{AESKEY:'H5AesKey'},
-            data: obj,
+            data: endObj,
             dataType: 'json',
             beforeSend: function () {
                 loader.showL();
             },
             success: function (data) {
+                var data = JSON.parse(decrypt(data.data));
                 if(data.header.rspMsg == '成功'){
                     loader.hideL();
                     this_.parent().remove();
+                    showMsg($('.error-msg'), '删除成功~');
+                }else if(data.header.rspCode == '-999999'){
+                    tokenInvalidParamFn(ua.appType,data.header.rspMsg);
+                    loader.hideL();
                 }else{
                     showMsg($('.error-msg'), data.header.rspMsg);
+                    loader.hideL();
                 }
             },
             error: function (e) {
@@ -188,11 +203,12 @@ function getMineMessage(){
     $('.mc_left .list-ul li').remove();
     //获取我的消息
     var bodyObj = {
-        "type":1,
-        "pageNo":1,
-        "pageSize":1000
+        "type":"1",
+        "pageNo":"1",
+        "pageSize":"1000"
     }
     var signObj = md5(JSON.stringify(bodyObj)).toUpperCase();//对body内容进行md5加密
+    var randomStr = Math.random().toString(36).substr(2);
     var obj = {
         "header": {
             "appType": ua.appType,
@@ -203,9 +219,9 @@ function getMineMessage(){
             "token":ua.token
         },
         "body":{
-            "type":1,
-            "pageNo":1,
-            "pageSize":1000
+            "type":"1",
+            "pageNo":"1",
+            "pageSize":"1000"
         }
     }
     var aseScret = encrypt(JSON.stringify(obj));//aes加密后
@@ -216,7 +232,7 @@ function getMineMessage(){
     $.ajax({
         type: 'POST',
         contentType: "text/html; charset=UTF-8",
-        url: '/api/appUser/queryInnerMail/',
+        url: '/api/appUser/queryInnerMail/v1/',
         headers:{AESKEY:'H5AesKey'},
         data: endObj,
         dataType: 'json',
@@ -257,6 +273,9 @@ function getMineMessage(){
                 }else{
                     $('.mc_left .none_msg').removeClass('hidden');
                 }
+            }else if(data.header.rspCode == '-999999'){
+                tokenInvalidParamFn(ua.appType,data.header.rspMsg);
+                loader.hideL();
             }else{
                 showMsg($('.error-msg'), data.header.rspMsg);
                 loader.hideL();
@@ -273,11 +292,12 @@ function genSystemMessage(){
     $('.mc_right .list-ul li').remove();
     //获取通知列表
     var bodyObj = {
-        "type":2,
-        "pageNo":1,
-        "pageSize":1000
+        "type":"2",
+        "pageNo":"1",
+        "pageSize":"1000"
     }
     var signObj = md5(JSON.stringify(bodyObj)).toUpperCase();//对body内容进行md5加密
+    var randomStr = Math.random().toString(36).substr(2);
     var obj = {
         "header": {
             "appType": ua.appType,
@@ -288,9 +308,9 @@ function genSystemMessage(){
             "token":ua.token
         },
         "body":{
-            "type":2,
-            "pageNo":1,
-            "pageSize":1000
+            "type":"2",
+            "pageNo":"1",
+            "pageSize":"1000"
         }
     }
     var aseScret = encrypt(JSON.stringify(obj));//aes加密后
@@ -301,7 +321,7 @@ function genSystemMessage(){
     $.ajax({
         type: 'POST',
         contentType: "text/html; charset=UTF-8",
-        url: '/api/appUser/queryInnerMail/',
+        url: '/api/appUser/queryInnerMail/v1/',
         headers:{AESKEY:'H5AesKey'},
         data: endObj,
         dataType: 'json',
@@ -328,6 +348,9 @@ function genSystemMessage(){
                 }else{
                     $('.mc_right .none_msg').removeClass('hidden');
                 }
+            }else if(data.header.rspCode == '-999999'){
+                tokenInvalidParamFn(ua.appType,data.header.rspMsg);
+                loader.hideL();
             }else{
                 showMsg($('.error-msg'), data.header.rspMsg);
                 loader.hideL();

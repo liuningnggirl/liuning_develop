@@ -81,6 +81,9 @@ $(function(){
                         if(ua.appType == 'android'){
                             window.jsToJava.jsCallbackMethod(param);
                         }
+                    }else if(decryptData.header.rspCode == '-999999'){
+                        tokenInvalidParamFn(ua.appType,decryptData.header.rspMsg);
+                        loader.hideL();
                     }else{
                         loader.hideL();
                         showMsg($('.error-msg'), decryptData.header.rspMsg);

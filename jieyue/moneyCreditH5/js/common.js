@@ -1,6 +1,6 @@
 //aes加密
 function encrypt(word) {
-    var key = CryptoJS.enc.Utf8.parse("0123456789123456"); //16位  0123456789123456
+    var key = CryptoJS.enc.Utf8.parse("UATH5@!#2017caln"); //16位  0123456789123456
     var iv = CryptoJS.enc.Utf8.parse("2015030120123456");
 
     var encrypted = CryptoJS.AES.encrypt(word, key, {
@@ -13,7 +13,7 @@ function encrypt(word) {
 
 // aes解密
 function decrypt(word) {
-    var key = CryptoJS.enc.Utf8.parse("0123456789123456"); //  UATH5@!#2017caln
+    var key = CryptoJS.enc.Utf8.parse("UATH5@!#2017caln"); //  UATH5@!#2017caln
     var iv = CryptoJS.enc.Utf8.parse("2015030120123456");
     var decrypt = CryptoJS.AES.decrypt(word, key, {
         iv: iv,
@@ -64,5 +64,16 @@ function CheckPassWord(password) {
         return true;
     } else {
         return false;
+    }
+}
+
+//判断token是否有效
+function tokenInvalidParamFn(appType,rspMsg){
+    var param = '{"type": "tokenInvalidParam","data":{"rspMsg":"'+rspMsg+'"}}';
+    if(appType == 'iOS'){
+        window.webkit.messageHandlers.jsCallbackMethod.postMessage(JSON.parse(param));
+    }
+    if(appType == 'android'){
+        window.jsToJava.jsCallbackMethod(param);
     }
 }

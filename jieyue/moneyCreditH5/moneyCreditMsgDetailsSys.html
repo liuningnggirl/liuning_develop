@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>消息详情</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        body{background: #F6F6F6;}
+        .msg_content{ background:#fff;padding: 0 15px;}
+        .msg_content .mc_title{text-align:center; font-size: 14.4px; color: #6E757F;  letter-spacing: -0.22px;margin:16px 0 0 0;padding:16px 0;word-wrap: break-word;}
+        .msg_content .mc_time{text-align:center; font-size: 13px; color: #9B9B9B;  letter-spacing: -0.2px;}
+        .msg_content .mc_content{font-size: 13px; color: #333333;  letter-spacing: -0.2px; padding:16px 0 70%; text-align:justify;line-height: 17px;word-wrap: break-word;}
+    </style>
+</head>
+<body>
+<div class="msg_content">
+    <div class="mc_title"></div>
+    <p class="mc_time"></p>
+    <p class="mc_content"></p>
+</div>
+<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./js/util.js"></script>
+<script>
+    $(function(){
+        var getParam = urlParse();
+        $('.mc_title').html(getParam.title);//标题
+        $('.mc_time').html(getParam.time);//时间
+        $('.mc_content').html(getParam.content);//短信内容
+    });
+</script>
+
+</body>
+</html>

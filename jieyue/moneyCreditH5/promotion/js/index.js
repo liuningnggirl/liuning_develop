@@ -1,9 +1,8 @@
 var getParam = urlParse();
-//var ua = navigator.userAgent;
+var ua = window.navigator.userAgent.toLowerCase();
 var operatSystem = '';
 loader.init();
 $(function(){
-    //ua = JSON.parse(ua.substring(ua.lastIndexOf('/')+1));
     var randomStr = Math.random().toString(36).substr(2);
     //获取验证码
     $('.cyc_send').click(function(){
@@ -13,14 +12,15 @@ $(function(){
             "pid" : getParam.pid
         }
         var signObj = md5(JSON.stringify(bodyObj)).toUpperCase();//对body内容进行md5加密
+        var randomStr = Math.random().toString(36).substr(2);
         var obj = {
             "header": {
-                "appType": getParam.appType,
-                "appNo": getParam.appNo,
-                "appVersion": getParam.appVersion,
+                "appType": "000000",
+                "appNo": "000000",
+                "appVersion": "000000",
                 "requestId": randomStr,
                 "sign":signObj,
-                "token":getParam.token
+                "token":"000000",
             },
             "body":{
                 "mobile": $.trim($('.cc_tel').val()),
@@ -70,7 +70,7 @@ $(function(){
     $('.cc_register_btn').on("click",function(){
         var bodyObj = {
             "mobile": $.trim($('.cc_tel').val()),
-            "password":$.trim($('.cyc_pwd').val()),
+            "password":md5($.trim($('.cyc_pwd').val())).toUpperCase(),
             "smCode":$.trim($('.cyc_yzm').val()),
             "type" : "1",
             "marketChannel" : getParam.marketChannel,//应用市场渠道（91助手、360助手 等）
@@ -78,18 +78,19 @@ $(function(){
             "terminalType" : "h5"//终端类型（ios、android、h5、pad）
         }
         var signObj = md5(JSON.stringify(bodyObj)).toUpperCase();//对body内容进行md5加密
+        var randomStr = Math.random().toString(36).substr(2);
         var obj = {
             "header": {
-                "appType": getParam.appType,
-                "appNo": getParam.appNo,
-                "appVersion": getParam.appVersion,
+                "appType": "000000",
+                "appNo": "000000",
+                "appVersion": "000000",
                 "requestId": randomStr,
                 "sign":signObj,
-                "token":getParam.token
+                "token":"000000",
             },
             "body":{
                 "mobile": $.trim($('.cc_tel').val()),
-                "password":$.trim($('.cyc_pwd').val()),
+                "password":md5($.trim($('.cyc_pwd').val())).toUpperCase(),
                 "smCode":$.trim($('.cyc_yzm').val()),
                 "type" : "1",
                 "marketChannel" : getParam.marketChannel,//应用市场渠道（91助手、360助手 等）
@@ -130,8 +131,23 @@ $(function(){
                         $('.content_box').addClass('hidden');
                         $('.success_box').removeClass('hidden');
                         setTimeout(function(){
-                            doanLoadAppFn();
-                        },1000)
+                            //IOS直接跳转到APP Store
+                            if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+                                //微信内
+                                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                                    window.location.href = "whiteDownLoad.html";
+                                }else {//微信外
+                                    doanLoadAppFn();
+                                }
+                            }else {//安卓系统内部
+                                //微信内
+                                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                                    window.location.href = "whiteDownLoad.html";
+                                }else {//微信外
+                                    doanLoadAppFn();
+                                }
+                            }
+                        },2000)
                     }else{
                         loader.hideL();
                         showMsg($('.error-msg'), decryptData.header.rspMsg);
@@ -165,7 +181,23 @@ $(function(){
 
     //登录
     $('.cl_login').click(function(){
-        doanLoadAppFn();
+        //IOS直接跳转到APP Store
+        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+            //微信内
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                window.location.href = "whiteDownLoad.html";
+            }else {//微信外
+                //doanLoadAppFn();
+                window.location.href = "iosDownLoad.html";
+            }
+        }else {//安卓系统内部
+            //微信内
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                window.location.href = "whiteDownLoad.html";
+            }else {//微信外
+                doanLoadAppFn();
+            }
+        }
     });
 })
 
@@ -192,29 +224,29 @@ function SetRemainTime() {
 function doanLoadAppFn(){
     //IOS直接跳转到APP Store
     if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-        var ua = window.navigator.userAgent.toLowerCase();
         //微信内
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
             console.log('ios微信内');
-            operatSystem = "1";
-            $('.content_box').addClass('hidden');
+            operatSystem = "ios";
+            $('.content_box,.success_box').addClass('hidden');
             $('.gray_box ').removeClass('hidden');
         }else {//微信外
             console.log('ios微信外');
-            operatSystem = "1";
-            getDownLoadUrl();
+            operatSystem = "ios";
+            //getDownLoadUrl();
+            window.location.href = "iosDownLoad.html";
         }
     }else {//安卓系统内部
-        var ua = window.navigator.userAgent.toLowerCase();
+
         //微信内
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
             console.log('android微信内');
-            operatSystem = "0";
-            $('.content_box').addClass('hidden');
+            operatSystem = "android";
+            $('.content_box,.success_box').addClass('hidden');
             $('.gray_box ').removeClass('hidden');
         }else {//微信外
             console.log('android微信外');
-            operatSystem = "0";
+            operatSystem = "android";
             getDownLoadUrl();
         }
     }
@@ -225,12 +257,13 @@ function getDownLoadUrl(){
         "operatSystem": operatSystem//操作系统 android、ios（0：android， 1：ios）
     }
     var signObj = md5(JSON.stringify(bodyObj)).toUpperCase();//对body内容进行md5加密
+    var randomStr = Math.random().toString(36).substr(2);
     var obj = {
         "header": {
             "appType": "000000",
             "appNo": "000000",
             "appVersion": "000000",
-            "requestId": "000000",
+            "requestId": randomStr,
             "sign":signObj,
             "token":"000000",
         },
@@ -246,7 +279,7 @@ function getDownLoadUrl(){
     $.ajax({
         type: 'POST',
         contentType: "text/html; charset=UTF-8",
-        url: '/api/appUser/selectByOperatSystem/',
+        url: '/api/h5/downloadVersion/v1/',
         headers:{AESKEY:'H5AesKey'},
         data: endObj,
         dataType: 'json',

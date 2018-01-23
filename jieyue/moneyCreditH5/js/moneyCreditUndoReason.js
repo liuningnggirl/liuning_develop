@@ -17,6 +17,7 @@ $(function(){
 
     //提交撤销借款申请
     $('.cb_btn').click(function(){
+        var randomStr = Math.random().toString(36).substr(2);
         var causeCode = '';
         $('.cb_content li').each(function(){
             if($(this).hasClass('on')){
@@ -67,7 +68,7 @@ $(function(){
                         window.webkit.messageHandlers.jsCallbackMethod.postMessage(param);
                     }
                     if(ua.appType == 'android'){
-                        window.jsToJava.jsCallbackMethod(param);
+                        window.jsToJava.jsCallbackMethod('{"type": "finish","data":{"refresh": "billCancelSuccess"}}');
                     }
                 }else{
                     showMsg($('.error-msg'), decryptData.header.rspMsg);
@@ -83,6 +84,7 @@ $(function(){
     //撤销原因列表查询
     var bodyObj = {};
     var signObj = md5(JSON.stringify(bodyObj)).toUpperCase();//对body内容进行md5加密
+
     var obj = {
         "header": {
             "appType": ua.appType,
