@@ -1,1 +1,0 @@
-function demo(n){alert("--------\r\n"+n+"\r\n--------")}function demo(n){alert("--------\r\n"+n+"\r\n--------")}demo("Hi my name is 01"),demo("Hi my name is 02");
