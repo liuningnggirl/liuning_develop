@@ -1,6 +1,0 @@
-body{background: #F6F6F6;}
-.msg_content .mc_title{ background: #fff; margin:16px 0 0 0; padding:17px 21px 27px 19px;}
-.msg_content .mc_title .mt_left{float:left; font-size: 14.4px; color: #6E757F; letter-spacing: -0.22px;}
-.msg_content .mc_title .mt_right{ float: right;font-size: 13px; color: #9B9B9B; letter-spacing: -0.2px;}
-.msg_content p{ clear:both; font-size: 13px;  color: #333333;  letter-spacing: -0.2px; margin-top: 7px; padding: 0 20px;  line-height: 19px;text-align: justify;word-wrap: break-word;}
-.msg_content{ background: #fff; height: 280px;}
